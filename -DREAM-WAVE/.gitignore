@@ -1,0 +1,78 @@
+# ── Dependencies ───────────────────────────────────────────────────────────────
+node_modules/
+*/node_modules/
+**/node_modules/
+
+# ── Environment files (NEVER commit secrets) ───────────────────────────────────
+.env
+.env.local
+.env.production
+.env.development
+server/.env
+client/.env
+client/.env.local
+*.env
+
+# ── Build / static output (do not ignore app modules) ───────────────────────────
+# Note: client/src/modules/profiles is the public org profile module (not /public)
+client/dist/
+dist/
+build/
+# Legacy root public folder only:
+/public/
+
+# ── Logs ────────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+logs/
+
+# ── macOS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# ── Editor ───────────────────────────────────────────────────────────────────────
+.vscode/settings.json
+.continue/
+.idea/
+*.swp
+*.swo
+
+# ── Test/temp files ───────────────────────────────────────────────────────────────
+test_api.js
+test_ai.js
+test_key.js
+*.backup
+*.corrupted.backup
+
+# ── Large duplicate folders (already cleaned up) ─────────────────────────────────
+dream-wave-ai/
+safe-ui/
+
+# ── Render cache ────────────────────────────────────────────────────────────────
+.render-buildpacks.json
+
+# ── Uploads & reports (keep folders via .gitkeep) ───────────────────────────────
+server/uploads/*
+!server/uploads/.gitkeep
+server/reports/*
+!server/reports/.gitkeep
+
+# ── Local caches / binary downloads (never commit mongod) ───────────────────────
+.vite
+coverage
+<<<<<<< HEAD
+server/tests/.cache
+server/.cache
+web/node_modules
+web/.next
+web/out
+=======
+server/tests/.cache/
+server/.cache/
+>>>>>>> feature/ui-threejs
+**/.cache/
+**/mongodb-memory-server/
+*.node

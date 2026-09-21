@@ -1,0 +1,52 @@
+services:
+  - type: web
+    name: dream-wave-api
+    env: node
+    region: oregon
+    plan: starter
+    rootDir: server
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: false
+    disk:
+      name: dream-wave-assets
+      mountPath: /var/data/dream-wave
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 20.19.0
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: AUTH_CHALLENGE_SECRET
+        sync: false
+      - key: COOKIE_REFRESH_ONLY
+        value: "true"
+      - key: TRUST_PROXY
+        value: "true"
+      - key: CLIENT_URL
+        sync: false
+      - key: PUBLIC_APP_URL
+        sync: false
+      - key: STUDENT_ASSET_ROOT
+        value: /var/data/dream-wave/student-profiles
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_VERIFY_SERVICE_SID
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false

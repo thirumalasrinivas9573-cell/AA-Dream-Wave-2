@@ -1,0 +1,100 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                         📋 QUICK REFERENCE CARD 📋                           ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  🎯 FIRST TIME SETUP                                                         │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  1. TEST_SETUP.bat          → Check if ready                                 │
+│  2. INSTALL_DEPENDENCIES.bat → Install packages (if needed)                  │
+│  3. CLEANUP_SCRIPT.bat      → Remove duplicates                              │
+│  4. START_APP.bat           → Start application                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  🚀 DAILY USE                                                                │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  START_APP.bat              → Start everything                               │
+│  Open: http://localhost:5173                                                 │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  🔧 TROUBLESHOOTING                                                          │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  Problem?                   → Run TEST_SETUP.bat                             │
+│  Need help?                 → Read TROUBLESHOOTING.md                        │
+│  Missing packages?          → Run INSTALL_DEPENDENCIES.bat                   │
+│  Errors in Report.jsx?      → Run CLEANUP_SCRIPT.bat                         │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  📚 DOCUMENTATION                                                            │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  🎯_START_HERE.txt          → Main guide                                     │
+│  ✅_FIXED_AND_TESTED.md     → What was fixed                                 │
+│  TROUBLESHOOTING.md         → Problem solutions                              │
+│  VISUAL_GUIDE.md            → Visual diagrams                                │
+│  README_FIRST.md            → Quick start                                    │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  🌐 URLS                                                                     │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  Frontend:  http://localhost:5173                                            │
+│  Backend:   http://localhost:5001                                            │
+│  API:       http://localhost:5001/api                                        │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  ⌨️ USEFUL COMMANDS                                                          │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  Stop server:               Ctrl + C                                         │
+│  Open console:              F12 (in browser)                                 │
+│  Clear cache:               Ctrl + Shift + Delete                            │
+│  Reload page:               Ctrl + R                                         │
+│  Hard reload:               Ctrl + Shift + R                                 │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  ✅ SUCCESS CHECKLIST                                                        │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  □ Node.js installed (node --version)                                        │
+│  □ Dependencies installed (node_modules exists)                              │
+│  □ No duplicate folders (dream-wave-ai, safe-ui, public)                    │
+│  □ Report.jsx has no errors                                                 │
+│  □ START_APP.bat runs without errors                                         │
+│  □ Browser opens to http://localhost:5173                                    │
+│  □ No CORS errors in console                                                │
+│  □ Report page loads correctly                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  🆘 QUICK FIXES                                                              │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  Port in use?               → Kill process or change port                    │
+│  CORS error?                → Use http://localhost:5173 (not file://)        │
+│  Module not found?          → Run INSTALL_DEPENDENCIES.bat                   │
+│  Report.jsx errors?         → Run CLEANUP_SCRIPT.bat                         │
+│  White screen?              → Check browser console (F12)                    │
+│  Server won't start?        → Check .env file exists                         │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  💡 PRO TIPS                                                                 │
+├──────────────────────────────────────────────────────────────────────────────┤
+│  • Always use the dev server (never open HTML directly)                     │
+│  • Run TEST_SETUP.bat when something feels wrong                            │
+│  • Keep browser console open (F12) to see errors                            │
+│  • Use START_APP.bat for full stack, START_CLIENT.bat for frontend only     │
+│  • Read error messages carefully - they usually tell you what's wrong       │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════════
+
+                    🎊 EVERYTHING IS READY TO GO! 🎊
+
+                    Run TEST_SETUP.bat to get started!
+
+═══════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,39 @@
+{
+  "name": "dream-wave-ai",
+  "version": "1.0.0",
+  "description": "Complete AI-powered career guidance platform",
+  "engines": {
+    "node": ">=20.9.0 <21"
+  },
+  "scripts": {
+    "start": "bash start.sh",
+    "dev": "npx concurrently \"npm run server\" \"npm run web\"",
+    "dev:memory": "USE_MEMORY_MONGO=1 bash start.sh",
+    "dev:legacy": "npx concurrently \"npm run server\" \"npm run client\"",
+    "dev:web": "npx concurrently \"npm run server\" \"npm run web\"",
+    "server": "cd server && node server.js",
+    "server:memory": "cd server && npm run dev:memory",
+    "client": "cd client && npm run dev",
+    "web": "cd web && npm run dev",
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install && cd ../web && npm install",
+    "build": "npm ci --prefix client && npm run build --prefix client",
+    "build:server": "npm ci --prefix server --omit=dev",
+    "build:web": "cd web && npm run build",
+    "test": "cd server && npm test",
+    "test:server": "cd server && npm test"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "keywords": [
+    "ai",
+    "career",
+    "education",
+    "mentor",
+    "react",
+    "nodejs",
+    "openai"
+  ],
+  "author": "DREAM WAVE AI Team",
+  "license": "MIT"
+}
