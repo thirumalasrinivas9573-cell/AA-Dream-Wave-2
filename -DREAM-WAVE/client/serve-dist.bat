@@ -1,0 +1,4 @@
+@echo off
+cd /d %~dp0
+echo Serving built frontend from dist folder on port 5173...
+node -e "const http=require('http'),fs=require('fs'),path=require('path');const mimeTypes={'html':'text/html','css':'text/css','js':'application/javascript','json':'application/json','png':'image/png','jpg':'image/jpeg','svg':'image/svg+xml','ico':'image/x-icon'};http.createServer((req,res)=>{let filePath='./dist'+req.url;if(filePath==='./dist/')filePath='./dist/index.html';const ext=path.extname(filePath).slice(1);const mime=mimeTypes[ext]||'application/octet-stream';fs.readFile(filePath,(err,data)=>{if(err){if(err.code==='ENOENT'){fs.readFile('./dist/index.html',(err,data)=>{res.writeHead(200,{'Content-Type':'text/html'});res.end(data);});}else{res.writeHead(500);res.end('Error');}}else{res.writeHead(200,{'Content-Type':mime});res.end(data);}});}).listen(5173,()=>console.log('Frontend running at http://localhost:5173'));"

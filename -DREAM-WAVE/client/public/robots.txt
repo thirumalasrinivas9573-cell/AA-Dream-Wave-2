@@ -1,0 +1,16 @@
+# Allow public discovery crawlers
+User-agent: *
+Allow: /
+Allow: /institutions
+Allow: /companies
+Allow: /discover
+Allow: /search
+Allow: /library
+Disallow: /student/
+Disallow: /institution/
+Disallow: /company/
+Disallow: /admin
+Disallow: /notifications
+
+Sitemap: /api/institution/sitemap.xml
+Sitemap: /api/company/sitemap.xml

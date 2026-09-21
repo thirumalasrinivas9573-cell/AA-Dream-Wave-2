@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, develop]
+  pull_request:
+    branches: [main, master, develop]
+
+jobs:
+  client-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+      - run: npm ci
+        working-directory: client
+      - run: npm run lint
+        working-directory: client
+      - run: npm run build
+        working-directory: client
+      - run: npm audit --omit=dev --audit-level=high
+        working-directory: client
+
+  server-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+      - run: npm ci
+        working-directory: server
+      - run: npm test
+        working-directory: server
+        env:
+          NODE_ENV: test
+          JWT_SECRET: ci-test-jwt-secret-min-32-chars-long
+          JWT_REFRESH_SECRET: ci-test-refresh-secret-min-32-chars
+          AUTH_CHALLENGE_SECRET: ci-test-challenge-secret-min-32-chars
+      - run: npm audit --omit=dev --audit-level=high
+        working-directory: server
+
+  web-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+        working-directory: web
+      - run: npm run typecheck
+        working-directory: web
+      - run: npm run lint
+        working-directory: web
+      - run: npm run build
+        working-directory: web
+      - run: npm audit --omit=dev --audit-level=high
+        working-directory: web

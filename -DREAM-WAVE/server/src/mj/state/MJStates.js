@@ -1,0 +1,83 @@
+/**
+ * MJ State Definitions and Valid Transitions
+ * @module mj/state/MJStates
+ */
+
+const { MJ_STATES } = require('../constants')
+
+/**
+ * Valid state transition map.
+ * Each key is a source state; values are allowed target states.
+ */
+const STATE_TRANSITIONS = {
+  [MJ_STATES.IDLE]: [
+    MJ_STATES.LISTENING,
+    MJ_STATES.SLEEPING,
+    MJ_STATES.THINKING,
+    MJ_STATES.ERROR,
+  ],
+  [MJ_STATES.SLEEPING]: [MJ_STATES.IDLE, MJ_STATES.LISTENING, MJ_STATES.ERROR],
+  [MJ_STATES.LISTENING]: [
+    MJ_STATES.THINKING,
+    MJ_STATES.IDLE,
+    MJ_STATES.SLEEPING,
+    MJ_STATES.ERROR,
+  ],
+  [MJ_STATES.THINKING]: [
+    MJ_STATES.PLANNING,
+    MJ_STATES.RESPONDING,
+    MJ_STATES.IDLE,
+    MJ_STATES.ERROR,
+  ],
+  [MJ_STATES.PLANNING]: [
+    MJ_STATES.WORKING,
+    MJ_STATES.EXECUTING,
+    MJ_STATES.THINKING,
+    MJ_STATES.ERROR,
+  ],
+  [MJ_STATES.WORKING]: [
+    MJ_STATES.EXECUTING,
+    MJ_STATES.WAITING,
+    MJ_STATES.COMPLETED,
+    MJ_STATES.ERROR,
+  ],
+  [MJ_STATES.EXECUTING]: [
+    MJ_STATES.WAITING,
+    MJ_STATES.COMPLETED,
+    MJ_STATES.RESPONDING,
+    MJ_STATES.ERROR,
+  ],
+  [MJ_STATES.LEARNING]: [MJ_STATES.IDLE, MJ_STATES.COMPLETED, MJ_STATES.ERROR],
+  [MJ_STATES.RESEARCHING]: [
+    MJ_STATES.THINKING,
+    MJ_STATES.COMPLETED,
+    MJ_STATES.ERROR,
+  ],
+  [MJ_STATES.SPEAKING]: [MJ_STATES.LISTENING, MJ_STATES.IDLE, MJ_STATES.ERROR],
+  [MJ_STATES.WAITING]: [
+    MJ_STATES.WORKING,
+    MJ_STATES.EXECUTING,
+    MJ_STATES.IDLE,
+    MJ_STATES.ERROR,
+  ],
+  [MJ_STATES.RESPONDING]: [MJ_STATES.IDLE, MJ_STATES.SPEAKING, MJ_STATES.COMPLETED, MJ_STATES.ERROR],
+  [MJ_STATES.COMPLETED]: [MJ_STATES.IDLE, MJ_STATES.LISTENING, MJ_STATES.THINKING],
+  [MJ_STATES.ERROR]: [MJ_STATES.IDLE, MJ_STATES.SLEEPING],
+}
+
+/**
+ * @param {string} fromState
+ * @param {string} toState
+ * @returns {boolean}
+ */
+function isValidTransition(fromState, toState) {
+  const allowed = STATE_TRANSITIONS[fromState]
+  if (!allowed) return false
+  return allowed.includes(toState)
+}
+
+module.exports = {
+  MJ_STATES,
+  STATE_TRANSITIONS,
+  isValidTransition,
+}

@@ -1,0 +1,30 @@
+const express = require('express')
+const router = express.Router()
+const auth = require('../middleware/auth')
+const requireRole = require('../middleware/requireRole')
+const ctrl = require('../controllers/goalExecutionController')
+
+const studentAuth = [auth, requireRole('student')]
+
+router.get('/dashboard', studentAuth, ctrl.dashboard)
+router.get('/strategy', studentAuth, ctrl.strategy)
+router.get('/milestones', studentAuth, ctrl.milestones)
+router.post('/plan/generate', studentAuth, ctrl.generatePlan)
+router.get('/plan/current', studentAuth, ctrl.currentPlan)
+router.post('/plan/:planId/accept', studentAuth, ctrl.acceptPlan)
+router.get('/daily', studentAuth, ctrl.daily)
+router.get('/weekly', studentAuth, ctrl.weekly)
+router.get('/blockers', studentAuth, ctrl.blockers)
+router.get('/progress', studentAuth, ctrl.progress)
+router.get('/risk', studentAuth, ctrl.risk)
+router.get('/recovery', studentAuth, ctrl.recovery)
+router.get('/plan-changes', studentAuth, ctrl.planChanges)
+router.post('/replan', studentAuth, ctrl.replan)
+router.post('/copilot', studentAuth, ctrl.copilot)
+router.post('/tasks/:taskId/complete', studentAuth, ctrl.completeTask)
+router.post('/tasks/:taskId/skip', studentAuth, ctrl.skipTask)
+router.post('/tasks/:taskId/fail', studentAuth, ctrl.failTask)
+router.post('/tasks/:taskId/split', studentAuth, ctrl.splitTask)
+router.post('/tasks/:taskId/reschedule-proposal', studentAuth, ctrl.rescheduleProposal)
+
+module.exports = router

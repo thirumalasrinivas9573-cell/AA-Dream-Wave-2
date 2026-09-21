@@ -1,0 +1,163 @@
+.dw-cmd {
+  display: grid;
+  gap: 18px;
+}
+
+.dw-cmd__hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.dw-cmd__eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8C7AE6;
+  font-weight: 700;
+}
+
+.dw-cmd__hero h1 {
+  margin: 0 0 6px;
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  color: #3A3153;
+}
+
+.dw-cmd__hero p,
+.dw-cmd__panel p,
+.dw-cmd__note,
+.dw-cmd__list p {
+  margin: 0;
+  color: #5D5477;
+}
+
+.dw-cmd__hero-actions,
+.dw-cmd__row,
+.dw-cmd__quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.dw-cmd__panel {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(139, 132, 163, 0.2);
+  background: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(140, 122, 230, 0.08);
+}
+
+.dw-cmd__panel h2 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  color: #3A3153;
+}
+
+.dw-cmd__panel textarea {
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(139, 132, 163, 0.22);
+  background: #F8F6FC;
+  color: #3A3153;
+  resize: vertical;
+}
+
+.dw-cmd__row {
+  margin-top: 12px;
+  align-items: center;
+}
+
+.dw-cmd__quick {
+  margin-top: 12px;
+}
+
+.dw-cmd__chip {
+  border: 1px solid rgba(139, 132, 163, 0.22);
+  background: #F3EEFA;
+  color: #3A3153;
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.dw-cmd__chip:hover,
+.dw-cmd__chip:focus-visible {
+  border-color: rgba(140, 122, 230, 0.55);
+  background: rgba(140, 122, 230, 0.15);
+}
+
+.dw-cmd__primary h3 {
+  margin: 4px 0 8px;
+  font-size: 1.2rem;
+  color: #3A3153;
+}
+
+.dw-cmd__label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8B84A3;
+}
+
+.dw-cmd__alts,
+.dw-cmd__list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.dw-cmd__alts li,
+.dw-cmd__list li {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(139, 132, 163, 0.15);
+  background: #F8F6FC;
+  color: #3A3153;
+}
+
+.dw-cmd__grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.dw-cmd__note {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.dw-cmd .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.dw-cmd button:focus-visible,
+.dw-cmd textarea:focus-visible,
+.dw-cmd a:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.7);
+  outline-offset: 2px;
+}
+
+@media (max-width: 840px) {
+  .dw-cmd__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dw-cmd__hero {
+    flex-direction: column;
+  }
+}

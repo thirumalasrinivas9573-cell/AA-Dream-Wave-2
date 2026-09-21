@@ -1,0 +1,172 @@
+.student-module {
+  --student-accent: #8C7AE6;
+  --student-accent-light: #7C69DC;
+  --student-accent-blue: #A7D8F0;
+}
+
+.student-module .sidebar-wrapper {
+  display: flex;
+}
+
+.student-shell {
+  min-width: 0;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.student-mobile-nav {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  transition: transform 250ms cubic-bezier(.4, 0, .2, 1);
+}
+
+.student-mobile-nav.is-open {
+  transform: translateX(0);
+}
+
+.student-nav-backdrop {
+  position: fixed;
+  z-index: 49;
+  inset: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(58, 49, 83, 0.45);
+  backdrop-filter: blur(3px);
+  cursor: default;
+}
+
+body.student-nav-open {
+  overflow: hidden;
+}
+
+.student-module .mobile-topbar {
+  display: none;
+  min-height: 58px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(139, 132, 163, 0.2);
+  background: #F3EEFA;
+  backdrop-filter: blur(12px);
+}
+
+.student-module .mobile-topbar__brand {
+  flex: 1;
+  color: #3A3153;
+  font-size: .95rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.student-module .mobile-topbar__actions {
+  display: flex;
+  gap: 4px;
+}
+
+.learning-studio-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.student-offline {
+  padding: 8px 16px;
+  color: #fef3c7;
+  background: #78350f;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.student-module .mobile-topbar__actions a {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  text-decoration: none;
+}
+
+.student-module .mobile-topbar__actions a:hover {
+  background: rgba(139, 92, 246, .1);
+}
+
+.student-module .gradient-text {
+  background: linear-gradient(135deg, var(--student-accent), var(--student-accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.student-module .card-purple {
+  border-color: rgba(139, 92, 246, 0.25);
+  background: rgba(139, 92, 246, 0.06);
+}
+
+/* Books / mentor / certificates responsive (keep existing desktop UX) */
+@media (max-width: 1100px) {
+  .student-module .student-books-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .student-module .student-books-grid,
+  .student-module .grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .student-module .mentor-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .student-module .certs-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .student-module .student-books-grid,
+  .student-module .grid-4,
+  .student-module .grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+  .student-module .page-header h1 {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+  .student-module .page-content {
+    padding: 14px 12px 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .student-module .sidebar-wrapper {
+    display: none;
+  }
+
+  .student-module .mobile-topbar {
+    position: sticky;
+    z-index: 40;
+    top: 0;
+    display: flex;
+  }
+
+  .learning-studio-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .student-module * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.student-module :focus-visible {
+  outline: 2px solid var(--student-accent);
+  outline-offset: 2px;
+}

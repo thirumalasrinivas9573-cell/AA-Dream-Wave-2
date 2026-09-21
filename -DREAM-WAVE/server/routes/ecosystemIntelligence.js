@@ -1,0 +1,31 @@
+const express = require('express')
+const router = express.Router()
+const auth = require('../middleware/auth')
+const requireRole = require('../middleware/requireRole')
+const { resolveOrganization } = require('../middleware/resolveOrganization')
+const ecosystemController = require('../controllers/ecosystemIntelligenceController')
+
+const orgAuth = [auth, requireRole('institution', 'company'), resolveOrganization]
+
+router.get('/overview', orgAuth, ecosystemController.getOverview)
+router.get('/institution/hub', orgAuth, ecosystemController.getInstitutionHub)
+router.get('/company/hub', orgAuth, ecosystemController.getCompanyHub)
+router.get('/programs/:programId/intelligence', orgAuth, ecosystemController.getProgramDetail)
+router.get('/departments/:departmentId/intelligence', orgAuth, ecosystemController.getDepartment)
+router.get('/industry', orgAuth, ecosystemController.getIndustry)
+router.get('/industry/trends', orgAuth, ecosystemController.getIndustryTrends)
+router.get('/company-recommendations', orgAuth, ecosystemController.getCompanyRecommendations)
+router.get('/student-aggregates', orgAuth, ecosystemController.getStudentAggregates)
+router.get('/companies/:companyId/connection', orgAuth, ecosystemController.getCompanyConnection)
+router.get('/hub/:orgId', orgAuth, ecosystemController.getOtherOrgHub)
+router.get('/intelligence/intents', orgAuth, ecosystemController.getIntelligenceIntents)
+router.get('/partnerships', orgAuth, ecosystemController.getPartnerships)
+router.get('/programs', orgAuth, ecosystemController.getPrograms)
+router.get('/skills', orgAuth, ecosystemController.getSkillAlignment)
+router.get('/recommendations', orgAuth, ecosystemController.getRecommendations)
+router.get('/search', orgAuth, ecosystemController.search)
+router.get('/ai/intents', orgAuth, ecosystemController.getAiIntents)
+router.post('/ai/insights', orgAuth, ecosystemController.getAiInsights)
+router.post('/ai/multi-agent', orgAuth, ecosystemController.runMultiAgent)
+
+module.exports = router

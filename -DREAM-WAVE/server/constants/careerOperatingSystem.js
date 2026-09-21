@@ -1,0 +1,41 @@
+/**
+ * Lasya V5 Prompt 10 — Career Operating System + Personal Command Center
+ */
+
+const ACTION_TYPES = ['LEARN', 'PRACTICE', 'BUILD', 'UPDATE_PORTFOLIO', 'PRACTICE_INTERVIEW', 'PREPARE_APPLICATION', 'REVIEW_DEADLINE', 'EXPLORE', 'RESEARCH']
+
+const ACTION_PRIORITIES = ['URGENT', 'HIGH', 'MEDIUM', 'LOW']
+
+const FUNNEL_STAGES = ['GOAL', 'SKILL', 'LEARNING', 'PROJECT', 'PORTFOLIO', 'OPPORTUNITY', 'APPLICATION', 'INTERVIEW', 'OUTCOME']
+
+const READINESS_DIMENSIONS = ['SKILLS', 'LEARNING', 'PROJECTS', 'PORTFOLIO', 'INTERVIEW', 'APPLICATION']
+
+const CHANGE_EVENT_TYPES = [
+  'GOAL_CHANGED',
+  'SKILL_EVIDENCE',
+  'LEARNING_COMPLETED',
+  'PROJECT_COMPLETED',
+  'PORTFOLIO_UPDATED',
+  'OPPORTUNITY_NEW',
+  'OPPORTUNITY_CHANGED',
+  'APPLICATION_STATUS',
+  'INTERVIEW_COMPLETED',
+]
+
+const INJECTION_PATTERNS = [
+  /ignore\s+(your|all)\s+rules/i,
+  /bypass\s+authorization/i,
+  /auto\s*apply/i,
+  /submit\s+application/i,
+  /modify\s+(permissions|records)/i,
+  /guarantee\s+(job|hire|outcome)/i,
+]
+
+module.exports = {
+  ACTION_TYPES,
+  ACTION_PRIORITIES,
+  FUNNEL_STAGES,
+  READINESS_DIMENSIONS,
+  CHANGE_EVENT_TYPES,
+  INJECTION_PATTERNS,
+}

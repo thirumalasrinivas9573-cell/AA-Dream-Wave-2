@@ -1,0 +1,189 @@
+.dw-pol {
+  display: grid;
+  gap: 18px;
+}
+
+.dw-pol__hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.dw-pol__eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8C7AE6;
+  font-weight: 700;
+}
+
+.dw-pol__hero h1 {
+  margin: 0 0 6px;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  color: #3A3153;
+}
+
+.dw-pol__hero p,
+.dw-pol__panel p,
+.dw-pol__panel small,
+.dw-pol__footnote {
+  color: #5D5477;
+}
+
+.dw-pol__hero-actions,
+.dw-pol__actions,
+.dw-pol__toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.dw-pol__focus,
+.dw-pol__next,
+.dw-pol__panel,
+.dw-pol__warn,
+.dw-pol__result {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(139, 132, 163, 0.2);
+  background: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(140, 122, 230, 0.08);
+}
+
+.dw-pol__focus,
+.dw-pol__next {
+  background: linear-gradient(135deg, rgba(140, 122, 230, 0.12), #FFFFFF);
+  border-color: rgba(140, 122, 230, 0.28);
+}
+
+.dw-pol__focus-title {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+  color: #3A3153;
+}
+
+.dw-pol__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.dw-pol__panel h2,
+.dw-pol__focus h2,
+.dw-pol__next h2,
+.dw-pol__warn h2 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  color: #3A3153;
+}
+
+.dw-pol__health-pill {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  margin: 8px 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(139, 132, 163, 0.25);
+  font-size: 0.78rem;
+  color: #3A3153;
+}
+
+.dw-pol__health-pill[data-status="ON_TRACK"] { border-color: rgba(5, 150, 105, 0.45); color: #059669; }
+.dw-pol__health-pill[data-status="AT_RISK"],
+.dw-pol__health-pill[data-status="BLOCKED"] { border-color: rgba(217, 119, 6, 0.5); color: #d97706; }
+.dw-pol__health-pill[data-status="INACTIVE"],
+.dw-pol__health-pill[data-status="INSUFFICIENT_DATA"] { opacity: 0.85; }
+
+.dw-pol__plan,
+.dw-pol__list {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 8px;
+  color: #5D5477;
+}
+
+.dw-pol__list li,
+.dw-pol__plan li {
+  display: grid;
+  gap: 2px;
+}
+
+.dw-pol__list span {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.dw-pol__list span[data-risk="OVERDUE"],
+.dw-pol__list span[data-risk="URGENT"] { color: #d97706; }
+
+.dw-pol__warn {
+  border-color: rgba(217, 119, 6, 0.35);
+  background: #FFFBEB;
+}
+
+.dw-pol__review {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.dw-pol__review h3 {
+  margin: 0 0 6px;
+  font-size: 0.9rem;
+  color: #3A3153;
+}
+
+.dw-pol textarea {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(139, 132, 163, 0.22);
+  background: #F8F6FC;
+  color: #3A3153;
+}
+
+.dw-pol__toggles button {
+  border: 1px solid rgba(139, 132, 163, 0.22);
+  background: #FFFFFF;
+  color: #5D5477;
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.dw-pol__toggles button.is-on {
+  border-color: rgba(140, 122, 230, 0.55);
+  background: rgba(140, 122, 230, 0.15);
+  color: #3A3153;
+  font-weight: 600;
+}
+
+.dw-pol__caution {
+  color: #fbbf24;
+}
+
+.dw-pol__footnote {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.dw-pol button:focus-visible,
+.dw-pol textarea:focus-visible,
+.dw-pol a:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.7);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .dw-pol__grid,
+  .dw-pol__review {
+    grid-template-columns: 1fr;
+  }
+}

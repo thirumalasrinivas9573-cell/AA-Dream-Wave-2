@@ -1,0 +1,207 @@
+.dw-daily {
+  display: grid;
+  gap: 18px;
+}
+
+.dw-daily__hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.dw-daily__eyebrow,
+.dw-daily__label {
+  margin: 0 0 6px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8C7AE6;
+  font-weight: 700;
+}
+
+.dw-daily__hero h1 {
+  margin: 0 0 6px;
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  color: #3A3153;
+}
+
+.dw-daily__hero p,
+.dw-daily__note,
+.dw-daily__panel p {
+  margin: 0;
+  color: #5D5477;
+}
+
+.dw-daily__hero-actions,
+.dw-daily__now-actions,
+.dw-daily__row-actions,
+.dw-daily__setup,
+.dw-daily__prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.dw-daily__now {
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(140, 122, 230, 0.28);
+  background: linear-gradient(135deg, rgba(140, 122, 230, 0.15), rgba(167, 216, 240, 0.2));
+  box-shadow: 0 8px 24px rgba(140, 122, 230, 0.08);
+}
+
+.dw-daily__now h2 {
+  margin: 0 0 8px;
+  color: #3A3153;
+}
+
+.dw-daily__now p {
+  margin: 0 0 6px;
+  color: #5D5477;
+}
+
+.dw-daily__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.9fr);
+  gap: 16px;
+}
+
+.dw-daily__main,
+.dw-daily__side {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.dw-daily__panel {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(139, 132, 163, 0.2);
+  background: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(140, 122, 230, 0.08);
+}
+
+.dw-daily__panel h2,
+.dw-daily__panel h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  color: #3A3153;
+}
+
+.dw-daily__bucket {
+  margin-top: 12px;
+}
+
+.dw-daily__bucket h3 {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8C7AE6;
+}
+
+.dw-daily__bucket ul,
+.dw-daily__risks,
+.dw-daily__prompts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dw-daily__bucket li,
+.dw-daily__risks li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(139, 132, 163, 0.15);
+  color: #3A3153;
+}
+
+.dw-daily__bucket li:first-child,
+.dw-daily__risks li:first-child {
+  border-top: 0;
+}
+
+.dw-daily__bucket small,
+.dw-daily__align {
+  display: block;
+  margin-top: 4px;
+  color: #8B84A3;
+  font-size: 0.78rem;
+}
+
+.dw-daily__prompts a {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(139, 132, 163, 0.2);
+  background: #F3EEFA;
+  text-decoration: none;
+  color: #3A3153;
+  font-size: 0.85rem;
+}
+
+.dw-daily__prompts a:focus-visible,
+.dw-daily__row-actions a:focus-visible,
+.dw-daily button:focus-visible {
+  outline: 2px solid #8C7AE6;
+  outline-offset: 2px;
+}
+
+.dw-daily__breakdown {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(139, 132, 163, 0.15);
+}
+
+.dw-daily__breakdown-form {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.dw-daily__breakdown-form input {
+  min-height: 42px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(139, 132, 163, 0.22);
+  background: #F8F6FC;
+  color: #3A3153;
+  font: inherit;
+}
+
+.dw-daily__proposal {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px dashed rgba(140, 122, 230, 0.35);
+  background: #F8F6FC;
+  color: #3A3153;
+}
+
+.dw-daily__proposal ol {
+  margin: 8px 0 12px;
+  padding-left: 1.2rem;
+}
+
+@media (max-width: 960px) {
+  .dw-daily__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .dw-daily__bucket li,
+  .dw-daily__risks li {
+    flex-direction: column;
+  }
+
+  .dw-daily__now-actions .btn,
+  .dw-daily__hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

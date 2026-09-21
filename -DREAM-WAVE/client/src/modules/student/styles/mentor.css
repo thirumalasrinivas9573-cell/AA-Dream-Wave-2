@@ -1,0 +1,327 @@
+.dw-mentor {
+  display: grid;
+  gap: 18px;
+}
+
+.dw-mentor__modes,
+.dw-mentor__mentor-modes {
+  display: grid;
+  gap: 10px;
+}
+
+.dw-mentor__modes {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.dw-mentor__mentor-modes {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.dw-mentor__mode-btn,
+.dw-mentor__mentor-mode-btn {
+  padding: 12px 10px;
+  border-radius: 12px;
+  border: 2px solid var(--border, rgba(139, 132, 163, 0.2));
+  background: var(--bg-card, #F3EEFA);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+  font: inherit;
+  color: inherit;
+}
+
+.dw-mentor__mode-btn.is-active,
+.dw-mentor__mentor-mode-btn.is-active {
+  box-shadow: 0 4px 20px rgba(140, 122, 230, 0.18);
+  border-color: #8C7AE6;
+  background: #FFFFFF;
+}
+
+.dw-mentor__layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr) 260px;
+  gap: 16px;
+  align-items: start;
+}
+
+.dw-mentor__history,
+.dw-mentor__chat,
+.dw-mentor__aside {
+  min-width: 0;
+}
+
+.dw-mentor__history,
+.dw-mentor__aside .dw-mentor-panel {
+  background: #FFFFFF;
+  border: 1px solid rgba(139, 132, 163, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(140, 122, 230, 0.08);
+}
+
+.dw-mentor__history-header,
+.dw-mentor-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px;
+  background: #F3EEFA;
+  border-bottom: 1px solid rgba(139, 132, 163, 0.2);
+}
+
+.dw-mentor__history-header h2,
+.dw-mentor-panel__header h2 {
+  margin: 0;
+  font-size: 0.86rem;
+}
+
+.dw-mentor__history-list {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  display: grid;
+  gap: 6px;
+  max-height: 520px;
+  overflow: auto;
+}
+
+.dw-mentor__history-item {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.dw-mentor__history-item:hover,
+.dw-mentor__history-item:focus-visible,
+.dw-mentor__history-item.is-active {
+  border-color: rgba(139, 92, 246, 0.35);
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.dw-mentor__history-item small {
+  color: var(--text-muted);
+}
+
+.dw-mentor__history-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.dw-mentor__history-actions button {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.72rem;
+}
+
+.dw-mentor__chat {
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+  background: rgba(13, 13, 23, 0.88);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.dw-mentor__chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.dw-mentor__chat-header-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.dw-mentor__chat-header-meta strong {
+  display: block;
+}
+
+.dw-mentor__chat-header-meta small {
+  color: var(--text-muted);
+}
+
+.dw-mentor__chat-toolbar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.dw-mentor__chat-toolbar button,
+.dw-mentor__chat-toolbar select {
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+  color: inherit;
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font: inherit;
+}
+
+.dw-mentor__messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dw-mentor__message-row {
+  display: flex;
+  gap: 9px;
+  align-items: flex-end;
+}
+
+.dw-mentor__message-row.is-user {
+  justify-content: flex-end;
+}
+
+.dw-mentor__bubble {
+  max-width: 92%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 0.875rem;
+  line-height: 1.68;
+}
+
+.dw-mentor__bubble.is-user {
+  max-width: 75%;
+  border-radius: 16px 16px 4px 16px;
+  background: linear-gradient(135deg, var(--purple), var(--purple-mid));
+  color: #fff;
+}
+
+.dw-mentor__bubble.is-assistant {
+  border-radius: 16px 16px 16px 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.dw-mentor__avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.dw-mentor__avatar.is-user {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+}
+
+.dw-mentor__composer {
+  padding: 12px 14px;
+  border-top: 1px solid rgba(148, 163, 184, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dw-mentor__composer form {
+  display: flex;
+  gap: 8px;
+}
+
+.dw-mentor__composer input {
+  flex: 1;
+}
+
+.dw-mentor__aside {
+  display: grid;
+  gap: 12px;
+}
+
+.dw-mentor-panel {
+  padding: 0;
+  overflow: hidden;
+}
+
+.dw-mentor-panel__body {
+  padding: 12px 14px 14px;
+}
+
+.dw-mentor__quick-actions,
+.dw-mentor__prompts {
+  display: grid;
+  gap: 6px;
+}
+
+.dw-mentor__quick-actions button,
+.dw-mentor__prompts button {
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  font: inherit;
+}
+
+.dw-mentor__quick-actions button:hover,
+.dw-mentor__quick-actions button:focus-visible,
+.dw-mentor__prompts button:hover,
+.dw-mentor__prompts button:focus-visible {
+  background: rgba(139, 92, 246, 0.1);
+  color: var(--purple-light, #ddd6fe);
+}
+
+.dw-mentor__suggestions {
+  display: grid;
+  gap: 6px;
+}
+
+.dw-mentor__suggestions a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.8rem;
+}
+
+.dw-mentor__error {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.08);
+  color: #fecaca;
+}
+
+@media (max-width: 1100px) {
+  .dw-mentor__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dw-mentor__history-list {
+    max-height: 220px;
+  }
+}
+
+@media (max-width: 760px) {
+  .dw-mentor__modes,
+  .dw-mentor__mentor-modes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

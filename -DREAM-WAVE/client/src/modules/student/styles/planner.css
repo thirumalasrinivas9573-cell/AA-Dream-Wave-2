@@ -1,0 +1,533 @@
+.planner-page {
+  display: grid;
+  gap: 18px;
+}
+
+.planner-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.planner-header h1 {
+  margin: 0 0 6px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.planner-header p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.planner-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.planner-summary,
+.planner-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.planner-summary article,
+.planner-metrics article {
+  padding: 14px;
+  border: 1px solid rgba(139, 132, 163, 0.2);
+  border-radius: 12px;
+  background: #FFFFFF;
+  box-shadow: 0 4px 15px rgba(140, 122, 230, 0.06);
+}
+
+.planner-summary span,
+.planner-metrics span {
+  display: block;
+  color: #8B84A3;
+  font-size: 0.68rem;
+}
+
+.planner-summary strong,
+.planner-metrics strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.1rem;
+  color: #3A3153;
+}
+
+.planner-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.planner-tabs button {
+  padding: 8px 12px;
+  border: 1px solid rgba(139, 132, 163, 0.2);
+  border-radius: 8px;
+  background: #FFFFFF;
+  color: #5D5477;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+}
+
+.planner-tabs button.is-active {
+  color: #3A3153;
+  border-color: rgba(140, 122, 230, 0.45);
+  background: rgba(140, 122, 230, 0.15);
+  font-weight: 600;
+}
+
+.planner-panel {
+  padding: 16px;
+  border: 1px solid rgba(139, 132, 163, 0.2);
+  border-radius: 14px;
+  background: #FFFFFF;
+  box-shadow: 0 8px 24px rgba(140, 122, 230, 0.08);
+}
+
+.planner-panel h2 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+
+.planner-panel h3 {
+  margin: 18px 0 8px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.planner-today-list {
+  display: grid;
+  gap: 10px;
+}
+
+.planner-item {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.planner-item--done {
+  opacity: 0.7;
+}
+
+.planner-item__time {
+  color: #a78bfa;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.planner-item header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.planner-item h3 {
+  margin: 0;
+  font-size: 0.86rem;
+}
+
+.planner-item__reason {
+  margin: 4px 0 0;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+}
+
+.planner-item__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+  color: var(--text-muted);
+  font-size: 0.64rem;
+}
+
+.planner-item__meta a {
+  color: #a78bfa;
+  text-decoration: none;
+}
+
+.planner-item__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.planner-priority {
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  font-size: 0.56rem;
+  text-transform: uppercase;
+}
+
+.planner-priority--high {
+  background: rgba(244, 63, 94, 0.12);
+  color: #fb7185;
+}
+
+.planner-priority--low {
+  background: rgba(148, 163, 184, 0.12);
+  color: #94a3b8;
+}
+
+.planner-status {
+  text-transform: capitalize;
+}
+
+.planner-status--completed {
+  color: #34d399;
+}
+
+.planner-alert {
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 0.78rem;
+}
+
+.planner-alert--warn {
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  background: rgba(245, 158, 11, 0.08);
+  color: #fcd34d;
+}
+
+.planner-week {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(90px, 1fr));
+  gap: 8px;
+  overflow-x: auto;
+}
+
+.planner-week__day {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+
+.planner-week__day--overload {
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.planner-week__label {
+  text-transform: capitalize;
+  color: var(--text-muted);
+  font-size: 0.62rem;
+}
+
+.planner-week__day strong {
+  font-size: 1.1rem;
+}
+
+.planner-week__day small {
+  color: var(--text-muted);
+  font-size: 0.6rem;
+}
+
+.planner-week__deadline {
+  color: #fb7185;
+  font-size: 0.58rem;
+}
+
+.planner-overdue {
+  display: grid;
+  gap: 8px;
+}
+
+.planner-overdue__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  border-radius: 10px;
+}
+
+.planner-overdue__item strong {
+  display: block;
+}
+
+.planner-overdue__item small {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+}
+
+.planner-overdue__actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.planner-recommendations {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.planner-recommendations li {
+  padding: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 10px;
+}
+
+.planner-recommendations small {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+}
+
+.planner-preview__list {
+  display: grid;
+  gap: 8px;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.planner-preview__row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.planner-preview__row small {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+}
+
+.planner-preview__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.planner-preview__warnings {
+  margin: 0 0 10px;
+  padding-left: 18px;
+  color: #fcd34d;
+  font-size: 0.72rem;
+}
+
+.planner-preview__summary {
+  margin: 0 0 10px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.planner-prefs {
+  display: grid;
+  gap: 12px;
+  max-width: 360px;
+}
+
+.planner-prefs label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.75rem;
+}
+
+.planner-prefs input,
+.planner-prefs select {
+  min-height: 40px;
+  padding: 0 10px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  color: inherit;
+  font: inherit;
+}
+
+.planner-reschedule {
+  display: grid;
+  gap: 12px;
+}
+
+.planner-reschedule label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.75rem;
+}
+
+/* Focus Mode */
+.focus-mode {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: #0a0a12;
+  color: #f8fafc;
+}
+
+.focus-mode__header {
+  padding: 16px 20px;
+}
+
+.focus-mode__exit {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.focus-mode__main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.focus-mode__ready,
+.focus-mode__active {
+  width: min(520px, 100%);
+  text-align: center;
+}
+
+.focus-mode__ready h1,
+.focus-mode__active h1 {
+  margin: 0 0 8px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.focus-mode__task {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+}
+
+.focus-mode__goal {
+  margin: 0 0 20px;
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.focus-mode__modes {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.focus-mode__modes button {
+  padding: 8px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  background: transparent;
+  color: #cbd5e1;
+  cursor: pointer;
+  font: inherit;
+}
+
+.focus-mode__modes button.is-active {
+  border-color: rgba(139, 92, 246, 0.5);
+  background: rgba(139, 92, 246, 0.15);
+  color: #ede9fe;
+}
+
+.focus-mode__timer {
+  font-size: clamp(3rem, 12vw, 5rem);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  margin: 16px 0;
+}
+
+.focus-mode__progress {
+  position: relative;
+  height: 6px;
+  margin: 0 auto 12px;
+  max-width: 280px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.15);
+  overflow: hidden;
+}
+
+.focus-mode__progress div {
+  height: 100%;
+  background: #8b5cf6;
+  transition: width 1s linear;
+}
+
+.focus-mode__progress span {
+  display: block;
+  margin-top: 8px;
+  color: #94a3b8;
+  font-size: 0.75rem;
+}
+
+.focus-mode__status {
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.focus-mode__controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.focus-finish {
+  display: grid;
+  gap: 12px;
+}
+
+.focus-finish textarea,
+.focus-finish input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  color: inherit;
+  font: inherit;
+}
+
+.focus-finish__check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .planner-item {
+    grid-template-columns: 1fr;
+  }
+
+  .planner-item__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .planner-week {
+    grid-template-columns: repeat(7, minmax(72px, 1fr));
+  }
+}

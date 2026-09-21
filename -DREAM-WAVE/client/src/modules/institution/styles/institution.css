@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+
+/* Institution Portal — independent academic theme (White / Navy / Blue / Emerald) */
+
+.institution-module {
+  --inst-navy: #1E3A5F;
+  --inst-blue: #2563EB;
+  --inst-blue-light: #3B82F6;
+  --inst-emerald: #059669;
+  --inst-bg: #F8FAFC;
+  --inst-card: #FFFFFF;
+  --inst-text: #0F172A;
+  --inst-muted: #64748B;
+  --inst-border: #E2E8F0;
+  color: var(--inst-text);
+  background:
+    radial-gradient(1200px 500px at 10% -10%, rgba(37, 99, 235, 0.08), transparent 55%),
+    radial-gradient(900px 400px at 100% 0%, rgba(5, 150, 105, 0.07), transparent 50%),
+    var(--inst-bg);
+  min-height: 100vh;
+  font-family: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+}
+
+.institution-module h1,
+.institution-module h2,
+.institution-module h3 {
+  font-family: 'Libre Franklin', 'Segoe UI', system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  color: var(--inst-navy);
+}
+
+.inst-card {
+  background: var(--inst-card);
+  border: 1px solid var(--inst-border);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.inst-input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--inst-border);
+  background: #fff;
+  color: var(--inst-text);
+  width: 100%;
+  font: inherit;
+}
+
+.inst-input:focus {
+  outline: 2px solid rgba(37, 99, 235, 0.35);
+  border-color: var(--inst-blue);
+}
+
+.inst-btn {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--inst-border);
+  background: #fff;
+  color: var(--inst-navy);
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.inst-btn:hover {
+  border-color: var(--inst-blue-light);
+  color: var(--inst-blue);
+}
+
+.inst-btn-primary {
+  background: linear-gradient(135deg, var(--inst-navy), var(--inst-blue));
+  color: #fff;
+  border: none;
+}
+
+.inst-btn-primary:hover {
+  color: #fff;
+  filter: brightness(1.05);
+}
+
+.inst-btn-emerald {
+  background: var(--inst-emerald);
+  color: #fff;
+  border: none;
+}
+
+.inst-sidebar {
+  width: 248px;
+  background: linear-gradient(180deg, #0B1B33 0%, #132A4A 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: #E2E8F0;
+}
+
+.inst-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: rgba(226, 232, 240, 0.78);
+  font-size: 0.84rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.inst-nav-link:hover,
+.inst-nav-link.active {
+  background: rgba(37, 99, 235, 0.28);
+  color: #fff;
+}
+
+.inst-nav-group {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.85);
+  padding: 12px 12px 4px;
+}
+
+.inst-stat {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.inst-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(30, 58, 95, 0.08);
+}
+
+.inst-stat-value {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--inst-navy);
+  line-height: 1.1;
+}
+
+.inst-stat-label {
+  font-size: 0.8rem;
+  color: var(--inst-muted);
+  margin-top: 4px;
+}
+
+.inst-table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--inst-border);
+  background: #fff;
+}
+
+.inst-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+
+.inst-table th,
+.inst-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--inst-border);
+}
+
+.inst-table th {
+  background: #F1F5F9;
+  color: var(--inst-navy);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.inst-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: #EFF6FF;
+  color: var(--inst-blue);
+}
+
+.inst-badge-ok {
+  background: #ECFDF5;
+  color: var(--inst-emerald);
+}
+
+.inst-badge-warn {
+  background: #FFF7ED;
+  color: #C2410C;
+}
+
+.inst-grid-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.inst-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.inst-empty {
+  text-align: center;
+  padding: 36px 20px;
+  color: var(--inst-muted);
+  font-size: 0.9rem;
+}
+
+.inst-form-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.inst-form-grid .full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 899px) {
+  .inst-sidebar-desktop { display: none !important; }
+  .inst-topbar { display: flex !important; }
+}
+
+@media (min-width: 900px) {
+  .inst-menu-btn { display: none !important; }
+  .inst-topbar-title { display: none !important; }
+}
+
+@media (max-width: 640px) {
+  .institution-module main {
+    padding: 16px 12px 40px !important;
+  }
+  .inst-stat-value { font-size: 1.3rem; }
+}
+
+.institution-module :focus-visible {
+  outline: 2px solid var(--inst-blue);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .institution-module * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
