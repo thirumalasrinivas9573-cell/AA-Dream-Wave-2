@@ -48,7 +48,7 @@ class OpenAIProvider extends IAIProvider {
   }
 
   _model(override) {
-    return override || this._config.model || 'gpt-4o-mini'
+    return override || this._config.model || process.env.GEMINI_MODEL || 'gemini-3.5-flash'
   }
 
   async chatCompletion(messages, options = {}) {

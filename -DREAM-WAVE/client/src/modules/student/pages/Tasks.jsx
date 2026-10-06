@@ -52,27 +52,38 @@ export default function Tasks() {
   } = useTasks()
   const [view, setView] = useState(searchParams.get('view') || 'list')
   const [query, setQuery] = useState('')
-  const [filter, setFilter] = useState({ status: 'all', priority: 'all', when: 'all' })
+  const [filter, setFilter] = useState(() => ({
+    status: 'all',
+    priority: 'all',
+    when: 'all',
+    goalId: searchParams.get('goalId') || 'all',
+  }))
   const [formTask, setFormTask] = useState(undefined)
   const [formOpen, setFormOpen] = useState(false)
   const [selectedTask, setSelectedTask] = useState(null)
   const [deleteCandidate, setDeleteCandidate] = useState(null)
   const [focusTaskId, setFocusTaskId] = useState('')
-  const [generateGoalId, setGenerateGoalId] = useState('')
+  const [generateGoalId, setGenerateGoalId] = useState(searchParams.get('goalId') || '')
   const [generating, setGenerating] = useState(false)
   const [generateConfirm, setGenerateConfirm] = useState(false)
   const [effects, setEffects] = useState([])
 
   const goalMap = useMemo(() => new Map(goals.map((goal) => [goal._id, goal])), [goals])
+
+  const goalScopedTasks = useMemo(() => {
+    if (!filter.goalId || filter.goalId === 'all') return tasks
+    return tasks.filter((task) => relationId(task.goalId) === filter.goalId)
+  }, [tasks, filter.goalId])
+
   const counts = useMemo(() => ({
-    all: tasks.length,
-    pending: tasks.filter((task) => !task.completed && !['completed', 'archived'].includes(task.status)).length,
-    todo: tasks.filter((task) => effectiveStatus(task) === 'todo').length,
-    'in-progress': tasks.filter((task) => effectiveStatus(task) === 'in-progress').length,
-    paused: tasks.filter((task) => effectiveStatus(task) === 'paused').length,
-    completed: tasks.filter((task) => effectiveStatus(task) === 'completed').length,
-    archived: tasks.filter((task) => effectiveStatus(task) === 'archived').length,
-  }), [tasks])
+    all: goalScopedTasks.length,
+    pending: goalScopedTasks.filter((task) => !task.completed && !['completed', 'archived'].includes(task.status)).length,
+    todo: goalScopedTasks.filter((task) => effectiveStatus(task) === 'todo').length,
+    'in-progress': goalScopedTasks.filter((task) => effectiveStatus(task) === 'in-progress').length,
+    paused: goalScopedTasks.filter((task) => effectiveStatus(task) === 'paused').length,
+    completed: goalScopedTasks.filter((task) => effectiveStatus(task) === 'completed').length,
+    archived: goalScopedTasks.filter((task) => effectiveStatus(task) === 'archived').length,
+  }), [goalScopedTasks])
 
   const filteredTasks = useMemo(() => {
     const term = query.trim().toLowerCase()
@@ -81,7 +92,7 @@ export default function Tasks() {
     tomorrow.setDate(today.getDate() + 1)
     const weekEnd = new Date(today)
     weekEnd.setDate(today.getDate() + 7)
-    return tasks.filter((task) => {
+    return goalScopedTasks.filter((task) => {
       const matchesQuery = !term
         || task.title.toLowerCase().includes(term)
         || task.description?.toLowerCase().includes(term)
@@ -96,7 +107,33 @@ export default function Tasks() {
       if (filter.when === 'week') matchesDate = Boolean(task.dueDate && new Date(task.dueDate) >= today && new Date(task.dueDate) <= weekEnd)
       return matchesQuery && matchesStatus && matchesPriority && matchesDate
     })
-  }, [filter, query, tasks])
+  }, [filter, query, goalScopedTasks])
+
+  useEffect(() => {
+    const goalIdParam = searchParams.get('goalId') || 'all'
+    setFilter((current) => {
+      if (current.goalId !== goalIdParam) {
+        return { ...current, goalId: goalIdParam }
+      }
+      return current
+    })
+    if (goalIdParam !== 'all' && !generateGoalId) {
+      setGenerateGoalId(goalIdParam)
+    }
+  }, [searchParams])
+
+  const handleFilterChange = (nextFilter) => {
+    setFilter(nextFilter)
+    setSearchParams((current) => {
+      const next = new URLSearchParams(current)
+      if (nextFilter.goalId && nextFilter.goalId !== 'all') {
+        next.set('goalId', nextFilter.goalId)
+      } else {
+        next.delete('goalId')
+      }
+      return next
+    }, { replace: true })
+  }
 
   useEffect(() => {
     const taskId = searchParams.get('taskId')
@@ -272,7 +309,7 @@ export default function Tasks() {
           </header>
         </section>
 
-        <TaskToolbar view={view} onView={changeView} query={query} onQuery={setQuery} filter={filter} onFilter={setFilter} counts={counts} />
+        <TaskToolbar view={view} onView={changeView} query={query} onQuery={setQuery} filter={filter} onFilter={handleFilterChange} counts={counts} goals={goals} />
 
         {view === 'list' && <TaskListView {...sharedViewProps} />}
         {view === 'kanban' && <TaskKanbanView {...sharedViewProps} />}

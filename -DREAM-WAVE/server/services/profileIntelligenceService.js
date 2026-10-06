@@ -1,4 +1,4 @@
-const { openai } = require('../utils/openaiClient')
+const { openai, getModel } = require('../utils/openaiClient')
 
 const text = (value, max) => String(value || '').trim().slice(0, max)
 
@@ -9,7 +9,7 @@ function sanitizeInput(input) {
 async function callProfileAi(systemPrompt, payload) {
   try {
     const completion = await openai.chat.completions.create({
-      model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.35,
       max_tokens: 500,
       messages: [

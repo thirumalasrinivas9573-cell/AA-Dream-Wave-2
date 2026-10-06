@@ -74,7 +74,7 @@ export default function Roadmap() {
         setSelectedGoalId((current) => {
           if (requested && items.some((goal) => goal._id === requested)) return requested
           if (current && items.some((goal) => goal._id === current)) return current
-          return items[0]?._id || ''
+          return '' // Do not default to first goal
         })
       })
       .catch((requestError) => !cancelled && setError(requestError.userMessage || 'Unable to load goals.'))
@@ -86,6 +86,7 @@ export default function Roadmap() {
     if (!goalId) {
       setRoadmap(null)
       setDraft(null)
+      setLoadingRoadmap(false)
       return
     }
     const currentRequest = ++requestId.current
@@ -106,7 +107,7 @@ export default function Roadmap() {
         setRoadmap(null)
         setDraft(null)
       } else {
-        setError(requestError.userMessage || 'Unable to load this roadmap.')
+        setError(requestError.response?.data?.message || requestError.userMessage || 'Unable to load this roadmap.')
       }
     } finally {
       if (requestId.current === currentRequest) setLoadingRoadmap(false)
@@ -114,11 +115,20 @@ export default function Roadmap() {
   }, [])
 
   useEffect(() => {
-    loadRoadmap(selectedGoalId)
+    if (selectedGoalId) {
+      loadRoadmap(selectedGoalId)
+    } else {
+      setRoadmap(null)
+      setDraft(null)
+    }
   }, [loadRoadmap, selectedGoalId])
 
   const chooseGoal = (goalId) => {
     setSelectedGoalId(goalId)
+    setRoadmap(null)
+    setDraft(null)
+    setError('')
+    setNotFound(false)
     setActiveTab('overview')
     setSearchParams((current) => {
       const next = new URLSearchParams(current)
@@ -163,7 +173,7 @@ export default function Roadmap() {
   }
 
   const generate = async () => {
-    if (!selectedGoalId) return
+    if (!selectedGoalId || generating) return
     setConfirmGenerate(false)
     setGenerating(true)
     setError('')
@@ -176,7 +186,7 @@ export default function Roadmap() {
       setNotFound(false)
       setActiveTab('overview')
     } catch (requestError) {
-      setError(requestError.userMessage || 'Roadmap generation failed.')
+      setError(requestError.response?.data?.message || requestError.userMessage || 'Roadmap generation failed.')
     } finally {
       setGenerating(false)
     }
@@ -250,22 +260,43 @@ export default function Roadmap() {
             <p>Structure skill progression, plans, resources, practice and assessments.</p>
           </div>
           <div className="goals-header__actions">
-            {dirty && <Button onClick={saveArchitecture} disabled={saving}>{saving ? 'Saving…' : 'Save changes'}</Button>}
-            {roadmap && <Button variant="secondary" onClick={() => setConfirmGenerate(true)} disabled={generating}>AI generation</Button>}
-            {roadmap && <Button variant="secondary" onClick={loadAdaptPreview} disabled={adaptLoading}>Suggest adjustments</Button>}
+            {dirty && <Button onClick={saveArchitecture} disabled={saving || generating}>{saving ? 'Saving…' : 'Save changes'}</Button>}
+            {roadmap && <Button variant="secondary" onClick={() => setConfirmGenerate(true)} disabled={generating}>{generating ? 'Generating roadmap…' : 'AI generation'}</Button>}
+            {roadmap && <Button variant="secondary" onClick={loadAdaptPreview} disabled={adaptLoading || generating}>Suggest adjustments</Button>}
           </div>
         </header>
+
+        {generating && (
+          <div className="roadmap-generating-banner" style={{ margin: '1rem 0' }}>
+            <LoadingState label="Generating personalized roadmap and 30-day curriculum with AI… Please wait." rows={3} />
+          </div>
+        )}
 
         <section className="roadmap-selector" aria-label="Select roadmap goal">
           <label htmlFor="roadmap-goal">Goal</label>
           <select id="roadmap-goal" className="select" value={selectedGoalId} onChange={(event) => chooseGoal(event.target.value)} disabled={loadingGoals}>
-            {!goals.length && <option value="">No goals available</option>}
+            <option value="">{goals.length ? '— Select a goal —' : 'No goals available'}</option>
             {goals.map((goal) => <option value={goal._id} key={goal._id}>{goal.title} · {goal.category}</option>)}
           </select>
           <Link className="btn btn-secondary" to="/student/goals">Manage goals</Link>
         </section>
 
-        {error && <ErrorState title="Roadmap action failed" message={error} onRetry={() => loadRoadmap(selectedGoalId)} />}
+        {error && (
+          <ErrorState
+            title="Roadmap action failed"
+            message={error}
+            onRetry={() => {
+              setError('')
+              if (selectedGoalId) {
+                if (notFound) {
+                  generate()
+                } else {
+                  loadRoadmap(selectedGoalId)
+                }
+              }
+            }}
+          />
+        )}
         {fallback && <div className="alert alert-warning">The existing AI service used its fallback roadmap because the generation provider was unavailable.</div>}
         {transparency && (
           <div className="alert alert-info">
@@ -278,7 +309,6 @@ export default function Roadmap() {
             </div>
           </div>
         )}
-        {generating && <LoadingState label="Generating the existing AI roadmap and learning records…" rows={6} />}
 
         {!loadingGoals && !goals.length && (
           <section className="roadmap-empty">
@@ -286,6 +316,14 @@ export default function Roadmap() {
             <h2>Create a goal first</h2>
             <p>Every roadmap belongs to a measurable learning goal.</p>
             <Link className="btn btn-primary" to="/student/goals">Create a goal</Link>
+          </section>
+        )}
+
+        {!loadingGoals && goals.length > 0 && !selectedGoalId && (
+          <section className="roadmap-empty">
+            <span aria-hidden="true">🎯</span>
+            <h2>Select a learning goal</h2>
+            <p>Choose a goal from the dropdown above to view or generate its customized roadmap.</p>
           </section>
         )}
 
@@ -415,11 +453,11 @@ export default function Roadmap() {
         open={confirmGenerate}
         title="Generate with the existing AI service?"
         description="This preserves the current AI feature but can replace generated learning tasks linked to this roadmap."
-        onClose={() => setConfirmGenerate(false)}
+        onClose={() => !generating && setConfirmGenerate(false)}
         actions={(
           <>
-            <Button variant="ghost" onClick={() => setConfirmGenerate(false)}>Cancel</Button>
-            <Button onClick={generate}>Generate roadmap</Button>
+            <Button variant="ghost" onClick={() => setConfirmGenerate(false)} disabled={generating}>Cancel</Button>
+            <Button onClick={generate} disabled={generating}>{generating ? 'Generating…' : 'Generate roadmap'}</Button>
           </>
         )}
       >

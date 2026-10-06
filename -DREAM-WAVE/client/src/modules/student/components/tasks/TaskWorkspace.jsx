@@ -185,13 +185,17 @@ export const TaskStats = memo(function TaskStats({ analytics, userStreak, loadin
   )
 })
 
-export function TaskToolbar({ view, onView, query, onQuery, filter, onFilter, counts }) {
+export function TaskToolbar({ view, onView, query, onQuery, filter, onFilter, counts, goals = [] }) {
   return (
     <section className="task-toolbar" aria-label="Task views and filters">
       <div className="task-view-tabs" role="tablist" aria-label="Task view">
         {TASK_VIEWS.map(([id, label]) => <button type="button" role="tab" aria-selected={view === id} className={view === id ? 'is-active' : ''} onClick={() => onView(id)} key={id}>{label}</button>)}
       </div>
       <label className="task-search"><span aria-hidden="true">⌕</span><input type="search" value={query} onChange={(event) => onQuery(event.target.value)} placeholder="Search title, tag or category" aria-label="Search tasks" /></label>
+      <select className="select" value={filter.goalId || 'all'} onChange={(event) => onFilter({ ...filter, goalId: event.target.value })} aria-label="Filter by goal">
+        <option value="all">All goals</option>
+        {goals.map((goal) => <option value={goal._id} key={goal._id}>{goal.title}</option>)}
+      </select>
       <select className="select" value={filter.when} onChange={(event) => onFilter({ ...filter, when: event.target.value })} aria-label="Filter by date">
         <option value="all">Any date</option><option value="today">Today</option><option value="tomorrow">Tomorrow</option><option value="week">This week</option>
       </select>

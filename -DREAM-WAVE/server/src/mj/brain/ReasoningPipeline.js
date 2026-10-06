@@ -281,7 +281,7 @@ Do NOT give a shallow chatbot reply. Think like a COO.`
 
 **Estimated Time:** ~${result.executionPlan?.estimatedTimeMinutes || 15} minutes
 
-Configure an AI provider (OPENAI_API_KEY or GEMINI_API_KEY) for full intelligent responses.`
+Configure an AI provider (GEMINI_API_KEY) for full intelligent responses.`
   }
 
   getObservability() { return this._observability }

@@ -1,4 +1,4 @@
-const { openai } = require('../utils/openaiClient')
+const { openai, getModel } = require('../utils/openaiClient')
 
 const text = (value, max) => String(value || '').trim().slice(0, max)
 
@@ -15,7 +15,7 @@ async function improvePostDraft({ content, postType, topics = [], skills = [] })
   }
   try {
     const completion = await openai.chat.completions.create({
-      model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.4,
       max_tokens: 500,
       messages: [
@@ -55,7 +55,7 @@ async function suggestTags({ content, postType }) {
   if (!draft) return { topics: [], skills: [] }
   try {
     const completion = await openai.chat.completions.create({
-      model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.2,
       max_tokens: 200,
       messages: [
@@ -90,7 +90,7 @@ async function summarizeProject({ title, description, technologies = [] }) {
   }
   try {
     const completion = await openai.chat.completions.create({
-      model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.3,
       max_tokens: 350,
       messages: [

@@ -1,4 +1,4 @@
-const OpenAI = require('openai')
+const { getOpenAI, getApiKey, getModel } = require('../utils/openaiClient')
 const {
   STUDENT_AI_INTENTS,
   COMPANY_AI_INTENTS,
@@ -14,11 +14,13 @@ const {
   matchStudentToOpportunity,
 } = require('./talentIntelligenceService')
 
-let openai = null
-function getOpenAI() {
-  if (!process.env.OPENAI_API_KEY?.trim()) return null
-  if (!openai) openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-  return openai
+function getClient() {
+  if (!getApiKey()) return null
+  try {
+    return getOpenAI()
+  } catch {
+    return null
+  }
 }
 
 function buildStudentRuleInsight(intent, ctx = {}) {
@@ -165,12 +167,12 @@ async function generateStudentTalentInsight(userId, intent, params = {}) {
   }
 
   const ruleInsight = buildStudentRuleInsight(intent, ctx)
-  const client = getOpenAI()
+  const client = getClient()
   if (!client) return { intent, source: 'rule', insight: ruleInsight }
 
   try {
     const completion = await client.chat.completions.create({
-      model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+      model: getModel(),
       messages: [
         {
           role: 'system',
@@ -179,7 +181,7 @@ async function generateStudentTalentInsight(userId, intent, params = {}) {
         },
         { role: 'user', content: JSON.stringify({ intent, ruleInsight, summary: ctx.readiness?.state }) },
       ],
-      max_tokens: 400,
+      max_tokens: 1000,
       temperature: 0.2,
     })
     const text = completion.choices?.[0]?.message?.content?.trim()

@@ -2,7 +2,7 @@
 // Each agent has a distinct personality, focus area, and system prompt.
 // The user's tone preference and history summary are injected for personalization.
 
-const { openai } = require('../utils/openaiClient')
+const { openai, getModel } = require('../utils/openaiClient')
 
 // ── Agent definitions ─────────────────────────────────────────────────────────
 const AGENTS = {
@@ -10,25 +10,25 @@ const AGENTS = {
     name: 'Sage (Mentor)',
     prompt: `You are Sage, an advanced AI life mentor. You are calm, wise, and precise -- inspired by Krishna-like clarity. You guide users through life decisions, discipline, habits, and personal growth. Every answer must be goal-aligned, practical, and structured. Never give vague or generic responses. Follow this structure: (1) Direct connection to goal, (2) Practical explanation, (3) Real-world application, (4) Short conclusion. Max 10 lines.`,
     temperature: 0.68,
-    max_tokens: 500,
+    max_tokens: 1000,
   },
   productivity: {
     name: 'Flux (Productivity)',
     prompt: `You are Flux, a sharp AI productivity coach. You help users build systems, eliminate distractions, and execute goals with precision. Every response must be goal-aligned and action-oriented. Give specific, time-bound steps. No fluff. Structure: (1) Goal connection, (2) Specific action, (3) Implementation, (4) Outcome. Max 10 lines.`,
     temperature: 0.60,
-    max_tokens: 450,
+    max_tokens: 1000,
   },
   research: {
     name: 'Atlas (Research)',
     prompt: `You are Atlas, a meticulous AI research analyst. You synthesize complex topics into clear, structured insights always connected to the user's goal. Be analytical, objective, and thorough. Structure responses with clear sections. Accuracy is paramount -- zero hallucination tolerance. Max 10 lines.`,
     temperature: 0.45,
-    max_tokens: 600,
+    max_tokens: 1000,
   },
   career: {
     name: 'Nexus (Career)',
     prompt: `You are Nexus, a strategic AI career advisor. You help users navigate career transitions, skill development, job searching, and professional growth. Every answer must be industry-specific and goal-aligned. Give concrete, actionable guidance. Structure: (1) Goal relevance, (2) Strategy, (3) Action steps, (4) Expected outcome. Max 10 lines.`,
     temperature: 0.62,
-    max_tokens: 550,
+    max_tokens: 1000,
   },
 }
 
@@ -77,7 +77,7 @@ const runAgent = async (agentType, message, history = [], profile = null) => {
   const systemPrompt = buildPersonalizedPrompt(agent.prompt, profile, profile?.tone)
 
   const completion = await openai.chat.completions.create({
-    model:       'gpt-3.5-turbo',
+    model:       getModel(),
     temperature: agent.temperature,
     max_tokens:  agent.max_tokens,
     messages: [
@@ -101,9 +101,9 @@ const buildResume = async (data) => {
   const { name, email, phone, summary, skills, experience, education, targetRole } = data
 
   const completion = await openai.chat.completions.create({
-    model: 'gpt-3.5-turbo',
+    model: getModel(),
     temperature: 0.6,
-    max_tokens: 1000,
+    max_tokens: 1500,
     messages: [
       { role: 'system', content: 'You are an expert resume writer. Create professional, ATS-optimized resume content.' },
       { role: 'user',   content: `Create a professional resume for:
@@ -139,9 +139,9 @@ Return JSON: {
  */
 const buildVideoScript = async (topic, duration = 60) => {
   const completion = await openai.chat.completions.create({
-    model: 'gpt-3.5-turbo',
+    model: getModel(),
     temperature: 0.75,
-    max_tokens: 800,
+    max_tokens: 1200,
     messages: [
       { role: 'system', content: 'You are a professional educational video scriptwriter. Create engaging, clear scripts for short-form learning videos.' },
       { role: 'user',   content: `Write a ${duration}-second educational video script about: "${topic}".
@@ -168,9 +168,9 @@ Return JSON: {
  */
 const generateNudge = async (stats, profile) => {
   const completion = await openai.chat.completions.create({
-    model: 'gpt-3.5-turbo',
+    model: getModel(),
     temperature: 0.8,
-    max_tokens: 150,
+    max_tokens: 500,
     messages: [
       { role: 'system', content: 'You generate short, motivating push notification messages for a productivity app. Be specific, personal, and action-oriented. Max 2 sentences.' },
       { role: 'user',   content: `User stats: ${stats.taskDone} tasks done out of ${stats.tasks} total. ${stats.goals} goals set. AI chats: ${stats.aiChats}. Tone preference: ${profile?.tone || 'calm'}. Generate a personalized nudge message.` },

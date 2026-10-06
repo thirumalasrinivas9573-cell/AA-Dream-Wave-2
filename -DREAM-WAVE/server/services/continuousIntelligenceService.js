@@ -355,7 +355,7 @@ async function getCommandCenter(user, { includeHistory = true } = {}) {
     failures: [daily, insights, progress, history, decisions]
       .filter((x) => !x.ok)
       .map((x) => ({ source: x.label, error: x.error })),
-    offlineNote: process.env.OPENAI_API_KEY
+    offlineNote: process.env.GEMINI_API_KEY
       ? null
       : 'AI provider optional — deterministic intelligence remains available.',
   }

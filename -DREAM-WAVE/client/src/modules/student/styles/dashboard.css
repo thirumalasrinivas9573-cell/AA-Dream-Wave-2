@@ -1,7 +1,7 @@
 .student-dashboard {
-  --dw-panel: #F3EEFA;
-  --dw-panel-soft: #FFFFFF;
-  --dw-line: rgba(139, 132, 163, 0.2);
+  --dw-panel: var(--bg-card);
+  --dw-panel-soft: var(--bg-elevated);
+  --dw-line: var(--border);
   display: grid;
   gap: 20px;
 }
@@ -30,13 +30,13 @@
 .dw-dashboard-topbar__heading h1 {
   margin: 0 0 3px;
   font-size: clamp(1.35rem, 2vw, 1.8rem);
-  color: #3A3153;
+  color: var(--text-primary);
 }
 
 .dw-dashboard-topbar__heading p,
 .dw-welcome p,
 .dw-panel p {
-  color: #5D5477;
+  color: var(--text-secondary);
 }
 
 .dw-dashboard-search {
@@ -46,10 +46,10 @@
   align-items: center;
   gap: 10px;
   padding: 0 14px;
-  color: #5D5477;
+  color: var(--text-secondary);
   border: 1px solid var(--dw-line);
   border-radius: 12px;
-  background: #FFFFFF;
+  background: var(--bg-elevated);
   cursor: pointer;
   text-align: left;
   font: inherit;

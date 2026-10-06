@@ -37,6 +37,12 @@ try {
   process.exit(1)
 }
 
+// Validate Gemini API Key (required for server operation)
+if (!process.env.GEMINI_API_KEY || !process.env.GEMINI_API_KEY.trim()) {
+  log.error('FATAL: GEMINI_API_KEY is missing or empty. Please set GEMINI_API_KEY in server/.env')
+  process.exit(1)
+}
+
 // Validate Resend / email configuration (fatal in production)
 try {
   validateEmailEnv({ fatalInProduction: true })

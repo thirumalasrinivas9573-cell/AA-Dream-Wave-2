@@ -1,7 +1,7 @@
 const Chat = require('../models/Chat')
 const UserProfile = require('../models/UserProfile')
 const PlatformAnalytics = require('../models/PlatformAnalytics')
-const { openai } = require('../utils/openaiClient')
+const { openai, getModel } = require('../utils/openaiClient')
 const { buildMentorContext } = require('../services/mentorContextEngine')
 const studentContextEngine = require('../services/studentContextEngine')
 const knowledgeGraphService = require('../services/knowledgeGraphService')
@@ -292,7 +292,7 @@ exports.mentorChat = async (req, res) => {
     })
 
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.72,
       max_tokens: depth === 'quick' ? 900 : depth === 'simple' ? 1400 : 3000,
       messages: buildMessagePayload({

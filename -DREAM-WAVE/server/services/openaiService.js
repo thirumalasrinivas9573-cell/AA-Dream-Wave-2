@@ -1,26 +1,72 @@
 const safeJsonParse = require("../utils/safeJsonParse");
-const { getOpenAI } = require("../utils/openaiClient");
+const { getOpenAI, getModel } = require("../utils/openaiClient");
 const client = new Proxy({}, { get(_t, p) { return getOpenAI()[p]; } });
 
 // ── Retry-based robust AI call ─────────────────────────────────────────────────
-const robustAiCall = async (messages, model = "gpt-4o-mini", fallback = {}) => {
-  for (let attempt = 1; attempt <= 3; attempt++) {
+const robustAiCall = async (messages, model = getModel()) => {
+  const maxAttempts = 3;
+  let lastError = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
       const res = await client.chat.completions.create({
-        model, messages, temperature: 0.7,
+        model: getModel(),
+        messages,
+        temperature: 0.7,
         response_format: { type: "json_object" },
-        max_tokens: 4096,
+        max_tokens: 8192,
       });
-      const parsed = safeJsonParse(res.choices[0].message.content, null);
+
+      const choice = res.choices?.[0];
+      const content = choice?.message?.content;
+      const finishReason = choice?.finish_reason;
+
+      if (typeof content !== 'string' || !content.trim()) {
+        const err = new Error(`Empty response content from Gemini (finish_reason: ${finishReason || 'unknown'})`);
+        err.statusCode = 502;
+        err.finishReason = finishReason;
+        throw err;
+      }
+
+      const parsed = safeJsonParse(content, null);
       if (parsed) return parsed;
-      console.warn(`[robustAiCall] Attempt ${attempt} JSON parse failed.`);
+
+      const parseErr = new Error(`Gemini returned invalid JSON (finish_reason: ${finishReason || 'unknown'})`);
+      parseErr.statusCode = 502;
+      parseErr.finishReason = finishReason;
+      throw parseErr;
     } catch (err) {
-      console.error(`[robustAiCall] Attempt ${attempt}: ${err.message}`);
-      if (err?.status === 429) break;
-      if (attempt < 3) await new Promise(r => setTimeout(r, attempt * 1200));
+      lastError = err;
+      const status = Number(err.status || err.statusCode || 0);
+
+      // Never retry on 400, 401, 403, or 404 (permanent / client errors)
+      if ([400, 401, 403, 404].includes(status)) {
+        console.error(`[robustAiCall] Permanent client error (HTTP ${status}): ${err.message}. Aborting without retry.`);
+        throw err;
+      }
+
+      // Retry ONLY for temporary failures (429, 5xx, or network/connection timeouts)
+      const isTemporary = status === 429 || (status >= 500 && status < 600) || !status || /network|timeout|connection|econnreset|etimedout/i.test(err.message);
+      if (!isTemporary) {
+        console.error(`[robustAiCall] Non-retryable error (HTTP ${status}): ${err.message}. Aborting.`);
+        throw err;
+      }
+
+      console.warn(`[robustAiCall] Attempt ${attempt}/${maxAttempts} temporary failure (${status || 'network'}): ${err.message}`);
+
+      if (attempt < maxAttempts) {
+        const backoffMs = attempt * 1500;
+        await new Promise((r) => setTimeout(r, backoffMs));
+      }
     }
   }
-  return fallback;
+
+  // After the final failure, throw an error with status and message, and do not return a fallback value.
+  const finalError = new Error(`AI generation failed after ${maxAttempts} attempts: ${lastError?.message || 'Unknown error'}`);
+  finalError.statusCode = lastError?.statusCode || lastError?.status || 502;
+  finalError.status = finalError.statusCode;
+  finalError.finishReason = lastError?.finishReason;
+  throw finalError;
 };
 
 // ── Standard chat ──────────────────────────────────────────────────────────────
@@ -55,10 +101,10 @@ DEPTH GUIDE:
 - Research topic: 800+ words with data and examples`;
 
   const res = await client.chat.completions.create({
-    model: "gpt-4o-mini",
+    model: getModel(),
     messages: [{ role: "system", content: sys }, ...messages],
     temperature: 0.72,
-    max_tokens: 2048,
+    max_tokens: 4096,
   });
   return { reply: res.choices[0].message.content, explain: null };
 };
@@ -134,7 +180,7 @@ Return JSON with ALL these fields. Each field must be a detailed string of 150-4
     },
   ];
 
-  return await robustAiCall(messages, "gpt-4o-mini", FALLBACK);
+  return await robustAiCall(messages, getModel());
 };
 
 module.exports = { robustAiCall, chat, generateRDReport };

@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const { withRetry, withTimeout } = require('../utils/retry');
-const { getOpenAI, getApiKey } = require('../utils/openaiClient');
+const { getOpenAI, getApiKey, getModel } = require('../utils/openaiClient');
 
 const AI_MODES = {
   mentor: {
@@ -116,15 +116,15 @@ const AI_MODES = {
 /** Allowed chat models (selection is constrained for security). */
 const AI_MODELS = [
   {
-    id: 'gpt-4o-mini',
-    label: 'GPT-4o Mini',
-    provider: 'openai',
+    id: getModel(),
+    label: 'Gemini 3.5 Flash',
+    provider: 'gemini',
     default: true,
   },
   {
-    id: 'gpt-4o',
-    label: 'GPT-4o',
-    provider: 'openai',
+    id: 'gemini-3.1-flash-lite',
+    label: 'Gemini 3.1 Flash Lite',
+    provider: 'gemini',
     default: false,
   },
   {
@@ -155,11 +155,11 @@ function normalizeMode(mode) {
 }
 
 function resolveModel(requested) {
-  const fallback = process.env.OPENAI_MODEL || 'gpt-4o-mini';
-  const id = String(requested || fallback).trim();
+  const configured = getModel();
+  const id = String(requested || configured).trim();
   if (id === 'fallback') return { id: 'fallback', useApi: false };
-  const allowed = AI_MODELS.some((m) => m.id === id && m.provider === 'openai');
-  if (!allowed) return { id: fallback, useApi: true };
+  const allowed = AI_MODELS.some((m) => m.id === id && m.provider === 'gemini');
+  if (!allowed) return { id: configured, useApi: true };
   return { id, useApi: true };
 }
 
@@ -436,7 +436,7 @@ function listModes() {
 }
 
 function listModels() {
-  const configured = process.env.OPENAI_MODEL || 'gpt-4o-mini';
+  const configured = getModel();
   return AI_MODELS.map((m) => ({
     ...m,
     default: m.id === configured || (m.default && !AI_MODELS.some((x) => x.id === configured)),
@@ -485,12 +485,11 @@ function fallbackRoadmap(career) {
 }
 
 async function generateRoadmap(career, level = 'beginner') {
-  const key = process.env.OPENAI_API_KEY;
-  if (key && OpenAI) {
+  if (getApiKey()) {
     try {
-      const client = new OpenAI({ apiKey: key });
+      const client = getOpenAI();
       const res = await client.chat.completions.create({
-        model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+        model: getModel(),
         messages: [
           {
             role: 'system',
@@ -537,12 +536,11 @@ function fallbackReport(userName, stats) {
 }
 
 async function generateReportSections(userName, stats) {
-  const key = process.env.OPENAI_API_KEY;
-  if (key && OpenAI) {
+  if (getApiKey()) {
     try {
-      const client = new OpenAI({ apiKey: key });
+      const client = getOpenAI();
       const res = await client.chat.completions.create({
-        model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+        model: getModel(),
         messages: [
           {
             role: 'system',
@@ -561,12 +559,11 @@ async function generateReportSections(userName, stats) {
 }
 
 async function generateStudyPlan(topic, days = 14) {
-  const key = process.env.OPENAI_API_KEY;
-  if (key && OpenAI) {
+  if (getApiKey()) {
     try {
-      const client = new OpenAI({ apiKey: key });
+      const client = getOpenAI();
       const res = await client.chat.completions.create({
-        model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+        model: getModel(),
         messages: [
           {
             role: 'system',
@@ -598,12 +595,11 @@ async function generateStudyPlan(topic, days = 14) {
 }
 
 async function generateQuiz(topic, context = '') {
-  const key = process.env.OPENAI_API_KEY;
-  if (key && OpenAI) {
+  if (getApiKey()) {
     try {
-      const client = new OpenAI({ apiKey: key });
+      const client = getOpenAI();
       const res = await client.chat.completions.create({
-        model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+        model: getModel(),
         messages: [
           {
             role: 'system',

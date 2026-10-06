@@ -1,15 +1,17 @@
-const OpenAI = require('openai')
+const { getOpenAI, getApiKey, getModel } = require('../utils/openaiClient')
 const {
   ECOSYSTEM_AI_INTENTS,
   MULTI_AGENT_ECOSYSTEM_INTENTS,
 } = require('../constants/ecosystemIntelligence')
 const { buildEcosystemAiContext } = require('./ecosystemIntelligenceService')
 
-let openai = null
-function getOpenAI() {
-  if (!process.env.OPENAI_API_KEY?.trim()) return null
-  if (!openai) openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-  return openai
+function getClient() {
+  if (!getApiKey()) return null
+  try {
+    return getOpenAI()
+  } catch {
+    return null
+  }
 }
 
 function buildRuleInsight(intent, context = {}) {
@@ -111,14 +113,14 @@ async function generateEcosystemInsight({ orgId, role, intent, query = {} }) {
   const context = await buildEcosystemAiContext(orgId, role, query)
   const ruleInsight = buildRuleInsight(intent, context)
 
-  const client = getOpenAI()
+  const client = getClient()
   if (!client) {
     return { intent, source: 'rule', insight: ruleInsight, contextSummary: summarizeContext(context) }
   }
 
   try {
     const completion = await client.chat.completions.create({
-      model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+      model: getModel(),
       messages: [
         {
           role: 'system',
@@ -127,7 +129,7 @@ async function generateEcosystemInsight({ orgId, role, intent, query = {} }) {
         },
         { role: 'user', content: JSON.stringify({ intent, ruleInsight, context: summarizeContext(context) }) },
       ],
-      max_tokens: 500,
+      max_tokens: 1000,
       temperature: 0.2,
     })
     const text = completion.choices?.[0]?.message?.content?.trim()

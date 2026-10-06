@@ -53,7 +53,7 @@ export default function AnalyticsPage() {
     <StudentLayout>
       <div style={{ position: 'relative', borderRadius: 20, overflow: 'hidden', marginBottom: 22, minHeight: 160, border: '1px solid rgba(139,92,246,0.25)' }}>
         <NeuralBg nodeCount={20} color="#8B5CF6" opacity={0.25} />
-        <div style={{ position: 'relative', zIndex: 1, padding: 24, background: 'linear-gradient(90deg, rgba(5,5,10,0.85), transparent)' }}>
+        <div style={{ position: 'relative', zIndex: 1, padding: 24, background: 'linear-gradient(90deg, color-mix(in srgb, var(--bg-secondary) 90%, transparent), transparent)' }}>
           <h1 style={{ margin: 0 }}>Analytics</h1>
           <p style={{ color: 'var(--text-secondary)' }}>Learning, tasks, reports, and community — one command view.</p>
         </div>

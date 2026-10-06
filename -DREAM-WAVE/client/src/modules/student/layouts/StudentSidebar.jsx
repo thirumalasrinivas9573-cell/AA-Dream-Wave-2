@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useAuth } from '@shared/context/AuthContext'
 import { XPRing, StreakFlame } from '@shared/components/Gamification'
+import ThemeToggle from '@shared/components/ThemeToggle'
 import { STUDENT_THEME, studentPath } from '../theme'
 
 const NAV = [
@@ -79,7 +80,7 @@ export default function StudentSidebar({ mobile, onClose }) {
             fontSize: '1.1rem', flexShrink: 0, boxShadow: `0 4px 12px ${t.glow}`,
           }}>🌊</div>
           <div>
-            <div style={{ fontWeight: 800, fontSize: '0.875rem', color: '#3A3153', letterSpacing: '-0.01em' }}>Dream Wave</div>
+            <div style={{ fontWeight: 800, fontSize: '0.875rem', color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>Dream Wave</div>
             <div style={{ fontSize: '0.68rem', color: t.accentLight, fontWeight: 600 }}>Student Portal</div>
           </div>
           {mobile && (
@@ -95,7 +96,7 @@ export default function StudentSidebar({ mobile, onClose }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <XPRing xp={user.credits || 0} level={user.level || 1} size={44} color={t.accent} />
             <div style={{ minWidth: 0, flex: 1 }}>
-              <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#3A3153', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user.name}</div>
+              <div style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-primary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user.name}</div>
               <div style={{ fontSize: '0.68rem', color: t.accentLight, marginBottom: 3, fontWeight: 600 }}>Lv {user.level || 1} · {user.credits || 0} XP</div>
               <div style={{ height: 3, background: 'rgba(140,122,230,0.15)', borderRadius: 999, overflow: 'hidden' }}>
                 <motion.div
@@ -115,7 +116,7 @@ export default function StudentSidebar({ mobile, onClose }) {
         {grouped.map(({ group, label, items }) => items.length === 0 ? null : (
           <div key={group} style={{ marginBottom: 4 }}>
             {label && (
-              <div style={{ fontSize: '0.63rem', fontWeight: 700, color: '#8C7AE6', letterSpacing: '0.1em', padding: '8px 10px 4px', textTransform: 'uppercase' }}>
+              <div style={{ fontSize: '0.63rem', fontWeight: 700, color: 'var(--purple)', letterSpacing: '0.1em', padding: '8px 10px 4px', textTransform: 'uppercase' }}>
                 {label}
               </div>
             )}
@@ -129,8 +130,8 @@ export default function StudentSidebar({ mobile, onClose }) {
                   display: 'flex', alignItems: 'center', gap: 9,
                   padding: '8px 10px', borderRadius: 9, marginBottom: 1,
                   fontSize: '0.845rem', fontWeight: isActive ? 600 : 400,
-                  color: isActive ? '#3A3153' : '#5D5477',
-                  background: isActive ? 'rgba(140, 122, 230, 0.15)' : 'transparent',
+                  color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  background: isActive ? 'var(--bg-hover)' : 'transparent',
                   borderLeft: isActive ? `3px solid ${t.accent}` : '3px solid transparent',
                   transition: 'all 0.15s ease', textDecoration: 'none',
                 })}
@@ -144,11 +145,14 @@ export default function StudentSidebar({ mobile, onClose }) {
       </nav>
 
       <div style={{ padding: '10px 8px', borderTop: `1px solid ${t.sidebarBorder}` }}>
+        <div style={{ marginBottom: 8 }}>
+          <ThemeToggle variant="segmented" />
+        </div>
         <button
           onClick={logout}
-          style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 9, padding: '8px 10px', borderRadius: 9, background: 'transparent', border: 'none', cursor: 'pointer', color: '#5D5477', fontSize: '0.845rem', fontFamily: 'inherit', transition: 'all 0.15s' }}
+          style={{ width: '100%', display: 'flex', alignItems: 'center', gap: 9, padding: '8px 10px', borderRadius: 9, background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', fontSize: '0.845rem', fontFamily: 'inherit', transition: 'all 0.15s' }}
           onMouseEnter={e => { e.currentTarget.style.color = '#F87171'; e.currentTarget.style.background = 'rgba(239,68,68,0.08)'; }}
-          onMouseLeave={e => { e.currentTarget.style.color = '#5D5477'; e.currentTarget.style.background = 'transparent'; }}
+          onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.background = 'transparent'; }}
         >
           <span style={{ fontSize: '0.95rem', width: 20, textAlign: 'center' }}>🚪</span>
           Sign Out

@@ -6,6 +6,8 @@ import profileService from '@shared/services/profileService'
 import StudentLayout from '../layouts/StudentLayout'
 import DeviceSessions from '@shared/components/auth/DeviceSessions'
 import useStudentProfile from '../hooks/useStudentProfile'
+import { useTheme } from '@shared/context/ThemeContext'
+import ThemeToggle from '@shared/components/ThemeToggle'
 import '../styles/profile.css'
 
 function Toggle({ value, onChange, label }) {
@@ -14,6 +16,7 @@ function Toggle({ value, onChange, label }) {
 
 export default function Settings() {
   const { user, profile, loading, error, load, setProfile } = useStudentProfile()
+  const { themePreference, setThemePreference } = useTheme()
   const [privacy, setPrivacy] = useState(null)
   const [preferences, setPreferences] = useState(null)
   const [saving, setSaving] = useState(false)
@@ -22,9 +25,17 @@ export default function Settings() {
   useEffect(() => {
     if (profile) {
       setPrivacy({ ...profile.privacy })
-      setPreferences({ ...profile.preferences })
+      setPreferences({
+        ...profile.preferences,
+        theme: themePreference || profile.preferences?.theme || 'system',
+      })
     }
-  }, [profile])
+  }, [profile, themePreference])
+
+  const handleThemeChange = (newTheme) => {
+    setThemePreference(newTheme)
+    setPreferences((current) => ({ ...current, theme: newTheme }))
+  }
 
   const save = async () => {
     setSaving(true)
@@ -64,8 +75,14 @@ export default function Settings() {
           {[['discoverable','Discoverable in search'],['showEmail','Show email'],['showPhone','Show phone'],['showAcademic','Show academic profile'],['showLearning','Show learning statistics'],['showSkills','Show skills'],['showProjects','Show projects'],['showAchievements','Show achievements'],['showCredentials','Show certificates'],['showExperience','Show experience'],['showCareer','Show career direction'],['showLinks','Show professional links']].map(([key, label]) => <div className="settings-toggle-row" key={key}><div><strong>{label}</strong><small>{key === 'discoverable' ? 'Allow people to find your public portfolio' : 'Control this section on your public portfolio'}</small></div><Toggle value={Boolean(privacy[key])} onChange={(value) => setPrivacy((current) => ({ ...current, [key]: value }))} label={label} /></div>)}
         </section>
         <section className="identity-panel">
-          <header><div><span>Personal experience</span><h2>Preferences</h2></div></header>
-          <div className="settings-preference-grid"><label><span>Theme</span><select className="select" value={preferences.theme} onChange={(event) => setPreferences((current) => ({ ...current, theme: event.target.value }))}><option value="system">System</option><option value="dark">Dark</option><option value="light">Light</option></select></label><label><span>Language</span><select className="select" value={preferences.language} onChange={(event) => setPreferences((current) => ({ ...current, language: event.target.value }))}><option value="en">English</option><option value="hi">Hindi</option><option value="te">Telugu</option><option value="ta">Tamil</option></select></label></div>
+          <header><div><span>Personal experience</span><h2>Preferences & Theme</h2></div></header>
+          <div style={{ marginBottom: 16 }}>
+            <span style={{ display: 'block', marginBottom: 8, fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+              Appearance Theme
+            </span>
+            <ThemeToggle variant="segmented" style={{ maxWidth: 360 }} />
+          </div>
+          <div className="settings-preference-grid"><label><span>Theme Mode</span><select className="select" value={preferences.theme || themePreference} onChange={(event) => handleThemeChange(event.target.value)}><option value="system">System Default</option><option value="dark">Dark</option><option value="light">Light</option></select></label><label><span>Language</span><select className="select" value={preferences.language} onChange={(event) => setPreferences((current) => ({ ...current, language: event.target.value }))}><option value="en">English</option><option value="hi">Hindi</option><option value="te">Telugu</option><option value="ta">Tamil</option></select></label></div>
           {[['emailNotifications','Email notifications'],['pushNotifications','Push notifications'],['weeklySummary','Weekly learning summary']].map(([key, label]) => <div className="settings-toggle-row" key={key}><div><strong>{label}</strong><small>Saved to your Dream Wave profile across devices</small></div><Toggle value={Boolean(preferences[key])} onChange={(value) => setPreferences((current) => ({ ...current, [key]: value }))} label={label} /></div>)}
         </section>
         <DeviceSessions />

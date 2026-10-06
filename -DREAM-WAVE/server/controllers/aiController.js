@@ -1,5 +1,5 @@
 const Chat   = require('../models/Chat')
-const { openai } = require('../utils/openaiClient')
+const { openai, getModel } = require('../utils/openaiClient')
 
 // ── V10 DEEP CONTENT SYSTEM PROMPT ────────────────────────────────────────────
 const SYSTEM = `You are Sage — a world-class AI mentor, career coach, teacher, research guide and productivity expert inside Dream Wave AI.
@@ -60,7 +60,7 @@ exports.chat = async (req, res) => {
     const systemWithGoal = SYSTEM + (userGoal ? `\n\nSTUDENT'S CURRENT GOAL: "${userGoal}"\nEverything you say should ultimately serve this goal or honestly address how it relates.` : '')
 
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.72,
       max_tokens: 3000,
       messages: [
@@ -107,7 +107,7 @@ exports.goalPlan = async (req, res) => {
     if (!title?.trim()) return res.status(400).json({ success: false, message: 'title required' })
 
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.7,
       max_tokens: 1500,
       messages: [
@@ -139,7 +139,7 @@ exports.daily = async (req, res) => {
     const { message } = req.body
     if (!message?.trim()) return res.status(400).json({ success: false, message: 'message required' })
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini', temperature: 0.75, max_tokens: 600,
+      model: getModel(), temperature: 0.75, max_tokens: 1000,
       messages: [{ role: 'system', content: SYSTEM + ' Focus on daily habits, routines and wellbeing.' }, { role: 'user', content: message.trim() }],
     })
     res.json({ success: true, reply: completion.choices[0].message.content })
@@ -152,7 +152,7 @@ exports.report = async (req, res) => {
     const { topic } = req.body
     if (!topic?.trim()) return res.status(400).json({ success: false, message: 'topic required' })
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini', temperature: 0.6, max_tokens: 1500,
+      model: getModel(), temperature: 0.6, max_tokens: 1500,
       messages: [
         { role: 'system', content: 'You are a research analyst. Return JSON: { "summary": "200-300 word summary", "insights": [{"label":"...","value":"..."}], "actions": ["specific actionable step 1","step 2","step 3","step 4","step 5"] }' },
         { role: 'user', content: `Detailed research report on: "${topic}"` },
@@ -170,7 +170,7 @@ exports.roadmap = async (req, res) => {
     const { goal, currentLevel = 'beginner' } = req.body
     if (!goal?.trim()) return res.status(400).json({ success: false, message: 'goal required' })
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini', temperature: 0.7, max_tokens: 1500,
+      model: getModel(), temperature: 0.7, max_tokens: 2000,
       messages: [
         { role: 'system', content: 'You are a career expert. Return JSON: { "phases": [{"title":"...","duration":"...","description":"100-150 word detailed description","steps":["specific step 1 (30-40 words)","step 2","step 3","step 4"]}] } — exactly 4 phases.' },
         { role: 'user', content: `4-phase learning roadmap for "${goal}" at ${currentLevel} level. Each phase description 100-150 words, each step 30-40 words.` },
@@ -188,7 +188,7 @@ exports.books = async (req, res) => {
     const { topic } = req.body
     if (!topic?.trim()) return res.status(400).json({ success: false, message: 'topic required' })
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini', temperature: 0.7, max_tokens: 1000,
+      model: getModel(), temperature: 0.7, max_tokens: 1500,
       messages: [
         { role: 'system', content: 'You are a book expert. Return JSON: { "books": [{"title":"exact title","author":"exact author","reason":"50-70 word explanation of why this book is essential","category":"...","level":"Beginner|Intermediate|Advanced"}] }' },
         { role: 'user', content: `8 essential books for "${topic}". Each reason must be 50-70 words explaining specific value.` },

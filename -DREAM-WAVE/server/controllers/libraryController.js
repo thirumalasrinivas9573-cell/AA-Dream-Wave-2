@@ -13,7 +13,7 @@ const LibraryAnnotation = require('../models/LibraryAnnotation');
 const LibraryReadingSession = require('../models/LibraryReadingSession');
 const Goal = require('../models/Goal');
 const { paginate } = require('../utils/portalHelpers');
-const { openai } = require('../utils/openaiClient');
+const { openai, getModel } = require('../utils/openaiClient');
 const { getInstitutionForUser, getCompanyForUser } = require('../utils/portalHelpers');
 
 const fail = (res, err, status = 500) =>
@@ -678,9 +678,9 @@ async function runBookAi(book, mode, focus = '') {
   let result = {};
   try {
     const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: getModel(),
       messages: [{ role: 'user', content: prompts[mode] || prompts.summary }],
-      max_tokens: 700,
+      max_tokens: 1200,
       temperature: 0.4,
     });
     const raw = completion.choices[0]?.message?.content || '';

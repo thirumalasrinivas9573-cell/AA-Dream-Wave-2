@@ -1,11 +1,13 @@
-const OpenAI = require('openai')
+const { getOpenAI, getApiKey, getModel } = require('../utils/openaiClient')
 const { POST_TYPES } = require('../constants/community')
 
-let openai = null
-function getOpenAI() {
-  if (!process.env.OPENAI_API_KEY?.trim()) return null
-  if (!openai) openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-  return openai
+function getClient() {
+  if (!getApiKey()) return null
+  try {
+    return getOpenAI()
+  } catch {
+    return null
+  }
 }
 
 function ruleBasedClassification({ content, title, postType, linkedEntity }) {
@@ -37,14 +39,14 @@ function ruleBasedClassification({ content, title, postType, linkedEntity }) {
 
 async function classifyPost(input) {
   const grounded = ruleBasedClassification(input)
-  const client = getOpenAI()
+  const client = getClient()
   if (!client) return grounded
 
   try {
     const completion = await client.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: getModel(),
       temperature: 0.1,
-      max_tokens: 120,
+      max_tokens: 500,
       messages: [
         {
           role: 'system',
@@ -86,14 +88,14 @@ async function buildFeedSuggestions(post) {
     'Happy to collaborate if useful.',
   ]
 
-  const client = getOpenAI()
+  const client = getClient()
   if (!client) return { suggestions: grounded, mode: 'rule_based' }
 
   try {
     const completion = await client.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: getModel(),
       temperature: 0.3,
-      max_tokens: 200,
+      max_tokens: 600,
       messages: [
         {
           role: 'system',

@@ -1,4 +1,4 @@
-const { openai } = require('../utils/openaiClient')
+const { openai, getApiKey, getModel } = require('../utils/openaiClient')
 const libraryDocumentService = require('./libraryDocumentService')
 const LibraryBook = require('../models/LibraryBook')
 
@@ -40,7 +40,7 @@ async function askReadingAssistant({
     `\nRespond in JSON: { "answer": string, "sourceGrounded": boolean, "citations": [{ "page": number|null, "excerpt": string }], "generalNote": string|null, "suggestedFollowUp": string|null }`,
   ].filter(Boolean).join('\n')
 
-  if (!process.env.OPENAI_API_KEY) {
+  if (!getApiKey()) {
     return {
       answer: hasChunks
         ? 'AI Reading Assistant requires server configuration. Use the document search panel to find relevant pages.'
@@ -54,9 +54,9 @@ async function askReadingAssistant({
 
   try {
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.25,
-      max_tokens: 900,
+      max_tokens: 1200,
       response_format: { type: 'json_object' },
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
@@ -93,13 +93,13 @@ async function askReadingAssistant({
 
 async function generatePracticeQuestions({ book, chunks, count = 4 }) {
   const excerptBlock = chunks.slice(0, 4).map((c) => `[Page ${c.page}]\n${c.text.slice(0, 800)}`).join('\n\n')
-  if (!process.env.OPENAI_API_KEY || !excerptBlock) {
+  if (!getApiKey() || !excerptBlock) {
     return { questions: [], aiReady: false, message: 'Index document content first to generate practice questions.' }
   }
   const completion = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
+    model: getModel(),
     temperature: 0.4,
-    max_tokens: 800,
+    max_tokens: 1200,
     response_format: { type: 'json_object' },
     messages: [
       { role: 'system', content: `${SYSTEM_PROMPT}\nGenerate practice questions ONLY from provided excerpts.` },
@@ -129,13 +129,13 @@ async function generatePracticeQuestions({ book, chunks, count = 4 }) {
 
 async function suggestRevisionCards({ book, chunks, studentSelection = '' }) {
   const source = studentSelection || chunks.slice(0, 3).map((c) => c.text).join('\n')
-  if (!process.env.OPENAI_API_KEY || !source.trim()) {
+  if (!getApiKey() || !source.trim()) {
     return { cards: [], requiresApproval: true, aiReady: false }
   }
   const completion = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
+    model: getModel(),
     temperature: 0.35,
-    max_tokens: 700,
+    max_tokens: 1000,
     response_format: { type: 'json_object' },
     messages: [
       { role: 'system', content: SYSTEM_PROMPT },

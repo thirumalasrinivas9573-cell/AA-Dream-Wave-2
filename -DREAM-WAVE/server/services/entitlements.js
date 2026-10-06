@@ -184,7 +184,7 @@ function isLiveAiResult(result) {
   if (result == null) return false;
   if (typeof result !== 'object') {
     // Legacy string-only payloads — only treat as live when an API key is configured
-    return Boolean(process.env.OPENAI_API_KEY);
+    return Boolean(process.env.GEMINI_API_KEY);
   }
   if (result.usedAi === false) return false;
   if (result.usedAi === true) return true;

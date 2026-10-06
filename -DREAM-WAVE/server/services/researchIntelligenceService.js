@@ -17,7 +17,7 @@ const researchService = require('./researchService')
 const researchDocumentService = require('./researchDocumentService')
 const knowledgeGraphService = require('./knowledgeGraphService')
 const StudentProfile = require('../models/StudentProfile')
-const { openai } = require('../utils/openaiClient')
+const { openai, getApiKey, getModel } = require('../utils/openaiClient')
 
 const RESEARCH_INTENTS = [
   'RESEARCH_QUESTION',
@@ -384,7 +384,7 @@ async function refineQuestionSuggestion(project) {
     return suggestion
   }
 
-  if (!process.env.OPENAI_API_KEY) {
+  if (!getApiKey()) {
     suggestion.refined = `How does ${seed.replace(/\?$/, '')} affect measurable outcomes, and what evidence supports or limits that claim?`
     suggestion.aiReady = false
     return suggestion
@@ -392,9 +392,9 @@ async function refineQuestionSuggestion(project) {
 
   try {
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.4,
-      max_tokens: 200,
+      max_tokens: 500,
       messages: [
         {
           role: 'system',
@@ -434,7 +434,7 @@ async function summarizeSource(studentId, projectId, sourceId) {
 
   const excerpt = chunks.map((c) => c.text).join('\n').slice(0, 6000) || String(source.rawText || '').slice(0, 6000)
 
-  if (!process.env.OPENAI_API_KEY) {
+  if (!getApiKey()) {
     return {
       label: 'SOURCE_SUMMARY',
       source: summarizeSourceMeta(source),
@@ -447,9 +447,9 @@ async function summarizeSource(studentId, projectId, sourceId) {
 
   try {
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.2,
-      max_tokens: 700,
+      max_tokens: 1200,
       messages: [
         {
           role: 'system',

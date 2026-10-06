@@ -23,7 +23,9 @@ const contextPersonalization = require('./contextPersonalizationService')
 let openaiProvider = null
 try {
   const { OpenAIProvider } = require('../src/mj/ai/providers/OpenAIProvider')
-  openaiProvider = new OpenAIProvider({ apiKey: process.env.OPENAI_API_KEY })
+  if (process.env.MJ_OPENAI_API_KEY) {
+    openaiProvider = new OpenAIProvider({ apiKey: process.env.MJ_OPENAI_API_KEY })
+  }
 } catch {
   openaiProvider = null
 }
@@ -153,7 +155,7 @@ async function searchIndexedChunks(userId, role, orgId, terms, { semanticQuery =
     .lean()
 
   let semanticHits = []
-  if (semanticQuery && openaiProvider && process.env.OPENAI_API_KEY) {
+  if (semanticQuery && openaiProvider && process.env.MJ_OPENAI_API_KEY) {
     const emb = await openaiProvider.embeddings(semanticQuery).catch(() => null)
     if (emb?.embeddings?.length) {
       const candidates = await SearchIndexEntry.find({ $or: visibilityFilter })
@@ -388,7 +390,7 @@ async function globalSearch({
     recent: recentQueries.map((q) => q.query),
     searchMethods: {
       keyword: true,
-      semantic: Boolean(useSemantic && openaiProvider && process.env.OPENAI_API_KEY),
+      semantic: Boolean(useSemantic && openaiProvider && process.env.MJ_OPENAI_API_KEY),
       hybrid: true,
     },
   }
@@ -538,7 +540,7 @@ async function indexDocument(userId, role, orgId, payload) {
 
   const chunks = String(text).match(/[\s\S]{1,800}/g) || [String(text)]
   let embedding = null
-  if (openaiProvider && process.env.OPENAI_API_KEY) {
+  if (openaiProvider && process.env.MJ_OPENAI_API_KEY) {
     const emb = await openaiProvider.embeddings(chunks[0].slice(0, 500)).catch(() => null)
     embedding = emb?.embeddings || null
   }

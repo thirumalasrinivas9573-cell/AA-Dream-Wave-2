@@ -1,4 +1,4 @@
-const OpenAI = require('openai')
+const { getOpenAI, getApiKey, getModel } = require('../utils/openaiClient')
 const {
   buildRuleBasedCandidateSummary,
   buildRuleBasedJobAnalysis,
@@ -6,24 +6,26 @@ const {
   buildSafeCandidateProfile,
 } = require('./recruitmentIntelligenceService')
 
-let openai = null
-function getOpenAI() {
-  if (!process.env.OPENAI_API_KEY?.trim()) return null
-  if (!openai) openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-  return openai
+function getClient() {
+  if (!getApiKey()) return null
+  try {
+    return getOpenAI()
+  } catch {
+    return null
+  }
 }
 
 async function generateCandidateSummary(student, application, opportunity = null) {
   const grounded = buildRuleBasedCandidateSummary(student, application, opportunity)
-  const client = getOpenAI()
+  const client = getClient()
   if (!client) return grounded
 
   const profile = buildSafeCandidateProfile(student, application)
   try {
     const completion = await client.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: getModel(),
       temperature: 0.2,
-      max_tokens: 700,
+      max_tokens: 1000,
       messages: [
         {
           role: 'system',
@@ -49,14 +51,14 @@ async function generateCandidateSummary(student, application, opportunity = null
 
 async function analyzeJobDescription(job) {
   const grounded = buildRuleBasedJobAnalysis(job)
-  const client = getOpenAI()
+  const client = getClient()
   if (!client || !job.description) return grounded
 
   try {
     const completion = await client.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: getModel(),
       temperature: 0.2,
-      max_tokens: 500,
+      max_tokens: 1000,
       messages: [
         {
           role: 'system',
@@ -78,15 +80,15 @@ async function analyzeJobDescription(job) {
 
 async function suggestInterviewQuestions(job, student) {
   const grounded = buildInterviewQuestionSuggestions(job, student)
-  const client = getOpenAI()
+  const client = getClient()
   if (!client) return grounded
 
   const profile = buildSafeCandidateProfile(student)
   try {
     const completion = await client.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: getModel(),
       temperature: 0.3,
-      max_tokens: 500,
+      max_tokens: 1000,
       messages: [
         {
           role: 'system',

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 import StudentSidebar from './StudentSidebar'
+import ThemeToggle from '@shared/components/ThemeToggle'
 import useScrollReveal from '@shared/hooks/useScrollReveal'
 import useNotifications from '@shared/hooks/useNotifications'
 import { usePlatformData } from '@shared/context/PlatformDataContext'
@@ -74,7 +75,8 @@ export default function StudentLayout({ children }) {
             aria-expanded={mobileOpen}
           >☰</button>
           <Link className="mobile-topbar__brand" to="/student/dashboard">🌊 Dream Wave</Link>
-          <div className="mobile-topbar__actions">
+          <div className="mobile-topbar__actions" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <ThemeToggle variant="icon" />
             <Link to="/notifications" aria-label={`Notifications${notifications.unread ? `, ${notifications.unread} unread` : ''}`}>
               <span aria-hidden="true">🔔</span>{notifications.unread > 0 && <sup>{notifications.unread > 99 ? '99+' : notifications.unread}</sup>}
             </Link>
