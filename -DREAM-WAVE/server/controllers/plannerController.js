@@ -4,6 +4,7 @@ const plannerIntelligence = require('../services/plannerIntelligenceService')
 const scheduleEngine = require('../services/scheduleEngine')
 const FocusSession = require('../models/FocusSession')
 const Task = require('../models/Task')
+const { isWorkflowTask } = require('../services/workflowGuard')
 
 function fail(res, status, message, code) {
   return res.status(status).json({ success: false, message, code })
@@ -370,14 +371,24 @@ exports.completeFocus = async (req, res) => {
     const focusMinutes = Math.max(1, Math.round(session.durationSeconds / 60))
     await Task.updateOne({ _id: session.taskId, userId: req.user._id }, { $inc: { actualMinutes: focusMinutes } })
 
+    let taskCompletionIgnored = false
     if (req.body?.markTaskComplete) {
-      await Task.updateOne(
-        { _id: session.taskId, userId: req.user._id },
-        { $set: { completed: true, status: 'completed', completedAt: new Date() } },
-      )
+      const task = await Task.findOne({ _id: session.taskId, userId: req.user._id })
+      if (isWorkflowTask(task)) {
+        taskCompletionIgnored = true
+      } else {
+        await Task.updateOne(
+          { _id: session.taskId, userId: req.user._id },
+          { $set: { completed: true, status: 'completed', completedAt: new Date() } },
+        )
+      }
     }
 
-    return res.json({ success: true, session })
+    return res.json({
+      success: true,
+      session,
+      ...(taskCompletionIgnored ? { taskCompletionIgnored: true } : {}),
+    })
   } catch (error) {
     console.error('[planner.completeFocus]', error.message)
     return fail(res, 500, 'Failed to complete focus session.')

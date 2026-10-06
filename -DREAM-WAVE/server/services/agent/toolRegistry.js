@@ -14,6 +14,7 @@ const Job = require('../../models/Job')
 const Internship = require('../../models/Internship')
 const PortalEvent = require('../../models/PortalEvent')
 const StudentProfile = require('../../models/StudentProfile')
+const { isWorkflowTask } = require('../workflowGuard')
 
 const RISK = {
   LOW_RISK: 'LOW_RISK',
@@ -482,6 +483,13 @@ registerTool({
     assertObjectId(args.taskId, 'taskId')
     const task = await Task.findOne({ _id: args.taskId, userId: ctx.userId })
     if (!task) deny('NOT_FOUND', 'Task not found.', 404)
+    if (isWorkflowTask(task)) {
+      return {
+        success: false,
+        code: 'WORKFLOW_ENFORCED',
+        error: 'Cannot complete a workflow task directly; the user must finish Learning, Exam and Certification.',
+      }
+    }
     task.status = 'completed'
     task.completed = true
     task.completedAt = new Date()

@@ -6,6 +6,17 @@ const FocusSession = require('../models/FocusSession')
 const notificationService = require('../services/notificationService')
 const aiTaskService = require('../services/aiTaskService')
 const { syncGoalProgress } = require('../services/progressEngine')
+const {
+  isWorkflowTask,
+  assertCompletionAllowed,
+  stripProtectedFields,
+} = require('../services/workflowGuard')
+const { serializeTaskResponse } = require('../services/taskProgressionSerializer')
+const {
+  shouldAutoEnableWorkflow,
+  MIN_REQUIRED_FOCUS_MINUTES,
+  MIN_FOCUS_MINUTES_RATIO,
+} = require('../config/progression')
 
 const PRIORITIES = ['High', 'Medium', 'Low']
 const STATUSES = ['todo', 'in-progress', 'paused', 'completed', 'archived']
@@ -136,6 +147,14 @@ function validateTaskInput(body, partial = false) {
 }
 
 function syncTaskStatus(task, body = {}) {
+  if (isWorkflowTask(task)) {
+    // Workflow tasks are completed exclusively via certification pipeline
+    if (task.status === 'paused' || task.status === 'archived') {
+      task.pausedAt = task.status === 'paused' ? task.pausedAt || new Date() : undefined
+      task.archivedAt = task.status === 'archived' ? task.archivedAt || new Date() : undefined
+    }
+    return
+  }
   if (typeof body.completed === 'boolean') task.status = body.completed ? 'completed' : 'todo'
   if (task.status === 'paused' || task.status === 'archived') {
     task.completed = false
@@ -224,7 +243,7 @@ exports.getTasks = async (req, res) => {
       .populate('roadmapId', 'status version')
       .sort({ dueDate: 1, createdAt: -1 })
       .lean()
-    return res.json({ success: true, tasks, total: tasks.length })
+    return res.json({ success: true, tasks: tasks.map(serializeTaskResponse), total: tasks.length })
   } catch (error) {
     console.error('[taskController.getTasks]', error.message)
     return fail(res, 500, 'Failed to load tasks.')
@@ -239,7 +258,7 @@ exports.getTask = async (req, res) => {
       .populate('roadmapId', 'status version')
       .lean()
     if (!task) return fail(res, 404, 'Task not found.', 'NOT_FOUND')
-    return res.json({ success: true, task })
+    return res.json({ success: true, task: serializeTaskResponse(task) })
   } catch (error) {
     console.error('[taskController.getTask]', error.message)
     return fail(res, 500, 'Failed to load task.')
@@ -248,23 +267,46 @@ exports.getTask = async (req, res) => {
 
 exports.createTask = async (req, res) => {
   try {
-    const fields = validateTaskInput(req.body)
-    await validateLinks(req.body, req.user._id)
+    const sanitizedBody = stripProtectedFields(req.body)
+    const fields = validateTaskInput(sanitizedBody)
+    await validateLinks(sanitizedBody, req.user._id)
     const task = new Task({
       userId: req.user._id,
       ...fields,
-      goalId: req.body.goalId || undefined,
-      roadmapId: req.body.roadmapId || undefined,
+      goalId: sanitizedBody.goalId || undefined,
+      roadmapId: sanitizedBody.roadmapId || undefined,
       priority: fields.priority || 'Medium',
       category: fields.category || 'General',
       status: fields.status || 'todo',
       source: 'manual',
     })
-    syncTaskStatus(task, req.body)
+    syncTaskStatus(task, sanitizedBody)
     await task.save()
+
+    // Auto-enable workflow if enabled and linked to roadmap/goal
+    if (shouldAutoEnableWorkflow(sanitizedBody) || shouldAutoEnableWorkflow(task)) {
+      const estimated = Number(task.estimatedMinutes) || 0
+      const requiredFocusMinutes = Math.max(
+        MIN_REQUIRED_FOCUS_MINUTES,
+        Math.round(estimated * MIN_FOCUS_MINUTES_RATIO),
+      )
+      task.workflowEnabled = true
+      task.workflowEnabledAt = new Date()
+      task.learningSnapshot = {
+        title: (task.title || '').slice(0, 200),
+        requiredFocusMinutes,
+        subtaskCount: Array.isArray(task.subtasks) ? task.subtasks.length : 0,
+        checklistCount: Array.isArray(task.checklist) ? task.checklist.length : 0,
+      }
+      task.progressionStage = 'learning'
+      task.stageStatus = 'learning_active'
+      task.learningVerifiedAt = null
+      await task.save()
+    }
+
     if (task.goalId) await updateGoalProgress(task.goalId, req.user._id)
     maybeNotifyDueSoon(task)
-    return res.status(201).json({ success: true, task })
+    return res.status(201).json({ success: true, task: serializeTaskResponse(task) })
   } catch (error) {
     if (error.statusCode) return fail(res, error.statusCode, error.message, error.code)
     if (error.name === 'ValidationError') return fail(res, 400, error.message, 'VALIDATION_ERROR')
@@ -278,21 +320,52 @@ exports.updateTask = async (req, res) => {
     if (!validId(req.params.id)) return fail(res, 400, 'Invalid task ID.', 'INVALID_ID')
     const task = await Task.findOne({ _id: req.params.id, userId: req.user._id })
     if (!task) return fail(res, 404, 'Task not found.', 'NOT_FOUND')
+
+    const sanitizedBody = stripProtectedFields(req.body)
+
+    if (isWorkflowTask(task)) {
+      // 1. Reject any attempt to set completed:true, status:'completed', or progress >= 100 with 403 WORKFLOW_ENFORCED
+      if (
+        req.body?.completed === true ||
+        req.body?.status === 'completed' ||
+        (req.body?.progress !== undefined && Number(req.body.progress) >= 100)
+      ) {
+        assertCompletionAllowed(task, 'complete')
+      }
+
+      // 2. Reject reopening a completed workflow task (completed:false) with 403 WORKFLOW_ENFORCED
+      if (
+        (task.completed === true || task.status === 'completed' || task.progressionStage === 'completed') &&
+        req.body?.completed === false
+      ) {
+        assertCompletionAllowed(task, 'reopen')
+      }
+
+      // 3. Silently ignore actualMinutes and estimatedMinutes changes (do not error; just don't apply them)
+      delete sanitizedBody.actualMinutes
+      delete sanitizedBody.estimatedMinutes
+    } else {
+      // Keep legacy behavior of actualMinutes for legacy tasks only
+      if (req.body?.actualMinutes !== undefined) {
+        sanitizedBody.actualMinutes = req.body.actualMinutes
+      }
+    }
+
     const oldGoalId = task.goalId
-    const nextGoalId = req.body.goalId !== undefined ? req.body.goalId || undefined : task.goalId
-    const nextRoadmapId = req.body.roadmapId !== undefined ? req.body.roadmapId || undefined : task.roadmapId
-    if (req.body.goalId !== undefined || req.body.roadmapId !== undefined) {
+    const nextGoalId = sanitizedBody.goalId !== undefined ? sanitizedBody.goalId || undefined : task.goalId
+    const nextRoadmapId = sanitizedBody.roadmapId !== undefined ? sanitizedBody.roadmapId || undefined : task.roadmapId
+    if (sanitizedBody.goalId !== undefined || sanitizedBody.roadmapId !== undefined) {
       await validateLinks({ goalId: nextGoalId, roadmapId: nextRoadmapId }, req.user._id)
       task.goalId = nextGoalId
       task.roadmapId = nextRoadmapId
     }
-    Object.assign(task, validateTaskInput(req.body, true))
-    syncTaskStatus(task, req.body)
+    Object.assign(task, validateTaskInput(sanitizedBody, true))
+    syncTaskStatus(task, sanitizedBody)
     await task.save()
     if (task.goalId) await updateGoalProgress(task.goalId, req.user._id)
     if (oldGoalId && String(oldGoalId) !== String(task.goalId || '')) await updateGoalProgress(oldGoalId, req.user._id)
     maybeNotifyDueSoon(task)
-    return res.json({ success: true, task })
+    return res.json({ success: true, task: serializeTaskResponse(task) })
   } catch (error) {
     if (error.statusCode) return fail(res, error.statusCode, error.message, error.code)
     if (error.name === 'ValidationError') return fail(res, 400, error.message, 'VALIDATION_ERROR')
@@ -307,8 +380,9 @@ exports.duplicateTask = async (req, res) => {
     const source = await Task.findOne({ _id: req.params.id, userId: req.user._id }).lean()
     if (!source) return fail(res, 404, 'Task not found.', 'NOT_FOUND')
     const { _id, createdAt, updatedAt, completedAt, archivedAt, pausedAt, ...copy } = source
+    const sanitizedCopy = stripProtectedFields(copy)
     const task = await Task.create({
-      ...copy,
+      ...sanitizedCopy,
       userId: req.user._id,
       title: `${source.title} (copy)`,
       status: 'todo',
@@ -316,6 +390,17 @@ exports.duplicateTask = async (req, res) => {
       progress: 0,
       source: 'duplicate',
       duplicatedFrom: _id,
+      workflowEnabled: false,
+      workflowEnabledAt: null,
+      learningSnapshot: null,
+      progressionStage: 'learning',
+      stageStatus: 'learning_active',
+      learningVerifiedAt: null,
+      examId: null,
+      examAttemptsCount: 0,
+      certificateId: null,
+      resumeLinkedAt: null,
+      actualMinutes: 0,
       subtasks: (source.subtasks || []).map((item) => ({ title: item.title, completed: false })),
       checklist: (source.checklist || []).map((item) => ({ text: item.text, done: false })),
     })

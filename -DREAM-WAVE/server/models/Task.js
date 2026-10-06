@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { STAGES, STAGE_STATUSES } = require('../config/progression')
 
 const taskSchema = new mongoose.Schema({
   userId: {
@@ -158,6 +159,55 @@ const taskSchema = new mongoose.Schema({
     ref: 'ExecutionPlan',
     index: true,
   },
+  workflowEnabled: {
+    type: Boolean,
+    default: false,
+    index: true,
+  },
+  workflowEnabledAt: {
+    type: Date,
+    default: null,
+  },
+  learningSnapshot: {
+    title: { type: String, default: null, maxlength: 200 },
+    requiredFocusMinutes: { type: Number, default: null },
+    subtaskCount: { type: Number, default: null },
+    checklistCount: { type: Number, default: null },
+  },
+  progressionStage: {
+    type: String,
+    enum: STAGES,
+    default: 'learning',
+    index: true,
+  },
+  stageStatus: {
+    type: String,
+    enum: STAGE_STATUSES,
+    default: 'learning_active',
+  },
+  learningVerifiedAt: {
+    type: Date,
+  },
+  examId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'TaskExam',
+  },
+  examAttemptsCount: {
+    type: Number,
+    default: 0,
+  },
+  certificateId: {
+    type: String,
+    default: null,
+  },
+  resumeLinkedAt: {
+    type: Date,
+  },
+  certificationLastError: {
+    code: { type: String, default: null },
+    message: { type: String, default: null },
+    at: { type: Date, default: null },
+  },
 }, { timestamps: true })
 
 taskSchema.index({ userId: 1, status: 1, dueDate: 1 })
@@ -165,5 +215,6 @@ taskSchema.index({ userId: 1, goalId: 1, status: 1 })
 taskSchema.index({ userId: 1, roadmapId: 1, day: 1 })
 taskSchema.index({ userId: 1, completed: 1, completedAt: -1 })
 taskSchema.index({ userId: 1, tags: 1 })
+taskSchema.index({ userId: 1, workflowEnabled: 1, progressionStage: 1 })
 
 module.exports = mongoose.model('Task', taskSchema)
