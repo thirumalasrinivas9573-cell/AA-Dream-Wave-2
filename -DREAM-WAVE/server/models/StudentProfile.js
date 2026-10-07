@@ -73,7 +73,20 @@ const credentialSchema = new mongoose.Schema({
   visibility: { type: String, enum: VISIBILITY, default: 'public' },
   featured: { type: Boolean, default: false },
   fileHash: { type: String, trim: true, maxlength: 128, default: '' },
-}, { timestamps: true })
+  source: { type: String, trim: true, maxlength: 60, default: 'manual' },
+}, {
+  timestamps: true,
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true },
+})
+
+credentialSchema.virtual('issueDate').get(function () {
+  return this.issuedAt
+})
+
+credentialSchema.virtual('credentialUrl').get(function () {
+  return this.verificationUrl || this.documentUrl || ''
+})
 
 const academicJourneySchema = new mongoose.Schema({
   level: {
@@ -189,6 +202,11 @@ const studentProfileSchema = new mongoose.Schema({
     showExperience: { type: Boolean, default: true },
     showCareer: { type: Boolean, default: true },
     showLinks: { type: Boolean, default: true },
+    visibleItems: {
+      credentials: [{ type: String }],
+      projects: [{ type: String }],
+      skills: [{ type: String }],
+    },
   },
   preferences: {
     theme: { type: String, enum: ['system', 'dark', 'light'], default: 'system' },

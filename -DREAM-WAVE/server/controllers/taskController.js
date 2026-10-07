@@ -8,6 +8,8 @@ const aiTaskService = require('../services/aiTaskService')
 const { syncGoalProgress } = require('../services/progressEngine')
 const {
   isWorkflowTask,
+  isCompletedWorkflowTask,
+  isWorkflowReopenAttempt,
   assertCompletionAllowed,
   stripProtectedFields,
 } = require('../services/workflowGuard')
@@ -152,6 +154,17 @@ function syncTaskStatus(task, body = {}) {
     if (task.status === 'paused' || task.status === 'archived') {
       task.pausedAt = task.status === 'paused' ? task.pausedAt || new Date() : undefined
       task.archivedAt = task.status === 'archived' ? task.archivedAt || new Date() : undefined
+    } else {
+      task.archivedAt = undefined
+    }
+    if (isCompletedWorkflowTask(task)) {
+      task.completed = true
+      task.progress = 100
+      task.stageStatus = 'task_completed'
+      task.progressionStage = 'completed'
+      if (task.status !== 'archived') {
+        task.status = 'completed'
+      }
     }
     return
   }
@@ -163,7 +176,13 @@ function syncTaskStatus(task, body = {}) {
     task.archivedAt = task.status === 'archived' ? task.archivedAt || new Date() : undefined
     return
   }
-  if (task.status === 'completed' || task.progress >= 100) {
+  if (body.completed === false || (body.status !== undefined && body.status !== 'completed')) {
+    task.completed = false
+    task.completedAt = undefined
+    if (task.progress >= 100 && body.progress === undefined) {
+      task.progress = 0
+    }
+  } else if (task.status === 'completed' || task.progress >= 100) {
     task.status = 'completed'
     task.completed = true
     task.progress = 100
@@ -324,20 +343,18 @@ exports.updateTask = async (req, res) => {
     const sanitizedBody = stripProtectedFields(req.body)
 
     if (isWorkflowTask(task)) {
-      // 1. Reject any attempt to set completed:true, status:'completed', or progress >= 100 with 403 WORKFLOW_ENFORCED
+      // 1. Reject any attempt to set completed:true, status:'completed', or progress >= 100 on an incomplete workflow task
       if (
-        req.body?.completed === true ||
-        req.body?.status === 'completed' ||
-        (req.body?.progress !== undefined && Number(req.body.progress) >= 100)
+        !isCompletedWorkflowTask(task) &&
+        (req.body?.completed === true ||
+          req.body?.status === 'completed' ||
+          (req.body?.progress !== undefined && Number(req.body.progress) >= 100))
       ) {
         assertCompletionAllowed(task, 'complete')
       }
 
-      // 2. Reject reopening a completed workflow task (completed:false) with 403 WORKFLOW_ENFORCED
-      if (
-        (task.completed === true || task.status === 'completed' || task.progressionStage === 'completed') &&
-        req.body?.completed === false
-      ) {
+      // 2. Reject reopening a completed workflow task with 403 WORKFLOW_ENFORCED
+      if (isWorkflowReopenAttempt(task, req.body)) {
         assertCompletionAllowed(task, 'reopen')
       }
 
@@ -488,9 +505,13 @@ exports.startFocus = async (req, res) => {
   try {
     if (!validId(req.params.id)) return fail(res, 400, 'Invalid task ID.', 'INVALID_ID')
     const task = await Task.findOne({ _id: req.params.id, userId: req.user._id })
-    if (!task) return fail(res, 404, 'Task not found.', 'NOT_FOUND')
-    const existing = await FocusSession.findOne({ taskId: task._id, userId: req.user._id, status: 'active' })
-    if (existing) return res.json({ success: true, session: existing, resumed: true })
+    const existing = await FocusSession.findOne({ userId: req.user._id, status: { $in: ['active', 'paused'] } })
+    if (existing) {
+      if (String(existing.taskId) === String(task._id)) {
+        return res.json({ success: true, session: existing, resumed: true })
+      }
+      return fail(res, 409, 'Another focus session is already active. Please complete or pause it first.', 'ACTIVE_FOCUS_SESSION_EXISTS')
+    }
     const session = await FocusSession.create({ taskId: task._id, userId: req.user._id, startedAt: new Date() })
     return res.status(201).json({ success: true, session })
   } catch (error) {

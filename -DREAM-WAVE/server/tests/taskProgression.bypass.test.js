@@ -550,4 +550,237 @@ describe('Task Progression Bypass & Security Hardening (Step 5B)', () => {
     assert.equal(resE.statusCode, 201)
     assert.equal(resE.body.task.completed, false)
   })
+
+  it('18. Focus time union, minimum duration, capping, and timestamp enforcement (Phase A)', async () => {
+    const task = await Task.create({
+      userId,
+      title: 'Focus Math Task',
+      workflowEnabled: true,
+      estimatedMinutes: 60,
+      learningSnapshot: { requiredFocusMinutes: 45, subtaskCount: 0, checklistCount: 0 },
+    })
+
+    const baseTime = Date.now()
+
+    // 1. Session below MIN_COUNTED_SESSION_SECONDS (45s < 60s) -> counts 0
+    await FocusSession.create({
+      userId,
+      taskId: task._id,
+      startedAt: new Date(baseTime),
+      endedAt: new Date(baseTime + 45 * 1000),
+      durationSeconds: 45,
+      status: 'completed',
+    })
+
+    const verShort = await taskProgressionService.verifyLearning(task)
+    assert.equal(verShort.focusMinutes, 0, 'Sub-minimum session must contribute 0 minutes')
+
+    // 2. Client-sent durationSeconds/startedAt ignored when server timestamps are evaluated
+    // Client sends durationSeconds: 3600 (60 min) but server timestamps only span 2 minutes with 1 minute pause
+    await FocusSession.deleteMany({ taskId: task._id })
+    await FocusSession.create({
+      userId,
+      taskId: task._id,
+      startedAt: new Date(baseTime),
+      endedAt: new Date(baseTime + 120 * 1000), // 2 minutes elapsed
+      pausedDurationSeconds: 60, // 1 minute paused -> 1 minute effective
+      durationSeconds: 3600, // Spoofed duration
+      status: 'completed',
+    })
+
+    const verSpoof = await taskProgressionService.verifyLearning(task)
+    assert.equal(verSpoof.focusMinutes, 1, 'Duration must derive from timestamps minus pause, ignoring spoofed durationSeconds')
+
+    // 3. Overlapping sessions counted ONCE via interval union
+    // Session 1: 10:00 to 10:30 (30 min)
+    // Session 2: 10:15 to 10:45 (30 min)
+    // Union: 10:00 to 10:45 (45 min, NOT 60 min)
+    await FocusSession.deleteMany({ taskId: task._id })
+    const start1 = new Date(baseTime)
+    const end1 = new Date(baseTime + 30 * 60 * 1000)
+    const start2 = new Date(baseTime + 15 * 60 * 1000)
+    const end2 = new Date(baseTime + 45 * 60 * 1000)
+
+    await FocusSession.create({
+      userId,
+      taskId: task._id,
+      startedAt: start1,
+      endedAt: end1,
+      status: 'completed',
+    })
+    await FocusSession.create({
+      userId,
+      taskId: task._id,
+      startedAt: start2,
+      endedAt: end2,
+      status: 'completed',
+    })
+
+    const verOverlap = await taskProgressionService.verifyLearning(task)
+    assert.equal(verOverlap.focusMinutes, 45, 'Overlapping sessions must count as interval union (45 min, not 60 min)')
+    assert.equal(verOverlap.verified, true)
+
+    // 4. Session capped at MAX_COUNTED_SESSION_MINUTES (120 min)
+    await FocusSession.deleteMany({ taskId: task._id })
+    await FocusSession.create({
+      userId,
+      taskId: task._id,
+      startedAt: new Date(baseTime),
+      endedAt: new Date(baseTime + 300 * 60 * 1000), // 300 min
+      status: 'completed',
+    })
+    const verCapped = await taskProgressionService.verifyLearning(task)
+    assert.equal(verCapped.focusMinutes, 120, 'Very long session must be capped at 120 minutes')
+  })
+
+  it('19. Completed workflow task reopen protection for EVERY path (Phase B)', async () => {
+    // Create fully completed workflow task
+    const task = await Task.create({
+      userId,
+      title: 'Completed Progression Task',
+      workflowEnabled: true,
+      workflowEnabledAt: new Date(),
+      progressionStage: 'completed',
+      stageStatus: 'task_completed',
+      completed: true,
+      status: 'completed',
+      progress: 100,
+      certificateId: 'DW-CERT-TEST99',
+      subtasks: [{ title: 'Subtask A', completed: true }],
+      checklist: [{ text: 'Check item 1', done: true }],
+    })
+
+    // Path 1: PUT { status: 'todo' } -> 403
+    const resTodo = await invoke(taskController.updateTask, {
+      params: { id: task._id.toString() },
+      body: { status: 'todo' },
+    })
+    assert.equal(resTodo.statusCode, 403)
+    assert.equal(resTodo.body.code, 'WORKFLOW_ENFORCED')
+
+    // Path 2: PUT { status: 'in_progress' } -> 403
+    const resInProgress = await invoke(taskController.updateTask, {
+      params: { id: task._id.toString() },
+      body: { status: 'in_progress' },
+    })
+    assert.equal(resInProgress.statusCode, 403)
+    assert.equal(resInProgress.body.code, 'WORKFLOW_ENFORCED')
+
+    // Path 3: PUT { progress: 50 } -> 403
+    const resProg = await invoke(taskController.updateTask, {
+      params: { id: task._id.toString() },
+      body: { progress: 50 },
+    })
+    assert.equal(resProg.statusCode, 403)
+    assert.equal(resProg.body.code, 'WORKFLOW_ENFORCED')
+
+    // Path 4: PUT { completed: false } -> 403
+    const resComp = await invoke(taskController.updateTask, {
+      params: { id: task._id.toString() },
+      body: { completed: false },
+    })
+    assert.equal(resComp.statusCode, 403)
+    assert.equal(resComp.body.code, 'WORKFLOW_ENFORCED')
+
+    // Path 5: Subtask un-complete -> 403
+    const resSub = await invoke(taskController.updateTask, {
+      params: { id: task._id.toString() },
+      body: { subtasks: [{ title: 'Subtask A', completed: false }] },
+    })
+    assert.equal(resSub.statusCode, 403)
+    assert.equal(resSub.body.code, 'WORKFLOW_ENFORCED')
+
+    // Path 6: Checklist un-complete -> 403
+    const resCheck = await invoke(taskController.updateTask, {
+      params: { id: task._id.toString() },
+      body: { checklist: [{ text: 'Check item 1', done: false }] },
+    })
+    assert.equal(resCheck.statusCode, 403)
+    assert.equal(resCheck.body.code, 'WORKFLOW_ENFORCED')
+
+    // Path 7: Archive -> 200, preserves completion fields
+    const resArchive = await invoke(taskController.updateTask, {
+      params: { id: task._id.toString() },
+      body: { status: 'archived' },
+    })
+    assert.equal(resArchive.statusCode, 200)
+    assert.equal(resArchive.body.task.status, 'archived')
+    assert.equal(resArchive.body.task.completed, true)
+    assert.equal(resArchive.body.task.stageStatus, 'task_completed')
+    assert.equal(resArchive.body.task.progressionStage, 'completed')
+
+    // Path 8: Unarchive -> 200, preserves completion fields
+    const resUnarchive = await invoke(taskController.updateTask, {
+      params: { id: task._id.toString() },
+      body: { status: 'completed' },
+    })
+    assert.equal(resUnarchive.statusCode, 200)
+    assert.equal(resUnarchive.body.task.status, 'completed')
+    assert.equal(resUnarchive.body.task.completed, true)
+    assert.equal(resUnarchive.body.task.stageStatus, 'task_completed')
+    assert.equal(resUnarchive.body.task.progressionStage, 'completed')
+
+    // Confirm DB record untouched
+    const reloaded = await Task.findById(task._id)
+    assert.equal(reloaded.completed, true)
+    assert.equal(reloaded.progress, 100)
+    assert.equal(reloaded.stageStatus, 'task_completed')
+    assert.equal(reloaded.progressionStage, 'completed')
+  })
+
+  it('20. Legacy tasks reopen exactly as before (Phase B legacy regression)', async () => {
+    const legacy = await Task.create({
+      userId,
+      title: 'Legacy Completed Task',
+      workflowEnabled: false,
+      completed: true,
+      status: 'completed',
+      progress: 100,
+      subtasks: [{ title: 'Sub 1', completed: true }],
+      checklist: [{ text: 'Item 1', done: true }],
+    })
+
+    // Reopen with completed: false
+    const res1 = await invoke(taskController.updateTask, {
+      params: { id: legacy._id.toString() },
+      body: { completed: false },
+    })
+    assert.equal(res1.statusCode, 200)
+    assert.equal(res1.body.task.completed, false)
+    assert.equal(res1.body.task.status, 'todo')
+
+    // Reopen with status: 'in-progress'
+    const res2 = await invoke(taskController.updateTask, {
+      params: { id: legacy._id.toString() },
+      body: { status: 'in-progress' },
+    })
+    assert.equal(res2.statusCode, 200)
+    assert.equal(res2.body.task.status, 'in-progress')
+    assert.equal(res2.body.task.completed, false)
+
+    // Reopen with progress: 50
+    const res3 = await invoke(taskController.updateTask, {
+      params: { id: legacy._id.toString() },
+      body: { progress: 50 },
+    })
+    assert.equal(res3.statusCode, 200)
+    assert.equal(res3.body.task.progress, 50)
+    assert.equal(res3.body.task.completed, false)
+
+    // Uncomplete subtasks
+    const res4 = await invoke(taskController.updateTask, {
+      params: { id: legacy._id.toString() },
+      body: { subtasks: [{ title: 'Sub 1', completed: false }] },
+    })
+    assert.equal(res4.statusCode, 200)
+    assert.equal(res4.body.task.subtasks[0].completed, false)
+
+    // Archive and unarchive
+    const resArch = await invoke(taskController.updateTask, {
+      params: { id: legacy._id.toString() },
+      body: { status: 'archived' },
+    })
+    assert.equal(resArch.statusCode, 200)
+    assert.equal(resArch.body.task.status, 'archived')
+  })
 })

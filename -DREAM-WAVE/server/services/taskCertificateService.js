@@ -55,6 +55,9 @@ async function issueCertificate(taskId, userId) {
     )
   }
 
+  // Ensure unique indexes are built (especially in test / in-memory environments)
+  await TaskCertificate.init()
+
   // Idempotent: return existing certificate if one was already issued
   let existingCert = await TaskCertificate.findOne({ userId, taskId: task._id })
   if (existingCert) {
@@ -206,11 +209,12 @@ async function linkCertificateToResume(taskId, userId) {
       issuer: certificate.issuer || CERTIFICATE_ISSUER,
       credentialId: certificate.credentialId,
       verificationUrl: certificate.verificationUrl || '',
-      documentUrl: '',
+      documentUrl: certificate.documentUrl || '',
       skills: certificate.skills || [],
       issuedAt: certificate.issueDate || new Date(),
       verificationStatus: 'verified',
-      visibility: 'public',
+      visibility: 'private',
+      source: 'task_progression',
     }
 
     if (existingCredIndex >= 0) {

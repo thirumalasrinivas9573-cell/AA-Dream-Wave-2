@@ -2,6 +2,7 @@ const Task = require('../models/Task')
 const TaskExam = require('../models/TaskExam')
 const TaskCertificate = require('../models/TaskCertificate')
 const FocusSession = require('../models/FocusSession')
+const progressionConfig = require('../config/progression')
 const {
   MIN_FOCUS_MINUTES_RATIO,
   RETAKE_MIN_NEW_FOCUS_MINUTES,
@@ -10,7 +11,7 @@ const {
   MINIMUM_PASSING_PERCENTAGE,
   EXAM_QUESTION_COUNT,
   EXAM_TIME_LIMIT_MINUTES,
-} = require('../config/progression')
+} = progressionConfig
 
 function createProgressionError(message, code, statusCode = 400, extra = {}) {
   const err = new Error(message)
@@ -31,6 +32,63 @@ const LEGAL_TRANSITIONS = {
   certification_locked: ['certification_completed', 'task_completed'],
   certification_completed: ['task_completed'],
   task_completed: [],
+}
+
+/**
+ * Computes total focus minutes as the length of the union of completed session intervals.
+ * Enforces MIN_COUNTED_SESSION_SECONDS and caps each session at MAX_COUNTED_SESSION_MINUTES.
+ */
+function computeFocusSessionUnionMinutes(sessions = []) {
+  const intervals = []
+  const minSeconds = progressionConfig.MIN_COUNTED_SESSION_SECONDS || 60
+  const maxSessionSeconds = (progressionConfig.MAX_COUNTED_SESSION_MINUTES || 120) * 60
+
+  for (const s of sessions) {
+    if (!s || s.status !== 'completed') continue
+
+    let durationSec = 0
+    let endMs = 0
+
+    if (s.endedAt && s.startedAt) {
+      endMs = new Date(s.endedAt).getTime()
+      const startMs = new Date(s.startedAt).getTime()
+      if (endMs > startMs) {
+        const elapsed = Math.floor((endMs - startMs) / 1000)
+        durationSec = Math.max(0, elapsed - (Number(s.pausedDurationSeconds) || 0))
+      }
+    } else if (s.durationSeconds) {
+      durationSec = Number(s.durationSeconds) || 0
+      endMs = s.endedAt
+        ? new Date(s.endedAt).getTime()
+        : (s.startedAt ? new Date(s.startedAt).getTime() + durationSec * 1000 : Date.now())
+    }
+
+    if (durationSec < minSeconds) continue
+
+    const effectiveSeconds = Math.min(durationSec, maxSessionSeconds)
+    const intervalStartMs = endMs - effectiveSeconds * 1000
+    intervals.push([intervalStartMs, endMs])
+  }
+
+  if (intervals.length === 0) return 0
+
+  intervals.sort((a, b) => a[0] - b[0])
+  let totalMs = 0
+  let [currStart, currEnd] = intervals[0]
+
+  for (let i = 1; i < intervals.length; i++) {
+    const [start, end] = intervals[i]
+    if (start <= currEnd) {
+      currEnd = Math.max(currEnd, end)
+    } else {
+      totalMs += (currEnd - currStart)
+      currStart = start
+      currEnd = end
+    }
+  }
+  totalMs += (currEnd - currStart)
+
+  return Math.round(totalMs / 60000)
 }
 
 /**
@@ -65,11 +123,7 @@ async function verifyLearning(task, { newEffortSince = null } = {}) {
     status: 'completed',
   }).lean()
 
-  const focusMinutes = completedSessions.reduce((sum, s) => {
-    const durationSec = Number(s.durationSeconds) || 0
-    const mins = Math.max(0, Math.round(durationSec / 60))
-    return sum + Math.min(mins, MAX_COUNTED_SESSION_MINUTES)
-  }, 0)
+  const focusMinutes = computeFocusSessionUnionMinutes(completedSessions)
 
   const requiredFocusMinutes =
     task.learningSnapshot?.requiredFocusMinutes != null
@@ -145,11 +199,7 @@ async function verifyLearning(task, { newEffortSince = null } = {}) {
       endedAt: { $gte: new Date(newEffortSince) },
     }).lean()
 
-    const newMinutes = recentSessions.reduce((sum, s) => {
-      const durationSec = Number(s.durationSeconds) || 0
-      const mins = Math.max(0, Math.round(durationSec / 60))
-      return sum + Math.min(mins, MAX_COUNTED_SESSION_MINUTES)
-    }, 0)
+    const newMinutes = computeFocusSessionUnionMinutes(recentSessions)
     const retakeMet = newMinutes >= RETAKE_MIN_NEW_FOCUS_MINUTES
 
     requirements.push({
@@ -164,7 +214,7 @@ async function verifyLearning(task, { newEffortSince = null } = {}) {
   }
 
   const verified = requirements.every((r) => r.met)
-  return { verified, requirements }
+  return { verified, requirements, focusMinutes, requiredFocusMinutes }
 }
 
 /**
@@ -294,21 +344,58 @@ async function getProgressionState(taskId, userId) {
       }
     : null
 
+  let locked = examState === 'locked' || examState === 'failed'
+  let lockedReason = null
+  let lockedMessage = null
+  if (examState === 'locked') {
+    if (!canUnlockExam) {
+      lockedReason = 'learning_incomplete'
+      lockedMessage = 'Complete learning stage requirements to unlock exam.'
+    }
+  } else if (examState === 'failed') {
+    lockedReason = 'retake_requirements_unmet'
+    lockedMessage = 'Complete required focus study time before retaking exam.'
+  }
+
+  const isRetakeRequired = Boolean(task.examAttemptsCount > 0 && lastAttempt && !lastAttempt.passed)
+  const retake = {
+    required: isRetakeRequired,
+    requirements: isRetakeRequired
+      ? learningVerification.requirements.filter((r) => r.key === 'retake_effort')
+      : [],
+  }
+
   return {
     taskId: String(task._id),
     title: task.title,
     workflowEnabled: task.workflowEnabled,
     stage: task.progressionStage,
     status: task.stageStatus,
+    progressionStage: task.progressionStage,
+    stageStatus: task.stageStatus,
+    completed: Boolean(task.completed),
+    serverNow: new Date().toISOString(),
+    links: {
+      goalId: task.goalId ? String(task.goalId) : null,
+      roadmapId: task.roadmapId ? String(task.roadmapId) : null,
+    },
     learning: {
       state: learningState,
       verified: Boolean(task.learningVerifiedAt),
+      verifiedAt: task.learningVerifiedAt || null,
       learningVerifiedAt: task.learningVerifiedAt || null,
       requirements: learningVerification.requirements,
+      focus: {
+        minutes: learningVerification.focusMinutes,
+        requiredMinutes: learningVerification.requiredFocusMinutes,
+      },
     },
     exam: {
       state: examState,
+      locked,
       canUnlock: canUnlockExam,
+      lockedReason,
+      lockedMessage,
       unlocked: canUnlockExam || Boolean(task.learningVerifiedAt),
       examId: exam?._id ? String(exam._id) : null,
       status: exam?.status || (hasPassedExam ? 'passed' : 'none'),
@@ -325,6 +412,7 @@ async function getProgressionState(taskId, userId) {
             evaluatedAt: lastAttempt.evaluatedAt,
           }
         : null,
+      retake,
       activeExam: activeExamDelivery,
     },
     certification: {
@@ -357,7 +445,7 @@ async function transitionStage(taskId, userId, fromStatus, toStatus, extraUpdate
     throw createProgressionError(
       `Illegal transition from '${fromStatus}' to '${toStatus}'.`,
       'ILLEGAL_STAGE_TRANSITION',
-      400,
+      409,
     )
   }
 

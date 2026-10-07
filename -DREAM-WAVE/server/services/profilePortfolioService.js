@@ -6,6 +6,17 @@ function visibleItems(items = []) {
   return (items || []).filter((item) => item.visibility === 'public')
 }
 
+function visibleCredentials(credentials = [], privacy = {}) {
+  const explicitIds = new Set((privacy?.visibleItems?.credentials || []).map(String))
+  return (credentials || []).filter((item) => {
+    if (item.source === 'task_progression') {
+      const isExplicit = explicitIds.has(String(item.credentialId)) || explicitIds.has(String(item._id))
+      return isExplicit && item.visibility === 'public'
+    }
+    return item.visibility === 'public'
+  })
+}
+
 function orderByIds(items, ids = [], featuredIds = []) {
   const featuredSet = new Set((featuredIds || []).map(String))
   const orderMap = Object.fromEntries((ids || []).map((id, index) => [String(id), index]))
@@ -30,7 +41,7 @@ function computeCompleteness(profile) {
     { key: 'education', label: 'Academic journey', done: Boolean(profile.academicJourney?.length || profile.academic?.institution) },
     { key: 'skills', label: 'Public skills', done: (profile.skills || []).some((item) => item.visibility === 'public') },
     { key: 'project', label: 'Public project', done: (profile.projects || []).some((item) => item.visibility === 'public') },
-    { key: 'certificate', label: 'Public certificate', done: (profile.credentials || []).some((item) => item.visibility === 'public') },
+    { key: 'certificate', label: 'Public certificate', done: visibleCredentials(profile.credentials, profile.privacy).length > 0 },
     { key: 'career', label: 'Career direction', done: Boolean(profile.careerDirection?.targetRole) },
   ]
   const completed = checks.filter((item) => item.done).length
@@ -117,7 +128,7 @@ function buildPublicPortfolioDTO(profile, user, { summary, graph } = {}) {
     portfolioConfig.featuredProjectIds,
   )
   const credentials = orderByIds(
-    visible(profile.credentials),
+    visibleCredentials(profile.credentials, profile.privacy),
     [],
     portfolioConfig.featuredCredentialIds,
   )
@@ -213,6 +224,7 @@ function cleanPortfolioPayload(body) {
 module.exports = {
   text,
   visibleItems,
+  visibleCredentials,
   orderByIds,
   computeCompleteness,
   buildRecommendations,

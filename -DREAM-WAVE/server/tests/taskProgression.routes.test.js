@@ -148,7 +148,7 @@ describe('Task Progression Routes & Contract v2 (Step 5C)', () => {
     const refRes = await invoke(taskProgressionController.enableWorkflow, {
       params: { id: completedTask._id.toString() },
     })
-    assert.equal(refRes.statusCode, 400)
+    assert.equal(refRes.statusCode, 409)
     assert.equal(refRes.body.code, 'TASK_ALREADY_COMPLETED')
 
     const activeTask = await Task.create({
@@ -620,4 +620,296 @@ describe('Task Progression Routes & Contract v2 (Step 5C)', () => {
     const cert = await TaskCertificate.findOne({ taskId: task._id })
     assert.equal(cert.title, 'Original Architecture Milestone')
   })
+
+  it('20. Exact CONTRACT SHAPES validation for every endpoint in pass, fail, failed-pipeline, and completed states', async () => {
+    const task = await Task.create({
+      userId,
+      title: 'Full Lifecycle Contract Task',
+      estimatedMinutes: 20,
+    })
+    await invoke(taskProgressionController.enableWorkflow, { params: { id: task._id.toString() } })
+
+    // 1. GET /progression in learning-current state
+    const progCurrent = await invoke(taskProgressionController.getProgression, { params: { id: task._id.toString() } })
+    assert.equal(progCurrent.statusCode, 200)
+    const pCurrent = JSON.parse(JSON.stringify(progCurrent.body.progression))
+    assert.deepEqual(Object.keys(pCurrent), ['taskId', 'workflowEnabled', 'completed', 'progressionStage', 'stageStatus', 'serverNow', 'links', 'stages'])
+    assert.deepEqual(Object.keys(pCurrent.links), ['goalId', 'roadmapId'])
+    assert.deepEqual(Object.keys(pCurrent.stages), ['learning', 'exam', 'certification'])
+    assert.deepEqual(Object.keys(pCurrent.stages.learning), ['state', 'verified', 'verifiedAt', 'requirements', 'focus'])
+    assert.deepEqual(Object.keys(pCurrent.stages.learning.focus), ['minutes', 'requiredMinutes'])
+    assert.equal(pCurrent.stages.learning.state, 'current')
+    assert.deepEqual(Object.keys(pCurrent.stages.exam), ['state', 'locked', 'canUnlock', 'lockedReason', 'lockedMessage', 'attemptsCount', 'minimumPassingPercentage', 'questionCount', 'timeLimitMinutes', 'activeExam', 'lastAttempt', 'retake'])
+    assert.equal(pCurrent.stages.exam.state, 'locked')
+    assert.deepEqual(Object.keys(pCurrent.stages.certification), ['state', 'certificate', 'recoverableError'])
+    assert.equal(pCurrent.stages.certification.state, 'locked')
+
+    // 2. GET /progression in ready_for_verification state
+    await FocusSession.create({
+      userId,
+      taskId: task._id,
+      status: 'completed',
+      durationSeconds: 30 * 60,
+    })
+    const progReady = await invoke(taskProgressionController.getProgression, { params: { id: task._id.toString() } })
+    const pReady = JSON.parse(JSON.stringify(progReady.body.progression))
+    assert.equal(pReady.stages.learning.state, 'ready_for_verification')
+    assert.equal(pReady.stages.exam.canUnlock, true)
+
+    // 3. POST /exam/start (new exam session)
+    const startRes = await invoke(taskProgressionController.startExam, { params: { id: task._id.toString() } })
+    assert.equal(startRes.statusCode, 200)
+    const startBody = JSON.parse(JSON.stringify(startRes.body))
+    assert.deepEqual(Object.keys(startBody), ['success', 'exam', 'progression'])
+    assert.deepEqual(Object.keys(startBody.exam), ['examId', 'startedAt', 'expiresAt', 'serverNow', 'remainingSeconds', 'timeLimitMinutes', 'questionCount', 'questions'])
+    assert.deepEqual(Object.keys(startBody.exam.questions[0]), ['questionId', 'question', 'options'])
+
+    // 4. POST /exam/start (resumed active exam)
+    const resumeRes = await invoke(taskProgressionController.startExam, { params: { id: task._id.toString() } })
+    assert.equal(resumeRes.statusCode, 200)
+    const resumeBody = JSON.parse(JSON.stringify(resumeRes.body))
+    assert.deepEqual(Object.keys(resumeBody), ['success', 'exam', 'progression'])
+    assert.equal(resumeBody.exam.examId, startBody.exam.examId)
+
+    // 5. POST /exam/submit (fail)
+    const examDoc = await TaskExam.findOne({ taskId: task._id }).select('+questions.correctIndex')
+    const failingAnswers = examDoc.questions.map((q) => ({
+      questionId: q.questionId,
+      selectedIndex: (q.correctIndex + 1) % 4,
+    }))
+    const failRes = await invoke(taskProgressionController.submitExam, {
+      params: { id: task._id.toString() },
+      body: { answers: failingAnswers },
+    })
+    assert.equal(failRes.statusCode, 200)
+    const failBody = JSON.parse(JSON.stringify(failRes.body))
+    assert.deepEqual(Object.keys(failBody), ['success', 'result', 'progression'])
+    assert.deepEqual(Object.keys(failBody.result), ['score', 'passed', 'minimumPassingPercentage', 'attemptNumber', 'correctCount', 'totalCount', 'nextStage', 'questionResults'])
+    assert.deepEqual(Object.keys(failBody.result.questionResults[0]), ['questionId', 'isCorrect'])
+    assert.equal(failBody.result.passed, false)
+    assert.equal(failBody.progression.stages.exam.state, 'failed')
+
+    // 6. POST /exam/submit (pass with failed pipeline)
+    // Satisfy retake effort requirement
+    await FocusSession.create({
+      userId,
+      taskId: task._id,
+      status: 'completed',
+      endedAt: new Date(),
+      startedAt: new Date(Date.now() - 35 * 60 * 1000),
+    })
+    await invoke(taskProgressionController.startExam, { params: { id: task._id.toString() } })
+    const activeExam = await TaskExam.findOne({ taskId: task._id, status: 'active' }).select('+questions.correctIndex')
+    const passingAnswers = activeExam.questions.map((q) => ({
+      questionId: q.questionId,
+      selectedIndex: q.correctIndex,
+    }))
+
+    // Inject failure into completeCertificationPipeline
+    const taskCertificateService = require('../services/taskCertificateService')
+    const origPipeline = taskCertificateService.completeCertificationPipeline
+    taskCertificateService.completeCertificationPipeline = async () => {
+      await Task.updateOne(
+        { _id: task._id },
+        {
+          $set: {
+            certificationLastError: {
+              code: 'RESUME_LINK_FAILED',
+              message: 'Failed to link certificate to Resume Builder.',
+              at: new Date(),
+            },
+          },
+        },
+      )
+      const err = new Error('Injected network error')
+      err.code = 'RESUME_LINK_FAILED'
+      err.statusCode = 500
+      throw err
+    }
+
+    const submitPipeRes = await invoke(taskProgressionController.submitExam, {
+      params: { id: task._id.toString() },
+      body: { answers: passingAnswers },
+    })
+    taskCertificateService.completeCertificationPipeline = origPipeline
+
+    assert.equal(submitPipeRes.statusCode, 200)
+    const pipeBody = JSON.parse(JSON.stringify(submitPipeRes.body))
+    assert.deepEqual(Object.keys(pipeBody), ['success', 'result', 'progression'])
+    assert.equal(pipeBody.result.passed, true)
+    assert.deepEqual(Object.keys(pipeBody.result.questionResults[0]), ['questionId', 'isCorrect', 'explanation'])
+    assert.equal(pipeBody.progression.stages.certification.state, 'failed')
+    assert.deepEqual(Object.keys(pipeBody.progression.stages.certification.recoverableError), ['code', 'message'])
+
+    // 7. POST /certificate/retry
+    const retryRes = await invoke(taskProgressionController.retryCertification, { params: { id: task._id.toString() } })
+    assert.equal(retryRes.statusCode, 200)
+    const retryBody = JSON.parse(JSON.stringify(retryRes.body))
+    assert.deepEqual(Object.keys(retryBody), ['success', 'progression'])
+    assert.equal(retryBody.progression.completed, true)
+    assert.equal(retryBody.progression.stageStatus, 'task_completed')
+    assert.equal(retryBody.progression.stages.certification.state, 'completed')
+    assert.deepEqual(Object.keys(retryBody.progression.stages.certification.certificate), [
+      'credentialId', 'title', 'issuer', 'issuedAt', 'url', 'verificationUrl', 'skills', 'skill', 'category', 'verificationStatus', 'documentUrl', 'linkedToResume', 'linkedResumeId', 'linkedResumeIds'
+    ])
+  })
+
+  it('21. Recursive JSON scan proving no correctIndex, no explanation (except pass-only questionResults), no userId, and no prompt text anywhere', async () => {
+    function assertNoLeakedFields(val, allowExplanation = false) {
+      if (!val || typeof val !== 'object') return
+      if (Array.isArray(val)) {
+        for (const item of val) assertNoLeakedFields(item, allowExplanation)
+        return
+      }
+      for (const [k, v] of Object.entries(val)) {
+        assert.notEqual(k, 'correctIndex', `Leaked correctIndex found at key ${k}`)
+        assert.notEqual(k, 'userId', `Leaked userId found at key ${k}`)
+        assert.notEqual(k, 'prompt', `Leaked prompt found at key ${k}`)
+        assert.notEqual(k, 'systemPrompt', `Leaked systemPrompt found at key ${k}`)
+        if (!allowExplanation) {
+          assert.notEqual(k, 'explanation', `Leaked explanation found at key ${k}`)
+        }
+        assertNoLeakedFields(v, allowExplanation)
+      }
+    }
+
+    const task = await Task.create({
+      userId,
+      title: 'Scan Task',
+      estimatedMinutes: 20,
+    })
+    await invoke(taskProgressionController.enableWorkflow, { params: { id: task._id.toString() } })
+
+    await FocusSession.create({
+      userId,
+      taskId: task._id,
+      status: 'completed',
+      durationSeconds: 30 * 60,
+    })
+
+    const startRes = await invoke(taskProgressionController.startExam, { params: { id: task._id.toString() } })
+    assertNoLeakedFields(JSON.parse(JSON.stringify(startRes.body)), false)
+
+    const progRes = await invoke(taskProgressionController.getProgression, { params: { id: task._id.toString() } })
+    assertNoLeakedFields(JSON.parse(JSON.stringify(progRes.body)), false)
+
+    // Failed submit
+    const examDoc = await TaskExam.findOne({ taskId: task._id }).select('+questions.correctIndex')
+    const failingAnswers = examDoc.questions.map((q) => ({
+      questionId: q.questionId,
+      selectedIndex: (q.correctIndex + 1) % 4,
+    }))
+    const failRes = await invoke(taskProgressionController.submitExam, {
+      params: { id: task._id.toString() },
+      body: { answers: failingAnswers },
+    })
+    assertNoLeakedFields(JSON.parse(JSON.stringify(failRes.body)), false)
+
+    // Passing submit: only questionResults may contain explanation
+    await FocusSession.create({
+      userId,
+      taskId: task._id,
+      status: 'completed',
+      endedAt: new Date(),
+      startedAt: new Date(Date.now() - 35 * 60 * 1000),
+    })
+    await invoke(taskProgressionController.startExam, { params: { id: task._id.toString() } })
+    const activeExam = await TaskExam.findOne({ taskId: task._id, status: 'active' }).select('+questions.correctIndex')
+    const passAnswers = activeExam.questions.map((q) => ({
+      questionId: q.questionId,
+      selectedIndex: q.correctIndex,
+    }))
+    const passRes = await invoke(taskProgressionController.submitExam, {
+      params: { id: task._id.toString() },
+      body: { answers: passAnswers },
+    })
+    const passParsed = JSON.parse(JSON.stringify(passRes.body))
+    assertNoLeakedFields(passParsed.progression, false)
+    assertNoLeakedFields(passParsed.result, true) // allows explanation on questionResults only
+  })
+
+  it('22. Comprehensive error codes and HTTP status code coverage', async () => {
+    // 1. TASK_NOT_FOUND 404
+    const notFoundRes = await invoke(taskProgressionController.getProgression, {
+      params: { id: new mongoose.Types.ObjectId().toString() },
+    })
+    assert.equal(notFoundRes.statusCode, 404)
+    assert.equal(notFoundRes.body.code, 'TASK_NOT_FOUND')
+
+    // 2. WORKFLOW_NOT_ENABLED 400
+    const legacyTask = await Task.create({ userId, title: 'Legacy Task', workflowEnabled: false })
+    const legacyRes = await invoke(taskProgressionController.getProgression, {
+      params: { id: legacyTask._id.toString() },
+    })
+    assert.equal(legacyRes.statusCode, 400)
+    assert.equal(legacyRes.body.code, 'WORKFLOW_NOT_ENABLED')
+
+    // 3. LEARNING_INCOMPLETE 400 (+top-level requirements[])
+    const wfTask = await Task.create({ userId, title: 'Incomplete Task', estimatedMinutes: 60 })
+    await invoke(taskProgressionController.enableWorkflow, { params: { id: wfTask._id.toString() } })
+    const incompleteRes = await invoke(taskProgressionController.startExam, {
+      params: { id: wfTask._id.toString() },
+    })
+    assert.equal(incompleteRes.statusCode, 400)
+    assert.equal(incompleteRes.body.code, 'LEARNING_INCOMPLETE')
+    assert.ok(Array.isArray(incompleteRes.body.requirements))
+
+    // 4. INVALID_ID 400
+    const invalidIdRes = await invoke(taskProgressionController.getProgression, { params: { id: 'bad-id' } })
+    assert.equal(invalidIdRes.statusCode, 400)
+    assert.equal(invalidIdRes.body.code, 'INVALID_ID')
+
+    // 5. INVALID_INPUT 400 & INVALID_ANSWERS 400
+    const badInputRes = await invoke(taskProgressionController.submitExam, {
+      params: { id: wfTask._id.toString() },
+      body: 'not-an-object',
+    })
+    assert.equal(badInputRes.statusCode, 400)
+    assert.equal(badInputRes.body.code, 'INVALID_INPUT')
+
+    const badAnswersRes = await invoke(taskProgressionController.submitExam, {
+      params: { id: wfTask._id.toString() },
+      body: { answers: 'not-an-array' },
+    })
+    assert.equal(badAnswersRes.statusCode, 400)
+    assert.equal(badAnswersRes.body.code, 'INVALID_ANSWERS')
+
+    // 6. TASK_ALREADY_COMPLETED 409
+    const compTask = await Task.create({ userId, title: 'Completed Old', completed: true, status: 'completed' })
+    const alreadyCompRes = await invoke(taskProgressionController.enableWorkflow, {
+      params: { id: compTask._id.toString() },
+    })
+    assert.equal(alreadyCompRes.statusCode, 409)
+    assert.equal(alreadyCompRes.body.code, 'TASK_ALREADY_COMPLETED')
+
+    // 7. EXAM_NOT_ACTIVE 404 & 409
+    const noExamRes = await invoke(taskProgressionController.submitExam, {
+      params: { id: wfTask._id.toString() },
+      body: { answers: [{ questionId: 'q1', selectedIndex: 0 }] },
+    })
+    assert.equal(noExamRes.statusCode, 404)
+    assert.equal(noExamRes.body.code, 'EXAM_NOT_ACTIVE')
+
+    // 8. CERTIFICATION_NOT_ELIGIBLE 409
+    const certNotElig = await invoke(taskProgressionController.retryCertification, {
+      params: { id: wfTask._id.toString() },
+    })
+    assert.equal(certNotElig.statusCode, 409)
+    assert.equal(certNotElig.body.code, 'CERTIFICATION_NOT_ELIGIBLE')
+
+    // 9. WORKFLOW_ENFORCED 403
+    const wfBypassRes = await invoke(taskController.updateTask, {
+      params: { id: wfTask._id.toString() },
+      body: { completed: true },
+    })
+    assert.equal(wfBypassRes.statusCode, 403)
+    assert.equal(wfBypassRes.body.code, 'WORKFLOW_ENFORCED')
+
+    // 10. AUTH_REQUIRED 401
+    const unauthRes = response()
+    await authMiddleware({ header: () => undefined }, unauthRes, () => {})
+    assert.equal(unauthRes.statusCode, 401)
+    assert.equal(unauthRes.body.code, 'AUTH_REQUIRED')
+  })
 })
+

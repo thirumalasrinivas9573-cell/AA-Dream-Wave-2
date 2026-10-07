@@ -6,6 +6,7 @@ const RETAKE_MIN_NEW_FOCUS_MINUTES = Number(process.env.RETAKE_MIN_NEW_FOCUS_MIN
 const ENGAGEMENT_MIN_FOCUS_MINUTES = Number(process.env.ENGAGEMENT_MIN_FOCUS_MINUTES) || 5
 const MIN_REQUIRED_FOCUS_MINUTES = Number(process.env.MIN_REQUIRED_FOCUS_MINUTES) || 10
 const MAX_COUNTED_SESSION_MINUTES = Number(process.env.MAX_COUNTED_SESSION_MINUTES) || 120
+const MIN_COUNTED_SESSION_SECONDS = Number(process.env.MIN_COUNTED_SESSION_SECONDS) || 60
 const CERTIFICATE_ISSUER = process.env.CERTIFICATE_ISSUER || 'Dream Wave AI'
 const ALLOW_FALLBACK_EXAM = process.env.ALLOW_FALLBACK_EXAM === 'true' && process.env.NODE_ENV !== 'production'
 
@@ -59,6 +60,9 @@ module.exports = {
   ENGAGEMENT_MIN_FOCUS_MINUTES,
   MIN_REQUIRED_FOCUS_MINUTES,
   MAX_COUNTED_SESSION_MINUTES,
+  get MIN_COUNTED_SESSION_SECONDS() {
+    return Number(process.env.MIN_COUNTED_SESSION_SECONDS) || 60
+  },
   CERTIFICATE_ISSUER,
   get ALLOW_FALLBACK_EXAM() {
     return process.env.ALLOW_FALLBACK_EXAM === 'true' && process.env.NODE_ENV !== 'production'

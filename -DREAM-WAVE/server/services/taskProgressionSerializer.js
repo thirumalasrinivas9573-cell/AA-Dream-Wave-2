@@ -102,13 +102,13 @@ function serializeCertificateSummary(cert) {
     title: cert.title,
     issuer: cert.issuer || progressionConfig.CERTIFICATE_ISSUER || 'Dream Wave AI',
     issuedAt: issuedAtIso,
-    url: null,
-    verificationUrl: null,
+    url: cert.verificationUrl || cert.url || null,
+    verificationUrl: cert.verificationUrl || null,
     skills: Array.isArray(cert.skills) ? cert.skills : [],
     skill: firstSkill,
     category: cert.category || 'course',
-    verificationStatus: 'verified',
-    documentUrl: null,
+    verificationStatus: cert.verificationStatus || 'verified',
+    documentUrl: cert.documentUrl || null,
     linkedToResume: Boolean(cert.linkedToResume),
     linkedResumeId,
     linkedResumeIds,
@@ -125,37 +125,55 @@ function serializeProgression(state) {
   const learningSection = {
     state: state.learning?.state || (state.learning?.verified ? 'completed' : 'current'),
     verified: Boolean(state.learning?.verified),
-    learningVerifiedAt: state.learning?.learningVerifiedAt || null,
+    verifiedAt: state.learning?.verifiedAt || state.learning?.learningVerifiedAt || null,
     requirements: Array.isArray(state.learning?.requirements)
       ? state.learning.requirements.map((r) => ({
           key: r.key,
           met: Boolean(r.met),
           detail: r.detail,
-          actual: r.actual,
-          required: r.required,
-          total: r.total,
-          completed: r.completed,
         }))
       : [],
+    focus: {
+      minutes: state.learning?.focus?.minutes ?? 0,
+      requiredMinutes: state.learning?.focus?.requiredMinutes ?? 0,
+    },
   }
+  Object.defineProperty(learningSection, 'learningVerifiedAt', {
+    get() {
+      return this.verifiedAt
+    },
+    enumerable: false,
+    configurable: true,
+  })
 
   const examSection = {
     state: state.exam?.state || 'locked',
+    locked:
+      state.exam?.locked !== undefined
+        ? Boolean(state.exam.locked)
+        : state.exam?.state === 'locked' || state.exam?.state === 'failed',
     canUnlock: Boolean(state.exam?.canUnlock),
-    unlocked: Boolean(state.exam?.unlocked || state.exam?.canUnlock),
-    examId: state.exam?.examId || null,
-    status: state.exam?.status || 'none',
+    lockedReason: state.exam?.lockedReason || null,
+    lockedMessage: state.exam?.lockedMessage || null,
+    attemptsCount: state.exam?.attemptsCount || 0,
     minimumPassingPercentage:
       state.exam?.minimumPassingPercentage ||
       state.exam?.passingPercentage ||
       progressionConfig.MINIMUM_PASSING_PERCENTAGE,
-    passingPercentage:
-      state.exam?.passingPercentage ||
-      state.exam?.minimumPassingPercentage ||
-      progressionConfig.MINIMUM_PASSING_PERCENTAGE,
     questionCount: state.exam?.questionCount || progressionConfig.EXAM_QUESTION_COUNT,
     timeLimitMinutes: state.exam?.timeLimitMinutes || progressionConfig.EXAM_TIME_LIMIT_MINUTES,
-    attemptsCount: state.exam?.attemptsCount || 0,
+    activeExam: state.exam?.activeExam
+      ? {
+          examId: state.exam.activeExam.examId,
+          startedAt: state.exam.activeExam.startedAt,
+          expiresAt: state.exam.activeExam.expiresAt,
+          serverNow: state.exam.activeExam.serverNow || new Date().toISOString(),
+          remainingSeconds: state.exam.activeExam.remainingSeconds,
+          timeLimitMinutes: state.exam.activeExam.timeLimitMinutes,
+          questionCount: state.exam.activeExam.questionCount,
+          questions: state.exam.activeExam.questions,
+        }
+      : null,
     lastAttempt: state.exam?.lastAttempt
       ? {
           attemptNumber: state.exam.lastAttempt.attemptNumber,
@@ -164,51 +182,170 @@ function serializeProgression(state) {
           evaluatedAt: state.exam.lastAttempt.evaluatedAt,
         }
       : null,
-    activeExam: state.exam?.activeExam || null,
+    retake: state.exam?.retake || { required: false, requirements: [] },
   }
+  Object.defineProperties(examSection, {
+    unlocked: {
+      get() {
+        return Boolean(!this.locked || this.canUnlock)
+      },
+      enumerable: false,
+      configurable: true,
+    },
+    examId: {
+      get() {
+        return this.activeExam?.examId || null
+      },
+      enumerable: false,
+      configurable: true,
+    },
+    status: {
+      get() {
+        return this.state === 'completed' ? 'passed' : this.state === 'current' ? 'active' : 'none'
+      },
+      enumerable: false,
+      configurable: true,
+    },
+    passingPercentage: {
+      get() {
+        return this.minimumPassingPercentage
+      },
+      enumerable: false,
+      configurable: true,
+    },
+  })
 
   const certSection = {
     state: state.certification?.state || 'locked',
-    certificateId: state.certification?.certificateId || null,
-    issuedAt: state.certification?.issuedAt || null,
-    linkedToResume: Boolean(state.certification?.linkedToResume),
     certificate: state.certification?.certificate
       ? serializeCertificateSummary(state.certification.certificate)
       : null,
-    recoverableError: state.certification?.recoverableError || null,
+    recoverableError: state.certification?.recoverableError
+      ? {
+          code: state.certification.recoverableError.code,
+          message: state.certification.recoverableError.message,
+        }
+      : null,
+  }
+  Object.defineProperties(certSection, {
+    certificateId: {
+      get() {
+        return this.certificate?.credentialId || null
+      },
+      enumerable: false,
+      configurable: true,
+    },
+    issuedAt: {
+      get() {
+        return this.certificate?.issuedAt || null
+      },
+      enumerable: false,
+      configurable: true,
+    },
+    linkedToResume: {
+      get() {
+        return Boolean(this.certificate?.linkedToResume)
+      },
+      enumerable: false,
+      configurable: true,
+    },
+  })
+  if (state.certification?.recoverableError?.at && certSection.recoverableError) {
+    Object.defineProperty(certSection.recoverableError, 'at', {
+      value: state.certification.recoverableError.at,
+      enumerable: false,
+      configurable: true,
+    })
+  }
+
+  const progressionResult = {
+    taskId: state.taskId,
+    workflowEnabled: Boolean(state.workflowEnabled),
+    completed: Boolean(state.completed !== undefined ? state.completed : state.taskCompleted),
+    progressionStage: state.progressionStage || state.stage || 'learning',
+    stageStatus: state.stageStatus || state.status || 'learning_active',
+    serverNow: state.serverNow || new Date().toISOString(),
+    links: state.links || { goalId: null, roadmapId: null },
+    stages: {
+      learning: learningSection,
+      exam: examSection,
+      certification: certSection,
+    },
   }
 
   const stagesSummary =
     state.stagesSummary ||
     deriveStagesSummary({
       workflowEnabled: true,
-      stageStatus: state.status,
-      learningVerifiedAt: state.learning?.learningVerifiedAt,
-      completed: state.taskCompleted,
-      examAttemptsCount: state.exam?.attemptsCount,
-      certificationLastError: state.certification?.recoverableError,
-      certificateId: state.certification?.certificateId,
+      stageStatus: progressionResult.stageStatus,
+      learningVerifiedAt: learningSection.verifiedAt,
+      completed: progressionResult.completed,
+      examAttemptsCount: examSection.attemptsCount,
+      certificationLastError: certSection.recoverableError,
+      certificateId: certSection.certificateId,
     })
 
-  return {
-    taskId: state.taskId,
-    title: state.title,
-    workflowEnabled: Boolean(state.workflowEnabled),
-    stage: state.stage,
-    status: state.status,
-    stages: {
-      learning: learningSection,
-      exam: examSection,
-      certification: certSection,
+  Object.defineProperties(progressionResult, {
+    stage: {
+      get() {
+        return this.progressionStage
+      },
+      enumerable: false,
+      configurable: true,
     },
-    // Top-level aliases for convenient access
-    learning: learningSection,
-    exam: examSection,
-    certification: certSection,
-    stagesSummary,
-    taskCompleted: Boolean(state.taskCompleted),
-    completedAt: state.completedAt || null,
-  }
+    status: {
+      get() {
+        return this.stageStatus
+      },
+      enumerable: false,
+      configurable: true,
+    },
+    taskCompleted: {
+      get() {
+        return this.completed
+      },
+      enumerable: false,
+      configurable: true,
+    },
+    title: {
+      value: state.title || '',
+      enumerable: false,
+      configurable: true,
+    },
+    completedAt: {
+      value: state.completedAt || null,
+      enumerable: false,
+      configurable: true,
+    },
+    stagesSummary: {
+      value: stagesSummary,
+      enumerable: false,
+      configurable: true,
+    },
+    learning: {
+      get() {
+        return this.stages.learning
+      },
+      enumerable: false,
+      configurable: true,
+    },
+    exam: {
+      get() {
+        return this.stages.exam
+      },
+      enumerable: false,
+      configurable: true,
+    },
+    certification: {
+      get() {
+        return this.stages.certification
+      },
+      enumerable: false,
+      configurable: true,
+    },
+  })
+
+  return progressionResult
 }
 
 /**
@@ -221,26 +358,14 @@ function serializeExamDelivery(examData) {
   const exp = examData.expiresAt ? new Date(examData.expiresAt).getTime() : now
   const remainingSeconds = Math.max(0, Math.floor((exp - now) / 1000))
 
-  return {
+  const examDelivery = {
     examId: examData.examId,
-    taskId: examData.taskId,
-    topic: examData.topic,
-    difficulty: examData.difficulty,
-    passingPercentage:
-      examData.passingPercentage ||
-      examData.minimumPassingPercentage ||
-      progressionConfig.MINIMUM_PASSING_PERCENTAGE,
-    minimumPassingPercentage:
-      examData.minimumPassingPercentage ||
-      examData.passingPercentage ||
-      progressionConfig.MINIMUM_PASSING_PERCENTAGE,
-    questionCount: examData.questionCount || progressionConfig.EXAM_QUESTION_COUNT,
-    timeLimitMinutes: examData.timeLimitMinutes || progressionConfig.EXAM_TIME_LIMIT_MINUTES,
     startedAt: examData.startedAt,
     expiresAt: examData.expiresAt,
     serverNow: new Date().toISOString(),
     remainingSeconds,
-    resumed: Boolean(examData.resumed),
+    timeLimitMinutes: examData.timeLimitMinutes || progressionConfig.EXAM_TIME_LIMIT_MINUTES,
+    questionCount: examData.questionCount || progressionConfig.EXAM_QUESTION_COUNT,
     questions: Array.isArray(examData.questions)
       ? examData.questions.map((q) => ({
           questionId: q.questionId,
@@ -249,6 +374,31 @@ function serializeExamDelivery(examData) {
         }))
       : [],
   }
+
+  Object.defineProperties(examDelivery, {
+    taskId: { value: examData.taskId, enumerable: false, configurable: true },
+    topic: { value: examData.topic, enumerable: false, configurable: true },
+    difficulty: { value: examData.difficulty, enumerable: false, configurable: true },
+    passingPercentage: {
+      value:
+        examData.passingPercentage ||
+        examData.minimumPassingPercentage ||
+        progressionConfig.MINIMUM_PASSING_PERCENTAGE,
+      enumerable: false,
+      configurable: true,
+    },
+    minimumPassingPercentage: {
+      value:
+        examData.minimumPassingPercentage ||
+        examData.passingPercentage ||
+        progressionConfig.MINIMUM_PASSING_PERCENTAGE,
+      enumerable: false,
+      configurable: true,
+    },
+    resumed: { value: Boolean(examData.resumed), enumerable: false, configurable: true },
+  })
+
+  return examDelivery
 }
 
 /**
@@ -260,7 +410,20 @@ function serializeExamResult(evalResult) {
   if (!evalResult) return null
   const passed = Boolean(evalResult.passed)
 
-  return {
+  const questionResults = Array.isArray(evalResult.questions)
+    ? evalResult.questions.map((q) => {
+        const item = {
+          questionId: q.questionId,
+          isCorrect: Boolean(q.isCorrect),
+        }
+        if (passed && q.explanation !== undefined) {
+          item.explanation = q.explanation
+        }
+        return item
+      })
+    : []
+
+  const resultObj = {
     score: evalResult.score,
     passed,
     minimumPassingPercentage:
@@ -269,15 +432,23 @@ function serializeExamResult(evalResult) {
     correctCount: evalResult.correctCount,
     totalCount: evalResult.totalCount,
     nextStage: evalResult.nextStage,
-    questions: Array.isArray(evalResult.questions)
+    questionResults,
+  }
+
+  Object.defineProperty(resultObj, 'questions', {
+    value: Array.isArray(evalResult.questions)
       ? evalResult.questions.map((q) => ({
           questionId: q.questionId,
           selectedIndex: q.selectedIndex,
           isCorrect: q.isCorrect,
           ...(passed && q.explanation !== undefined ? { explanation: q.explanation } : {}),
         }))
-      : [],
-  }
+      : questionResults,
+    enumerable: false,
+    configurable: true,
+  })
+
+  return resultObj
 }
 
 module.exports = {

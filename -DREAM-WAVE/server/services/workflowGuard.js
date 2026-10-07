@@ -9,6 +9,55 @@ function isWorkflowTask(task) {
   return Boolean(task && task.workflowEnabled)
 }
 
+function isCompletedWorkflowTask(task) {
+  if (!isWorkflowTask(task)) return false
+  return Boolean(
+    task.completed === true ||
+    task.status === 'completed' ||
+    task.stageStatus === 'task_completed' ||
+    task.progressionStage === 'completed'
+  )
+}
+
+/**
+ * Checks whether an incoming update is an attempt to reopen a completed workflow task.
+ * @param {Object} task
+ * @param {Object} updates
+ * @returns {boolean}
+ */
+function isWorkflowReopenAttempt(task, updates = {}) {
+  if (!isCompletedWorkflowTask(task)) return false
+
+  // 1. Explicit completed: false
+  if (updates.completed === false) return true
+
+  // 2. Setting status to a non-completed, non-archived state
+  if (updates.status !== undefined && !['completed', 'archived'].includes(updates.status)) {
+    return true
+  }
+
+  // 3. Lowering progress below 100
+  if (updates.progress !== undefined && Number(updates.progress) < 100) {
+    return true
+  }
+
+  // 4. Subtasks un-complete: any subtask with completed: false
+  if (Array.isArray(updates.subtasks)) {
+    if (updates.subtasks.some((s) => s && s.completed === false)) {
+      return true
+    }
+  }
+
+  // 5. Checklist un-complete: any checklist item with done: false
+  if (Array.isArray(updates.checklist)) {
+    if (updates.checklist.some((c) => c && c.done === false)) {
+      return true
+    }
+  }
+
+  return false
+}
+
 /**
  * Enforces that workflow tasks cannot be marked complete or reopened through legacy endpoints.
  * @param {Object} task
@@ -45,6 +94,9 @@ function stripProtectedFields(body = {}) {
 
 module.exports = {
   isWorkflowTask,
+  isCompletedWorkflowTask,
+  isWorkflowReopenAttempt,
   assertCompletionAllowed,
   stripProtectedFields,
 }
+

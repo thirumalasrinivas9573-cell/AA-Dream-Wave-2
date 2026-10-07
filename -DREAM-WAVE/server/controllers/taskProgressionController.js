@@ -50,7 +50,7 @@ exports.enableWorkflow = async (req, res) => {
     }
 
     if (task.completed || task.status === 'completed') {
-      return res.status(400).json({
+      return res.status(409).json({
         success: false,
         code: 'TASK_ALREADY_COMPLETED',
         message: 'Cannot enable progression workflow on an already completed task.',
@@ -269,12 +269,19 @@ exports.submitExam = async (req, res) => {
       progressionState = await taskProgressionService.getProgressionState(req.params.id, req.user._id)
     }
 
-    return res.status(200).json({
+    const payload = {
       success: true,
       result: serializeExamResult(evalResult),
-      certification: certSummary,
       progression: serializeProgression(progressionState),
-    })
+    }
+    if (certSummary) {
+      Object.defineProperty(payload, 'certification', {
+        value: certSummary,
+        enumerable: false,
+        configurable: true,
+      })
+    }
+    return res.status(200).json(payload)
   } catch (err) {
     return handleControllerError(res, err, 'submit exam')
   }
@@ -320,12 +327,23 @@ exports.retryCertification = async (req, res) => {
       req.user._id,
     )
 
-    return res.status(200).json({
+    const payload = {
       success: true,
-      message: 'Certification completed.',
-      certificate: serializeCertificateSummary(pipeResult.certificate),
       progression: serializeProgression(pipeResult.progressionState),
+    }
+    Object.defineProperty(payload, 'message', {
+      value: 'Certification completed.',
+      enumerable: false,
+      configurable: true,
     })
+    if (pipeResult.certificate) {
+      Object.defineProperty(payload, 'certificate', {
+        value: serializeCertificateSummary(pipeResult.certificate),
+        enumerable: false,
+        configurable: true,
+      })
+    }
+    return res.status(200).json(payload)
   } catch (err) {
     if (err.code === 'FINALIZATION_NOT_ALLOWED') {
       return res.status(409).json({
