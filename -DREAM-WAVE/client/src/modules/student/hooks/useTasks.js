@@ -60,8 +60,21 @@ export default function useTasks() {
   }
 
   const updateTask = async (task, payload) => {
+    if (task.workflowEnabled) {
+      if (payload.completed === true || payload.status === 'completed' || payload.progress === 100) {
+        const error = new Error('Complete the Learning, Exam and Certification stages.')
+        error.userMessage = 'Complete the Learning, Exam and Certification stages.'
+        throw error
+      }
+    }
     const previous = task
-    setTasks((current) => current.map((item) => item._id === task._id ? { ...item, ...payload, completed: payload.status ? payload.status === 'completed' : payload.completed ?? item.completed } : item))
+    setTasks((current) => current.map((item) => {
+      if (item._id !== task._id) return item
+      const nextCompleted = task.workflowEnabled
+        ? item.completed
+        : (payload.status ? payload.status === 'completed' : payload.completed ?? item.completed)
+      return { ...item, ...payload, completed: nextCompleted }
+    }))
     try {
       const { data } = await taskApi.update(task._id, payload)
       setTasks((current) => current.map((item) => item._id === task._id ? data.task : item))

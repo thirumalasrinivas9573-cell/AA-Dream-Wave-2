@@ -208,3 +208,181 @@
 @media (prefers-reduced-motion:reduce) {
   .task-card { transition:none; }
 }
+
+/* ── Task Progression Workflow Styles ── */
+.task-check.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-style: dashed;
+}
+
+.task-progression-bar {
+  margin: 8px 0;
+  width: 100%;
+}
+.task-progression-bar__list {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
+.task-progression-bar__item-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.task-progression-bar__separator {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  user-select: none;
+}
+.task-stage-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border: 1px solid var(--task-border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.68rem;
+  color: var(--text-primary);
+  transition: all 150ms ease;
+}
+.task-stage-item:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 1px;
+}
+.task-stage-item.is-current {
+  border-color: rgba(139, 92, 246, 0.45);
+  background: rgba(139, 92, 246, 0.08);
+}
+.task-stage-item__header {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.task-stage-item__step-number {
+  display: inline-grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.56rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.task-stage-item.is-current .task-stage-item__step-number {
+  background: rgba(139, 92, 246, 0.3);
+  color: #ede9fe;
+}
+.task-stage-item__title {
+  font-weight: 600;
+}
+.task-stage-item__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  font-size: 0.58rem;
+  font-weight: 700;
+}
+.stage-state--locked {
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.12);
+}
+.stage-state--current {
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.14);
+}
+.stage-state--ready {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.15);
+}
+.stage-state--completed {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.14);
+}
+.stage-state--failed {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.14);
+}
+.stage-state--generating {
+  color: #a855f7;
+  background: rgba(168, 85, 247, 0.14);
+}
+
+.task-progression-bar--compact .task-stage-item {
+  padding: 2px 5px;
+  font-size: 0.6rem;
+}
+.task-progression-bar--compact .task-stage-item__badge {
+  padding: 1px 4px;
+  font-size: 0.52rem;
+}
+
+.task-progression-detail {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--task-border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  margin-bottom: 14px;
+}
+.task-progression-detail__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.task-progression-detail h4 {
+  font-size: 0.82rem;
+  margin: 0;
+  color: var(--text-primary);
+}
+.task-requirements-list {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0;
+  display: grid;
+  gap: 6px;
+}
+.task-requirement-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.72rem;
+  color: var(--text-primary);
+}
+.task-requirement-item--met {
+  color: #34d399;
+}
+.task-requirement-item--unmet {
+  color: var(--text-muted);
+}
+.task-requirement-icon {
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+.task-progress-locked-hint {
+  display: grid;
+  gap: 4px;
+}
+.task-workflow-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(139, 92, 246, 0.15);
+  color: #c084fc;
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+

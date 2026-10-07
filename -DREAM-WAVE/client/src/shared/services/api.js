@@ -562,7 +562,7 @@ export const goalIntelligenceApi = {
   validateRoadmap: (data) => api.post('/goals/intelligence/validate-roadmap', data),
 }
 
-// ── Tasks ─────────────────────────────────────────────────────────────────────
+// ── Tasks & Progression ────────────────────────────────────────────────────────
 export const taskApi = {
   getAll:   (params)   => api.get('/tasks', { params }),
   get:      (id)       => api.get(`/tasks/${id}`),
@@ -574,6 +574,22 @@ export const taskApi = {
   stopFocus: (id)      => api.post(`/tasks/${id}/focus/stop`),
   delete:   (id)       => api.delete(`/tasks/${id}`),
   generate: (data)     => api.post('/tasks/generate-from-roadmap', data),
+  // Progression endpoints
+  enableProgression: (id)        => api.post(`/tasks/${id}/progression/enable`),
+  getProgression:    (id)        => api.get(`/tasks/${id}/progression`),
+  verifyLearning:    (id)        => api.post(`/tasks/${id}/progression/verify-learning`),
+  startExam:         (id)        => api.post(`/tasks/${id}/exam/start`),
+  submitExam:        (id, data)  => api.post(`/tasks/${id}/exam/submit`, data),
+  retryCertificate:  (id)        => api.post(`/tasks/${id}/certificate/retry`),
+}
+
+export const progressionApi = {
+  enable:            (id)        => api.post(`/tasks/${id}/progression/enable`),
+  get:               (id)        => api.get(`/tasks/${id}/progression`),
+  verifyLearning:    (id)        => api.post(`/tasks/${id}/progression/verify-learning`),
+  startExam:         (id)        => api.post(`/tasks/${id}/exam/start`),
+  submitExam:        (id, data)  => api.post(`/tasks/${id}/exam/submit`, data),
+  retryCertificate:  (id)        => api.post(`/tasks/${id}/certificate/retry`),
 }
 
 // ── Study Planner & Focus ─────────────────────────────────────────────────────

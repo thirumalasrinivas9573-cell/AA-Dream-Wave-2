@@ -15,6 +15,10 @@ import type {
   Skill,
   StudyPlan,
   Task,
+  TaskProgression,
+  ExamData,
+  ExamSubmitBody,
+  ExamSubmitResult,
   User,
 } from '../types';
 
@@ -139,13 +143,31 @@ export const goalsApi = {
   updateProgress: (id: string, progress: number) => api.patch(`/goals/${id}/progress`, { progress }),
 };
 
+export const progressionApi = {
+  enable: (taskId: string) =>
+    api.post<{ success: boolean; progression: TaskProgression }>(`/tasks/${taskId}/progression/enable`),
+  get: (taskId: string) =>
+    api.get<{ success: boolean; progression: TaskProgression }>(`/tasks/${taskId}/progression`),
+  verifyLearning: (taskId: string) =>
+    api.post<{ success: boolean; verified: boolean; progression: TaskProgression }>(`/tasks/${taskId}/progression/verify-learning`),
+  startExam: (taskId: string) =>
+    api.post<{ success: boolean; exam: ExamData; progression: TaskProgression }>(`/tasks/${taskId}/exam/start`),
+  submitExam: (taskId: string, body: ExamSubmitBody) =>
+    api.post<{ success: boolean; result: ExamSubmitResult; progression: TaskProgression }>(`/tasks/${taskId}/exam/submit`, body),
+  retryCertificate: (taskId: string) =>
+    api.post<{ success: boolean; progression: TaskProgression }>(`/tasks/${taskId}/certificate/retry`),
+};
+
 export const tasksApi = {
   list: (params?: Record<string, string>) =>
     api.get<{ success: boolean; data: { tasks: Task[] } }>('/tasks', { params }),
   create: (body: Partial<Task>) => api.post('/tasks', body),
   update: (id: string, body: Partial<Task>) => api.put(`/tasks/${id}`, body),
   remove: (id: string) => api.delete(`/tasks/${id}`),
-  toggle: (id: string) => api.patch(`/tasks/${id}/toggle`),
+  // Note: PATCH /tasks/:id/toggle was removed as it does not exist on server and had 0 frontend callers.
+  enableProgression: (id: string) => progressionApi.enable(id),
+  getProgression: (id: string) => progressionApi.get(id),
+  verifyLearning: (id: string) => progressionApi.verifyLearning(id),
 };
 
 export const roadmapApi = {

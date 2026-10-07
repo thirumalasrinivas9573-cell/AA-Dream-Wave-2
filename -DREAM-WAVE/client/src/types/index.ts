@@ -53,8 +53,17 @@ export interface Task {
   status: 'todo' | 'in_progress' | 'done';
   dueDate?: string;
   goal?: string;
+  completed?: boolean;
   completedAt?: string;
   createdAt: string;
+  workflowEnabled?: boolean;
+  progressionStage?: ProgressionStage;
+  stageStatus?: string;
+  stagesSummary?: StagesSummary;
+  certificateId?: string | null;
+  progress?: number;
+  actualMinutes?: number;
+  estimatedMinutes?: number;
 }
 
 export interface Roadmap {
@@ -227,3 +236,129 @@ export interface ApiResponse<T> {
   message?: string;
   token?: string;
 }
+
+// ── Task Progression Types ──────────────────────────────────────────────────
+export type StageState = 'locked' | 'current' | 'ready_for_verification' | 'completed' | 'failed' | 'generating';
+export type ProgressionStage = 'learning' | 'exam' | 'certification' | 'completed';
+
+export interface LearningRequirement {
+  key: string;
+  met: boolean;
+  detail: string;
+}
+
+export interface LearningStage {
+  state: StageState;
+  verified: boolean;
+  verifiedAt: string | null;
+  requirements: LearningRequirement[];
+  focus: {
+    minutes: number;
+    requiredMinutes: number;
+  };
+}
+
+export interface ExamQuestion {
+  questionId: string;
+  question: string;
+  options: string[];
+}
+
+export interface ExamData {
+  examId: string;
+  startedAt: string;
+  expiresAt: string;
+  timeLimitMinutes: number;
+  questionCount: number;
+  remainingSeconds?: number;
+  questions: ExamQuestion[];
+}
+
+export interface ExamQuestionResult {
+  questionId: string;
+  isCorrect: boolean;
+  explanation?: string;
+}
+
+export interface ExamSubmitResult {
+  score: number;
+  passed: boolean;
+  minimumPassingPercentage: number;
+  attemptNumber: number;
+  correctCount: number;
+  totalCount: number;
+  nextStage: string;
+  questionResults: ExamQuestionResult[];
+}
+
+export interface ExamSubmitBody {
+  answers: { questionId: string; selectedIndex: number }[];
+}
+
+export interface ExamStage {
+  state: StageState;
+  locked: boolean;
+  lockedReason?: string;
+  lockedMessage?: string;
+  attemptsCount: number;
+  minimumPassingPercentage: number;
+  questionCount: number;
+  timeLimitMinutes: number;
+  activeExam: ExamData | null;
+  lastAttempt: any | null;
+  retake?: {
+    required: boolean;
+    requirements: string[];
+  };
+}
+
+export interface TaskCertificateInfo {
+  credentialId: string;
+  title: string;
+  issuer: string;
+  issuedAt: string;
+  url?: string | null;
+  verificationUrl?: string | null;
+  skills?: string[];
+  skill?: string;
+  category?: string;
+  verificationStatus?: string;
+  documentUrl?: string;
+  linkedToResume?: boolean;
+  linkedResumeId?: string | null;
+  linkedResumeIds?: string[];
+}
+
+export interface CertificationStage {
+  state: StageState;
+  certificate: TaskCertificateInfo | null;
+  recoverableError: {
+    code: string;
+    message: string;
+  } | null;
+}
+
+export interface StagesSummary {
+  learning: StageState;
+  exam: StageState;
+  certification: StageState;
+}
+
+export interface TaskProgression {
+  taskId: string;
+  workflowEnabled: boolean;
+  completed: boolean;
+  progressionStage: ProgressionStage;
+  stageStatus: string;
+  links?: {
+    goalId?: string;
+    roadmapId?: string | null;
+  };
+  stages: {
+    learning: LearningStage;
+    exam: ExamStage;
+    certification: CertificationStage;
+  };
+  stagesSummary?: StagesSummary;
+}
+

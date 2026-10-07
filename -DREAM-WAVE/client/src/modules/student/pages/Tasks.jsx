@@ -144,6 +144,12 @@ export default function Tasks() {
 
   const handleUpdate = async (task, payload) => {
     setError('')
+    if (task?.workflowEnabled) {
+      if (payload.completed === true || payload.status === 'completed' || payload.progress === 100) {
+        setError('Complete the Learning, Exam and Certification stages.')
+        return null
+      }
+    }
     try {
       const updated = await updateTask(task, payload)
       if (selectedTask?._id === updated._id) setSelectedTask(updated)
@@ -155,6 +161,10 @@ export default function Tasks() {
   }
 
   const completeTask = async (task) => {
+    if (task.workflowEnabled) {
+      setError('Complete the Learning, Exam and Certification stages.')
+      return
+    }
     const completed = !task.completed
     const updated = await handleUpdate(task, { completed })
     if (updated && completed) {
@@ -185,26 +195,31 @@ export default function Tasks() {
     }
   }
 
-  const startFocus = async () => {
-    if (!selectedTask) return
+  const startFocus = async (taskTarget) => {
+    const target = taskTarget || selectedTask
+    if (!target) return
     try {
-      await taskApi.startFocus(selectedTask._id)
-      setFocusTaskId(selectedTask._id)
+      await taskApi.startFocus(target._id)
+      setFocusTaskId(target._id)
     } catch (requestError) {
       setError(requestError.userMessage || 'Unable to start focus session.')
     }
   }
 
-  const stopFocus = async () => {
-    if (!selectedTask) return
+  const stopFocus = async (taskTarget) => {
+    const target = taskTarget || selectedTask
+    if (!target) return
     try {
-      const response = await taskApi.stopFocus(selectedTask._id)
-      const minutes = Math.max(1, Math.round((response.data.session.durationSeconds || 0) / 60))
-      const next = { ...selectedTask, actualMinutes: (selectedTask.actualMinutes || 0) + minutes }
+      const response = await taskApi.stopFocus(target._id)
+      const minutes = Math.max(1, Math.round((response.data?.session?.durationSeconds || 0) / 60))
+      const next = { ...target, actualMinutes: (target.actualMinutes || 0) + minutes }
       setSelectedTask(next)
       setTasks((current) => current.map((task) => task._id === next._id ? next : task))
       setFocusTaskId('')
       refreshAnalytics()
+      if (response.data?.taskCompletionIgnored) {
+        setError('This task completes through Learning, Exam and Certification stages.')
+      }
     } catch (requestError) {
       setError(requestError.userMessage || 'Unable to stop focus session.')
     }

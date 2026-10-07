@@ -9,11 +9,13 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      '@shared/components/ui': path.resolve(__dirname, 'src/shared/components/ui/index.jsx'),
       '@shared': path.resolve(__dirname, 'src/shared'),
       '@student': path.resolve(__dirname, 'src/modules/student'),
       '@institution': path.resolve(__dirname, 'src/modules/institution'),
       '@company': path.resolve(__dirname, 'src/modules/company'),
     },
+    extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json'],
   },
 
   build: {
@@ -60,5 +62,10 @@ export default defineConfig({
     include: [
       'react', 'react-dom', 'react-router-dom', 'framer-motion', 'axios',
     ],
+  },
+
+  test: {
+    globals: true,
+    environment: 'jsdom',
   },
 })

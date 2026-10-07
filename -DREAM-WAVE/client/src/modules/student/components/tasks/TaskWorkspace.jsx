@@ -1,6 +1,9 @@
 import { memo, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Dialog, EmptyState, FormField, LoadingState } from '@shared/components/ui'
+import TaskProgressionBar from './TaskProgressionBar'
+import useTaskProgression from '../../hooks/useTaskProgression'
+import { getStageStateMeta } from '../../utils/taskProgression'
 
 export const TASK_STATUSES = ['todo', 'in-progress', 'paused', 'completed', 'archived']
 export const TASK_PRIORITIES = ['High', 'Medium', 'Low']
@@ -116,9 +119,26 @@ export function TaskFormDialog({ open, task, goals, roadmaps, onClose, onSave })
             </select>
           </FormField>
           <FormField label="Status">
-            <select className="select" value={form.status} onChange={(event) => setField('status', event.target.value)}>
-              {TASK_STATUSES.map((status) => <option value={status} key={status}>{STATUS_LABEL[status]}</option>)}
+            <select className="select" aria-label="Status" value={form.status} onChange={(event) => setField('status', event.target.value)}>
+              {TASK_STATUSES.map((status) => {
+                const isWorkflowDisabled = task?.workflowEnabled && status === 'completed';
+                return (
+                  <option
+                    value={status}
+                    key={status}
+                    disabled={isWorkflowDisabled}
+                    title={isWorkflowDisabled ? 'Complete the Learning, Exam and Certification stages' : undefined}
+                  >
+                    {STATUS_LABEL[status]}{isWorkflowDisabled ? ' (workflow enforced)' : ''}
+                  </option>
+                );
+              })}
             </select>
+            {task?.workflowEnabled && (
+              <small className="text-muted" style={{ display: 'block', marginTop: 4 }}>
+                Workflow tasks complete via Learning, Exam and Certification stages.
+              </small>
+            )}
           </FormField>
           <FormField label="Category">
             <input className="input" maxLength="100" value={form.category} onChange={(event) => setField('category', event.target.value)} />
@@ -212,15 +232,30 @@ export const TaskCard = memo(function TaskCard({ task, goal, onOpen, onComplete,
   const overdue = !task.completed && task.dueDate && new Date(task.dueDate) < new Date()
   const checklistDone = (task.checklist || []).filter((item) => item.done).length
   const subtasksDone = (task.subtasks || []).filter((item) => item.completed).length
+  const isWorkflow = Boolean(task.workflowEnabled)
+
   return (
-    <article className={`task-card task-card--${status}`}>
-      <button className={`task-check ${task.completed ? 'is-done' : ''}`} type="button" onClick={onComplete} aria-label={`${task.completed ? 'Reopen' : 'Complete'} ${task.title}`}>{task.completed ? '✓' : ''}</button>
+    <article className={`task-card task-card--${status} ${isWorkflow ? 'task-card--workflow' : ''}`}>
+      <button
+        className={`task-check ${task.completed ? 'is-done' : ''} ${isWorkflow ? 'is-disabled' : ''}`}
+        type="button"
+        disabled={isWorkflow}
+        onClick={isWorkflow ? undefined : onComplete}
+        aria-label={isWorkflow ? 'Workflow tasks complete through Learning, Exam and Certification stages' : `${task.completed ? 'Reopen' : 'Complete'} ${task.title}`}
+        title={isWorkflow ? 'Complete the Learning, Exam and Certification stages' : `${task.completed ? 'Reopen' : 'Complete'} ${task.title}`}
+      >
+        {task.completed ? '✓' : (isWorkflow ? '⚡' : '')}
+      </button>
       <div className="task-card__content">
         <header>
           <button type="button" onClick={onOpen}><h3>{task.title}</h3></button>
           <span className={`task-priority task-priority--${task.priority?.toLowerCase()}`}>{task.priority || 'Medium'}</span>
+          {isWorkflow && <span className="task-workflow-badge">⚡ Workflow</span>}
         </header>
         {task.description && <p>{task.description}</p>}
+        {isWorkflow && task.stagesSummary && (
+          <TaskProgressionBar stagesSummary={task.stagesSummary} compact />
+        )}
         <div className="task-card__meta">
           <span className={`task-status task-status--${overdue ? 'overdue' : status}`}>{overdue ? 'overdue' : STATUS_LABEL[status]}</span>
           {task.dueDate && <span>Due {new Date(task.dueDate).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}</span>}
@@ -235,8 +270,27 @@ export const TaskCard = memo(function TaskCard({ task, goal, onOpen, onComplete,
       <div className="task-card__actions">
         <Button variant="ghost" className="btn-icon" onClick={onEdit} aria-label={`Edit ${task.title}`}>✎</Button>
         <Button variant="ghost" className="btn-icon" onClick={onDuplicate} aria-label={`Duplicate ${task.title}`}>⧉</Button>
-        <select value={status} onChange={(event) => onStatus(event.target.value)} aria-label={`Move ${task.title}`}>
-          {TASK_STATUSES.map((item) => <option value={item} key={item}>{STATUS_LABEL[item]}</option>)}
+        <select
+          value={status}
+          onChange={(event) => {
+            if (isWorkflow && event.target.value === 'completed') return;
+            onStatus(event.target.value);
+          }}
+          aria-label={`Move ${task.title}`}
+        >
+          {TASK_STATUSES.map((item) => {
+            const isWorkflowBlocked = isWorkflow && item === 'completed';
+            return (
+              <option
+                value={item}
+                key={item}
+                disabled={isWorkflowBlocked}
+                title={isWorkflowBlocked ? 'Complete the Learning, Exam and Certification stages' : undefined}
+              >
+                {STATUS_LABEL[item]}{isWorkflowBlocked ? ' (workflow enforced)' : ''}
+              </option>
+            );
+          })}
         </select>
         <Button variant="ghost" className="btn-icon" onClick={onDelete} aria-label={`Delete ${task.title}`}>⌫</Button>
       </div>
@@ -265,9 +319,31 @@ export function TaskKanbanView(props) {
                 <article className="task-kanban-card" key={task._id}>
                   <button type="button" onClick={() => props.onOpen(task)}><strong>{task.title}</strong></button>
                   <small>{task.category} · {task.priority}</small>
+                  {task.workflowEnabled && task.stagesSummary && (
+                    <TaskProgressionBar stagesSummary={task.stagesSummary} compact />
+                  )}
                   {task.dueDate && <p>{new Date(task.dueDate).toLocaleDateString()}</p>}
-                  <select value={status} onChange={(event) => props.onStatus(task, event.target.value)} aria-label={`Move ${task.title} to column`}>
-                    {columns.map((column) => <option value={column} key={column}>{STATUS_LABEL[column]}</option>)}
+                  <select
+                    value={status}
+                    onChange={(event) => {
+                      if (task.workflowEnabled && event.target.value === 'completed') return;
+                      props.onStatus(task, event.target.value);
+                    }}
+                    aria-label={`Move ${task.title} to column`}
+                  >
+                    {columns.map((column) => {
+                      const isBlocked = task.workflowEnabled && column === 'completed';
+                      return (
+                        <option
+                          value={column}
+                          key={column}
+                          disabled={isBlocked}
+                          title={isBlocked ? 'Complete the Learning, Exam and Certification stages' : undefined}
+                        >
+                          {STATUS_LABEL[column]}{isBlocked ? ' (workflow enforced)' : ''}
+                        </option>
+                      );
+                    })}
                   </select>
                 </article>
               ))}
@@ -376,6 +452,13 @@ export function TaskDetailDialog({ task, open, goals, onClose, onUpdate, onStart
   const [checkItem, setCheckItem] = useState('')
   const [note, setNote] = useState('')
   const [attachment, setAttachment] = useState({ name: '', url: '' })
+  const {
+    progression,
+    loading: progressionLoading,
+    error: progressionError,
+    verifying,
+    verifyLearning,
+  } = useTaskProgression(task?._id, Boolean(task?.workflowEnabled && open))
   if (!task) return null
   const goal = goals.find((item) => item._id === relationId(task.goalId))
   const tabs = ['overview', 'subtasks', 'checklist', 'notes', 'attachments']
@@ -389,9 +472,132 @@ export function TaskDetailDialog({ task, open, goals, onClose, onUpdate, onStart
         {tab === 'overview' && (
           <section className="task-detail__overview">
             <p>{task.description || 'No description added.'}</p>
+
+            {task.workflowEnabled && (
+              <section className="task-progression-detail" aria-label="Task Progression Workflow">
+                <div className="task-progression-detail__header">
+                  <h4>Task Progression Workflow</h4>
+                  <span className="task-workflow-badge">⚡ 3-Stage Workflow</span>
+                </div>
+
+                {progressionLoading && <LoadingState label="Loading progression state…" rows={2} />}
+                {progressionError && <div className="alert alert-error" role="alert">{progressionError}</div>}
+
+                <TaskProgressionBar
+                  stages={progression?.stages}
+                  stagesSummary={!progression?.stages ? task.stagesSummary : undefined}
+                />
+
+                {/* Stage 1: Learning details */}
+                <div className="task-stage-section">
+                  <div className="task-stage-section__header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '6px 0' }}>
+                    <strong style={{ fontSize: '0.78rem' }}>1. Learning Stage</strong>
+                    {progression?.stages?.learning && (
+                      <span className={`task-stage-item__badge ${getStageStateMeta(progression.stages.learning.state).badgeClass}`}>
+                        {getStageStateMeta(progression.stages.learning.state).icon} {getStageStateMeta(progression.stages.learning.state).label}
+                      </span>
+                    )}
+                  </div>
+
+                  {progression?.stages?.learning?.focus && (
+                    <div className="task-focus-progress" style={{ fontSize: '0.72rem', margin: '4px 0' }}>
+                      Focus time: <strong>{progression.stages.learning.focus.minutes || 0}</strong> of <strong>{progression.stages.learning.focus.requiredMinutes || 0}</strong> minutes required
+                    </div>
+                  )}
+
+                  {progression?.stages?.learning?.requirements && progression.stages.learning.requirements.length > 0 && (
+                    <ul className="task-requirements-list" aria-label="Learning requirements">
+                      {progression.stages.learning.requirements.map((req) => (
+                        <li
+                          key={req.key}
+                          className={`task-requirement-item ${req.met ? 'task-requirement-item--met' : 'task-requirement-item--unmet'}`}
+                        >
+                          <span className="task-requirement-icon" aria-hidden="true">{req.met ? '✓' : '○'}</span>
+                          <span>{req.detail}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  <div className="task-stage-actions" style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
+                    <Button variant="ghost" onClick={() => onStartFocus(task)}>
+                      ⏱ Start focus timer for this task
+                    </Button>
+
+                    {progression?.stages?.learning?.state === 'ready_for_verification' && (
+                      <Button
+                        variant="primary"
+                        onClick={verifyLearning}
+                        disabled={verifying}
+                        aria-label="Unlock Exam after satisfying learning requirements"
+                      >
+                        {verifying ? 'Unlocking…' : '🔓 Unlock Exam'}
+                      </Button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Stage 2: Exam details */}
+                {progression?.stages?.exam && (
+                  <div className="task-stage-section" style={{ borderTop: '1px solid var(--task-border)', paddingTop: 8, marginTop: 8 }}>
+                    <div className="task-stage-section__header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <strong style={{ fontSize: '0.78rem' }}>2. Exam Stage</strong>
+                      <span className={`task-stage-item__badge ${getStageStateMeta(progression.stages.exam.state).badgeClass}`}>
+                        {getStageStateMeta(progression.stages.exam.state).icon} {getStageStateMeta(progression.stages.exam.state).label}
+                      </span>
+                    </div>
+
+                    {progression.stages.exam.locked && (
+                      <p className="text-muted" style={{ fontSize: '0.72rem', margin: '4px 0' }}>
+                        {progression.stages.exam.lockedMessage || (progression.stages.exam.lockedReason ? `Locked: ${progression.stages.exam.lockedReason}` : 'Locked until learning is verified.')}
+                      </p>
+                    )}
+
+                    {progression.stages.exam.minimumPassingPercentage !== undefined && (
+                      <small className="text-muted" style={{ display: 'block', fontSize: '0.7rem' }}>
+                        Passing threshold: <strong>{progression.stages.exam.minimumPassingPercentage}%</strong> (backend enforced)
+                      </small>
+                    )}
+                  </div>
+                )}
+
+                {/* Stage 3: Certification details */}
+                {progression?.stages?.certification && (
+                  <div className="task-stage-section" style={{ borderTop: '1px solid var(--task-border)', paddingTop: 8, marginTop: 8 }}>
+                    <div className="task-stage-section__header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <strong style={{ fontSize: '0.78rem' }}>3. Certification Stage</strong>
+                      <span className={`task-stage-item__badge ${getStageStateMeta(progression.stages.certification.state).badgeClass}`}>
+                        {getStageStateMeta(progression.stages.certification.state).icon} {getStageStateMeta(progression.stages.certification.state).label}
+                      </span>
+                    </div>
+                    {progression.stages.certification.state === 'generating' && (
+                      <small className="text-muted" style={{ display: 'block', marginTop: 4 }}>Generating certificate...</small>
+                    )}
+                    {progression.stages.certification.certificate && (
+                      <small style={{ color: '#34d399', fontSize: '0.7rem', display: 'block', marginTop: 4 }}>
+                        Certificate: {progression.stages.certification.certificate.title || progression.stages.certification.certificate.credentialId}
+                      </small>
+                    )}
+                    {progression.stages.certification.recoverableError && (
+                      <div className="alert alert-error" style={{ fontSize: '0.7rem', padding: '4px 8px', marginTop: 4 }}>
+                        {progression.stages.certification.recoverableError.message || 'Certificate pipeline issue.'}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </section>
+            )}
+
             <div className="task-progress-control">
               <label htmlFor="task-progress">Progress</label><strong>{task.progress || 0}%</strong>
-              <input id="task-progress" type="range" min="0" max="100" value={task.progress || 0} onChange={(event) => onUpdate({ progress: Number(event.target.value) })} />
+              {task.workflowEnabled ? (
+                <div className="task-progress-locked-hint">
+                  <input id="task-progress" type="range" min="0" max="100" value={task.progress || 0} disabled />
+                  <small className="text-muted">Progress is determined by Learning, Exam and Certification stages.</small>
+                </div>
+              ) : (
+                <input id="task-progress" type="range" min="0" max="100" value={task.progress || 0} onChange={(event) => onUpdate({ progress: Number(event.target.value) })} />
+              )}
             </div>
             <dl>
               <div><dt>Priority</dt><dd>{task.priority}</dd></div>
@@ -401,7 +607,7 @@ export function TaskDetailDialog({ task, open, goals, onClose, onUpdate, onStart
             </dl>
             <div className="task-focus">
               <div><strong>Focus timer</strong><small>{focusActive ? 'Session in progress' : 'Track focused study time for this task.'}</small></div>
-              {focusActive ? <Button variant="danger" onClick={onStopFocus}>Stop focus</Button> : <Button onClick={onStartFocus}>Start focus</Button>}
+              {focusActive ? <Button variant="danger" onClick={() => onStopFocus(task)}>Stop focus</Button> : <Button onClick={() => onStartFocus(task)}>Start focus</Button>}
             </div>
             {goal && <Link to={`/student/goals?goalId=${goal._id}`}>Open linked goal: {goal.title}</Link>}
             {task.roadmapId && goal && <Link to={`/student/roadmap?goalId=${goal._id}`}>Open linked roadmap</Link>}
