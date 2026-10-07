@@ -18,6 +18,7 @@ const {
 
 const careerCopilot = require('./careerCopilotService')
 const careerOS = require('./careerOperatingSystemService')
+const { assertCompletionAllowed } = require('./workflowGuard')
 const adaptiveLearning = require('./adaptiveLearningService')
 const projectIntelligence = require('./projectIntelligenceService')
 const opportunityIntelligence = require('./opportunityIntelligenceService')
@@ -652,15 +653,18 @@ async function getProgress(userId, goalId) {
 
 async function completeTask(userId, taskId) {
   const task = await assertTaskAccess(userId, taskId)
+  assertCompletionAllowed(task, 'complete')
   task.completed = true
   task.completedAt = new Date()
   task.proposed = false
   await task.save()
 
   if (task.goalId) {
+    const calc = await calculateProgress(task.goalId, userId)
+    const progressPercent = typeof calc === 'object' && calc !== null ? calc.percent : Number(calc) || 0
     await Goal.findOneAndUpdate(
       { _id: task.goalId, userId },
-      { progress: await calculateProgress(task.goalId, userId), completed: false },
+      { progress: progressPercent, completed: false },
     )
 
     const plan = await ExecutionPlan.findOne({ userId, goalId: task.goalId, status: 'ACTIVE' })

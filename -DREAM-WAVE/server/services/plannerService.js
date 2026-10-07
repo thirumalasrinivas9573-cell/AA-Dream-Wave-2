@@ -8,6 +8,7 @@ const FocusSession = require('../models/FocusSession')
 const scheduleEngine = require('./scheduleEngine')
 const priorityEngine = require('./priorityEngine')
 const { validatePlanItems } = require('./planValidator')
+const { isWorkflowTask } = require('./workflowGuard')
 
 const DEFAULT_PREFS = {
   timezone: 'UTC',
@@ -177,10 +178,13 @@ async function completeScheduleItem(userId, id, { markTaskComplete = false } = {
   item.status = 'completed'
   await item.save()
   if (markTaskComplete && item.taskId) {
-    await Task.updateOne(
-      { _id: item.taskId, userId },
-      { $set: { completed: true, status: 'completed', completedAt: new Date() } },
-    )
+    const task = await Task.findOne({ _id: item.taskId, userId })
+    if (!isWorkflowTask(task)) {
+      await Task.updateOne(
+        { _id: item.taskId, userId },
+        { $set: { completed: true, status: 'completed', completedAt: new Date() } },
+      )
+    }
   }
   return item
 }
