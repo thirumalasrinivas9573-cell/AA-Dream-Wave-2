@@ -2,6 +2,7 @@ import { memo, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Dialog, EmptyState, FormField, LoadingState } from '@shared/components/ui'
 import TaskProgressionBar from './TaskProgressionBar'
+import ExamRunner from './ExamRunner'
 import useTaskProgression from '../../hooks/useTaskProgression'
 import { getStageStateMeta } from '../../utils/taskProgression'
 
@@ -457,8 +458,14 @@ export function TaskDetailDialog({ task, open, goals, onClose, onUpdate, onStart
     loading: progressionLoading,
     error: progressionError,
     verifying,
+    retryingCert,
+    pollTimedOut,
     verifyLearning,
+    retryCertificate,
+    refetch: refetchProgression,
+    setProgression,
   } = useTaskProgression(task?._id, Boolean(task?.workflowEnabled && open))
+  const [examRunnerOpen, setExamRunnerOpen] = useState(false)
   if (!task) return null
   const goal = goals.find((item) => item._id === relationId(task.goalId))
   const tabs = ['overview', 'subtasks', 'checklist', 'notes', 'attachments']
@@ -558,6 +565,48 @@ export function TaskDetailDialog({ task, open, goals, onClose, onUpdate, onStart
                         Passing threshold: <strong>{progression.stages.exam.minimumPassingPercentage}%</strong> (backend enforced)
                       </small>
                     )}
+
+                    {/* Failed state display & retake requirements */}
+                    {progression.stages.exam.state === 'failed' && (
+                      <div className="exam-failed-info" style={{ marginTop: 6 }}>
+                        <div className="alert alert-error" style={{ fontSize: '0.72rem', padding: '6px 8px' }}>
+                          Previous attempt did not pass (Score: {progression.stages.exam.lastAttempt?.score || 0}%). Retake study required.
+                        </div>
+                        {progression.stages.exam.retake?.requirements?.length > 0 && (
+                          <div style={{ marginTop: 4 }}>
+                            <small style={{ fontWeight: 600, fontSize: '0.7rem' }}>Retake Requirements:</small>
+                            <ul className="task-requirements-list" style={{ marginTop: 2 }}>
+                              {progression.stages.exam.retake.requirements.map((req) => (
+                                <li key={req.key} className={`task-requirement-item ${req.met ? 'task-requirement-item--met' : 'task-requirement-item--unmet'}`}>
+                                  <span className="task-requirement-icon">{req.met ? '✓' : '○'}</span>
+                                  <span>{req.detail}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Passed state display */}
+                    {progression.stages.exam.state === 'completed' && (
+                      <div style={{ marginTop: 6, fontSize: '0.74rem', color: '#10b981', display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <span>✓ Exam passed with score {progression.stages.exam.lastAttempt?.score ?? 100}%</span>
+                      </div>
+                    )}
+
+                    {/* Start / Resume Exam Action */}
+                    {(progression.stages.exam.state === 'current' || progression.stages.exam.activeExam) && (
+                      <div style={{ marginTop: 8 }}>
+                        <Button
+                          variant="primary"
+                          onClick={() => setExamRunnerOpen(true)}
+                          aria-label={progression.stages.exam.activeExam ? 'Resume active exam' : 'Start competency exam'}
+                        >
+                          {progression.stages.exam.activeExam ? '▶ Resume Exam' : '✍ Start Exam'}
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 )}
 
@@ -570,23 +619,113 @@ export function TaskDetailDialog({ task, open, goals, onClose, onUpdate, onStart
                         {getStageStateMeta(progression.stages.certification.state).icon} {getStageStateMeta(progression.stages.certification.state).label}
                       </span>
                     </div>
+
                     {progression.stages.certification.state === 'generating' && (
-                      <small className="text-muted" style={{ display: 'block', marginTop: 4 }}>Generating certificate...</small>
+                      <div style={{ marginTop: 6 }}>
+                        <small className="text-muted" style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.74rem' }}>
+                          Generating certificate & linking to Resume Builder…
+                        </small>
+                        {pollTimedOut && (
+                          <div style={{ marginTop: 6 }}>
+                            <Button variant="secondary" onClick={retryCertificate} disabled={retryingCert}>
+                              {retryingCert ? 'Retrying…' : 'Retry Verification'}
+                            </Button>
+                          </div>
+                        )}
+                      </div>
                     )}
-                    {progression.stages.certification.certificate && (
-                      <small style={{ color: '#34d399', fontSize: '0.7rem', display: 'block', marginTop: 4 }}>
-                        Certificate: {progression.stages.certification.certificate.title || progression.stages.certification.certificate.credentialId}
-                      </small>
+
+                    {progression.stages.certification.state === 'failed' && (
+                      <div style={{ marginTop: 6 }}>
+                        <div className="alert alert-error" style={{ fontSize: '0.72rem', padding: '6px 8px', marginBottom: 6 }}>
+                          {progression.stages.certification.recoverableError?.message || 'Certificate generation or resume linking encountered an issue.'}
+                        </div>
+                        <Button variant="secondary" onClick={retryCertificate} disabled={retryingCert}>
+                          {retryingCert ? 'Retrying…' : 'Retry Certificate Generation'}
+                        </Button>
+                      </div>
                     )}
-                    {progression.stages.certification.recoverableError && (
-                      <div className="alert alert-error" style={{ fontSize: '0.7rem', padding: '4px 8px', marginTop: 4 }}>
-                        {progression.stages.certification.recoverableError.message || 'Certificate pipeline issue.'}
+
+                    {/* M8 Completed Certificate Card */}
+                    {progression.stages.certification.state === 'completed' && progression.stages.certification.certificate && (
+                      <div
+                        className="task-certificate-card"
+                        style={{
+                          marginTop: 8,
+                          padding: 12,
+                          borderRadius: 10,
+                          border: '1px solid rgba(16, 185, 129, 0.35)',
+                          background: 'rgba(16, 185, 129, 0.05)',
+                        }}
+                      >
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                          <div>
+                            <span style={{ fontSize: '0.62rem', fontWeight: 700, color: '#34d399', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                              Verified Credential
+                            </span>
+                            <h5 style={{ margin: '2px 0 4px', fontSize: '0.88rem', color: 'var(--text-primary)' }}>
+                              {progression.stages.certification.certificate.title}
+                            </h5>
+                            <p style={{ margin: 0, fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                              Issuer: {progression.stages.certification.certificate.issuer} · Issued:{' '}
+                              {progression.stages.certification.certificate.issuedAt
+                                ? new Date(progression.stages.certification.certificate.issuedAt).toLocaleDateString()
+                                : 'Recent'}
+                            </p>
+                          </div>
+                          <span style={{ fontSize: '0.66rem', fontFamily: 'monospace', color: '#94a3b8', background: 'rgba(255,255,255,0.06)', padding: '2px 6px', borderRadius: 4 }}>
+                            {progression.stages.certification.certificate.credentialId}
+                          </span>
+                        </div>
+
+                        {progression.stages.certification.certificate.skills?.length > 0 && (
+                          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 8 }}>
+                            {progression.stages.certification.certificate.skills.map((s) => (
+                              <span key={s} style={{ fontSize: '0.62rem', padding: '1px 6px', borderRadius: 4, background: 'rgba(139,92,246,0.15)', color: '#c084fc' }}>
+                                {s}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+
+                        <div style={{ marginTop: 10, paddingTop: 8, borderTop: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 6 }}>
+                          <span style={{ fontSize: '0.7rem', color: '#a78bfa' }}>
+                            Available in your Resume Builder
+                          </span>
+                          <div style={{ display: 'flex', gap: 8 }}>
+                            <Link to="/student/certificates" style={{ fontSize: '0.7rem', color: '#60a5fa', textDecoration: 'none' }}>
+                              Certificates →
+                            </Link>
+                            <Link to="/student/career/resume" style={{ fontSize: '0.7rem', color: '#60a5fa', textDecoration: 'none' }}>
+                              Resume Builder →
+                            </Link>
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>
                 )}
               </section>
             )}
+
+            {/* Exam Runner Dialog */}
+            <ExamRunner
+              open={examRunnerOpen}
+              taskId={task._id}
+              taskTitle={task.title}
+              progression={progression}
+              onClose={() => {
+                setExamRunnerOpen(false);
+                refetchProgression();
+              }}
+              onProgressionUpdated={(updated) => {
+                if (updated) {
+                  setProgression(updated);
+                } else {
+                  refetchProgression();
+                }
+              }}
+            />
 
             <div className="task-progress-control">
               <label htmlFor="task-progress">Progress</label><strong>{task.progress || 0}%</strong>

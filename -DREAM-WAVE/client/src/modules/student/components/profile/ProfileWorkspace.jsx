@@ -149,7 +149,26 @@ export function CredentialGallery({ credentials, query = '', category = '', onAd
     <section className="identity-panel">
       <header><div><span>Evidence and trust</span><h2>Certificates</h2></div>{!publicView && <Button onClick={onAdd}>+ Import certificate</Button>}</header>
       {!filtered.length ? <EmptyState title="No matching certificates" message="Import credentials from institutions, courses and professional issuers." /> : (
-        <div className="credential-grid">{filtered.map((item) => <article className="credential-card" key={item._id}><span className={`credential-status credential-status--${item.verificationStatus}`}>{item.verificationStatus}</span><div aria-hidden>▧</div><h3>{item.title}</h3><p>{item.issuer}</p><small>{item.category}{item.issuedAt ? ` · ${new Date(item.issuedAt).toLocaleDateString()}` : ''}</small><nav><DocumentLink url={item.documentUrl}>Preview / Download</DocumentLink><ExternalLink url={item.verificationUrl}>Verify</ExternalLink></nav>{!publicView && <footer><Button variant="ghost" onClick={() => onEdit(item)}>Edit</Button><Button variant="ghost" onClick={() => onDelete(item)}>Delete</Button></footer>}</article>)}</div>
+        <div className="credential-grid">
+          {filtered.map((item) => {
+            const dateVal = item.issuedAt || item.issueDate
+            const verifyVal = item.verificationUrl || item.credentialUrl
+            return (
+              <article className="credential-card" key={item._id || item.credentialId}>
+                <span className={`credential-status credential-status--${item.verificationStatus || 'verified'}`}>{item.verificationStatus || 'verified'}</span>
+                <div aria-hidden>▧</div>
+                <h3>{item.title}</h3>
+                <p>{item.issuer}</p>
+                <small>{item.category}{dateVal ? ` · ${new Date(dateVal).toLocaleDateString()}` : ''}</small>
+                <nav>
+                  {item.documentUrl && <DocumentLink url={item.documentUrl}>Preview / Download</DocumentLink>}
+                  {verifyVal && <ExternalLink url={verifyVal}>Verify</ExternalLink>}
+                </nav>
+                {!publicView && <footer><Button variant="ghost" onClick={() => onEdit(item)}>Edit</Button><Button variant="ghost" onClick={() => onDelete(item)}>Delete</Button></footer>}
+              </article>
+            )
+          })}
+        </div>
       )}
     </section>
   )

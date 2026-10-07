@@ -60,6 +60,9 @@ export default function StudyPlanner() {
     try {
       await plannerService.completeSchedule(item._id, markTask)
       await refreshToday()
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('task:refresh'))
+      }
     } catch (err) {
       setError(err.userMessage || 'Could not complete item.')
     }

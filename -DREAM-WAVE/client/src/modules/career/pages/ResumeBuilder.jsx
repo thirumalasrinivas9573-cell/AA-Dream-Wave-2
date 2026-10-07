@@ -16,6 +16,7 @@ export default function ResumeBuilder() {
   const [createForm, setCreateForm] = useState({ title: 'Professional Resume', template: 'modern', fromProfile: true })
   const [keywords, setKeywords] = useState('')
   const [analyzing, setAnalyzing] = useState(false)
+  const [unsavedBackup, setUnsavedBackup] = useState(null)
   const hydratedId = useRef(null)
 
   const load = useCallback(async () => {
@@ -35,7 +36,27 @@ export default function ResumeBuilder() {
       setLoading(false)
     }
   }, [])
-  useEffect(() => { load() }, [load])
+  const selectResume = useCallback(async (id) => {
+    try {
+      const { data } = await careerApi.resume(id)
+      hydratedId.current = id
+      setResume(data.resume)
+    } catch (requestError) {
+      setError(requestError.userMessage || 'Unable to open resume.')
+    }
+  }, [])
+
+  useEffect(() => {
+    const onWindowFocus = () => {
+      if (resume?._id) {
+        selectResume(resume._id)
+      } else {
+        load()
+      }
+    }
+    window.addEventListener('focus', onWindowFocus)
+    return () => window.removeEventListener('focus', onWindowFocus)
+  }, [resume?._id, load, selectResume])
 
   useEffect(() => {
     if (!resume?._id || hydratedId.current === resume._id) {
@@ -52,21 +73,22 @@ export default function ResumeBuilder() {
         hydratedId.current = data.resume._id
       } catch (requestError) {
         setSaveState('Autosave failed')
-        setError(requestError.response?.status === 409 ? 'This resume changed in another session. Reload before continuing.' : requestError.userMessage || 'Autosave failed.')
+        if (
+          requestError.response?.status === 409 ||
+          requestError.response?.data?.code === 'REVISION_CONFLICT'
+        ) {
+          setUnsavedBackup(resume)
+          setError('Resume was updated in another session (or a new credential was linked). Reloading latest version from server. Your unsaved edits are preserved.')
+          if (resume?._id) {
+            selectResume(resume._id)
+          }
+          return
+        }
+        setError(requestError.userMessage || 'Autosave failed.')
       }
     }, 900)
     return () => clearTimeout(timeout)
-  }, [resume])
-
-  const selectResume = async (id) => {
-    try {
-      const { data } = await careerApi.resume(id)
-      hydratedId.current = id
-      setResume(data.resume)
-    } catch (requestError) {
-      setError(requestError.userMessage || 'Unable to open resume.')
-    }
-  }
+  }, [resume, selectResume])
   const create = async (event) => {
     event.preventDefault()
     try {
@@ -125,6 +147,20 @@ export default function ResumeBuilder() {
           <nav><Button variant="secondary" onClick={() => setCreateOpen(true)}>+ New resume</Button>{resume && <Button onClick={download}>Download PDF</Button>}</nav>
         </header>
         {error && <ErrorState title="Resume action failed" message={error} onRetry={() => setError('')} />}
+        {unsavedBackup && (
+          <div className="alert alert-warning" style={{ margin: '12px 0', padding: '12px 16px', borderRadius: 8, background: 'rgba(234,179,8,0.1)', border: '1px solid rgba(234,179,8,0.3)' }}>
+            <p style={{ margin: 0, fontWeight: 600 }}>Unsaved Draft Preserved</p>
+            <p style={{ margin: '4px 0 8px', fontSize: '0.85rem' }}>The server resume was reloaded to resolve the conflict. You can restore your recent unsaved edits below.</p>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <Button size="sm" variant="secondary" onClick={() => { setResume(unsavedBackup); setUnsavedBackup(null); }}>
+                Restore Unsaved Draft
+              </Button>
+              <Button size="sm" variant="ghost" onClick={() => setUnsavedBackup(null)}>
+                Dismiss
+              </Button>
+            </div>
+          </div>
+        )}
         {!resume ? <EmptyState title="Create your first professional resume" message="Start from your verified Dream Wave profile or build from a blank template." action={<Button onClick={() => setCreateOpen(true)}>Create resume</Button>} /> : <>
           <section className="resume-command-bar">
             <label><span>Resume</span><select value={resume._id} onChange={(event) => selectResume(event.target.value)}>{resumes.map((item) => <option value={item._id} key={item._id}>{item.title}{item.isDefault ? ' · Default' : ''}</option>)}</select></label>

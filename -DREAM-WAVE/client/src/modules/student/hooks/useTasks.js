@@ -46,6 +46,9 @@ export default function useTasks() {
 
   useEffect(() => {
     refresh()
+    const handleTaskRefresh = () => refresh()
+    window.addEventListener('task:refresh', handleTaskRefresh)
+    return () => window.removeEventListener('task:refresh', handleTaskRefresh)
   }, [refresh])
 
   const refreshAnalytics = useCallback(() => {

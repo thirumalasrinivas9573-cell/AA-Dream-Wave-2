@@ -9,7 +9,6 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@shared/components/ui': path.resolve(__dirname, 'src/shared/components/ui/index.jsx'),
       '@shared': path.resolve(__dirname, 'src/shared'),
       '@student': path.resolve(__dirname, 'src/modules/student'),
       '@institution': path.resolve(__dirname, 'src/modules/institution'),
@@ -67,5 +66,8 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    alias: {
+      '@shared/components/ui': path.resolve(__dirname, 'src/shared/components/ui/index.jsx'),
+    },
   },
 })

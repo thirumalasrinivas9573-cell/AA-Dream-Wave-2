@@ -245,6 +245,10 @@ export interface LearningRequirement {
   key: string;
   met: boolean;
   detail: string;
+  actual?: number;
+  required?: number;
+  total?: number;
+  completed?: number;
 }
 
 export interface LearningStage {
@@ -268,9 +272,10 @@ export interface ExamData {
   examId: string;
   startedAt: string;
   expiresAt: string;
+  serverNow?: string;
+  remainingSeconds: number;
   timeLimitMinutes: number;
   questionCount: number;
-  remainingSeconds?: number;
   questions: ExamQuestion[];
 }
 
@@ -295,20 +300,28 @@ export interface ExamSubmitBody {
   answers: { questionId: string; selectedIndex: number }[];
 }
 
+export interface ExamLastAttempt {
+  attemptNumber: number;
+  score: number;
+  passed: boolean;
+  evaluatedAt: string;
+}
+
 export interface ExamStage {
   state: StageState;
   locked: boolean;
-  lockedReason?: string;
-  lockedMessage?: string;
+  canUnlock: boolean;
+  lockedReason?: string | null;
+  lockedMessage?: string | null;
   attemptsCount: number;
   minimumPassingPercentage: number;
   questionCount: number;
   timeLimitMinutes: number;
   activeExam: ExamData | null;
-  lastAttempt: any | null;
+  lastAttempt: ExamLastAttempt | null;
   retake?: {
     required: boolean;
-    requirements: string[];
+    requirements: LearningRequirement[];
   };
 }
 
@@ -323,7 +336,7 @@ export interface TaskCertificateInfo {
   skill?: string;
   category?: string;
   verificationStatus?: string;
-  documentUrl?: string;
+  documentUrl?: string | null;
   linkedToResume?: boolean;
   linkedResumeId?: string | null;
   linkedResumeIds?: string[];
@@ -350,8 +363,9 @@ export interface TaskProgression {
   completed: boolean;
   progressionStage: ProgressionStage;
   stageStatus: string;
+  serverNow?: string;
   links?: {
-    goalId?: string;
+    goalId?: string | null;
     roadmapId?: string | null;
   };
   stages: {
@@ -360,5 +374,29 @@ export interface TaskProgression {
     certification: CertificationStage;
   };
   stagesSummary?: StagesSummary;
+}
+
+export interface VerifyLearningResponse {
+  success: boolean;
+  verified: boolean;
+  requirements?: LearningRequirement[];
+  progression: TaskProgression;
+}
+
+export interface ExamStartResponse {
+  success: boolean;
+  exam: ExamData;
+  progression: TaskProgression;
+}
+
+export interface ExamSubmitResponse {
+  success: boolean;
+  result: ExamSubmitResult;
+  progression: TaskProgression;
+}
+
+export interface CertificateRetryResponse {
+  success: boolean;
+  progression: TaskProgression;
 }
 

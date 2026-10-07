@@ -107,7 +107,7 @@ export default function useFocusSession() {
     setSession(null)
     sessionRef.current = null
     setElapsedSeconds(0)
-    return data.session
+    return { ...(data.session || {}), taskCompletionIgnored: data.taskCompletionIgnored }
   }, [session])
 
   const cancel = useCallback(async () => {

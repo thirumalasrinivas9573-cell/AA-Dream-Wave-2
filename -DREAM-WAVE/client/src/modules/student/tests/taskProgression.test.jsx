@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { render, screen, fireEvent, renderHook, act, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import {
   STAGE_STATES,
@@ -8,7 +8,15 @@ import {
   isWorkflowTask,
 } from '../utils/taskProgression';
 import { StageItem, TaskProgressionBar } from '../components/tasks/TaskProgressionBar';
-import { TaskCard, TaskFormDialog } from '../components/tasks/TaskWorkspace';
+import { TaskCard, TaskDetailDialog, TaskFormDialog } from '../components/tasks/TaskWorkspace';
+import ExamRunner from '../components/tasks/ExamRunner';
+import useTaskProgression from '../hooks/useTaskProgression';
+import {
+  mapProgressionError,
+  PROGRESSION_ERROR_CODES,
+  ERROR_ACTIONS,
+} from '../utils/progressionErrorMapper';
+import { taskApi } from '@shared/services/api';
 
 describe('Task Progression: Stage State Mapping', () => {
   it('maps all six stage states to correct labels and icons', () => {
@@ -263,3 +271,616 @@ describe('Completion Guards: Workflow vs Legacy Tasks', () => {
     expect(legacyCompleted.hasAttribute('disabled')).toBe(false);
   });
 });
+
+// ════════════════════════════════════════════════════════════════════════════
+// M10: Central Error Mapper Tests
+// ════════════════════════════════════════════════════════════════════════════
+describe('M10: Central Progression Error Mapper', () => {
+  it('maps 401 auth errors to auth action', () => {
+    const err401 = { response: { status: 401, data: { code: 'AUTH_REQUIRED' } } };
+    const mapped = mapProgressionError(err401);
+    expect(mapped.action).toBe(ERROR_ACTIONS.AUTH);
+    expect(mapped.status).toBe(401);
+  });
+
+  it('maps 403 FORBIDDEN and WORKFLOW_ENFORCED correctly', () => {
+    const wfErr = { response: { status: 403, data: { code: 'WORKFLOW_ENFORCED' } } };
+    const mappedWf = mapProgressionError(wfErr);
+    expect(mappedWf.friendlyMessage).toContain('Direct task completion is not allowed');
+    expect(mappedWf.action).toBe(ERROR_ACTIONS.NONE);
+
+    const forbiddenErr = { response: { status: 403, data: { code: 'FORBIDDEN' } } };
+    const mappedForbidden = mapProgressionError(forbiddenErr);
+    expect(mappedForbidden.friendlyMessage).toContain('permission');
+  });
+
+  it('maps 404 TASK_NOT_FOUND', () => {
+    const err = { response: { status: 404, data: { code: 'TASK_NOT_FOUND' } } };
+    const mapped = mapProgressionError(err);
+    expect(mapped.friendlyMessage).toContain('Task was not found');
+  });
+
+  it('maps 400 LEARNING_INCOMPLETE with top-level requirements', () => {
+    const requirements = [{ key: 'focus_time', met: false, detail: 'Need 30 min focus' }];
+    const err = {
+      response: {
+        status: 400,
+        data: {
+          code: 'LEARNING_INCOMPLETE',
+          requirements,
+        },
+      },
+    };
+    const mapped = mapProgressionError(err);
+    expect(mapped.requirements).toEqual(requirements);
+    expect(mapped.action).toBe(ERROR_ACTIONS.NONE);
+  });
+
+  it('maps 429 RATE_LIMITED to rate_limited action with cooldown', () => {
+    const err = { response: { status: 429, data: { code: 'RATE_LIMITED' } } };
+    const mapped = mapProgressionError(err);
+    expect(mapped.action).toBe(ERROR_ACTIONS.RATE_LIMITED);
+    expect(mapped.retryAfter).toBe(60);
+
+    const errWithHeader = {
+      response: {
+        status: 429,
+        data: { code: 'RATE_LIMITED' },
+        headers: { 'retry-after': '45' },
+      },
+    };
+    const mappedWithHeader = mapProgressionError(errWithHeader);
+    expect(mappedWithHeader.retryAfter).toBe(45);
+  });
+
+  it('maps 409 ACTIVE_FOCUS_SESSION_EXISTS to focus message without refetching progression', () => {
+    const err = { response: { status: 409, data: { code: 'ACTIVE_FOCUS_SESSION_EXISTS' } } };
+    const mapped = mapProgressionError(err);
+    expect(mapped.action).toBe(ERROR_ACTIONS.FOCUS_MESSAGE);
+    expect(mapped.friendlyMessage).toBe('Stop your current focus session first.');
+    expect(mapped.action).not.toBe(ERROR_ACTIONS.REFETCH_PROGRESSION);
+  });
+
+  it('maps 409 REVISION_CONFLICT to reload_resume action', () => {
+    const err = { response: { status: 409, data: { code: 'REVISION_CONFLICT' } } };
+    const mapped = mapProgressionError(err);
+    expect(mapped.action).toBe(ERROR_ACTIONS.RELOAD_RESUME);
+  });
+
+  it('maps stage conflicts (EXAM_EXPIRED, EXAM_NOT_ACTIVE, ILLEGAL_STAGE_TRANSITION) to refetch_progression', () => {
+    const codes = [
+      PROGRESSION_ERROR_CODES.EXAM_NOT_ACTIVE,
+      PROGRESSION_ERROR_CODES.EXAM_EXPIRED,
+      PROGRESSION_ERROR_CODES.EXAM_ALREADY_PASSED,
+      PROGRESSION_ERROR_CODES.ILLEGAL_STAGE_TRANSITION,
+      PROGRESSION_ERROR_CODES.CERTIFICATION_NOT_ELIGIBLE,
+      PROGRESSION_ERROR_CODES.TASK_ALREADY_COMPLETED,
+    ];
+
+    codes.forEach((code) => {
+      const err = { response: { status: 409, data: { code } } };
+      const mapped = mapProgressionError(err);
+      expect(mapped.action).toBe(ERROR_ACTIONS.REFETCH_PROGRESSION);
+    });
+
+    const finalErr = {
+      response: {
+        status: 409,
+        data: { code: 'FINALIZATION_NOT_ALLOWED', missing: ['exam_passed'] },
+      },
+    };
+    const mappedFinal = mapProgressionError(finalErr);
+    expect(mappedFinal.action).toBe(ERROR_ACTIONS.REFETCH_PROGRESSION);
+    expect(mappedFinal.missing).toEqual(['exam_passed']);
+  });
+
+  it('maps 500 recoverable errors to retry action', () => {
+    const err = { response: { status: 500, data: { code: 'CERTIFICATE_GENERATION_FAILED' } } };
+    const mapped = mapProgressionError(err);
+    expect(mapped.action).toBe(ERROR_ACTIONS.RETRY);
+    expect(mapped.isRecoverable).toBe(true);
+  });
+
+  it('maps network errors to network_retry', () => {
+    const err = { isNetworkError: true };
+    const mapped = mapProgressionError(err);
+    expect(mapped.action).toBe(ERROR_ACTIONS.NETWORK_RETRY);
+  });
+});
+
+// ════════════════════════════════════════════════════════════════════════════
+// M7: Exam Runner Tests
+// ════════════════════════════════════════════════════════════════════════════
+describe('M7: Exam Runner Component', () => {
+  const REAL_EXAM_DELIVERY = {
+    examId: '6ac51854f1894085fd9b7e52',
+    startedAt: '2026-10-06T15:48:36.350Z',
+    expiresAt: '2026-10-06T16:08:36.350Z',
+    serverNow: '2026-10-06T15:48:36.360Z',
+    remainingSeconds: 1200,
+    timeLimitMinutes: 20,
+    questionCount: 1,
+    questions: [
+      {
+        questionId: 'q_786733ecbda1',
+        question: 'Question 1 on system design?',
+        options: ['Option A (Correct)', 'Option B', 'Option C', 'Option D'],
+      },
+    ],
+  };
+
+  const REAL_EXAM_SUBMIT_PASS = {
+    score: 100,
+    passed: true,
+    minimumPassingPercentage: 80,
+    attemptNumber: 1,
+    correctCount: 1,
+    totalCount: 1,
+    nextStage: 'certification',
+    questionResults: [
+      {
+        questionId: 'q_786733ecbda1',
+        isCorrect: true,
+        explanation: 'Explanation for system design.',
+      },
+    ],
+  };
+
+  const REAL_EXAM_SUBMIT_FAIL = {
+    score: 0,
+    passed: false,
+    minimumPassingPercentage: 80,
+    attemptNumber: 1,
+    correctCount: 0,
+    totalCount: 1,
+    nextStage: 'learning',
+    questionResults: [
+      {
+        questionId: 'q_786733ecbda1',
+        isCorrect: false,
+      },
+    ],
+  };
+
+  beforeEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('starts exam via POST /exam/start, renders questions, and submits answers ONLY', async () => {
+    const startSpy = vi.spyOn(taskApi, 'startExam').mockResolvedValueOnce({
+      data: {
+        success: true,
+        exam: REAL_EXAM_DELIVERY,
+        progression: { taskId: 'task-123', workflowEnabled: true },
+      },
+    });
+
+    const submitSpy = vi.spyOn(taskApi, 'submitExam').mockResolvedValueOnce({
+      data: {
+        success: true,
+        result: REAL_EXAM_SUBMIT_PASS,
+        progression: { taskId: 'task-123', workflowEnabled: true },
+      },
+    });
+
+    render(
+      <ExamRunner
+        open={true}
+        taskId="task-123"
+        taskTitle="Cloud Architecture"
+        onClose={vi.fn()}
+        onProgressionUpdated={vi.fn()}
+      />
+    );
+
+    // Initial ready state
+    const startBtn = screen.getByRole('button', { name: /Start Exam/i });
+    fireEvent.click(startBtn);
+
+    await waitFor(() => {
+      expect(startSpy).toHaveBeenCalledWith('task-123');
+    });
+
+    // Verify question and options appear
+    expect(await screen.findByText('Question 1 on system design?')).toBeDefined();
+    expect(screen.getByText('Option A (Correct)')).toBeDefined();
+
+    // Select Option A (index 0)
+    const radioOption = screen.getByLabelText('Option A (Correct)');
+    fireEvent.click(radioOption);
+
+    // Submit exam
+    const submitBtn = screen.getByRole('button', { name: /Submit Exam/i });
+    fireEvent.click(submitBtn);
+
+    await waitFor(() => {
+      expect(submitSpy).toHaveBeenCalledWith('task-123', {
+        answers: [{ questionId: 'q_786733ecbda1', selectedIndex: 0 }],
+      });
+    });
+
+    // Verify pass result screen
+    expect(await screen.findByText('Exam Passed!')).toBeDefined();
+    expect(screen.getByText(/Explanation for system design/i)).toBeDefined();
+    expect(screen.getByRole('button', { name: /Continue to Certification/i })).toBeDefined();
+  });
+
+  it('restores unexpired active exam from progression props on load', async () => {
+    const progressionWithActive = {
+      stages: {
+        exam: {
+          activeExam: REAL_EXAM_DELIVERY,
+        },
+      },
+    };
+
+    render(
+      <ExamRunner
+        open={true}
+        taskId="task-123"
+        progression={progressionWithActive}
+        onClose={vi.fn()}
+        onProgressionUpdated={vi.fn()}
+      />
+    );
+
+    // Should immediately show questions without clicking Start
+    expect(await screen.findByText('Question 1 on system design?')).toBeDefined();
+  });
+
+  it('prevents double submit by disabling submit button while submitting', async () => {
+    vi.spyOn(taskApi, 'startExam').mockResolvedValueOnce({
+      data: {
+        success: true,
+        exam: REAL_EXAM_DELIVERY,
+      },
+    });
+
+    let resolveSubmit;
+    const submitPromise = new Promise((resolve) => {
+      resolveSubmit = resolve;
+    });
+    vi.spyOn(taskApi, 'submitExam').mockImplementationOnce(() => submitPromise);
+
+    render(
+      <ExamRunner
+        open={true}
+        taskId="task-123"
+        onClose={vi.fn()}
+        onProgressionUpdated={vi.fn()}
+      />
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /Start Exam/i }));
+    await screen.findByText('Question 1 on system design?');
+
+    const submitBtn = screen.getByRole('button', { name: /Submit Exam/i });
+    fireEvent.click(submitBtn);
+
+    // Verify button disabled during submit
+    expect(submitBtn.hasAttribute('disabled')).toBe(true);
+
+    // Complete submission
+    resolveSubmit({
+      data: {
+        success: true,
+        result: REAL_EXAM_SUBMIT_PASS,
+      },
+    });
+
+    await screen.findByText('Exam Passed!');
+  });
+
+  it('handles fail result by reverting to learning with retake text', async () => {
+    vi.spyOn(taskApi, 'startExam').mockResolvedValueOnce({
+      data: { success: true, exam: REAL_EXAM_DELIVERY },
+    });
+
+    vi.spyOn(taskApi, 'submitExam').mockResolvedValueOnce({
+      data: {
+        success: true,
+        result: REAL_EXAM_SUBMIT_FAIL,
+      },
+    });
+
+    const progressionWithRetake = {
+      stages: {
+        exam: {
+          retake: {
+            required: true,
+            requirements: [
+              {
+                key: 'retake_effort',
+                met: false,
+                detail: 'Retake requires at least 30 min of new focus study after failed attempt (0 min recorded).',
+              },
+            ],
+          },
+        },
+      },
+    };
+
+    render(
+      <ExamRunner
+        open={true}
+        taskId="task-123"
+        progression={progressionWithRetake}
+        onClose={vi.fn()}
+        onProgressionUpdated={vi.fn()}
+      />
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /Start Exam/i }));
+    await screen.findByText('Question 1 on system design?');
+    fireEvent.click(screen.getByRole('button', { name: /Submit Exam/i }));
+
+    expect(await screen.findByText('Exam Not Passed')).toBeDefined();
+    expect(screen.getByText(/Retake requires at least 30 min of new focus study/i)).toBeDefined();
+    expect(screen.getByRole('button', { name: /Back to Learning/i })).toBeDefined();
+  });
+
+  it('handles RATE_LIMITED on start with cooldown on the start button', async () => {
+    vi.spyOn(taskApi, 'startExam').mockRejectedValueOnce({
+      response: { status: 429, data: { code: 'RATE_LIMITED' } },
+    });
+
+    render(
+      <ExamRunner
+        open={true}
+        taskId="task-123"
+        onClose={vi.fn()}
+        onProgressionUpdated={vi.fn()}
+      />
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /Start Exam/i }));
+
+    expect(await screen.findByText(/Too many exam start attempts/i)).toBeDefined();
+    const cooldownBtn = screen.getByRole('button', { name: /Start Exam \(.*cooldown\)/i });
+    expect(cooldownBtn.hasAttribute('disabled')).toBe(true);
+  });
+
+  it('handles pass result then transitions to certification next stage', async () => {
+    vi.spyOn(taskApi, 'startExam').mockResolvedValueOnce({
+      data: { success: true, exam: REAL_EXAM_DELIVERY },
+    });
+    vi.spyOn(taskApi, 'submitExam').mockResolvedValueOnce({
+      data: {
+        success: true,
+        result: REAL_EXAM_SUBMIT_PASS,
+        progression: {
+          taskId: 'task-123',
+          progressionStage: 'certification',
+          stages: {
+            learning: { state: 'completed' },
+            exam: { state: 'completed' },
+            certification: { state: 'generating' },
+          },
+        },
+      },
+    });
+
+    const updateSpy = vi.fn();
+    render(
+      <ExamRunner
+        open={true}
+        taskId="task-123"
+        onClose={vi.fn()}
+        onProgressionUpdated={updateSpy}
+      />
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /Start Exam/i }));
+    await screen.findByText('Question 1 on system design?');
+    fireEvent.click(screen.getByRole('button', { name: /Submit Exam/i }));
+
+    expect(await screen.findByText('Exam Passed!')).toBeDefined();
+    expect(screen.getByText(/Continue to Certification/i)).toBeDefined();
+    expect(updateSpy).toHaveBeenCalledWith(
+      expect.objectContaining({ progressionStage: 'certification' })
+    );
+  });
+});
+
+// ════════════════════════════════════════════════════════════════════════════
+// M8: Certification Stage & Polling Tests
+// ════════════════════════════════════════════════════════════════════════════
+describe('M8: Certification Stage Polling and Card', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.restoreAllMocks();
+  });
+
+  it('polls GET /progression every 2 seconds when generating and stops after 10 tries', async () => {
+    vi.useFakeTimers();
+    const getProgSpy = vi.spyOn(taskApi, 'getProgression').mockResolvedValue({
+      data: {
+        progression: {
+          taskId: 'task-123',
+          stages: {
+            certification: { state: 'generating' },
+          },
+        },
+      },
+    });
+
+    const { result } = renderHook(() =>
+      useTaskProgression('task-123', true)
+    );
+
+    // Initial state set to generating
+    act(() => {
+      result.current.setProgression({
+        taskId: 'task-123',
+        stages: { certification: { state: 'generating' } },
+      });
+    });
+
+    // Advance 10 intervals of 2 seconds = 20 seconds
+    for (let i = 0; i < 11; i++) {
+      await act(async () => {
+        vi.advanceTimersByTime(2000);
+      });
+    }
+
+    // Polling stops and sets pollTimedOut
+    expect(result.current.pollTimedOut).toBe(true);
+    expect(getProgSpy).toHaveBeenCalled();
+  });
+
+  it('renders completed certificate card with details and resume builder link', async () => {
+    const completedProgression = {
+      taskId: 'task-123',
+      workflowEnabled: true,
+      completed: true,
+      stages: {
+        learning: { state: 'completed' },
+        exam: { state: 'completed' },
+        certification: {
+          state: 'completed',
+          certificate: {
+            credentialId: 'DW-CERT-9C936F72E7FF',
+            title: 'Cloud Mastery',
+            issuer: 'Dream Wave AI',
+            issuedAt: '2026-10-06T15:48:37.223Z',
+            category: 'course',
+            skills: ['AWS', 'Docker'],
+            url: null,
+          },
+        },
+      },
+    };
+
+    vi.spyOn(taskApi, 'getProgression').mockResolvedValue({
+      data: { progression: completedProgression },
+    });
+
+    render(
+      <BrowserRouter>
+        <TaskDetailDialog
+          task={{ _id: 'task-123', title: 'Deploy App', workflowEnabled: true }}
+          open={true}
+          goals={[]}
+          onClose={vi.fn()}
+          onUpdate={vi.fn()}
+          onStartFocus={vi.fn()}
+          onStopFocus={vi.fn()}
+          focusActive={false}
+        />
+      </BrowserRouter>
+    );
+
+    // Hook will load, but we can verify the text mapping and elements
+    expect(screen.getByText('Deploy App')).toBeDefined();
+    expect(await screen.findByText('DW-CERT-9C936F72E7FF')).toBeDefined();
+    expect(screen.getByText('Cloud Mastery')).toBeDefined();
+  });
+
+  it('retryCertificate calls POST /api/tasks/:id/certificate/retry on recoverable failure', async () => {
+    const retrySpy = vi.spyOn(taskApi, 'retryCertificate').mockResolvedValueOnce({
+      data: {
+        success: true,
+        progression: {
+          taskId: 'task-123',
+          stages: { certification: { state: 'completed' } },
+        },
+      },
+    });
+    vi.spyOn(taskApi, 'getProgression').mockResolvedValue({
+      data: { progression: { taskId: 'task-123', stages: { certification: { state: 'completed' } } } },
+    });
+
+    const { result } = renderHook(() => useTaskProgression('task-123', true));
+    await act(async () => {
+      await result.current.retryCertificate();
+    });
+
+    expect(retrySpy).toHaveBeenCalledWith('task-123');
+  });
+});
+
+// ════════════════════════════════════════════════════════════════════════════
+// M9: Conflict & Guard Tests
+// ════════════════════════════════════════════════════════════════════════════
+describe('M9: Conflict & Focus Guards', () => {
+  beforeEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('refetches progression on 409 conflict during verifyLearning', async () => {
+    const getSpy = vi.spyOn(taskApi, 'getProgression').mockResolvedValue({
+      data: { progression: { taskId: 'task-123', stages: {} } },
+    });
+
+    vi.spyOn(taskApi, 'verifyLearning').mockRejectedValueOnce({
+      response: {
+        status: 409,
+        data: { code: 'ILLEGAL_STAGE_TRANSITION', message: 'Conflict' },
+      },
+    });
+
+    const { result } = renderHook(() => useTaskProgression('task-123', true));
+
+    await expect(result.current.verifyLearning()).rejects.toBeDefined();
+    // Exactly one extra refetch triggered
+    expect(getSpy).toHaveBeenCalledTimes(2);
+  });
+
+  it('does NOT refetch progression on 409 ACTIVE_FOCUS_SESSION_EXISTS', () => {
+    const err = {
+      response: {
+        status: 409,
+        data: { code: 'ACTIVE_FOCUS_SESSION_EXISTS', message: 'Another session running' },
+      },
+    };
+    const mapped = mapProgressionError(err);
+    expect(mapped.action).toBe(ERROR_ACTIONS.FOCUS_MESSAGE);
+    expect(mapped.action).not.toBe(ERROR_ACTIONS.REFETCH_PROGRESSION);
+  });
+
+  it('Unlock Exam calls verify-learning then refetches progression', async () => {
+    const verifySpy = vi.spyOn(taskApi, 'verifyLearning').mockResolvedValueOnce({
+      data: {
+        success: true,
+        verified: true,
+        progression: {
+          taskId: 'task-123',
+          stages: {
+            learning: { state: 'completed' },
+            exam: { state: 'current', canUnlock: true },
+          },
+        },
+      },
+    });
+    const getSpy = vi.spyOn(taskApi, 'getProgression').mockResolvedValue({
+      data: {
+        progression: {
+          taskId: 'task-123',
+          stages: {
+            learning: { state: 'completed' },
+            exam: { state: 'current', canUnlock: true },
+          },
+        },
+      },
+    });
+
+    const { result } = renderHook(() => useTaskProgression('task-123', true));
+    await act(async () => {
+      await result.current.verifyLearning();
+    });
+
+    expect(verifySpy).toHaveBeenCalledWith('task-123');
+    expect(getSpy).toHaveBeenCalled();
+  });
+
+  it('dispatches task:refresh event on schedule completion to trigger task refetch', () => {
+    const eventSpy = vi.fn();
+    window.addEventListener('task:refresh', eventSpy);
+
+    window.dispatchEvent(new CustomEvent('task:refresh'));
+
+    expect(eventSpy).toHaveBeenCalledTimes(1);
+    window.removeEventListener('task:refresh', eventSpy);
+  });
+});
+

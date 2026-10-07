@@ -28,6 +28,9 @@ function localDateKey(value) {
 }
 
 function effectiveStatus(task) {
+  if (task.workflowEnabled) {
+    return task.completed ? 'completed' : (task.status === 'completed' ? 'in-progress' : task.status || 'todo')
+  }
   return task.completed ? 'completed' : task.status || 'todo'
 }
 
@@ -202,6 +205,13 @@ export default function Tasks() {
       await taskApi.startFocus(target._id)
       setFocusTaskId(target._id)
     } catch (requestError) {
+      if (
+        requestError.response?.status === 409 &&
+        requestError.response?.data?.code === 'ACTIVE_FOCUS_SESSION_EXISTS'
+      ) {
+        setError('Stop your current focus session first.')
+        return
+      }
       setError(requestError.userMessage || 'Unable to start focus session.')
     }
   }
@@ -219,6 +229,7 @@ export default function Tasks() {
       refreshAnalytics()
       if (response.data?.taskCompletionIgnored) {
         setError('This task completes through Learning, Exam and Certification stages.')
+        await refresh()
       }
     } catch (requestError) {
       setError(requestError.userMessage || 'Unable to stop focus session.')
