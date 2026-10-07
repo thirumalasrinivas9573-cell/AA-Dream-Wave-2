@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100vh;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "secondary-fixed-dim": "#3dd8f5", "on-tertiary-fixed-variant": "#004c6e", "on-surface-variant": "#404751", "surface": "#f9f9ff", "on-primary-container": "#fdfcff", "surface-container": "#e7eeff", "error-container": "#ffdad6", "surface-container-low": "#f0f3ff", "on-primary": "#ffffff", "on-error-container": "#93000a", "tertiary": "#246185", "outline-variant": "#c0c7d3", "primary": "#005f9c", "on-tertiary-fixed": "#001e2f", "tertiary-fixed-dim": "#96cdf5", "primary-container": "#0079c4", "secondary-container": "#49e1fd", "secondary-fixed": "#a6eeff", "on-primary-fixed": "#001d35", "on-background": "#001c3b", "on-tertiary": "#ffffff", "surface-variant": "#d5e3ff", "primary-fixed": "#d0e4ff", "error": "#ba1a1a", "surface-container-high": "#dee8ff", "on-primary-fixed-variant": "#00497a", "outline": "#707882", "surface-tint": "#0062a0", "tertiary-fixed": "#c8e6ff", "tertiary-container": "#427a9f", "on-surface": "#001c3b", "inverse-surface": "#193151", "inverse-primary": "#9bcaff", "surface-container-lowest": "#ffffff", "on-secondary-fixed-variant": "#004e5b", "on-error": "#ffffff", "background": "#f9f9ff", "inverse-on-surface": "#ebf1ff", "primary-fixed-dim": "#9bcaff", "surface-container-highest": "#d5e3ff", "on-secondary": "#ffffff", "secondary": "#006878", "on-secondary-container": "#006170", "surface-dim": "#c7dbff", "surface-bright": "#f9f9ff", "on-tertiary-container": "#fcfcff", "on-secondary-fixed": "#001f25" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-md": "1.25rem", "margin": "2rem", "space-sm": "0.75rem", "margin-mobile": "1rem", "gutter-mobile": "1rem", "gutter": "1.5rem", "space-lg": "1.75rem", "space-xs": "0.375rem", "space-xl": "2.5rem" }, fontFamily: { "label-sm": ["Outfit"], "label-md": ["Outfit"], "body-lg": ["Plus Jakarta Sans"], "headline-md": ["Outfit"], "display-hero": ["Outfit"], "headline-lg-mobile": ["Outfit"], "label-lg": ["Outfit"], "headline-sm": ["Outfit"], "title-md": ["Outfit"], "body-md": ["Plus Jakarta Sans"], "display-hero-mobile": ["Outfit"], "headline-lg": ["Outfit"], "body-sm": ["Plus Jakarta Sans"] }, fontSize: { "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }], "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "display-hero": ["48px", { "lineHeight": "56px", "fontWeight": "700" }], "headline-lg-mobile": ["26px", { "lineHeight": "32px", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }], "display-hero-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }], "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface-variant/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-xs"><div class="flex items-center gap-space-xs"><div class="w-9 h-9 rounded-full bg-primary-container flex items-center justify-center shadow-[0_4px_14px_rgba(47,143,221,0.35)]"><span class="material-symbols-outlined text-on-primary text-[20px]">auto_awesome</span></div><div class="flex flex-col"><span class="font-label-md text-label-md tracking-wider uppercase text-primary">DREAM WAVE AI</span><span class="font-title-md text-title-md leading-tight text-on-surface font-headline-sm">Community</span></div></div><div class="flex items-center gap-1"><button aria-label="Search" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 transition-colors"><span class="material-symbols-outlined text-[22px]">search</span></button><button aria-label="Notifications" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container/60 transition-colors relative"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-secondary-container ring-2 ring-surface"></span></button><a class="w-11 h-11 flex items-center justify-center pl-1" data-path="account" href="#"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></a></div></div></header><main class="flex flex-col relative w-full pt-16 pb-20 bg-surface min-h-screen"><div class="flex flex-col w-full relative pb-10">
+<!-- Header Section -->
+<section class="flex flex-col px-gutter-mobile pt-2 pb-3">
+<span class="font-label-sm text-label-sm tracking-wider uppercase text-primary font-semibold">STUDENT COMMUNITY</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold tracking-tight mt-0.5">Community</h1>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-1 mt-0.5">Knowledge feed &amp; collaboration network.</p>
+</section>
+<!-- Horizontally Scrollable Topic/Feed Tabs -->
+<div class="w-full overflow-x-auto no-scrollbar py-1 px-gutter-mobile flex items-center gap-2">
+<button class="tab-btn px-4 py-2 rounded-full font-label-md text-label-md bg-primary text-on-primary whitespace-nowrap shadow-sm transition-all" data-tab="for-you">For You</button>
+<button class="tab-btn px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface whitespace-nowrap hover:bg-surface-variant transition-all" data-tab="following">Following</button>
+<button class="tab-btn px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface whitespace-nowrap hover:bg-surface-variant transition-all" data-tab="learning">Learning</button>
+<button class="tab-btn px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface whitespace-nowrap hover:bg-surface-variant transition-all" data-tab="projects">Projects</button>
+<button class="tab-btn px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface whitespace-nowrap hover:bg-surface-variant transition-all" data-tab="questions">Questions</button>
+<button class="tab-btn px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface whitespace-nowrap hover:bg-surface-variant transition-all" data-tab="collaboration">Collaboration</button>
+<button class="tab-btn px-4 py-2 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface whitespace-nowrap hover:bg-surface-variant transition-all" data-tab="achievements">Achievements</button>
+</div>
+<!-- Creator Stats Collapsible Card -->
+<div class="px-gutter-mobile mt-3">
+<div class="w-full bg-surface-container-low rounded-[24px] p-4 shadow-sm transition-all duration-300">
+<button class="w-full flex items-center justify-between min-h-[44px] text-left" id="stats-toggle">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">analytics</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface font-semibold">Your learning content</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Past 30 days activity metrics</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-[22px] transition-transform duration-200" id="stats-icon">expand_less</span>
+</button>
+<div class="grid grid-cols-5 gap-2 mt-3 pt-2" id="stats-content">
+<div class="flex flex-col items-center justify-center p-2 rounded-xl bg-surface-container text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Published</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface mt-0.5">14</span>
+</div>
+<div class="flex flex-col items-center justify-center p-2 rounded-xl bg-tertiary-fixed text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Reactions</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface mt-0.5">342</span>
+</div>
+<div class="flex flex-col items-center justify-center p-2 rounded-xl bg-surface-container-highest text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Comments</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface mt-0.5">89</span>
+</div>
+<div class="flex flex-col items-center justify-center p-2 rounded-xl bg-primary-fixed text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Saves</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface mt-0.5">65</span>
+</div>
+<div class="flex flex-col items-center justify-center p-2 rounded-xl bg-secondary-fixed text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Views</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface mt-0.5">2.4k</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Horizontal Carousel 1: Topics This Week -->
+<div class="mt-5 flex flex-col">
+<div class="flex items-center justify-between px-gutter-mobile mb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[20px]">trending_up</span>
+<h3 class="font-title-md text-title-md font-semibold text-on-surface">Topics this week</h3>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-medium">Explore all</span>
+</div>
+<div class="overflow-x-auto no-scrollbar flex items-stretch gap-3 px-gutter-mobile pb-2">
+<!-- Topic Card 1 -->
+<div class="min-w-[170px] bg-surface-container-low rounded-[20px] p-3 flex flex-col justify-between shadow-sm">
+<div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/30 text-on-secondary-container font-label-sm text-label-sm inline-block">1.4k posts</span>
+<p class="font-title-md text-title-md font-bold text-on-surface mt-2">#TritonKernels</p>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">GPU compiler optimization &amp; fused layers</p>
+</div>
+<!-- Topic Card 2 -->
+<div class="min-w-[170px] bg-surface-container rounded-[20px] p-3 flex flex-col justify-between shadow-sm">
+<div>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm inline-block">890 posts</span>
+<p class="font-title-md text-title-md font-bold text-on-surface mt-2">#MoEArchitecture</p>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Sparse routing and expert balancing</p>
+</div>
+<!-- Topic Card 3 -->
+<div class="min-w-[170px] bg-surface-container-high rounded-[20px] p-3 flex flex-col justify-between shadow-sm">
+<div>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm inline-block">642 posts</span>
+<p class="font-title-md text-title-md font-bold text-on-surface mt-2">#RLHFSafety</p>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Preference alignment &amp; reward hacking</p>
+</div>
+<!-- Topic Card 4 -->
+<div class="min-w-[170px] bg-surface-container-highest rounded-[20px] p-3 flex flex-col justify-between shadow-sm">
+<div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm inline-block">510 posts</span>
+<p class="font-title-md text-title-md font-bold text-on-surface mt-2">#DistributedData</p>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Raft &amp; Paxos cluster consensus</p>
+</div>
+<!-- Carousel Note Card -->
+<div class="min-w-[210px] bg-surface-container-lowest/80 rounded-[20px] p-3.5 flex flex-col justify-center items-center text-center shadow-sm">
+<span class="material-symbols-outlined text-tertiary text-[24px]">bubble_chart</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1.5 leading-snug">Trending topics appear as students share learning content.</p>
+</div>
+</div>
+</div>
+<!-- Horizontal Carousel 2: Learning Groups -->
+<div class="mt-4 flex flex-col">
+<div class="flex items-center justify-between px-gutter-mobile mb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[20px]">groups</span>
+<h3 class="font-title-md text-title-md font-semibold text-on-surface">Learning groups</h3>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-medium">Join more</span>
+</div>
+<div class="overflow-x-auto no-scrollbar flex items-stretch gap-3 px-gutter-mobile pb-2">
+<!-- Group 1 -->
+<div class="min-w-[220px] bg-surface-container-low rounded-[24px] p-4 flex flex-col justify-between shadow-sm">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md font-bold text-on-surface leading-snug">Distributed Systems Reading Club</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">428 peers • 3 active rooms</p>
+</div>
+</div>
+<button class="mt-3 w-full min-h-[44px] bg-primary text-on-primary font-label-md text-label-md rounded-full flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">group_add</span>
+<span>Join Group</span>
+</button>
+</div>
+<!-- Group 2 -->
+<div class="min-w-[220px] bg-surface-container rounded-[24px] p-4 flex flex-col justify-between shadow-sm">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md font-bold text-on-surface leading-snug">AI Alignment Forum</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">312 peers • 1 active debate</p>
+</div>
+</div>
+<button class="mt-3 w-full min-h-[44px] bg-primary text-on-primary font-label-md text-label-md rounded-full flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">group_add</span>
+<span>Join Group</span>
+</button>
+</div>
+<!-- Empty State Card for Carousel -->
+<div class="min-w-[220px] bg-surface-container-lowest/80 rounded-[24px] p-4 flex flex-col justify-between text-center shadow-sm">
+<div class="flex flex-col items-center justify-center py-2">
+<span class="material-symbols-outlined text-outline text-[28px]">add_circle_outline</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">No groups yet — Create the first learning group.</p>
+</div>
+<button class="w-full min-h-[44px] bg-surface-container-high text-primary font-label-md text-label-md rounded-full flex items-center justify-center">
+          + Start Group
+        </button>
+</div>
+</div>
+</div>
+<!-- Feed Section -->
+<section class="px-gutter-mobile mt-4 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<h3 class="font-title-md text-title-md font-semibold text-on-surface">Recent Discussions</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Live updates</span>
+</div>
+<!-- Post Card 1 -->
+<article class="w-full bg-surface-container-low rounded-[24px] p-4 shadow-sm flex flex-col gap-3">
+<!-- Author row -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-semibold text-label-lg shrink-0">
+            AR
+          </div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-title-md text-title-md font-bold text-on-surface">Alex Rivers</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Project Showcase</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Computer Science, MIT • 2h ago</span>
+</div>
+</div>
+<button aria-label="Post options" class="w-11 h-11 flex items-center justify-center text-on-surface-variant rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<!-- Post Body -->
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+        Just open-sourced our distributed Triton kernel benchmarking harness for multi-node MoE inference. 3.2x speedup on L40S clusters!
+      </p>
+<!-- Attached Image Showcase -->
+<div class="w-full h-44 rounded-xl overflow-hidden relative bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Technical dashboard terminal screen showing blue benchmarks for distributed Triton GPU kernels, matrix multiplications, latency charts, and high throughput performance in clean light daylight cyan hues" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm62ss2tVELbb8Wq2lnyriXSqSqaR4legX_a74An_3f8raIvyGRP-vf6mjolsh5ru4vbNs7oU4NSzOk5gtcVgGdmjVnxIOSAw6DcxqjXnjas9r9RPiq38nzPFAilGw_af95Ee-HetJm3V6F-y1H_xU2PMBgw-W08xUTMJgKhD8_-v3d_tV0MQZjE-KT3y0DKKrcaNLB0TnyS6_HapFZJHKePVNQen2uVVl1Ox0UHMi1IpM6ZHOP0hk"/>
+<span class="absolute bottom-2 right-2 px-2.5 py-1 rounded-full bg-on-background/70 backdrop-blur-sm text-on-primary font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">code</span> GitHub Repo
+        </span>
+</div>
+<!-- Tags -->
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">#Triton</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm">#MoE</span>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<button class="like-button min-h-[44px] px-3 rounded-full flex items-center gap-1.5 bg-surface-container-high/60 text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+<span class="font-label-md text-label-md count">42</span>
+</button>
+<button class="min-h-[44px] px-3 rounded-full flex items-center gap-1.5 bg-surface-container-high/60 text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat_bubble_outline</span>
+<span class="font-label-md text-label-md">11</span>
+</button>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Save post" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+<button aria-label="Share post" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Post Card 2 -->
+<article class="w-full bg-surface-container rounded-[24px] p-4 shadow-sm flex flex-col gap-3">
+<!-- Author row -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary font-semibold text-label-lg shrink-0">
+            ER
+          </div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-title-md text-title-md font-bold text-on-surface">Elena Rostova</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm text-primary font-medium">Learning Update</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Stanford University • 4h ago</span>
+</div>
+</div>
+<button aria-label="Post options" class="w-11 h-11 flex items-center justify-center text-on-surface-variant rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<!-- Post Body -->
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed">
+        Finished Chapter 7 of Designing Data-Intensive Applications on transactions and consensus protocols.
+      </p>
+<!-- Tags -->
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm">#DistributedSystems</span>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<button class="like-button min-h-[44px] px-3 rounded-full flex items-center gap-1.5 bg-surface-container-high/60 text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+<span class="font-label-md text-label-md count">28</span>
+</button>
+<button class="min-h-[44px] px-3 rounded-full flex items-center gap-1.5 bg-surface-container-high/60 text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat_bubble_outline</span>
+<span class="font-label-md text-label-md">6</span>
+</button>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Save post" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">bookmark_border</span>
+</button>
+<button aria-label="Share post" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Inline Error Banner -->
+<div class="w-full bg-error-container text-on-error-container rounded-[20px] p-3.5 flex items-center justify-between shadow-sm" id="error-banner">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[20px]">error_outline</span>
+<span class="font-body-md text-body-md font-medium">Failed to load feed.</span>
+</div>
+<button class="min-h-[44px] px-4 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm active:scale-95 transition-transform flex items-center gap-1" id="retry-btn">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span>Retry</span>
+</button>
+</div>
+<!-- Empty State Preview Card -->
+<div class="w-full bg-surface-container-lowest/90 rounded-[24px] p-6 text-center flex flex-col items-center justify-center shadow-sm">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined text-[26px]">chat</span>
+</div>
+<h4 class="font-title-md text-title-md font-bold text-on-surface">No posts in this section yet</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-[260px]">
+        Be the first to share something useful.
+      </p>
+<button class="open-composer-btn mt-4 min-h-[44px] px-5 bg-primary text-on-primary font-label-md text-label-md rounded-full flex items-center gap-1.5 shadow-md">
+<span class="material-symbols-outlined text-[18px]">edit_square</span>
+<span>Create Post</span>
+</button>
+</div>
+</section>
+<!-- Floating Plus Button -->
+<div class="fixed bottom-20 right-4 z-40">
+<button aria-label="Create new community post" class="open-composer-btn w-14 h-14 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-[0_4px_16px_rgba(47,143,221,0.45)] hover:scale-105 active:scale-95 transition-all" id="fab-compose">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+</div>
+<!-- Full-Screen Post Composer Modal -->
+<div class="fixed inset-0 z-50 bg-background/95 backdrop-blur-md hidden flex-col justify-between overflow-y-auto p-gutter-mobile" id="composer-modal">
+<div class="w-full flex flex-col">
+<!-- Composer Top Bar -->
+<div class="flex items-center justify-between min-h-[44px] pb-3 border-b-0">
+<button class="min-h-[44px] px-2 flex items-center text-on-surface-variant font-label-md text-label-md" id="close-composer">
+<span class="material-symbols-outlined text-[22px]">close</span>
+<span class="ml-1">Cancel</span>
+</button>
+<div class="flex items-center gap-2">
+<button class="min-h-[44px] px-3 rounded-full bg-secondary-container/40 text-on-secondary-container font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">public</span>
+<span>Public</span>
+</button>
+<button class="min-h-[44px] px-5 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-sm" id="composer-publish">
+            Publish
+          </button>
+</div>
+</div>
+<!-- Avatar & Post meta selects -->
+<div class="flex items-center gap-3 mt-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-semibold">
+          ME
+        </div>
+<div class="flex flex-wrap gap-2">
+<!-- Post Type Selector -->
+<select aria-label="Select post type" class="min-h-[44px] px-3 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm outline-none">
+<option>Project Showcase</option>
+<option>Learning Update</option>
+<option>Question / Inquiry</option>
+<option>Collaboration Request</option>
+</select>
+<!-- Visibility Selector -->
+<select aria-label="Select visibility" class="min-h-[44px] px-3 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm outline-none">
+<option>Public Network</option>
+<option>Study Group Only</option>
+<option>Mentors &amp; Peers</option>
+</select>
+</div>
+</div>
+<!-- Main Textarea Input -->
+<div class="mt-4">
+<textarea class="w-full bg-surface-container-lowest text-on-surface font-body-lg text-body-lg p-3 rounded-2xl outline-none placeholder:text-outline resize-none shadow-sm" id="composer-text" placeholder="What are you learning, building, or exploring?" rows="6"></textarea>
+</div>
+<!-- Topics & Skills Meta Pills -->
+<div class="mt-3 flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">TAGS &amp; SKILLS</span>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm flex items-center gap-1">
+            #DistributedSystems
+            <span class="material-symbols-outlined text-[14px]">close</span>
+</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm flex items-center gap-1">
+            CUDA / GPU
+            <span class="material-symbols-outlined text-[14px]">close</span>
+</span>
+<button class="px-3 py-1.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">add</span>
+            Add skill
+          </button>
+</div>
+</div>
+</div>
+<!-- Composer Quick Action Buttons (Add media, Suggest tags, Improve with AI) -->
+<div class="w-full pt-4 pb-6 flex flex-col gap-2">
+<div class="grid grid-cols-3 gap-2">
+<button class="min-h-[44px] rounded-xl bg-surface-container flex flex-col items-center justify-center p-2 text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary text-[20px]">add_photo_alternate</span>
+<span class="font-label-sm text-label-sm mt-0.5">Add media</span>
+</button>
+<button class="min-h-[44px] rounded-xl bg-surface-container flex flex-col items-center justify-center p-2 text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-secondary text-[20px]">sell</span>
+<span class="font-label-sm text-label-sm mt-0.5">Suggest tags</span>
+</button>
+<button class="min-h-[44px] rounded-xl bg-secondary-fixed/40 flex flex-col items-center justify-center p-2 text-on-surface hover:bg-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-primary text-[20px]">auto_awesome</span>
+<span class="font-label-sm text-label-sm mt-0.5 font-semibold">Improve with AI</span>
+</button>
+</div>
+<button class="w-full min-h-[44px] bg-primary text-on-primary font-label-md text-label-md rounded-full shadow-md mt-2" id="composer-submit-full">
+        Publish Post
+      </button>
+</div>
+</div>
+</div>
+<script>
+  // Collapsible Creator Stats
+  const statsToggle = document.getElementById('stats-toggle');
+  const statsContent = document.getElementById('stats-content');
+  const statsIcon = document.getElementById('stats-icon');
+  let isStatsOpen = true;
+
+  if (statsToggle && statsContent && statsIcon) {
+    statsToggle.addEventListener('click', () => {
+      isStatsOpen = !isStatsOpen;
+      if (isStatsOpen) {
+        statsContent.classList.remove('hidden');
+        statsIcon.textContent = 'expand_less';
+      } else {
+        statsContent.classList.add('hidden');
+        statsIcon.textContent = 'expand_more';
+      }
+    });
+  }
+
+  // Horizontal Tabs switching state
+  const tabs = document.querySelectorAll('.tab-btn');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => {
+        t.classList.remove('bg-primary', 'text-on-primary');
+        t.classList.add('bg-surface-container-high', 'text-on-surface');
+      });
+      tab.classList.remove('bg-surface-container-high', 'text-on-surface');
+      tab.classList.add('bg-primary', 'text-on-primary');
+    });
+  });
+
+  // Reaction Buttons Counter micro-interaction
+  const likeButtons = document.querySelectorAll('.like-button');
+  likeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const countSpan = btn.querySelector('.count');
+      const icon = btn.querySelector('.material-symbols-outlined');
+      if (countSpan && icon) {
+        let count = parseInt(countSpan.textContent, 10);
+        if (btn.dataset.liked === 'true') {
+          btn.dataset.liked = 'false';
+          countSpan.textContent = count - 1;
+          icon.style.fontVariationSettings = "'FILL' 0";
+          btn.classList.remove('text-primary');
+        } else {
+          btn.dataset.liked = 'true';
+          countSpan.textContent = count + 1;
+          icon.style.fontVariationSettings = "'FILL' 1";
+          btn.classList.add('text-primary');
+        }
+      }
+    });
+  });
+
+  // Retry Feed Interaction
+  const retryBtn = document.getElementById('retry-btn');
+  const errorBanner = document.getElementById('error-banner');
+  if (retryBtn && errorBanner) {
+    retryBtn.addEventListener('click', () => {
+      retryBtn.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span> Loading...';
+      setTimeout(() => {
+        errorBanner.classList.add('hidden');
+      }, 700);
+    });
+  }
+
+  // Composer Modal toggling
+  const composerModal = document.getElementById('composer-modal');
+  const openComposerBtns = document.querySelectorAll('.open-composer-btn');
+  const closeComposerBtn = document.getElementById('close-composer');
+  const publishComposerBtn = document.getElementById('composer-publish');
+  const submitComposerFull = document.getElementById('composer-submit-full');
+
+  const openComposer = () => {
+    if (composerModal) {
+      composerModal.classList.remove('hidden');
+      composerModal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  const closeComposer = () => {
+    if (composerModal) {
+      composerModal.classList.add('hidden');
+      composerModal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+  };
+
+  openComposerBtns.forEach(b => b.addEventListener('click', openComposer));
+  if (closeComposerBtn) closeComposerBtn.addEventListener('click', closeComposer);
+  if (publishComposerBtn) publishComposerBtn.addEventListener('click', closeComposer);
+  if (submitComposerFull) submitComposerFull.addEventListener('click', closeComposer);
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-variant/80 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.04)]" data-active-classes="text-primary"><div class="flex justify-around items-center h-16 px-gutter-mobile"><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] px-2 text-on-surface-variant hover:text-on-surface transition-colors" data-path="explore" href="#"><span class="material-symbols-outlined text-[22px]">explore</span><span class="font-label-sm text-label-sm mt-0.5">Explore</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] px-2 text-on-surface-variant hover:text-on-surface transition-colors" data-path="studio" href="#"><span class="material-symbols-outlined text-[22px]">draw</span><span class="font-label-sm text-label-sm mt-0.5">Studio</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] px-2 text-on-surface-variant hover:text-on-surface transition-colors" data-path="space" href="#"><span class="material-symbols-outlined text-[22px]">cloud_done</span><span class="font-label-sm text-label-sm mt-0.5">Space</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] px-2 transition-colors text-primary" data-path="community" href="#"><span class="material-symbols-outlined text-[22px]">groups</span><span class="font-label-sm text-label-sm mt-0.5">Community</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] px-2 text-on-surface-variant hover:text-on-surface transition-colors" data-path="account" href="#"><span class="material-symbols-outlined text-[22px]">account_circle</span><span class="font-label-sm text-label-sm mt-0.5">Account</span></a></div></nav></body></html>

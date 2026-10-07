@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-primary":"#ffffff","on-tertiary-fixed-variant":"#005233","surface-tint":"#0062a0","tertiary-container":"#008656","on-secondary":"#ffffff","primary-fixed":"#d0e4ff","on-surface":"#001c3b","on-background":"#001c3b","surface-dim":"#c7dbff","tertiary-fixed-dim":"#55de9d","on-error":"#ffffff","on-primary-fixed":"#001d35","background":"#f9f9ff","error-container":"#ffdad6","inverse-primary":"#9bcaff","surface-variant":"#d5e3ff","secondary":"#006878","surface-container":"#e7eeff","surface-container-high":"#dee8ff","tertiary-fixed":"#75fbb8","on-secondary-container":"#006170","on-tertiary":"#ffffff","secondary-container":"#49e1fd","inverse-on-surface":"#ebf1ff","surface-container-lowest":"#ffffff","primary":"#005f9c","on-primary-fixed-variant":"#00497a","surface-container-low":"#f0f3ff","on-tertiary-fixed":"#002112","on-secondary-fixed-variant":"#004e5b","error":"#ba1a1a","surface-bright":"#f9f9ff","on-tertiary-container":"#f6fff6","on-primary-container":"#fdfcff","outline":"#707882","secondary-fixed":"#a6eeff","tertiary":"#006a43","on-error-container":"#93000a","surface":"#f9f9ff","secondary-fixed-dim":"#3dd8f5","inverse-surface":"#193151","on-secondary-fixed":"#001f25","on-surface-variant":"#404751","primary-fixed-dim":"#9bcaff","outline-variant":"#c0c7d3","surface-container-highest":"#d5e3ff","primary-container":"#0079c4"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"gutter":"1.5rem","margin-mobile":"1rem","space-md":"1rem","space-lg":"1.5rem","margin":"2rem","space-sm":"0.5rem","gutter-sm":"1rem","space-xl":"2rem","space-xs":"0.25rem"},"fontFamily":{"label-sm":["Outfit"],"headline-xl":["Outfit"],"body-md":["Plus Jakarta Sans"],"label-md":["Outfit"],"headline-lg":["Outfit"],"label-lg":["Outfit"],"display-hero":["Outfit"],"headline-md":["Outfit"],"body-lg":["Plus Jakarta Sans"],"display-hero-mobile":["Outfit"],"headline-xl-mobile":["Outfit"],"headline-sm":["Outfit"],"body-xl":["Plus Jakarta Sans"]},"fontSize":{"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.05em","fontWeight":"700"}],"headline-xl":["40px",{"lineHeight":"48px","letterSpacing":"-0.025em","fontWeight":"600"}],"body-md":["15px",{"lineHeight":"24px","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.03em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"display-hero":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"26px","fontWeight":"400"}],"display-hero-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-xl":["18px",{"lineHeight":"28px","fontWeight":"400"}]}}}}</script></head><body class="bg-gradient-to-br from-surface-container-low via-surface-container to-surface-variant min-h-screen font-body-md text-on-surface antialiased"><aside class="fixed left-6 top-6 bottom-6 w-[72px] bg-surface-container-high/70 backdrop-blur-xl rounded-lg shadow-[0_16px_40px_-10px_rgba(47,143,221,0.14)] z-50 flex flex-col items-center py-5 justify-between"><div class="flex flex-col items-center gap-6 w-full"><a class="w-11 h-11 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container shadow-[0_4px_14px_rgba(0,121,196,0.35)] transition-transform hover:scale-105 active:scale-95" data-path="workspace" href="#" title="Dream Wave AI"><span class="material-symbols-outlined text-[24px]">tsunami</span></a><nav class="flex flex-col items-center gap-3 w-full px-3" data-active-classes="bg-surface-container-highest text-primary font-bold shadow-[0_2px_8px_rgba(0,98,160,0.15)]"><a class="w-11 h-11 flex items-center justify-center rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="workspace" href="#" title="Workspace"><span class="material-symbols-outlined text-[22px]">space_dashboard</span></a><a aria-current="page" class="w-11 h-11 flex items-center justify-center rounded-DEFAULT transition-all bg-surface-container-highest text-primary font-bold shadow-[0_2px_8px_rgba(0,98,160,0.15)]" data-path="learning" href="#" title="Learning"><span class="material-symbols-outlined text-[22px]">auto_stories</span></a><a class="w-11 h-11 flex items-center justify-center rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="intelligence" href="#" title="Intelligence"><span class="material-symbols-outlined text-[22px]">psychology</span></a><a class="w-11 h-11 flex items-center justify-center rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="career" href="#" title="Career"><span class="material-symbols-outlined text-[22px]">rocket_launch</span></a><a class="w-11 h-11 flex items-center justify-center rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="analytics" href="#" title="Analytics"><span class="material-symbols-outlined text-[22px]">insert_chart</span></a></nav></div><div class="w-full px-3"><a class="w-11 h-11 mx-auto flex items-center justify-center rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="settings" href="#" title="Settings"><span class="material-symbols-outlined text-[22px]">settings</span></a></div></aside><div class="pl-[120px] pr-6 pt-6 pb-6"><header class="fixed top-6 left-[120px] right-6 h-16 bg-surface-container-high/70 backdrop-blur-xl rounded-lg shadow-[0_16px_40px_-10px_rgba(47,143,221,0.12)] z-40 flex items-center justify-between px-6"><div class="flex items-center gap-3"><span class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">DREAM WAVE</span><span class="font-label-sm text-label-sm uppercase px-2.5 py-0.5 rounded-full bg-surface-container-lowest text-primary tracking-wider font-bold">AI OS</span></div><div class="flex-1 max-w-xl mx-8"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-4 text-on-surface-variant text-[20px] pointer-events-none">search</span><input class="w-full h-11 pl-11 pr-14 bg-surface-container-lowest/80 text-on-surface placeholder:text-on-surface-variant/60 font-body-md text-body-md rounded-full shadow-[0_2px_6px_rgba(0,28,59,0.03)] focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/25 transition-all" placeholder="Search your workspace..." type="text"/><kbd class="absolute right-3.5 px-2 py-0.5 font-label-sm text-label-sm text-on-surface-variant bg-surface-container-high rounded-full pointer-events-none">⌘K</kbd></div></div><div class="flex items-center gap-4"><button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest/60 transition-colors relative" title="Notifications" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-secondary ring-2 ring-surface-container-high"></span></button><div class="flex items-center gap-3 pl-2 py-1 pr-3 rounded-full bg-surface-container-lowest/70 backdrop-blur-md shadow-[0_2px_6px_rgba(0,28,59,0.02)]"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col pr-1"><span class="font-label-lg text-label-lg text-on-surface font-medium leading-none">Charan</span><span class="font-label-sm text-label-sm text-on-surface-variant font-normal leading-none mt-1">Student</span></div></div></div></header><main class="relative pt-20 w-full min-h-[calc(100vh-48px)]"><div class="flex flex-col w-full font-['Figtree'] text-[#0B2545] space-y-6 pb-12">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-[#DDEEFC]/90 to-[#EAF4FD]/90 p-6 rounded-[26px] shadow-[0_10px_30px_-5px_rgba(47,143,221,0.08)] [border:1px_solid_rgba(255,255,255,0.9)] backdrop-blur-md">
+<div class="space-y-1">
+<div class="inline-flex items-center gap-2">
+<span class="font-['Outfit'] font-bold text-[11px] tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-[#CFE6F9] text-[#005f9c]">LEARNING</span>
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+<span class="font-['Outfit'] text-[12px] text-[#005f9c] font-semibold">DELULU DAYLIGHT STUDIO v4.2</span>
+</div>
+<h1 class="font-['Outfit'] text-[32px] md:text-[36px] font-bold text-[#0B2545] tracking-tight leading-none pt-1">AI Learning Studio</h1>
+<p class="text-[15px] text-[#0B2545]/80 font-normal">Cinematic AI-powered lessons — scenes, narration, visuals, quizzes, mind maps</p>
+</div>
+<div class="flex items-center gap-3 flex-wrap">
+<button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#CFE6F9] hover:bg-[#BFE0F7] text-[#005f9c] font-['Outfit'] font-semibold text-[14px] transition-all duration-200 active:scale-95 shadow-[0_2px_8px_rgba(47,143,221,0.1)]" type="button">
+<span class="material-symbols-outlined text-[19px]">bookmarks</span>
+<span>My Library</span>
+</button>
+<button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#CFE6F9] hover:bg-[#BFE0F7] text-[#005f9c] font-['Outfit'] font-semibold text-[14px] transition-all duration-200 active:scale-95 shadow-[0_2px_8px_rgba(47,143,221,0.1)]" type="button">
+<span class="material-symbols-outlined text-[19px]">history</span>
+<span>Lesson History</span>
+</button>
+<button class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] text-white font-['Outfit'] font-semibold text-[14px] transition-all duration-200 active:scale-95 shadow-[0_4px_14px_rgba(47,143,221,0.35)]" type="button">
+<span class="material-symbols-outlined text-[19px]">add_circle</span>
+<span>+ Custom Prompt</span>
+</button>
+</div>
+</header>
+<!-- 1. Hero Card -->
+<section class="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#A9D3F1] via-[#94C9EE] to-[#7FC0EC] p-8 md:p-10 shadow-[0_16px_40px_-10px_rgba(47,143,221,0.22)] [border:1px_solid_rgba(255,255,255,0.9)]">
+<!-- Atmospheric Ambient Lighting Rings -->
+<div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-white/20 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-20 -left-20 w-72 h-72 rounded-full bg-[#00C2DE]/25 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 space-y-6">
+<!-- Title & Icon row -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-white/80 backdrop-blur-md flex items-center justify-center text-[#2F8FDD] shadow-[0_4px_16px_rgba(0,40,90,0.08)] [border:1px_solid_rgba(255,255,255,0.95)]">
+<span class="material-symbols-outlined text-[28px]">bubble_chart</span>
+</div>
+<div>
+<h2 class="font-['Outfit'] text-[32px] md:text-[38px] font-bold text-[#0B2545] tracking-tight leading-tight">
+            What do you want to learn today?
+          </h2>
+<p class="text-[16px] text-[#0B2545]/85">
+            Enter any topic — programming, math, science, career, history — and get a cinematic AI lesson
+          </p>
+</div>
+</div>
+<!-- Interactive Input Bar -->
+<div class="bg-white/40 p-2 rounded-[22px] backdrop-blur-md [border:1px_solid_rgba(255,255,255,0.9)] shadow-[0_8px_30px_rgba(11,37,69,0.06)]">
+<form class="flex flex-col lg:flex-row items-stretch gap-2" onsubmit="event.preventDefault();">
+<div class="relative flex-1 flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-[#005f9c] text-[22px] pointer-events-none">auto_awesome</span>
+<input class="w-full h-14 pl-12 pr-4 bg-white text-[#0B2545] placeholder:text-[#0B2545]/45 text-[15px] font-medium rounded-[18px] focus:outline-none focus:ring-2 focus:ring-[#00C2DE] transition-all shadow-[0_2px_10px_rgba(47,143,221,0.06)]" placeholder="e.g. HTML Basics, Python Loops, Photosynthesis, Machine Learning..." type="text" value="Scalable Multi-Agent Orchestration &amp; Distributed Inference"/>
+</div>
+<div class="flex items-center gap-2">
+<!-- Category Dropdown -->
+<div class="relative w-full sm:w-44">
+<span class="material-symbols-outlined absolute left-3.5 text-[#005f9c] text-[20px] pointer-events-none">category</span>
+<select class="w-full h-14 pl-10 pr-9 bg-white text-[#0B2545] font-['Outfit'] font-semibold text-[14px] rounded-[18px] appearance-none focus:outline-none focus:ring-2 focus:ring-[#00C2DE] cursor-pointer shadow-[0_2px_10px_rgba(47,143,221,0.06)]">
+<option selected="">Computer Science</option>
+<option>Career</option>
+<option>Data &amp; AI</option>
+<option>System Architecture</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 text-[#005f9c] text-[20px] pointer-events-none">expand_more</span>
+</div>
+<!-- Level Dropdown -->
+<div class="relative w-full sm:w-36">
+<span class="material-symbols-outlined absolute left-3.5 text-[#005f9c] text-[20px] pointer-events-none">stairs</span>
+<select class="w-full h-14 pl-10 pr-9 bg-white text-[#0B2545] font-['Outfit'] font-semibold text-[14px] rounded-[18px] appearance-none focus:outline-none focus:ring-2 focus:ring-[#00C2DE] cursor-pointer shadow-[0_2px_10px_rgba(47,143,221,0.06)]">
+<option>Beginner</option>
+<option>Intermediate</option>
+<option selected="">Advanced</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 text-[#005f9c] text-[20px] pointer-events-none">expand_more</span>
+</div>
+<!-- Start Learning Button -->
+<button class="h-14 px-8 bg-[#2F8FDD] hover:bg-[#2478BE] text-white font-['Outfit'] font-semibold text-[15px] rounded-[18px] transition-all flex items-center justify-center gap-2 shrink-0 shadow-[0_4px_16px_rgba(47,143,221,0.4)] active:scale-95" type="button">
+<span>Start Learning</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Suggested Pills Row -->
+<div class="pt-1 flex flex-col md:flex-row md:items-center gap-3">
+<span class="font-['Outfit'] font-bold text-[11px] text-[#0B2545]/75 tracking-wider uppercase shrink-0 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-[#005f9c]">tips_and_updates</span>
+          SUGGESTED FROM YOUR GOALS
+        </span>
+<div class="flex items-center gap-2 overflow-x-auto pb-1.5 md:pb-0 scrollbar-none flex-wrap">
+<button class="px-3.5 py-1.5 rounded-full bg-white hover:bg-[#D4F1FE] text-[#0B2545] text-[13px] font-medium transition-all shadow-[0_2px_6px_rgba(0,30,70,0.06)] hover:shadow-md border border-white/60 active:scale-95 flex items-center gap-1.5" type="button">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+            Master Scalable Multi-Agent Systems
+          </button>
+<button class="px-3.5 py-1.5 rounded-full bg-white/90 hover:bg-[#D4F1FE] text-[#0B2545] text-[13px] font-medium transition-all shadow-[0_2px_6px_rgba(0,30,70,0.06)] hover:shadow-md border border-white/60 active:scale-95" type="button">
+            Parameter-Efficient Fine-Tuning (PEFT &amp; LoRA)
+          </button>
+<button class="px-3.5 py-1.5 rounded-full bg-white/90 hover:bg-[#D4F1FE] text-[#0B2545] text-[13px] font-medium transition-all shadow-[0_2px_6px_rgba(0,30,70,0.06)] hover:shadow-md border border-white/60 active:scale-95" type="button">
+            Video Editor: Trailer Rough Assembly
+          </button>
+<button class="px-3.5 py-1.5 rounded-full bg-white/90 hover:bg-[#D4F1FE] text-[#0B2545] text-[13px] font-medium transition-all shadow-[0_2px_6px_rgba(0,30,70,0.06)] hover:shadow-md border border-white/60 active:scale-95" type="button">
+            Transformer Attention &amp; FlashAttention-2
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. Six Feature Cards in a Row -->
+<section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+<!-- Card 1 -->
+<div class="group bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] p-5 rounded-[22px] [border:1px_solid_rgba(255,255,255,0.9)] shadow-[0_8px_24px_-6px_rgba(47,143,221,0.08)] hover:shadow-[0_12px_28px_-4px_rgba(47,143,221,0.18)] transition-all duration-200 flex flex-col justify-between">
+<div class="space-y-3">
+<div class="w-10 h-10 rounded-xl bg-[#D4F1FE] flex items-center justify-center text-[#2F8FDD] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]">movie</span>
+</div>
+<h3 class="font-['Outfit'] font-bold text-[16px] text-[#0B2545]">Cinematic Scenes</h3>
+</div>
+<p class="text-[13px] text-[#0B2545]/75 mt-3 leading-snug">4-6 structured learning scenes with narration and visuals</p>
+</div>
+<!-- Card 2 -->
+<div class="group bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] p-5 rounded-[22px] [border:1px_solid_rgba(255,255,255,0.9)] shadow-[0_8px_24px_-6px_rgba(47,143,221,0.08)] hover:shadow-[0_12px_28px_-4px_rgba(47,143,221,0.18)] transition-all duration-200 flex flex-col justify-between">
+<div class="space-y-3">
+<div class="w-10 h-10 rounded-xl bg-[#BFE0F7] flex items-center justify-center text-[#005f9c] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]">hub</span>
+</div>
+<h3 class="font-['Outfit'] font-bold text-[16px] text-[#0B2545]">Mind Maps</h3>
+</div>
+<p class="text-[13px] text-[#0B2545]/75 mt-3 leading-snug">Visual concept maps showing how ideas connect</p>
+</div>
+<!-- Card 3 -->
+<div class="group bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] p-5 rounded-[22px] [border:1px_solid_rgba(255,255,255,0.9)] shadow-[0_8px_24px_-6px_rgba(47,143,221,0.08)] hover:shadow-[0_12px_28px_-4px_rgba(47,143,221,0.18)] transition-all duration-200 flex flex-col justify-between">
+<div class="space-y-3">
+<div class="w-10 h-10 rounded-xl bg-[#CFE6F9] flex items-center justify-center text-[#2F8FDD] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]">fact_check</span>
+</div>
+<h3 class="font-['Outfit'] font-bold text-[16px] text-[#0B2545]">Smart Quiz</h3>
+</div>
+<p class="text-[13px] text-[#0B2545]/75 mt-3 leading-snug">5 adaptive questions with detailed explanations</p>
+</div>
+<!-- Card 4 -->
+<div class="group bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] p-5 rounded-[22px] [border:1px_solid_rgba(255,255,255,0.9)] shadow-[0_8px_24px_-6px_rgba(47,143,221,0.08)] hover:shadow-[0_12px_28px_-4px_rgba(47,143,221,0.18)] transition-all duration-200 flex flex-col justify-between">
+<div class="space-y-3">
+<div class="w-10 h-10 rounded-xl bg-[#D4F1FE] flex items-center justify-center text-[#005f9c] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]">terminal</span>
+</div>
+<h3 class="font-['Outfit'] font-bold text-[16px] text-[#0B2545]">Practice Exercise</h3>
+</div>
+<p class="text-[13px] text-[#0B2545]/75 mt-3 leading-snug">Step-by-step hands-on project to apply your learning</p>
+</div>
+<!-- Card 5 -->
+<div class="group bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] p-5 rounded-[22px] [border:1px_solid_rgba(255,255,255,0.9)] shadow-[0_8px_24px_-6px_rgba(47,143,221,0.08)] hover:shadow-[0_12px_28px_-4px_rgba(47,143,221,0.18)] transition-all duration-200 flex flex-col justify-between">
+<div class="space-y-3">
+<div class="w-10 h-10 rounded-xl bg-[#BFE0F7] flex items-center justify-center text-[#2F8FDD] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]">data_object</span>
+</div>
+<h3 class="font-['Outfit'] font-bold text-[16px] text-[#0B2545]">Code Examples</h3>
+</div>
+<p class="text-[13px] text-[#0B2545]/75 mt-3 leading-snug">Live code examples for technical topics</p>
+</div>
+<!-- Card 6 -->
+<div class="group bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] p-5 rounded-[22px] [border:1px_solid_rgba(255,255,255,0.9)] shadow-[0_8px_24px_-6px_rgba(47,143,221,0.08)] hover:shadow-[0_12px_28px_-4px_rgba(47,143,221,0.18)] transition-all duration-200 flex flex-col justify-between">
+<div class="space-y-3">
+<div class="w-10 h-10 rounded-xl bg-[#CFE6F9] flex items-center justify-center text-[#005f9c] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]">explore</span>
+</div>
+<h3 class="font-['Outfit'] font-bold text-[16px] text-[#0B2545]">Curated Resources</h3>
+</div>
+<p class="text-[13px] text-[#0B2545]/75 mt-3 leading-snug">Books, courses, and platforms to go deeper</p>
+</div>
+</section>
+<!-- 3. Generated Lesson View -->
+<section class="bg-[#EAF4FD] rounded-[28px] p-6 lg:p-8 [border:1px_solid_rgba(255,255,255,0.9)] shadow-[0_14px_36px_-6px_rgba(47,143,221,0.12)] space-y-6">
+<!-- Lesson Header & Tab Bar -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-white/60">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full bg-[#BFE0F7] text-[#005f9c] font-['Outfit'] text-[11px] font-bold uppercase tracking-wider">Active Workspace</span>
+<span class="text-[#0B2545]/50 text-[13px]">· Generation ID #DW-9821</span>
+</div>
+<h2 class="font-['Outfit'] text-[24px] lg:text-[26px] font-bold text-[#0B2545]">
+          Lesson Preview: Scalable Multi-Agent Orchestration &amp; Distributed Inference
+        </h2>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex items-center gap-1.5 p-1.5 bg-[#CFE6F9]/80 rounded-full [border:1px_solid_rgba(255,255,255,0.8)] overflow-x-auto scrollbar-none">
+<button class="px-4 py-2 rounded-full bg-white text-[#2F8FDD] font-['Outfit'] font-bold text-[13px] shadow-[0_2px_8px_rgba(47,143,221,0.2)] flex items-center gap-2 shrink-0" type="button">
+<span class="material-symbols-outlined text-[17px]">slideshow</span>
+<span>Scenes (1 of 5)</span>
+</button>
+<button class="px-4 py-2 rounded-full text-[#0B2545]/75 hover:text-[#0B2545] hover:bg-white/40 font-['Outfit'] font-semibold text-[13px] transition-all flex items-center gap-2 shrink-0" type="button">
+<span class="material-symbols-outlined text-[17px]">record_voice_over</span>
+<span>Narration &amp; Script</span>
+</button>
+<button class="px-4 py-2 rounded-full text-[#0B2545]/75 hover:text-[#0B2545] hover:bg-white/40 font-['Outfit'] font-semibold text-[13px] transition-all flex items-center gap-2 shrink-0" type="button">
+<span class="material-symbols-outlined text-[17px]">schema</span>
+<span>Mind Map</span>
+</button>
+<button class="px-4 py-2 rounded-full text-[#0B2545]/75 hover:text-[#0B2545] hover:bg-white/40 font-['Outfit'] font-semibold text-[13px] transition-all flex items-center gap-2 shrink-0" type="button">
+<span class="material-symbols-outlined text-[17px]">quiz</span>
+<span>Smart Quiz (5)</span>
+</button>
+<button class="px-4 py-2 rounded-full text-[#0B2545]/75 hover:text-[#0B2545] hover:bg-white/40 font-['Outfit'] font-semibold text-[13px] transition-all flex items-center gap-2 shrink-0" type="button">
+<span class="material-symbols-outlined text-[17px]">code</span>
+<span>Hands-on Lab</span>
+</button>
+</div>
+</div>
+<!-- Active Stage & Sidebar Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Left / Main Stage (65% width ~ 8 cols) -->
+<div class="lg:col-span-8 flex flex-col space-y-4">
+<!-- Cinematic Player Viewport -->
+<div class="relative w-full rounded-[24px] bg-gradient-to-br from-[#07192F] via-[#0B2545] to-[#0A223E] overflow-hidden shadow-[0_16px_40px_rgba(0,28,59,0.3)] [border:1px_solid_rgba(255,255,255,0.3)]">
+<!-- Top Badges inside Player -->
+<div class="absolute top-5 left-5 right-5 z-20 flex items-center justify-between pointer-events-none">
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-[#0B2545]/80 backdrop-blur-md border border-white/20">
+<span class="w-2 h-2 rounded-full bg-[#00C2DE] animate-pulse"></span>
+<span class="font-['Outfit'] text-[12px] font-semibold text-white tracking-wide uppercase">Scene 01 · Orchestration Graph</span>
+</div>
+<div class="px-2.5 py-1 rounded-full bg-white/10 backdrop-blur-md text-[11px] font-mono text-[#D4F1FE] border border-white/15">
+              1080p AI-RENDERED
+            </div>
+</div>
+<!-- Stage Visual: Multi-Agent Network Diagram -->
+<div class="relative w-full aspect-[16/9] flex items-center justify-center p-8">
+<svg class="w-full h-full max-w-[620px]" fill="none" viewbox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="cyanGlow" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#00C2DE" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#2F8FDD" stop-opacity="0.2"></stop>
+</lineargradient>
+<lineargradient id="nodeGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#14365D"></stop>
+<stop offset="100%" stop-color="#0E2847"></stop>
+</lineargradient>
+<filter height="140%" id="softGlow" width="140%" x="-20%" y="-20%">
+<fegaussianblur result="blur" stddeviation="8"></fegaussianblur>
+<fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite>
+</filter>
+</defs>
+<!-- Dynamic Connection Curves -->
+<path d="M 320 180 Q 210 110 140 100" opacity="0.6" stroke="#00C2DE" stroke-dasharray="4 4" stroke-width="2"></path>
+<path d="M 320 180 Q 210 250 140 260" opacity="0.6" stroke="#00C2DE" stroke-dasharray="4 4" stroke-width="2"></path>
+<path d="M 320 180 Q 430 110 500 100" opacity="0.8" stroke="#00C2DE" stroke-width="2.5"></path>
+<path d="M 320 180 Q 430 250 500 260" opacity="0.6" stroke="#00C2DE" stroke-dasharray="4 4" stroke-width="2"></path>
+<!-- Central Node: Primary Orchestrator Router -->
+<circle cx="320" cy="180" fill="url(#cyanGlow)" filter="url(#softGlow)" r="48"></circle>
+<circle cx="320" cy="180" fill="url(#nodeGrad)" r="42" stroke="#00C2DE" stroke-width="2.5"></circle>
+<circle cx="320" cy="180" fill="#0B2545" r="34" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"></circle>
+<text fill="#FFFFFF" font-family="Outfit" font-size="12" font-weight="700" text-anchor="middle" x="320" y="176">ROUTER LLM</text>
+<text fill="#00C2DE" font-family="Figtree" font-size="10" text-anchor="middle" x="320" y="192">State Broker</text>
+<!-- Node 1: Retrieval Agent -->
+<g transform="translate(140, 100)">
+<circle cx="0" cy="0" fill="url(#nodeGrad)" r="32" stroke="#2F8FDD" stroke-width="2"></circle>
+<text fill="#FFFFFF" font-family="Outfit" font-size="10" font-weight="600" text-anchor="middle" x="0" y="-3">RAG Agent</text>
+<text fill="#CFE6F9" font-family="Figtree" font-size="8" text-anchor="middle" x="0" y="11">Vector Search</text>
+</g>
+<!-- Node 2: Reasoning Specialist -->
+<g transform="translate(140, 260)">
+<circle cx="0" cy="0" fill="url(#nodeGrad)" r="32" stroke="#2F8FDD" stroke-width="2"></circle>
+<text fill="#FFFFFF" font-family="Outfit" font-size="10" font-weight="600" text-anchor="middle" x="0" y="-3">Critic Node</text>
+<text fill="#CFE6F9" font-family="Figtree" font-size="8" text-anchor="middle" x="0" y="11">Chain-of-Thought</text>
+</g>
+<!-- Node 3: Code Synthesis Engine (Active Pulsing) -->
+<g transform="translate(500, 100)">
+<circle cx="0" cy="0" fill="rgba(0,194,222,0.15)" r="36" stroke="#00C2DE" stroke-width="1.5"></circle>
+<circle cx="0" cy="0" fill="url(#nodeGrad)" r="32" stroke="#00C2DE" stroke-width="2.5"></circle>
+<text fill="#FFFFFF" font-family="Outfit" font-size="10" font-weight="700" text-anchor="middle" x="0" y="-3">Executor</text>
+<text fill="#00C2DE" font-family="Figtree" font-size="8" text-anchor="middle" x="0" y="11">Sandboxed Py</text>
+</g>
+<!-- Node 4: Memory Cluster -->
+<g transform="translate(500, 260)">
+<circle cx="0" cy="0" fill="url(#nodeGrad)" r="32" stroke="#2F8FDD" stroke-width="2"></circle>
+<text fill="#FFFFFF" font-family="Outfit" font-size="10" font-weight="600" text-anchor="middle" x="0" y="-3">Memory Sync</text>
+<text fill="#CFE6F9" font-family="Figtree" font-size="8" text-anchor="middle" x="0" y="11">Redis Buffer</text>
+</g>
+<!-- Animated Data Packets -->
+<circle cx="230" cy="140" fill="#00C2DE" r="3.5"></circle>
+<circle cx="410" cy="140" fill="#00C2DE" r="4.5"></circle>
+</svg>
+</div>
+<!-- Playback Controls Bar -->
+<div class="bg-[#07192F]/90 backdrop-blur-md px-6 py-3.5 border-t border-white/10 flex flex-col gap-2">
+<!-- Progress scrubber -->
+<div class="flex items-center gap-3">
+<span class="text-[12px] font-mono text-[#D4F1FE]/80">03:42</span>
+<div class="relative flex-1 h-2 bg-white/20 rounded-full cursor-pointer group">
+<div class="absolute left-0 top-0 bottom-0 w-[45%] bg-gradient-to-r from-[#2F8FDD] to-[#00C2DE] rounded-full"></div>
+<div class="absolute left-[45%] top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow-[0_0_8px_#00C2DE] group-hover:scale-125 transition-transform"></div>
+</div>
+<span class="text-[12px] font-mono text-[#D4F1FE]/80">08:15</span>
+</div>
+<!-- Buttons bar -->
+<div class="flex items-center justify-between text-white">
+<div class="flex items-center gap-3">
+<button class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">replay_10</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] flex items-center justify-center transition-all shadow-[0_2px_10px_rgba(47,143,221,0.5)]" type="button">
+<span class="material-symbols-outlined text-[22px] text-white">pause</span>
+</button>
+<button class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">forward_10</span>
+</button>
+<div class="h-4 w-[1px] bg-white/20 mx-1"></div>
+<button class="flex items-center gap-1.5 text-white/80 hover:text-white transition-colors text-[13px] font-medium" type="button">
+<span class="material-symbols-outlined text-[20px]">volume_up</span>
+<div class="w-14 h-1.5 bg-white/20 rounded-full overflow-hidden hidden sm:block">
+<div class="w-[75%] h-full bg-[#00C2DE]"></div>
+</div>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-2.5 py-1 rounded-md bg-[#00C2DE]/20 text-[#00C2DE] border border-[#00C2DE]/40 text-[12px] font-bold font-['Outfit']" type="button">
+                  CC ON
+                </button>
+<button class="px-2.5 py-1 rounded-md bg-white/10 text-white text-[12px] font-['Outfit'] font-semibold hover:bg-white/20" type="button">
+                  1.0x
+                </button>
+<button class="w-8 h-8 rounded-md hover:bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]">fullscreen</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Scene Synopsis & Highlights Pill Area -->
+<div class="bg-gradient-to-r from-[#DDEEFC] to-[#EAF4FD] p-5 rounded-[22px] [border:1px_solid_rgba(255,255,255,0.9)] flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="space-y-1">
+<span class="font-['Outfit'] text-[12px] font-bold text-[#005f9c] tracking-wider uppercase">Scene Key Concept</span>
+<p class="text-[15px] font-medium text-[#0B2545]">
+              Asynchronous message broking prevents deadlock when 10+ sub-agents publish concurrent tool calls.
+            </p>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="px-3 py-1 rounded-full bg-white text-[#0B2545] text-[12px] font-semibold shadow-sm [border:1px_solid_rgba(255,255,255,0.9)]">
+              Latency: 42ms
+            </span>
+<span class="px-3 py-1 rounded-full bg-[#D4F1FE] text-[#005f9c] text-[12px] font-semibold border border-[#00C2DE]/30">
+              Topology: Directed Acyclic
+            </span>
+</div>
+</div>
+</div>
+<!-- Right Sidebar (35% width ~ 4 cols) -->
+<div class="lg:col-span-4 flex flex-col space-y-4">
+<!-- Scene Breakdown List -->
+<div class="bg-[#DDEEFC]/70 rounded-[24px] p-5 [border:1px_solid_rgba(255,255,255,0.9)] shadow-sm space-y-3">
+<div class="flex items-center justify-between pb-1">
+<span class="font-['Outfit'] text-[14px] font-bold uppercase tracking-wider text-[#005f9c]">Lesson Timeline</span>
+<span class="font-['Outfit'] text-[12px] font-semibold text-[#0B2545]/70">5 SCENES TOTAL</span>
+</div>
+<div class="space-y-2">
+<!-- Scene 1 (Active) -->
+<div class="p-3 rounded-[18px] bg-white text-[#0B2545] shadow-[0_4px_14px_rgba(47,143,221,0.12)] border border-[#00C2DE]/40 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-full bg-[#2F8FDD] text-white flex items-center justify-center font-['Outfit'] font-bold text-[12px]">
+                  1
+                </div>
+<div class="flex flex-col">
+<span class="font-['Outfit'] font-bold text-[14px]">Foundations &amp; Architecture</span>
+<span class="text-[12px] text-[#2F8FDD] font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE] animate-ping"></span>
+                    Now Playing · 03:42
+                  </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[20px] text-[#2F8FDD]">graphic_eq</span>
+</div>
+<!-- Scene 2 -->
+<div class="p-3 rounded-[18px] bg-white/60 hover:bg-white/90 text-[#0B2545] transition-colors flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-full bg-[#CFE6F9] text-[#005f9c] flex items-center justify-center font-['Outfit'] font-bold text-[12px]">
+                  2
+                </div>
+<div class="flex flex-col">
+<span class="font-['Outfit'] font-semibold text-[13px]">Message Passing &amp; Sync</span>
+<span class="text-[11px] text-[#0B2545]/60">04:18 duration</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-[#0B2545]/40">play_circle</span>
+</div>
+<!-- Scene 3 -->
+<div class="p-3 rounded-[18px] bg-white/60 hover:bg-white/90 text-[#0B2545] transition-colors flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-full bg-[#CFE6F9] text-[#005f9c] flex items-center justify-center font-['Outfit'] font-bold text-[12px]">
+                  3
+                </div>
+<div class="flex flex-col">
+<span class="font-['Outfit'] font-semibold text-[13px]">Latency &amp; Memory Footprint</span>
+<span class="text-[11px] text-[#0B2545]/60">06:05 duration</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-[#0B2545]/40">play_circle</span>
+</div>
+<!-- Scene 4 -->
+<div class="p-3 rounded-[18px] bg-white/60 hover:bg-white/90 text-[#0B2545] transition-colors flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-full bg-[#CFE6F9] text-[#005f9c] flex items-center justify-center font-['Outfit'] font-bold text-[12px]">
+                  4
+                </div>
+<div class="flex flex-col">
+<span class="font-['Outfit'] font-semibold text-[13px]">Fault Tolerance in GPU Clusters</span>
+<span class="text-[11px] text-[#0B2545]/60">05:40 duration</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-[#0B2545]/40">play_circle</span>
+</div>
+<!-- Scene 5 -->
+<div class="p-3 rounded-[18px] bg-white/60 hover:bg-white/90 text-[#0B2545] transition-colors flex items-center justify-between cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-full bg-[#CFE6F9] text-[#005f9c] flex items-center justify-center font-['Outfit'] font-bold text-[12px]">
+                  5
+                </div>
+<div class="flex flex-col">
+<span class="font-['Outfit'] font-semibold text-[13px]">Production Deployment &amp; Eval</span>
+<span class="text-[11px] text-[#0B2545]/60">07:22 duration</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-[#0B2545]/40">play_circle</span>
+</div>
+</div>
+</div>
+<!-- AI Narration Stream & Waveform -->
+<div class="bg-white/80 backdrop-blur-md rounded-[24px] p-5 [border:1px_solid_rgba(255,255,255,0.95)] shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#00C2DE]"></span>
+<span class="font-['Outfit'] text-[13px] font-bold text-[#0B2545]">AI Voice Narration</span>
+</div>
+<span class="text-[11px] font-semibold text-[#005f9c] bg-[#D4F1FE] px-2 py-0.5 rounded-full">Neural HD Voice</span>
+</div>
+<!-- Waveform Visualizer -->
+<div class="flex items-center justify-between gap-1 h-8 px-2 bg-[#EAF4FD] rounded-xl">
+<span class="w-1 bg-[#2F8FDD] rounded-full h-3"></span>
+<span class="w-1 bg-[#2F8FDD] rounded-full h-5"></span>
+<span class="w-1 bg-[#00C2DE] rounded-full h-7 animate-pulse"></span>
+<span class="w-1 bg-[#2F8FDD] rounded-full h-4"></span>
+<span class="w-1 bg-[#2F8FDD] rounded-full h-6"></span>
+<span class="w-1 bg-[#00C2DE] rounded-full h-8"></span>
+<span class="w-1 bg-[#2F8FDD] rounded-full h-5"></span>
+<span class="w-1 bg-[#2F8FDD] rounded-full h-3"></span>
+<span class="w-1 bg-[#00C2DE] rounded-full h-6 animate-pulse"></span>
+<span class="w-1 bg-[#2F8FDD] rounded-full h-4"></span>
+<span class="w-1 bg-[#2F8FDD] rounded-full h-7"></span>
+<span class="w-1 bg-[#00C2DE] rounded-full h-3"></span>
+<span class="w-1 bg-[#2F8FDD] rounded-full h-6"></span>
+<span class="w-1 bg-[#2F8FDD] rounded-full h-4"></span>
+<span class="w-1 bg-[#00C2DE] rounded-full h-7"></span>
+<span class="w-1 bg-[#2F8FDD] rounded-full h-5"></span>
+<span class="w-1 bg-[#2F8FDD] rounded-full h-2"></span>
+</div>
+<!-- Synced Transcript Box -->
+<div class="p-3 bg-[#F9FCFF] rounded-[16px] border border-[#CFE6F9] text-[13px] leading-relaxed text-[#0B2545]/85">
+<span class="text-[#2F8FDD] font-semibold">“...In this topology, each worker exposes an ephemeral state registry</span>, preventing race conditions while sub-agents stream JSON tokens back to the central arbitrator.”
+          </div>
+</div>
+<!-- Quick Lesson Action Buttons -->
+<div class="grid grid-cols-3 gap-2">
+<button class="p-3 rounded-[18px] bg-white hover:bg-[#D4F1FE] text-[#005f9c] text-center font-['Outfit'] font-bold text-[12px] shadow-sm transition-all flex flex-col items-center gap-1.5 border border-white" type="button">
+<span class="material-symbols-outlined text-[20px] text-[#2F8FDD]">task_alt</span>
+<span>Take Quiz</span>
+</button>
+<button class="p-3 rounded-[18px] bg-white hover:bg-[#D4F1FE] text-[#005f9c] text-center font-['Outfit'] font-bold text-[12px] shadow-sm transition-all flex flex-col items-center gap-1.5 border border-white" type="button">
+<span class="material-symbols-outlined text-[20px] text-[#2F8FDD]">share</span>
+<span>Mind Map</span>
+</button>
+<button class="p-3 rounded-[18px] bg-white hover:bg-[#D4F1FE] text-[#005f9c] text-center font-['Outfit'] font-bold text-[12px] shadow-sm transition-all flex flex-col items-center gap-1.5 border border-white" type="button">
+<span class="material-symbols-outlined text-[20px] text-[#2F8FDD]">download</span>
+<span>Code Lab</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div></main></div></body></html>

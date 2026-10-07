@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "outline-variant": "#c0c7d3",
+          "surface-container-highest": "#d5e3ff",
+          "tertiary-fixed-dim": "#96cdf5",
+          "on-primary-fixed": "#001d35",
+          "outline": "#707882",
+          "tertiary": "#246185",
+          "on-tertiary": "#ffffff",
+          "secondary-fixed-dim": "#3dd8f5",
+          "on-secondary-fixed-variant": "#004e5b",
+          "inverse-surface": "#193151",
+          "tertiary-container": "#427a9f",
+          "surface-container-high": "#dee8ff",
+          "inverse-on-surface": "#ebf1ff",
+          "secondary-fixed": "#a6eeff",
+          "on-secondary-container": "#006170",
+          "surface-dim": "#c7dbff",
+          "surface-container-lowest": "#ffffff",
+          "surface-container": "#e7eeff",
+          "surface": "#f9f9ff",
+          "tertiary-fixed": "#c8e6ff",
+          "surface-tint": "#0062a0",
+          "on-secondary": "#ffffff",
+          "surface-container-low": "#f0f3ff",
+          "on-tertiary-fixed": "#001e2f",
+          "surface-bright": "#f9f9ff",
+          "secondary-container": "#49e1fd",
+          "error-container": "#ffdad6",
+          "inverse-primary": "#9bcaff",
+          "on-tertiary-container": "#fcfcff",
+          "on-primary-fixed-variant": "#00497a",
+          "surface-variant": "#d5e3ff",
+          "secondary": "#006878",
+          "background": "#f9f9ff",
+          "on-surface-variant": "#404751",
+          "on-background": "#001c3b",
+          "primary-fixed-dim": "#9bcaff",
+          "primary": "#005f9c",
+          "primary-container": "#0079c4",
+          "primary-fixed": "#d0e4ff",
+          "on-primary-container": "#fdfcff",
+          "on-error": "#ffffff",
+          "on-surface": "#001c3b",
+          "on-error-container": "#93000a",
+          "on-primary": "#ffffff",
+          "on-tertiary-fixed-variant": "#004c6e",
+          "on-secondary-fixed": "#001f25",
+          "error": "#ba1a1a"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-sm": "0.75rem",
+          "gutter-mobile": "1rem",
+          "space-lg": "1.75rem",
+          "space-xs": "0.375rem",
+          "margin-mobile": "1rem",
+          "margin": "2rem",
+          "space-xl": "2.5rem",
+          "gutter": "1.5rem",
+          "space-md": "1.25rem"
+        },
+        "fontFamily": {
+          "headline-lg-mobile": [
+            "Outfit"
+          ],
+          "headline-lg": [
+            "Outfit"
+          ],
+          "label-md": [
+            "Outfit"
+          ],
+          "body-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "body-md": [
+            "Plus Jakarta Sans"
+          ],
+          "title-md": [
+            "Outfit"
+          ],
+          "display-hero-mobile": [
+            "Outfit"
+          ],
+          "label-sm": [
+            "Outfit"
+          ],
+          "headline-sm": [
+            "Outfit"
+          ],
+          "display-hero": [
+            "Outfit"
+          ],
+          "headline-md": [
+            "Outfit"
+          ],
+          "body-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "label-lg": [
+            "Outfit"
+          ]
+        },
+        "fontSize": {
+          "headline-lg-mobile": [
+            "26px",
+            {
+              "lineHeight": "32px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "fontWeight": "600"
+            }
+          ],
+          "label-md": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "12px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "400"
+            }
+          ],
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "22px",
+              "fontWeight": "400"
+            }
+          ],
+          "title-md": [
+            "18px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "600"
+            }
+          ],
+          "display-hero-mobile": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "fontWeight": "700"
+            }
+          ],
+          "label-sm": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-sm": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "600"
+            }
+          ],
+          "display-hero": [
+            "48px",
+            {
+              "lineHeight": "56px",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-md": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "fontWeight": "600"
+            }
+          ],
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "26px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-lg": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "600"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-container"><aside class="fixed left-0 top-0 h-full w-[72px] z-50 bg-surface-container-low/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex flex-col items-center py-space-md justify-between"><div class="flex flex-col items-center gap-space-lg"><div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shadow-[0_4px_14px_rgba(47,143,221,0.35)]"><span class="material-symbols-outlined text-on-primary text-[22px]">waves</span></div><nav class="flex flex-col items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container shadow-[0_4px_12px_rgba(0,121,196,0.25)]"><a class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="explore" href="#" title="Explore"><span class="material-symbols-outlined text-[20px]">explore</span></a><a class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="studio" href="#" title="Studio"><span class="material-symbols-outlined text-[20px]">auto_awesome</span></a><a class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="workspace" href="#" title="Workspace"><span class="material-symbols-outlined text-[20px]">grid_view</span></a><a aria-current="page" class="w-11 h-11 rounded-full flex items-center justify-center transition-all bg-primary-container text-on-primary-container shadow-[0_4px_12px_rgba(0,121,196,0.25)]" data-path="careers" href="#" title="Careers"><span class="material-symbols-outlined text-[20px]">work</span></a><a class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="analytics" href="#" title="Analytics"><span class="material-symbols-outlined text-[20px]">insights</span></a></nav></div><div class="flex flex-col items-center gap-space-xs"><a class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="account" href="#" title="Account"><span class="material-symbols-outlined text-[20px]">account_circle</span></a><a class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="settings" href="#" title="Settings"><span class="material-symbols-outlined text-[20px]">settings</span></a></div></aside><div class="pl-[72px] min-h-screen bg-surface"><header class="fixed top-0 left-[72px] right-0 h-16 z-40 bg-surface-container/70 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md flex-1 max-w-xl"><div class="relative w-full"><span class="material-symbols-outlined absolute left-space-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span><input class="w-full h-10 pl-10 pr-space-md rounded-full bg-surface-container-lowest/80 text-on-surface placeholder:text-outline text-body-md font-body-md shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] focus:outline-none focus:bg-surface-container-lowest transition-all" placeholder="Search Dream Wave, modules, prompts..." type="text"/></div></div><div class="flex items-center gap-space-sm"><button class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-space-xs"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 w-full px-space-lg py-space-lg"><div class="flex flex-col w-full">
+<div class="w-full bg-gradient-to-b from-[#D6EAFB] to-[#E6F3FD] rounded-3xl p-6 lg:p-8 flex flex-col gap-8 shadow-sm">
+<!-- Top Action Bar & Page Title -->
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex flex-col">
+<span class="font-['Outfit'] text-[12px] font-bold tracking-[0.14em] text-[#246185] uppercase mb-1">
+          LIVE COMPANY OPPORTUNITIES
+        </span>
+<h1 class="font-['Outfit'] text-[34px] leading-tight font-bold text-[#0B2545] tracking-tight">
+          Job Explorer
+        </h1>
+<p class="font-['Figtree',sans-serif] text-[15px] text-[#404751] mt-1 font-normal">
+          Find verified roles aligned with your skills and preferences.
+        </p>
+</div>
+<div class="flex items-center gap-3">
+<!-- Live count pill badge -->
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 shadow-sm border border-white">
+<span class="w-2 h-2 rounded-full bg-[#00C2DE] ring-4 ring-[#00C2DE]/20 animate-pulse"></span>
+<span class="font-['Outfit'] text-[14px] font-semibold text-[#0B2545]">
+<span id="roleCountLabel">3</span> open roles
+          </span>
+</div>
+<button class="h-10 px-4 rounded-full bg-white/80 hover:bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[15px] font-medium shadow-sm transition-all flex items-center gap-1.5 border border-white/80" type="button">
+<span class="material-symbols-outlined text-[18px] text-[#246185]">bookmark</span>
+<span>Saved Roles</span>
+</button>
+<button class="h-10 px-4 rounded-full bg-white/80 hover:bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[15px] font-medium shadow-sm transition-all flex items-center gap-1.5 border border-white/80" type="button">
+<span class="material-symbols-outlined text-[18px] text-[#246185]">tune</span>
+<span>Alert Preferences</span>
+</button>
+</div>
+</header>
+<!-- Filter Card -->
+<section class="w-full bg-gradient-to-r from-[#EAF4FD] to-[#DDEEFC] border border-white rounded-[26px] p-6 shadow-[0_8px_24px_-4px_rgba(47,143,221,0.08)] flex flex-col gap-4">
+<!-- Search and main dropdowns -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3">
+<!-- Search bar -->
+<div class="lg:col-span-2 relative">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[#707882] text-[20px]">search</span>
+<input class="w-full h-11 pl-10 pr-9 rounded-full bg-white text-[#0B2545] placeholder-[#707882] font-['Figtree',sans-serif] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/30 transition-all border border-white" id="jobSearchInput" placeholder="Search jobs, roles, skills" type="text"/>
+<button class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-[#707882] hover:text-[#0B2545]" id="clearSearchBtn" title="Clear search" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Location Dropdown -->
+<div class="relative">
+<select class="w-full h-11 px-4 pr-9 appearance-none rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/30 cursor-pointer border border-white" id="locFilter">
+<option value="all">All locations</option>
+<option value="sf">San Francisco, CA</option>
+<option value="nyc">New York, NY</option>
+<option value="sea">Seattle, WA</option>
+<option value="remote">Remote Global</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#707882] text-[18px]">keyboard_arrow_down</span>
+</div>
+<!-- Work Modes Dropdown -->
+<div class="relative">
+<select class="w-full h-11 px-4 pr-9 appearance-none rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/30 cursor-pointer border border-white" id="modeFilter">
+<option value="all">All work modes</option>
+<option value="hybrid">Hybrid</option>
+<option value="remote">Remote</option>
+<option value="onsite">On-site</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#707882] text-[18px]">keyboard_arrow_down</span>
+</div>
+<!-- Industries Dropdown -->
+<div class="relative">
+<select class="w-full h-11 px-4 pr-9 appearance-none rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/30 cursor-pointer border border-white" id="industryFilter">
+<option value="all">All industries</option>
+<option value="ai">AI &amp; Foundation Models</option>
+<option value="infra">Cloud &amp; Compute Infra</option>
+<option value="search">Search &amp; Synthesis</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#707882] text-[18px]">keyboard_arrow_down</span>
+</div>
+<!-- Skills Dropdown -->
+<div class="relative">
+<select class="w-full h-11 px-4 pr-9 appearance-none rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[15px] focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/30 cursor-pointer border border-white" id="skillsFilter">
+<option value="all">All skills</option>
+<option value="pytorch">PyTorch</option>
+<option value="vllm">vLLM / Inference</option>
+<option value="cuda">CUDA &amp; Kernels</option>
+<option value="distributed">Distributed Systems</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#707882] text-[18px]">keyboard_arrow_down</span>
+</div>
+</div>
+<!-- Secondary filter line -->
+<div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+<div class="flex flex-wrap items-center gap-3">
+<!-- Job Type -->
+<div class="relative min-w-[170px]">
+<select class="w-full h-10 px-4 pr-8 appearance-none rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[15px] focus:outline-none cursor-pointer border border-white" id="typeFilter">
+<option value="all">All job types</option>
+<option value="fulltime">Full-time</option>
+<option value="contract">Contract / Visiting</option>
+<option value="fellow">Research Fellow</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#707882] text-[18px]">keyboard_arrow_down</span>
+</div>
+<!-- Min Salary -->
+<div class="relative min-w-[170px]">
+<select class="w-full h-10 px-4 pr-8 appearance-none rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[15px] focus:outline-none cursor-pointer border border-white" id="salaryFilter">
+<option value="all">Min salary</option>
+<option value="160">$160k+ / year</option>
+<option value="200">$200k+ / year</option>
+<option value="240">$240k+ / year</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#707882] text-[18px]">keyboard_arrow_down</span>
+</div>
+<!-- Active filters counter pill -->
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 text-[#0B2545] border border-white">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+<span class="font-['Outfit'] text-[13px] font-semibold">Verified Openings Only</span>
+</div>
+</div>
+<button class="inline-flex items-center gap-1 text-[#246185] hover:text-[#0B2545] font-['Figtree',sans-serif] text-[15px] font-semibold transition-colors" id="resetAllBtn" type="button">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+<span>Reset filters</span>
+</button>
+</div>
+</section>
+<!-- STATE A: EMPTY STATE (Hidden by default, toggleable via script) -->
+<section class="hidden w-full bg-gradient-to-r from-[#EAF4FD] to-[#DDEEFC] border border-white rounded-[26px] p-10 shadow-[0_8px_24px_-4px_rgba(47,143,221,0.08)] flex flex-col items-center text-center" id="emptyStateCard">
+<div class="w-14 h-14 rounded-full bg-white flex items-center justify-center text-[#2F8FDD] shadow-sm mb-4">
+<span class="material-symbols-outlined text-[28px]">search_off</span>
+</div>
+<h2 class="font-['Outfit'] text-[22px] font-bold text-[#0B2545] mb-2">
+        No jobs match these filters
+      </h2>
+<p class="font-['Figtree',sans-serif] text-[15px] text-[#404751] max-w-md mb-6 leading-relaxed">
+        Try broadening your search, location, skill or work-mode filters to reveal active opportunities.
+      </p>
+<button class="h-10 px-5 rounded-full bg-transparent border border-[#2F8FDD] text-[#2F8FDD] hover:bg-[#2F8FDD] hover:text-white font-['Outfit'] text-[15px] font-semibold transition-all shadow-sm" id="emptyStateClearBtn" type="button">
+        Clear filters
+      </button>
+</section>
+<!-- STATE B: RESULTS GRID OF VERIFIED JOB CARDS -->
+<section class="flex flex-col gap-4" id="jobsGrid">
+<div class="flex items-center justify-between px-1">
+<span class="font-['Outfit'] text-[14px] font-bold tracking-wider uppercase text-[#246185]">
+          Curated Roles For You
+        </span>
+<span class="font-['Figtree',sans-serif] text-[14px] text-[#404751]">
+          Sorted by AI Match Score
+        </span>
+</div>
+<!-- Card 1: Scale AI / Anthropic Frontier Systems -->
+<article class="job-card group w-full bg-gradient-to-br from-[#EAF4FD] to-[#DDEEFC] border border-white rounded-[24px] p-6 shadow-[0_8px_24px_-4px_rgba(47,143,221,0.08)] hover:-translate-y-1 hover:shadow-[0_16px_36px_-6px_rgba(47,143,221,0.16)] transition-all duration-200">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="flex items-start gap-4">
+<!-- Monogram badge -->
+<div class="w-13 h-13 min-w-[52px] rounded-2xl bg-white shadow-sm flex items-center justify-center text-[#2F8FDD] font-['Outfit'] font-bold text-[20px] border border-white">
+<span class="material-symbols-outlined text-[26px] text-[#2F8FDD]">memory</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex flex-wrap items-center gap-2">
+<span class="font-['Figtree',sans-serif] text-[15px] font-semibold text-[#404751]">Scale AI Frontier Lab</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white text-[#0B2545] font-['Outfit'] text-[12px] font-semibold shadow-sm border border-white">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+                  Verified
+                </span>
+<span class="font-['Figtree',sans-serif] text-[13px] text-[#707882]">Posted 2h ago</span>
+</div>
+<h3 class="font-['Outfit'] text-[22px] font-bold text-[#0B2545] tracking-tight group-hover:text-[#2F8FDD] transition-colors">
+                Senior AI Systems Engineer (LLM Kernels)
+              </h3>
+<div class="flex flex-wrap items-center gap-2 pt-1 font-['Figtree',sans-serif] text-[15px] text-[#404751]">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-[#246185]">location_on</span>
+                  San Francisco, CA
+                </span>
+<span class="text-[#707882]">•</span>
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#0B2545] font-['Outfit'] text-[13px] font-semibold border border-white">Hybrid</span>
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#0B2545] font-['Outfit'] text-[13px] font-semibold border border-white">Full-time</span>
+</div>
+</div>
+</div>
+<!-- Compensation and CTA -->
+<div class="flex flex-row lg:flex-col lg:items-end justify-between items-center gap-3 border-t lg:border-t-0 pt-4 lg:pt-0 border-white/60">
+<div class="text-left lg:text-right">
+<span class="font-['Outfit'] text-[20px] font-bold text-[#0B2545] block">
+                $210k – $285k
+              </span>
+<span class="font-['Figtree',sans-serif] text-[14px] text-[#246185] font-medium">
+                0.15% Equity • Top 5% Match
+              </span>
+</div>
+<div class="flex items-center gap-2">
+<button class="h-10 px-3.5 rounded-full bg-white hover:bg-white text-[#0B2545] border border-white shadow-sm flex items-center justify-center transition-all hover:text-[#2F8FDD]" title="Save Role" type="button">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+</button>
+<button class="h-10 px-5 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] hover:-translate-y-0.5 text-white font-['Outfit'] text-[15px] font-semibold shadow-[0_4px_14px_rgba(47,143,221,0.35)] transition-all flex items-center gap-1" type="button">
+<span>Apply</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Skills stack pills -->
+<div class="mt-4 pt-4 border-t border-white/60 flex flex-wrap items-center gap-2">
+<span class="font-['Figtree',sans-serif] text-[13px] text-[#707882] mr-1">Required Stack:</span>
+<span class="px-3 py-1 rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[14px] font-medium border border-white">PyTorch</span>
+<span class="px-3 py-1 rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[14px] font-medium border border-white">CUDA</span>
+<span class="px-3 py-1 rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[14px] font-medium border border-white">Triton</span>
+<span class="px-3 py-1 rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[14px] font-medium border border-white">Distributed Inference</span>
+<span class="px-3 py-1 rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[14px] font-medium border border-white">vLLM</span>
+</div>
+</article>
+<!-- Card 2: Modal Labs -->
+<article class="job-card group w-full bg-gradient-to-br from-[#EAF4FD] to-[#DDEEFC] border border-white rounded-[24px] p-6 shadow-[0_8px_24px_-4px_rgba(47,143,221,0.08)] hover:-translate-y-1 hover:shadow-[0_16px_36px_-6px_rgba(47,143,221,0.16)] transition-all duration-200">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="flex items-start gap-4">
+<!-- Monogram badge -->
+<div class="w-13 h-13 min-w-[52px] rounded-2xl bg-white shadow-sm flex items-center justify-center text-[#2F8FDD] font-['Outfit'] font-bold text-[20px] border border-white">
+<span class="material-symbols-outlined text-[26px] text-[#2F8FDD]">cloud_sync</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex flex-wrap items-center gap-2">
+<span class="font-['Figtree',sans-serif] text-[15px] font-semibold text-[#404751]">Modal Labs</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white text-[#0B2545] font-['Outfit'] text-[12px] font-semibold shadow-sm border border-white">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+                  Verified
+                </span>
+<span class="font-['Figtree',sans-serif] text-[13px] text-[#707882]">Posted 5h ago</span>
+</div>
+<h3 class="font-['Outfit'] text-[22px] font-bold text-[#0B2545] tracking-tight group-hover:text-[#2F8FDD] transition-colors">
+                Distributed Inference Engineer (Serverless GPUs)
+              </h3>
+<div class="flex flex-wrap items-center gap-2 pt-1 font-['Figtree',sans-serif] text-[15px] text-[#404751]">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-[#246185]">public</span>
+                  Remote Global
+                </span>
+<span class="text-[#707882]">•</span>
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#0B2545] font-['Outfit'] text-[13px] font-semibold border border-white">Remote</span>
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#0B2545] font-['Outfit'] text-[13px] font-semibold border border-white">Full-time</span>
+</div>
+</div>
+</div>
+<!-- Compensation and CTA -->
+<div class="flex flex-row lg:flex-col lg:items-end justify-between items-center gap-3 border-t lg:border-t-0 pt-4 lg:pt-0 border-white/60">
+<div class="text-left lg:text-right">
+<span class="font-['Outfit'] text-[20px] font-bold text-[#0B2545] block">
+                $195k – $260k
+              </span>
+<span class="font-['Figtree',sans-serif] text-[14px] text-[#246185] font-medium">
+                0.2% Equity • Fast-Track Review
+              </span>
+</div>
+<div class="flex items-center gap-2">
+<button class="h-10 px-3.5 rounded-full bg-white hover:bg-white text-[#0B2545] border border-white shadow-sm flex items-center justify-center transition-all hover:text-[#2F8FDD]" title="Save Role" type="button">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+</button>
+<button class="h-10 px-5 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] hover:-translate-y-0.5 text-white font-['Outfit'] text-[15px] font-semibold shadow-[0_4px_14px_rgba(47,143,221,0.35)] transition-all flex items-center gap-1" type="button">
+<span>Apply</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Skills stack pills -->
+<div class="mt-4 pt-4 border-t border-white/60 flex flex-wrap items-center gap-2">
+<span class="font-['Figtree',sans-serif] text-[13px] text-[#707882] mr-1">Required Stack:</span>
+<span class="px-3 py-1 rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[14px] font-medium border border-white">Rust</span>
+<span class="px-3 py-1 rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[14px] font-medium border border-white">Linux eBPF</span>
+<span class="px-3 py-1 rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[14px] font-medium border border-white">Ray</span>
+<span class="px-3 py-1 rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[14px] font-medium border border-white">vLLM</span>
+</div>
+</article>
+<!-- Card 3: Perplexity -->
+<article class="job-card group w-full bg-gradient-to-br from-[#EAF4FD] to-[#DDEEFC] border border-white rounded-[24px] p-6 shadow-[0_8px_24px_-4px_rgba(47,143,221,0.08)] hover:-translate-y-1 hover:shadow-[0_16px_36px_-6px_rgba(47,143,221,0.16)] transition-all duration-200">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="flex items-start gap-4">
+<!-- Monogram badge -->
+<div class="w-13 h-13 min-w-[52px] rounded-2xl bg-white shadow-sm flex items-center justify-center text-[#2F8FDD] font-['Outfit'] font-bold text-[20px] border border-white">
+<span class="material-symbols-outlined text-[26px] text-[#2F8FDD]">hub</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex flex-wrap items-center gap-2">
+<span class="font-['Figtree',sans-serif] text-[15px] font-semibold text-[#404751]">Perplexity AI</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white text-[#0B2545] font-['Outfit'] text-[12px] font-semibold shadow-sm border border-white">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+                  Verified
+                </span>
+<span class="font-['Figtree',sans-serif] text-[13px] text-[#707882]">Posted 1d ago</span>
+</div>
+<h3 class="font-['Outfit'] text-[22px] font-bold text-[#0B2545] tracking-tight group-hover:text-[#2F8FDD] transition-colors">
+                Founding ML Infra Engineer (Index &amp; Retrieval)
+              </h3>
+<div class="flex flex-wrap items-center gap-2 pt-1 font-['Figtree',sans-serif] text-[15px] text-[#404751]">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-[#246185]">location_on</span>
+                  San Francisco, CA
+                </span>
+<span class="text-[#707882]">•</span>
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#0B2545] font-['Outfit'] text-[13px] font-semibold border border-white">On-site</span>
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#0B2545] font-['Outfit'] text-[13px] font-semibold border border-white">Full-time</span>
+</div>
+</div>
+</div>
+<!-- Compensation and CTA -->
+<div class="flex flex-row lg:flex-col lg:items-end justify-between items-center gap-3 border-t lg:border-t-0 pt-4 lg:pt-0 border-white/60">
+<div class="text-left lg:text-right">
+<span class="font-['Outfit'] text-[20px] font-bold text-[#0B2545] block">
+                $220k – $310k
+              </span>
+<span class="font-['Figtree',sans-serif] text-[14px] text-[#246185] font-medium">
+                Significant Equity • Direct Founder Access
+              </span>
+</div>
+<div class="flex items-center gap-2">
+<button class="h-10 px-3.5 rounded-full bg-white hover:bg-white text-[#0B2545] border border-white shadow-sm flex items-center justify-center transition-all hover:text-[#2F8FDD]" title="Save Role" type="button">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+</button>
+<button class="h-10 px-5 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] hover:-translate-y-0.5 text-white font-['Outfit'] text-[15px] font-semibold shadow-[0_4px_14px_rgba(47,143,221,0.35)] transition-all flex items-center gap-1" type="button">
+<span>Apply</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Skills stack pills -->
+<div class="mt-4 pt-4 border-t border-white/60 flex flex-wrap items-center gap-2">
+<span class="font-['Figtree',sans-serif] text-[13px] text-[#707882] mr-1">Required Stack:</span>
+<span class="px-3 py-1 rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[14px] font-medium border border-white">Vector Search</span>
+<span class="px-3 py-1 rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[14px] font-medium border border-white">C++20</span>
+<span class="px-3 py-1 rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[14px] font-medium border border-white">PyTorch</span>
+<span class="px-3 py-1 rounded-full bg-white text-[#0B2545] font-['Figtree',sans-serif] text-[14px] font-medium border border-white">Distributed Storage</span>
+</div>
+</article>
+</section>
+<!-- State Switcher micro-tool (Allows user to inspect empty vs populated state seamlessly) -->
+<div class="flex items-center justify-end gap-2 pt-2">
+<span class="font-['Figtree',sans-serif] text-[13px] text-[#707882]">Preview State:</span>
+<button class="px-3 py-1 rounded-full bg-white text-[#0B2545] hover:text-[#2F8FDD] text-[13px] font-['Outfit'] font-semibold shadow-sm border border-white transition-colors" id="toggleStateBtn" type="button">
+        Toggle Empty State
+      </button>
+</div>
+</div>
+</div>
+<script>
+  (function initJobExplorer() {
+    const searchInput = document.getElementById('jobSearchInput');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    const resetAllBtn = document.getElementById('resetAllBtn');
+    const emptyStateClearBtn = document.getElementById('emptyStateClearBtn');
+    const toggleStateBtn = document.getElementById('toggleStateBtn');
+
+    const emptyStateCard = document.getElementById('emptyStateCard');
+    const jobsGrid = document.getElementById('jobsGrid');
+    const roleCountLabel = document.getElementById('roleCountLabel');
+
+    const dropdowns = [
+      document.getElementById('locFilter'),
+      document.getElementById('modeFilter'),
+      document.getElementById('industryFilter'),
+      document.getElementById('skillsFilter'),
+      document.getElementById('typeFilter'),
+      document.getElementById('salaryFilter')
+    ];
+
+    function showEmpty(isEmpty) {
+      if (isEmpty) {
+        jobsGrid.classList.add('hidden');
+        emptyStateCard.classList.remove('hidden');
+        roleCountLabel.textContent = '0';
+      } else {
+        jobsGrid.classList.remove('hidden');
+        emptyStateCard.classList.add('hidden');
+        roleCountLabel.textContent = '3';
+      }
+    }
+
+    // Input clear button state
+    searchInput.addEventListener('input', (e) => {
+      const val = e.target.value.trim();
+      clearSearchBtn.classList.toggle('hidden', val === '');
+      // If typing "none" or nonsense, trigger empty state demonstration
+      if (val.toLowerCase() === 'none' || val.toLowerCase() === '0') {
+        showEmpty(true);
+      } else if (emptyStateCard.classList.contains('hidden') === false && val === '') {
+        showEmpty(false);
+      }
+    });
+
+    clearSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      clearSearchBtn.classList.add('hidden');
+      searchInput.focus();
+      showEmpty(false);
+    });
+
+    function resetFilters() {
+      searchInput.value = '';
+      clearSearchBtn.classList.add('hidden');
+      dropdowns.forEach(dd => {
+        if (dd) dd.selectedIndex = 0;
+      });
+      showEmpty(false);
+    }
+
+    resetAllBtn.addEventListener('click', resetFilters);
+    emptyStateClearBtn.addEventListener('click', resetFilters);
+
+    toggleStateBtn.addEventListener('click', () => {
+      const isCurrentlyEmpty = !jobsGrid.classList.contains('hidden');
+      showEmpty(isCurrentlyEmpty);
+    });
+  })();
+</script></main></div></body></html>

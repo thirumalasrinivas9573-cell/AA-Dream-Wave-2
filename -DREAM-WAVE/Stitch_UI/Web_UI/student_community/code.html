@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary-fixed-dim": "#3dd8f5", "on-tertiary-fixed-variant": "#004c6e", "on-surface-variant": "#404751", "surface": "#f9f9ff", "on-primary-container": "#fdfcff", "surface-container": "#e7eeff", "error-container": "#ffdad6", "surface-container-low": "#f0f3ff", "on-primary": "#ffffff", "on-error-container": "#93000a", "tertiary": "#246185", "outline-variant": "#c0c7d3", "primary": "#005f9c", "on-tertiary-fixed": "#001e2f", "tertiary-fixed-dim": "#96cdf5", "primary-container": "#0079c4", "secondary-container": "#49e1fd", "secondary-fixed": "#a6eeff", "on-primary-fixed": "#001d35", "on-background": "#001c3b", "on-tertiary": "#ffffff", "surface-variant": "#d5e3ff", "primary-fixed": "#d0e4ff", "error": "#ba1a1a", "surface-container-high": "#dee8ff", "on-primary-fixed-variant": "#00497a", "outline": "#707882", "surface-tint": "#0062a0", "tertiary-fixed": "#c8e6ff", "tertiary-container": "#427a9f", "on-surface": "#001c3b", "inverse-surface": "#193151", "inverse-primary": "#9bcaff", "surface-container-lowest": "#ffffff", "on-secondary-fixed-variant": "#004e5b", "on-error": "#ffffff", "background": "#f9f9ff", "inverse-on-surface": "#ebf1ff", "primary-fixed-dim": "#9bcaff", "surface-container-highest": "#d5e3ff", "on-secondary": "#ffffff", "secondary": "#006878", "on-secondary-container": "#006170", "surface-dim": "#c7dbff", "surface-bright": "#f9f9ff", "on-tertiary-container": "#fcfcff", "on-secondary-fixed": "#001f25" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-md": "1.25rem", "margin": "2rem", "space-sm": "0.75rem", "margin-mobile": "1rem", "gutter-mobile": "1rem", "gutter": "1.5rem", "space-lg": "1.75rem", "space-xs": "0.375rem", "space-xl": "2.5rem" }, "fontFamily": { "label-sm": [ "Outfit" ], "label-md": [ "Outfit" ], "body-lg": [ "Plus Jakarta Sans" ], "headline-md": [ "Outfit" ], "display-hero": [ "Outfit" ], "headline-lg-mobile": [ "Outfit" ], "label-lg": [ "Outfit" ], "headline-sm": [ "Outfit" ], "title-md": [ "Outfit" ], "body-md": [ "Plus Jakarta Sans" ], "display-hero-mobile": [ "Outfit" ], "headline-lg": [ "Outfit" ], "body-sm": [ "Plus Jakarta Sans" ] }, "fontSize": { "label-sm": [ "11px", { "lineHeight": "14px", "fontWeight": "500" } ], "label-md": [ "12px", { "lineHeight": "16px", "fontWeight": "600" } ], "body-lg": [ "16px", { "lineHeight": "26px", "fontWeight": "400" } ], "headline-md": [ "24px", { "lineHeight": "32px", "fontWeight": "600" } ], "display-hero": [ "48px", { "lineHeight": "56px", "fontWeight": "700" } ], "headline-lg-mobile": [ "26px", { "lineHeight": "32px", "fontWeight": "600" } ], "label-lg": [ "14px", { "lineHeight": "20px", "fontWeight": "600" } ], "headline-sm": [ "20px", { "lineHeight": "28px", "fontWeight": "600" } ], "title-md": [ "18px", { "lineHeight": "24px", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "22px", "fontWeight": "400" } ], "display-hero-mobile": [ "32px", { "lineHeight": "40px", "fontWeight": "700" } ], "headline-lg": [ "32px", { "lineHeight": "40px", "fontWeight": "600" } ], "body-sm": [ "12px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-gradient-to-b from-[#D6EAFB] to-[#E6F3FD] min-h-screen text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[72px] bg-[#CFE6F9]/80 backdrop-blur-xl border-r border-white/60 z-50 flex flex-col items-center py-space-md justify-between"><div class="flex flex-col items-center gap-space-lg w-full"><a class="w-11 h-11 rounded-full bg-gradient-to-tr from-primary to-secondary-container flex items-center justify-center shadow-[0_4px_14px_rgba(47,143,221,0.35)] hover:scale-105 transition-transform duration-200" data-path="home" href="#" title="Dream Wave AI"><span class="material-symbols-outlined text-on-primary text-[22px]">waves</span></a><nav class="flex flex-col items-center gap-space-xs w-full px-2" data-active-classes="bg-primary-container text-on-primary-container shadow-md"><a class="w-11 h-11 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150" data-path="home" href="#" title="Home"><span class="material-symbols-outlined text-[22px]">home</span></a><a class="w-11 h-11 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150" data-path="knowledge" href="#" title="Knowledge"><span class="material-symbols-outlined text-[22px]">psychology</span></a><a aria-current="page" class="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-150 bg-primary-container text-on-primary-container shadow-md" data-path="community" href="#" title="Community"><span class="material-symbols-outlined text-[22px]">forum</span></a><a class="w-11 h-11 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150" data-path="careers" href="#" title="Careers"><span class="material-symbols-outlined text-[22px]">explore</span></a><a class="w-11 h-11 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150" data-path="books" href="#" title="Books"><span class="material-symbols-outlined text-[22px]">menu_book</span></a><a class="w-11 h-11 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150" data-path="analytics" href="#" title="Analytics"><span class="material-symbols-outlined text-[22px]">insights</span></a></nav></div><div class="flex flex-col items-center gap-space-xs w-full px-2"><nav class="w-full flex justify-center" data-active-classes="bg-primary-container text-on-primary-container"><a class="w-11 h-11 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150" data-path="settings" href="#" title="Settings"><span class="material-symbols-outlined text-[22px]">settings</span></a></nav></div></aside><div class="pl-[72px]"><header class="fixed top-0 left-[72px] right-0 h-16 bg-[#CFE6F9]/75 backdrop-blur-xl border-b border-white/60 z-40 px-margin flex items-center justify-between"><div class="flex items-center gap-space-xs"><span class="font-title-md text-title-md text-primary tracking-tight font-semibold">DREAM WAVE</span><span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">AI</span></div><div class="flex-1 max-w-xl mx-space-xl"><div class="relative flex items-center w-full"><span class="material-symbols-outlined absolute left-4 text-on-surface-variant text-[20px] pointer-events-none">search</span><input class="w-full h-10 pl-11 pr-4 rounded-full bg-surface-container-lowest/80 border border-white/80 font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-secondary focus:bg-surface-container-lowest transition-all shadow-sm" placeholder="Search Dream Wave, modules, prompts..." type="text"/></div></div><div class="flex items-center gap-space-sm"><button class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" title="Toggle daylight mode" type="button"><span class="material-symbols-outlined text-[20px]">light_mode</span></button><button class="relative w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" title="Notifications" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-secondary ring-2 ring-surface-container-lowest"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 min-h-screen"><div class="flex flex-col w-full px-margin py-6 font-['Figtree',sans-serif] text-[#0B2545] space-y-6">
+<!-- Top Header Bar -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-2">
+<div>
+<span class="font-['Outfit',sans-serif] text-[12px] font-bold tracking-widest text-[#246185] uppercase block mb-1">Student Community</span>
+<h1 class="font-['Outfit',sans-serif] text-[32px] font-bold leading-tight text-[#0B2545] m-0">Student Community</h1>
+<p class="text-[15px] text-[#246185] mt-1 leading-normal font-normal">Connect with peer researchers, share breakthroughs, and collaborate across AI domains.</p>
+</div>
+<div class="flex items-center flex-wrap gap-3">
+<div class="inline-flex items-center gap-2 bg-[#D4F1FE]/80 border border-white px-3.5 py-1.5 rounded-full shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#00C2DE]"></span>
+<span class="text-[14px] font-semibold text-[#0B2545]">1,420 Active Students</span>
+</div>
+<button class="px-4 py-2 rounded-full bg-[#EAF4FD] border border-white text-[#0B2545] font-semibold text-[14px] hover:bg-[#DDEEFC] transition-colors shadow-sm" type="button">
+        Explore Groups
+      </button>
+<button class="px-4 py-2 rounded-full bg-[#EAF4FD] border border-white text-[#0B2545] font-semibold text-[14px] hover:bg-[#DDEEFC] transition-colors shadow-sm" type="button">
+        My Contributions
+      </button>
+</div>
+</header>
+<!-- Hero Card -->
+<section class="rounded-[26px] p-7 bg-gradient-to-r from-[#A9D3F1] to-[#7FC0EC] text-[#0B2545] shadow-[0_8px_24px_-4px_rgba(47,143,221,0.15)] border border-white/70 relative overflow-hidden">
+<div class="max-w-2xl relative z-10">
+<span class="font-['Outfit',sans-serif] text-[11px] font-bold uppercase tracking-wider text-[#0B2545]/80 bg-white/40 px-2.5 py-1 rounded-full inline-block mb-3">STUDENT COMMUNITY</span>
+<h2 class="font-['Outfit',sans-serif] text-[28px] font-bold text-[#0B2545] leading-tight mb-2">Knowledge feed &amp; collaboration network</h2>
+<p class="text-[15px] text-[#0B2545]/90 leading-relaxed font-normal">Share learning updates, showcase projects, ask questions, and discover collaborators across Dream Wave.</p>
+</div>
+<div class="absolute -right-6 -bottom-10 w-64 h-64 rounded-full bg-white/20 blur-2xl pointer-events-none"></div>
+</section>
+<!-- Nav Tabs -->
+<nav aria-label="Community navigation" class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+<button class="px-5 py-2 rounded-full bg-[#2F8FDD] text-white font-semibold text-[15px] shadow-[0_4px_12px_rgba(47,143,221,0.35)] shrink-0 transition-transform active:scale-95" type="button">For You</button>
+<button class="px-5 py-2 rounded-full bg-[#EAF4FD] border border-white text-[#0B2545] font-medium text-[15px] hover:bg-[#DDEEFC] shrink-0 transition-colors" type="button">Following</button>
+<button class="px-5 py-2 rounded-full bg-[#EAF4FD] border border-white text-[#0B2545] font-medium text-[15px] hover:bg-[#DDEEFC] shrink-0 transition-colors" type="button">Learning</button>
+<button class="px-5 py-2 rounded-full bg-[#EAF4FD] border border-white text-[#0B2545] font-medium text-[15px] hover:bg-[#DDEEFC] shrink-0 transition-colors" type="button">Projects</button>
+<button class="px-5 py-2 rounded-full bg-[#EAF4FD] border border-white text-[#0B2545] font-medium text-[15px] hover:bg-[#DDEEFC] shrink-0 transition-colors" type="button">Questions</button>
+<button class="px-5 py-2 rounded-full bg-[#EAF4FD] border border-white text-[#0B2545] font-medium text-[15px] hover:bg-[#DDEEFC] shrink-0 transition-colors" type="button">Collaboration</button>
+<button class="px-5 py-2 rounded-full bg-[#EAF4FD] border border-white text-[#0B2545] font-medium text-[15px] hover:bg-[#DDEEFC] shrink-0 transition-colors" type="button">Achievements</button>
+</nav>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- LEFT COLUMN (Feed & Composer) -->
+<div class="lg:col-span-8 flex flex-col space-y-6">
+<!-- Composer Card -->
+<section class="rounded-[26px] p-6 bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] border border-white shadow-[0_8px_24px_-4px_rgba(47,143,221,0.08)]">
+<div class="flex items-center gap-3.5 mb-4">
+<div class="w-11 h-11 rounded-full bg-[#2F8FDD] text-white flex items-center justify-center font-['Outfit',sans-serif] font-bold text-[16px] shadow-sm shrink-0">
+            RK
+          </div>
+<div>
+<h3 class="font-['Outfit',sans-serif] text-[17px] font-bold text-[#0B2545] leading-snug">Share learning, projects, or questions</h3>
+<p class="text-[13px] text-[#246185] leading-none mt-0.5">Keep posts professional and knowledge-focused.</p>
+</div>
+</div>
+<div class="mb-4">
+<textarea class="w-full bg-white text-[#0B2545] placeholder-[#707882] text-[15px] p-4 rounded-xl border border-white focus:outline-none focus:ring-2 focus:ring-[#00C2DE] transition-all resize-none shadow-sm" placeholder="What are you learning, building, or exploring?" rows="3"></textarea>
+</div>
+<!-- Controls Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+<div class="flex items-center gap-2">
+<div class="relative flex-1">
+<select class="w-full h-10 px-3 py-1.5 rounded-lg bg-white border border-white text-[#0B2545] text-[14px] font-medium appearance-none focus:outline-none focus:ring-1 focus:ring-[#2F8FDD]">
+<option value="general">Type: General</option>
+<option value="project">Type: Project</option>
+<option value="question">Type: Question</option>
+<option value="paper">Type: Paper</option>
+<option value="resource">Type: Resource</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-[18px] text-[#246185] pointer-events-none">expand_more</span>
+</div>
+<div class="relative flex-1">
+<select class="w-full h-10 px-3 py-1.5 rounded-lg bg-white border border-white text-[#0B2545] text-[14px] font-medium appearance-none focus:outline-none focus:ring-1 focus:ring-[#2F8FDD]">
+<option value="public">Vis: Public</option>
+<option value="campus">Vis: Campus Only</option>
+<option value="connections">Vis: Connections</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-[18px] text-[#246185] pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex-1 bg-white h-10 px-3 rounded-lg border border-white flex items-center gap-1.5 overflow-hidden">
+<span class="text-[12px] font-semibold text-[#246185]">Topics:</span>
+<span class="bg-[#EBFAFF] text-[#0B2545] text-[12px] px-2 py-0.5 rounded-md">Python</span>
+<span class="bg-[#EBFAFF] text-[#0B2545] text-[12px] px-2 py-0.5 rounded-md">React</span>
+</div>
+<div class="flex-1 bg-white h-10 px-3 rounded-lg border border-white flex items-center gap-1.5 overflow-hidden">
+<span class="text-[12px] font-semibold text-[#246185]">Skills:</span>
+<span class="bg-[#EBFAFF] text-[#0B2545] text-[12px] px-2 py-0.5 rounded-md truncate">API design</span>
+<span class="bg-[#EBFAFF] text-[#0B2545] text-[12px] px-2 py-0.5 rounded-md">UI</span>
+</div>
+</div>
+</div>
+<!-- Actions Row -->
+<div class="flex items-center justify-between pt-2 border-t border-white/60">
+<div class="flex items-center gap-1">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[#246185] hover:bg-white/60 text-[14px] font-semibold transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">attach_file</span>
+              Add media
+            </button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[#246185] hover:bg-white/60 text-[14px] font-semibold transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">label</span>
+              Suggest tags
+            </button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[#246185] hover:bg-white/60 text-[14px] font-semibold transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+              Improve with AI
+            </button>
+</div>
+<button class="px-6 py-2 rounded-full bg-[#2F8FDD] text-white font-['Outfit',sans-serif] font-semibold text-[15px] shadow-[0_4px_14px_rgba(47,143,221,0.35)] hover:bg-[#2478BE] transition-all" type="button">
+            Publish
+          </button>
+</div>
+</section>
+<!-- Inline Error Banner -->
+<div class="rounded-xl px-4 py-3 bg-[#ffdad6]/40 border border-[#ffdad6] flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[#ba1a1a] text-[20px]">error</span>
+<span class="text-[14px] text-[#ba1a1a] font-medium">Failed to load feed.</span>
+</div>
+<button class="text-[14px] text-[#2F8FDD] font-semibold hover:underline" type="button">Retry</button>
+</div>
+<!-- Empty State Card -->
+<div class="rounded-[26px] p-6 bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] border border-white flex flex-col items-center justify-center text-center py-8">
+<div class="w-12 h-12 rounded-full bg-white/70 flex items-center justify-center text-[#246185] mb-3">
+<span class="material-symbols-outlined text-[24px]">forum</span>
+</div>
+<p class="text-[15px] font-medium text-[#0B2545] max-w-sm mb-4">No posts in this section yet — Be the first to share something useful.</p>
+<button class="px-4 py-2 rounded-full bg-[#2F8FDD] text-white font-semibold text-[14px] shadow-sm hover:bg-[#2478BE]" type="button">
+          Create First Post
+        </button>
+</div>
+<!-- Feed Post 1: Alex Rivers -->
+<article class="rounded-[26px] p-6 bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] border border-white shadow-[0_8px_24px_-4px_rgba(47,143,221,0.06)] flex flex-col space-y-4">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#BFE0F7] text-[#0B2545] font-['Outfit',sans-serif] font-bold flex items-center justify-center text-[15px] border border-white">
+              AR
+            </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-['Outfit',sans-serif] font-bold text-[16px] text-[#0B2545]">Alex Rivers</span>
+<span class="text-[13px] text-[#246185]">• Stanford AI Lab</span>
+</div>
+<span class="text-[13px] text-[#707882]">2h ago</span>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-[#D4F1FE] text-[#0B2545] text-[12px] font-semibold border border-white">
+            Project Showcase
+          </span>
+</div>
+<p class="text-[15px] text-[#0B2545] leading-relaxed">
+          Just open-sourced our distributed Triton kernel benchmarking harness for multi-node MoE inference. 3.2x speedup on L40S clusters! Check out the repo and benchmarks.
+        </p>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#246185] text-[13px] font-medium">#Triton</span>
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#246185] text-[13px] font-medium">#MoE</span>
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#246185] text-[13px] font-medium">#CUDA</span>
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#246185] text-[13px] font-medium">#DistributedSystems</span>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/70">
+<div class="flex items-center gap-5">
+<button class="inline-flex items-center gap-1.5 text-[#246185] hover:text-[#0B2545] text-[14px] font-semibold" type="button">
+<span class="material-symbols-outlined text-[19px]">thumb_up</span>
+              42
+            </button>
+<button class="inline-flex items-center gap-1.5 text-[#246185] hover:text-[#0B2545] text-[14px] font-semibold" type="button">
+<span class="material-symbols-outlined text-[19px]">chat_bubble</span>
+              11
+            </button>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-full hover:bg-white/50 text-[#246185] hover:text-[#0B2545]" type="button">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+</button>
+<button class="p-1.5 rounded-full hover:bg-white/50 text-[#246185] hover:text-[#0B2545]" type="button">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Feed Post 2: Elena Rostova -->
+<article class="rounded-[26px] p-6 bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] border border-white shadow-[0_8px_24px_-4px_rgba(47,143,221,0.06)] flex flex-col space-y-4">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#CFE6F9] text-[#0B2545] font-['Outfit',sans-serif] font-bold flex items-center justify-center text-[15px] border border-white">
+              ER
+            </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-['Outfit',sans-serif] font-bold text-[16px] text-[#0B2545]">Elena Rostova</span>
+<span class="text-[13px] text-[#246185]">• ETH Zurich</span>
+</div>
+<span class="text-[13px] text-[#707882]">4h ago</span>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-[#D4F1FE] text-[#0B2545] text-[12px] font-semibold border border-white">
+            Learning Update
+          </span>
+</div>
+<p class="text-[15px] text-[#0B2545] leading-relaxed">
+          Finished Chapter 7 of Designing Data-Intensive Applications on transactions and consensus protocols. Summarized the trade-offs between Raft and Multi-Paxos in a quick visual memo.
+        </p>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#246185] text-[13px] font-medium">#DistributedSystems</span>
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#246185] text-[13px] font-medium">#Consensus</span>
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#246185] text-[13px] font-medium">#Databases</span>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/70">
+<div class="flex items-center gap-5">
+<button class="inline-flex items-center gap-1.5 text-[#246185] hover:text-[#0B2545] text-[14px] font-semibold" type="button">
+<span class="material-symbols-outlined text-[19px]">thumb_up</span>
+              28
+            </button>
+<button class="inline-flex items-center gap-1.5 text-[#246185] hover:text-[#0B2545] text-[14px] font-semibold" type="button">
+<span class="material-symbols-outlined text-[19px]">chat_bubble</span>
+              6
+            </button>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-full hover:bg-white/50 text-[#246185] hover:text-[#0B2545]" type="button">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+</button>
+<button class="p-1.5 rounded-full hover:bg-white/50 text-[#246185] hover:text-[#0B2545]" type="button">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Feed Post 3: Marcus Vance -->
+<article class="rounded-[26px] p-6 bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] border border-white shadow-[0_8px_24px_-4px_rgba(47,143,221,0.06)] flex flex-col space-y-4">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-[#D4F1FE] text-[#0B2545] font-['Outfit',sans-serif] font-bold flex items-center justify-center text-[15px] border border-white">
+              MV
+            </div>
+<div>
+<span class="font-['Outfit',sans-serif] font-bold text-[16px] text-[#0B2545] block">Marcus Vance</span>
+<span class="text-[13px] text-[#707882]">Yesterday</span>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-[#D4F1FE] text-[#0B2545] text-[12px] font-semibold border border-white">
+            Collaboration Request
+          </span>
+</div>
+<p class="text-[15px] text-[#0B2545] leading-relaxed">
+          Looking for 1-2 collaborators on an RLHF alignment benchmark evaluating constitutional AI reasoning traces. Tech stack: PyTorch, vLLM, LangGraph.
+        </p>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#246185] text-[13px] font-medium">#AIAlignment</span>
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#246185] text-[13px] font-medium">#RLHF</span>
+<span class="px-2.5 py-0.5 rounded-full bg-white text-[#246185] text-[13px] font-medium">#PyTorch</span>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/70">
+<div class="flex items-center gap-5">
+<button class="inline-flex items-center gap-1.5 text-[#246185] hover:text-[#0B2545] text-[14px] font-semibold" type="button">
+<span class="material-symbols-outlined text-[19px]">thumb_up</span>
+              19
+            </button>
+<button class="inline-flex items-center gap-1.5 text-[#246185] hover:text-[#0B2545] text-[14px] font-semibold" type="button">
+<span class="material-symbols-outlined text-[19px]">chat_bubble</span>
+              9
+            </button>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-full hover:bg-white/50 text-[#246185] hover:text-[#0B2545]" type="button">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+</button>
+<button class="p-1.5 rounded-full hover:bg-white/50 text-[#246185] hover:text-[#0B2545]" type="button">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<!-- RIGHT COLUMN (Sidebar Modules) -->
+<div class="lg:col-span-4 flex flex-col space-y-6">
+<!-- 1. Your learning content -->
+<section class="rounded-[26px] p-6 bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] border border-white shadow-[0_8px_24px_-4px_rgba(47,143,221,0.06)]">
+<h3 class="font-['Outfit',sans-serif] text-[18px] font-bold text-[#0B2545] mb-4">Your learning content</h3>
+<div class="grid grid-cols-2 gap-2.5">
+<!-- Stat 1 -->
+<div class="p-3.5 rounded-2xl bg-[#D4F1FE] border border-white/70">
+<span class="text-[12px] text-[#246185] font-semibold block uppercase">Published</span>
+<span class="font-['Outfit',sans-serif] text-[24px] font-bold text-[#0B2545]">14</span>
+</div>
+<!-- Stat 2 -->
+<div class="p-3.5 rounded-2xl bg-[#BFE0F7] border border-white/70">
+<span class="text-[12px] text-[#246185] font-semibold block uppercase">Reactions</span>
+<span class="font-['Outfit',sans-serif] text-[24px] font-bold text-[#0B2545]">342</span>
+</div>
+<!-- Stat 3 -->
+<div class="p-3.5 rounded-2xl bg-[#CFE6F9] border border-white/70">
+<span class="text-[12px] text-[#246185] font-semibold block uppercase">Comments</span>
+<span class="font-['Outfit',sans-serif] text-[24px] font-bold text-[#0B2545]">89</span>
+</div>
+<!-- Stat 4 -->
+<div class="p-3.5 rounded-2xl bg-[#D4F1FE] border border-white/70">
+<span class="text-[12px] text-[#246185] font-semibold block uppercase">Saves</span>
+<span class="font-['Outfit',sans-serif] text-[24px] font-bold text-[#0B2545]">65</span>
+</div>
+<!-- Stat 5 (Spans 2 cols) -->
+<div class="col-span-2 p-3.5 rounded-2xl bg-[#BFE0F7] border border-white/70 flex items-center justify-between">
+<span class="text-[13px] text-[#246185] font-semibold uppercase">Total Views</span>
+<span class="font-['Outfit',sans-serif] text-[24px] font-bold text-[#0B2545]">2.4k</span>
+</div>
+</div>
+</section>
+<!-- 2. Topics this week -->
+<section class="rounded-[26px] p-6 bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] border border-white shadow-[0_8px_24px_-4px_rgba(47,143,221,0.06)]">
+<h3 class="font-['Outfit',sans-serif] text-[18px] font-bold text-[#0B2545] mb-3">Topics this week</h3>
+<div class="rounded-xl p-5 bg-white/40 border border-white/70 flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-[28px] text-[#246185] mb-2">trending_up</span>
+<p class="text-[14px] text-[#246185] leading-normal font-normal">Trending topics appear as students share learning content.</p>
+</div>
+</section>
+<!-- 3. Learning groups -->
+<section class="rounded-[26px] p-6 bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] border border-white shadow-[0_8px_24px_-4px_rgba(47,143,221,0.06)]">
+<h3 class="font-['Outfit',sans-serif] text-[18px] font-bold text-[#0B2545] mb-3">Learning groups</h3>
+<!-- Form -->
+<div class="space-y-3 mb-4">
+<div>
+<label class="text-[12px] font-bold text-[#246185] uppercase mb-1 block">Group name</label>
+<input class="w-full h-10 px-3 rounded-xl bg-white border border-white text-[#0B2545] text-[14px] placeholder-[#707882] focus:outline-none focus:ring-1 focus:ring-[#2F8FDD]" placeholder="e.g. Distributed Triton Reading" type="text"/>
+</div>
+<div>
+<label class="text-[12px] font-bold text-[#246185] uppercase mb-1 block">Topic</label>
+<input class="w-full h-10 px-3 rounded-xl bg-white border border-white text-[#0B2545] text-[14px] placeholder-[#707882] focus:outline-none focus:ring-1 focus:ring-[#2F8FDD]" placeholder="e.g. Machine Learning" type="text"/>
+</div>
+<div>
+<label class="text-[12px] font-bold text-[#246185] uppercase mb-1 block">Description</label>
+<textarea class="w-full p-3 rounded-xl bg-white border border-white text-[#0B2545] text-[14px] placeholder-[#707882] focus:outline-none focus:ring-1 focus:ring-[#2F8FDD] resize-none" placeholder="Brief scope and goals..." rows="2"></textarea>
+</div>
+<button class="w-full py-2.5 rounded-full bg-[#2F8FDD] text-white font-['Outfit',sans-serif] font-semibold text-[14px] hover:bg-[#2478BE] transition-colors shadow-sm" type="button">
+            Create group
+          </button>
+</div>
+<!-- Empty state below -->
+<div class="pt-3 border-t border-white/60 text-center">
+<p class="text-[13px] text-[#246185]">No groups yet — Create the first learning group.</p>
+</div>
+</section>
+<!-- 4. Discovery -->
+<section class="rounded-[26px] p-6 bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] border border-white shadow-[0_8px_24px_-4px_rgba(47,143,221,0.06)]">
+<h3 class="font-['Outfit',sans-serif] text-[18px] font-bold text-[#0B2545] mb-4">Discovery</h3>
+<div class="space-y-3.5">
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-white/50 border border-white">
+<div class="flex items-center gap-2.5 min-w-0 pr-2">
+<div class="w-8 h-8 rounded-full bg-[#BFE0F7] text-[#0B2545] font-['Outfit',sans-serif] font-bold text-[12px] flex items-center justify-center shrink-0">
+                SL
+              </div>
+<div class="truncate">
+<span class="font-['Outfit',sans-serif] font-bold text-[14px] text-[#0B2545] block truncate">Stanford Vision Lab</span>
+<span class="text-[12px] text-[#246185] truncate block">Multimodal Systems</span>
+</div>
+</div>
+<button class="p-1.5 rounded-full hover:bg-white text-[#2F8FDD] transition-colors" title="Connect" type="button">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+</button>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-white/50 border border-white">
+<div class="flex items-center gap-2.5 min-w-0 pr-2">
+<div class="w-8 h-8 rounded-full bg-[#CFE6F9] text-[#0B2545] font-['Outfit',sans-serif] font-bold text-[12px] flex items-center justify-center shrink-0">
+                DK
+              </div>
+<div class="truncate">
+<span class="font-['Outfit',sans-serif] font-bold text-[14px] text-[#0B2545] block truncate">Devin Kim</span>
+<span class="text-[12px] text-[#246185] truncate block">Berkeley • RL &amp; Robotics</span>
+</div>
+</div>
+<button class="p-1.5 rounded-full hover:bg-white text-[#2F8FDD] transition-colors" title="Connect" type="button">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+</button>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-white/50 border border-white">
+<div class="flex items-center gap-2.5 min-w-0 pr-2">
+<div class="w-8 h-8 rounded-full bg-[#D4F1FE] text-[#0B2545] font-['Outfit',sans-serif] font-bold text-[12px] flex items-center justify-center shrink-0">
+                CL
+              </div>
+<div class="truncate">
+<span class="font-['Outfit',sans-serif] font-bold text-[14px] text-[#0B2545] block truncate">Cambridge NLP Group</span>
+<span class="text-[12px] text-[#246185] truncate block">Constitutional Eval</span>
+</div>
+</div>
+<button class="p-1.5 rounded-full hover:bg-white text-[#2F8FDD] transition-colors" title="Connect" type="button">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div></main></div></body></html>

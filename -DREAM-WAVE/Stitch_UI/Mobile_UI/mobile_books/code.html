@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'secondary-fixed': '#a6eeff', 'outline': '#707882', 'on-tertiary-container': '#fcfcff', 'on-secondary': '#ffffff', 'surface-container-high': '#dee8ff', 'surface-container-lowest': '#ffffff', 'tertiary-container': '#427a9f', 'error-container': '#ffdad6', 'on-error-container': '#93000a', 'surface-dim': '#c7dbff', 'outline-variant': '#c0c7d3', 'tertiary-fixed-dim': '#96cdf5', 'surface-container-highest': '#d5e3ff', 'tertiary': '#246185', 'surface-tint': '#0062a0', 'secondary-container': '#49e1fd', 'on-primary-container': '#fdfcff', 'on-primary-fixed-variant': '#00497a', 'primary-fixed-dim': '#9bcaff', 'on-secondary-container': '#006170', 'surface-container-low': '#f0f3ff', 'on-error': '#ffffff', 'inverse-on-surface': '#ebf1ff', 'on-primary-fixed': '#001d35', 'secondary-fixed-dim': '#3dd8f5', 'on-tertiary': '#ffffff', 'on-background': '#001c3b', 'tertiary-fixed': '#c8e6ff', 'surface-container': '#e7eeff', 'inverse-primary': '#9bcaff', 'on-primary': '#ffffff', 'on-secondary-fixed': '#001f25', 'on-tertiary-fixed': '#001e2f', 'primary-fixed': '#d0e4ff', 'inverse-surface': '#193151', 'surface-bright': '#f9f9ff', 'surface': '#f9f9ff', 'on-secondary-fixed-variant': '#004e5b', 'on-surface-variant': '#404751', 'surface-variant': '#d5e3ff', 'on-surface': '#001c3b', 'on-tertiary-fixed-variant': '#004c6e', 'primary-container': '#0079c4', 'primary': '#005f9c', 'background': '#f9f9ff', 'secondary': '#006878', 'error': '#ba1a1a' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'gutter-mobile': '1rem', 'space-xl': '2.5rem', 'space-md': '1.25rem', 'space-lg': '1.75rem', 'space-xs': '0.375rem', 'margin': '2rem', 'margin-mobile': '1rem', 'space-sm': '0.75rem', 'gutter': '1.5rem' }, fontFamily: { 'label-lg': ['Outfit'], 'label-sm': ['Outfit'], 'headline-lg': ['Outfit'], 'body-lg': ['Plus Jakarta Sans'], 'display-hero': ['Outfit'], 'display-hero-mobile': ['Outfit'], 'body-sm': ['Plus Jakarta Sans'], 'label-md': ['Outfit'], 'title-md': ['Outfit'], 'headline-lg-mobile': ['Outfit'], 'headline-md': ['Outfit'], 'body-md': ['Plus Jakarta Sans'], 'headline-sm': ['Outfit'] }, fontSize: { 'label-lg': ['14px', { lineHeight: '20px', fontWeight: '600' }], 'label-sm': ['11px', { lineHeight: '14px', fontWeight: '500' }], 'headline-lg': ['32px', { lineHeight: '40px', fontWeight: '600' }], 'body-lg': ['16px', { lineHeight: '26px', fontWeight: '400' }], 'display-hero': ['48px', { lineHeight: '56px', fontWeight: '700' }], 'display-hero-mobile': ['32px', { lineHeight: '40px', fontWeight: '700' }], 'body-sm': ['12px', { lineHeight: '18px', fontWeight: '400' }], 'label-md': ['12px', { lineHeight: '16px', fontWeight: '600' }], 'title-md': ['18px', { lineHeight: '24px', fontWeight: '600' }], 'headline-lg-mobile': ['26px', { lineHeight: '32px', fontWeight: '600' }], 'headline-md': ['24px', { lineHeight: '32px', fontWeight: '600' }], 'body-md': ['14px', { lineHeight: '22px', fontWeight: '400' }], 'headline-sm': ['20px', { lineHeight: '28px', fontWeight: '600' }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100vh;}body{overscroll-behavior-y:none;}.pb-safe{padding-bottom:calc(env(safe-area-inset-bottom, 0px) + 5rem);}.pt-safe{padding-top:env(safe-area-inset-top, 0px);}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="min-h-screen bg-gradient-to-b from-[#D6EAFB] to-[#E6F3FD] font-body-md text-body-md text-on-surface flex flex-col antialiased selection:bg-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-[#CFE6F9]/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-secondary flex items-center justify-center shadow-[0_2px_10px_rgba(0,95,156,0.25)]"><span class="material-symbols-outlined text-on-primary text-[20px]">auto_awesome</span></div><div class="flex flex-col"><span class="font-label-lg text-label-lg tracking-wider text-on-surface uppercase">DREAM WAVE AI</span><span class="font-label-sm text-label-sm text-tertiary -mt-1">Mobile Books</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Search" class="w-11 h-11 rounded-full flex items-center justify-center text-tertiary hover:bg-surface-container-low/60 transition-colors"><span class="material-symbols-outlined text-[22px]">search</span></button><button aria-label="Notifications" class="w-11 h-11 rounded-full flex items-center justify-center text-tertiary hover:bg-surface-container-low/60 transition-colors relative"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-secondary-container"></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_2px_8px_rgba(0,95,156,0.25)] ml-1"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-safe"><div class="flex flex-col w-full px-gutter-mobile gap-y-6 pb-6 text-on-surface">
+<!-- Header Section -->
+<header class="flex flex-col gap-1 pt-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-tertiary font-semibold">DIGITAL LIBRARY</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold tracking-tight">Books</h1>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-1">Licensed digital library — search, continue reading, notes, and AI summaries</p>
+</header>
+<!-- Knowledge Discovery Card -->
+<section class="p-space-md rounded-[20px] bg-gradient-to-br from-[#EAF4FD] to-[#DDEEFC] shadow-[0_8px_24px_-4px_rgba(47,143,221,0.08)] flex flex-col gap-3.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">auto_awesome</span>
+<h2 class="font-title-md text-title-md text-on-surface font-semibold">Knowledge discovery</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+      Find legal resources by skill or topic. AI recommendations are architecture-ready and will be grounded in approved content.
+    </p>
+<div class="flex flex-col gap-2.5 sm:flex-row">
+<div class="relative flex-1">
+<input class="w-full h-11 px-4 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-outline text-body-md focus:outline-none shadow-sm transition-all" placeholder="e.g. machine learning, entrepreneurship..." type="text"/>
+</div>
+<button class="h-11 px-5 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-1.5 shadow-[0_4px_14px_rgba(47,143,221,0.35)] active:scale-[0.98] transition-transform">
+<span>Discover</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Search & Category Chips -->
+<section class="flex flex-col gap-3">
+<div class="relative flex items-center w-full">
+<span class="material-symbols-outlined absolute left-3.5 text-[22px] text-tertiary pointer-events-none">search</span>
+<input class="w-full h-12 pl-11 pr-4 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-outline text-body-md focus:outline-none shadow-sm transition-all" id="library-search-input" placeholder="Search library titles, authors..." type="text"/>
+</div>
+<!-- Category Chips (Horizontal Scroll) -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar py-0.5" id="category-chips">
+<button class="shrink-0 h-9 px-3.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center shadow-sm">All</button>
+<button class="shrink-0 h-9 px-3.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm flex items-center shadow-sm">Algorithms</button>
+<button class="shrink-0 h-9 px-3.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm flex items-center shadow-sm">Artificial Intelligence</button>
+<button class="shrink-0 h-9 px-3.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm flex items-center shadow-sm">Biology</button>
+<button class="shrink-0 h-9 px-3.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm flex items-center shadow-sm">Business</button>
+<button class="shrink-0 h-9 px-3.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm flex items-center shadow-sm">Cloud Computing</button>
+<button class="shrink-0 h-9 px-3.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm flex items-center shadow-sm">Computer Science</button>
+<button class="shrink-0 h-9 px-3.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm flex items-center shadow-sm">Cyber Security</button>
+<button class="shrink-0 h-9 px-3.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm flex items-center shadow-sm">Data Structures</button>
+<button class="shrink-0 h-9 px-3.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm flex items-center shadow-sm">Databases</button>
+</div>
+</section>
+<!-- Continue Reading Carousel -->
+<section class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Continue Reading</h2>
+<span class="font-label-sm text-label-sm text-tertiary">2 in progress</span>
+</div>
+<div class="flex gap-3.5 overflow-x-auto no-scrollbar pb-1">
+<!-- Item 1 -->
+<article class="shrink-0 w-[270px] p-3.5 rounded-[22px] bg-gradient-to-br from-[#EAF4FD] to-[#DDEEFC] shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col justify-between gap-3">
+<div class="flex gap-3">
+<div class="relative w-16 h-22 shrink-0 rounded-lg overflow-hidden shadow-sm bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Cover illustration of distributed computing systems book with soft sky blue geometric cubes connected by luminous cyan lines, clean modern academic textbook style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVkyOPavlFDSfgSFz6Edy0lZ7yd8IaSx_NdKdwzYQiZaHBJKXX_Rzp5eJ4oruhIHGFWsI28zEzb_uDHBK06vVJWLKj3vYSb_r8knSsB6UbTj1JIZdMQgB00Aioxwej79--5xcbKcNVCNne6AyaZE7EkvLGCmA2lnfS4gScxsVMn6J73WAoR_YAq_riIheQQ2d-lwlJ70CoQWi1QucRQXuMrrh-7nz1QBW_-QobLIHe-flTJQkLS3N4"/>
+</div>
+<div class="flex flex-col min-w-0 flex-1 justify-center">
+<span class="font-label-sm text-label-sm text-tertiary truncate">Cloud Architecture</span>
+<h3 class="font-title-md text-title-md text-on-surface font-semibold truncate">Designing Data-Intensive Apps</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Martin Kleppmann</p>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-tertiary">Chapter 7: Transactions</span>
+<span class="text-on-surface font-semibold">68%</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-[#CFE6F9] overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 68%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<button aria-label="Book Notes" class="w-10 h-10 rounded-full flex items-center justify-center text-tertiary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">sticky_note_2</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center gap-1 shadow-[0_2px_10px_rgba(47,143,221,0.25)]">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+<span>Resume</span>
+</button>
+</div>
+</article>
+<!-- Item 2 -->
+<article class="shrink-0 w-[270px] p-3.5 rounded-[22px] bg-gradient-to-br from-[#EAF4FD] to-[#DDEEFC] shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col justify-between gap-3">
+<div class="flex gap-3">
+<div class="relative w-16 h-22 shrink-0 rounded-lg overflow-hidden shadow-sm bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Cover artwork for deep learning textbook featuring soft blue neural network nodes and clean celestial gradients, academic minimalist layout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2vSr_dCvBtdZllF2Y8unRkixMUd7SlN4Zt6gDa3I2itHOn4-BgOnMuwUdkdFpH2V-eVsRin4mVpFKEvRCm_F-Q2jja2dijqnRwRxSy3mKI0jSl9T2cVItrN_CkPY6e0rCxTrSZSdOZuylr8Nt9wq6qHTmxp5TYJY78jDqahO5xOJVMIBsQ08DV329T3XJJm8eLIvDryMz_ceLlOtwbSM-nubfrzmUV0riJjT7hNOjeFvHURMvBf02"/>
+</div>
+<div class="flex flex-col min-w-0 flex-1 justify-center">
+<span class="font-label-sm text-label-sm text-tertiary truncate">Machine Learning</span>
+<h3 class="font-title-md text-title-md text-on-surface font-semibold truncate">Deep Learning</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Ian Goodfellow et al.</p>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-tertiary">Chapter 3: Probability</span>
+<span class="text-on-surface font-semibold">24%</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-[#CFE6F9] overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 24%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<button aria-label="Book Notes" class="w-10 h-10 rounded-full flex items-center justify-center text-tertiary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">sticky_note_2</span>
+</button>
+<button class="h-9 px-4 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center gap-1 shadow-[0_2px_10px_rgba(47,143,221,0.25)]">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+<span>Resume</span>
+</button>
+</div>
+</article>
+</div>
+</section>
+<!-- 2-Column Responsive Book Grid -->
+<section class="flex flex-col gap-3.5">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight">Curated Library</h2>
+<div class="flex items-center gap-1 text-tertiary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span>Verified Legal</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3" id="book-grid">
+<!-- Card 1 -->
+<article class="p-3 rounded-[18px] bg-gradient-to-br from-[#EAF4FD] to-[#DDEEFC] shadow-[0_6px_18px_-4px_rgba(47,143,221,0.08)] flex flex-col justify-between gap-2.5">
+<div class="flex flex-col gap-2">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-sm bg-[#D4F1FE]">
+<img class="w-full h-full object-cover" data-alt="Cover of computer systems architecture textbook showing translucent frosted sky blue layered microprocessor diagrams and light teal vector nodes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoWg4B_qh6eUJvtyxrsiO7SEjFRblWi1hlByCKjopO_THNTFrvlSrLRrLSguE6YM6Js7jVMrESm74ap94-oqZrFxdNlnOdRKEJe2T2uRsiw1UsomGtDXPxwXAXdbeZ1i9PKK0nZ6FM4caD1U3saUfzI13czNHO_hNfh04jCmnYrbFEGSUs93Zb4hUodZkE7d6tLjV5a6Rs9anw9CRi-cI9NyiiIGqQIiIavKRqWjx80pSrCS1E1baF"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm">Systems</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 leading-snug">CS:APP Systems</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Randal E. Bryant</p>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="w-full h-1 rounded-full bg-[#CFE6F9] overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 45%;"></div>
+</div>
+<div class="flex items-center justify-between text-tertiary font-body-sm text-body-sm">
+<span>45% read</span>
+<span>480p</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1">
+<button aria-label="Notes" class="w-8 h-8 rounded-full flex items-center justify-center text-tertiary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</button>
+<button aria-label="AI Summary" class="w-8 h-8 rounded-full flex items-center justify-center text-tertiary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+</button>
+</div>
+<button class="h-8 px-3 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center shadow-sm">
+            Read
+          </button>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="p-3 rounded-[18px] bg-gradient-to-br from-[#EAF4FD] to-[#DDEEFC] shadow-[0_6px_18px_-4px_rgba(47,143,221,0.08)] flex flex-col justify-between gap-2.5">
+<div class="flex flex-col gap-2">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-sm bg-[#BFE0F7]">
+<img class="w-full h-full object-cover" data-alt="Cover illustration of an algorithm textbook featuring light cerulean blue mathematical graphs, trees, and elegant geometric lattice patterns on daylight sky background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2k1vNuLAthzOC_DDQiGQhyZOiQH5xFOrA7IP_9STiSEjL6itW27YHt2dJmQBHDFy0bnuv6kBVWHT2FsLnqSCrOvgWinAtXPiS4vZjIOWF9VeOuKiXss8z6ceytqp40DTAQpIc1LtfWz2jzT2hDFNjlIMJKlsWYX3n1i1xu3FIn5iOk8QZ6GQzqsDFQox3Z2S06q-ggD9kDQkkdI3-IXVESw4AsLUCter3VLBGzvSFkD8qqQk3Gn4j"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm">Algorithms</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 leading-snug">CLRS Algorithms</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Thomas H. Cormen</p>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="w-full h-1 rounded-full bg-[#CFE6F9] overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 12%;"></div>
+</div>
+<div class="flex items-center justify-between text-tertiary font-body-sm text-body-sm">
+<span>12% read</span>
+<span>1312p</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1">
+<button aria-label="Notes" class="w-8 h-8 rounded-full flex items-center justify-center text-tertiary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</button>
+<button aria-label="AI Summary" class="w-8 h-8 rounded-full flex items-center justify-center text-tertiary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+</button>
+</div>
+<button class="h-8 px-3 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center shadow-sm">
+            Read
+          </button>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="p-3 rounded-[18px] bg-gradient-to-br from-[#EAF4FD] to-[#DDEEFC] shadow-[0_6px_18px_-4px_rgba(47,143,221,0.08)] flex flex-col justify-between gap-2.5">
+<div class="flex flex-col gap-2">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-sm bg-[#CFE6F9]">
+<img class="w-full h-full object-cover" data-alt="Cover of operating systems concepts textbook with subtle pale blue layered abstract kernel waves and cyan highlights, clean minimal layout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbZKjKduaEGG73PONjJoBshPARJHk2e_u8gtFy5BTxRQKEj90mKJCk6TMSBh0i4RqZdj7k5Wrv3GaNTBnf7l4NFWhKCRVTYQAeKkGjec9yarFH61OQUSFZKU5blcSN1QuAecAGbS_psEQY6-s8HfBdInmNeV70LDGpMA9D17y4AJQLuhVEsi_CS23Uekef-UuyChtH4k02xgeyEf6RYQIHEAInLXowGCnRNDKcRGP27LTpYwSxpbPt"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm">Core CS</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 leading-snug">Operating Systems</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Abraham Silberschatz</p>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="w-full h-1 rounded-full bg-[#CFE6F9] overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 82%;"></div>
+</div>
+<div class="flex items-center justify-between text-tertiary font-body-sm text-body-sm">
+<span>82% read</span>
+<span>976p</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1">
+<button aria-label="Notes" class="w-8 h-8 rounded-full flex items-center justify-center text-tertiary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</button>
+<button aria-label="AI Summary" class="w-8 h-8 rounded-full flex items-center justify-center text-tertiary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+</button>
+</div>
+<button class="h-8 px-3 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center shadow-sm">
+            Read
+          </button>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="p-3 rounded-[18px] bg-gradient-to-br from-[#EAF4FD] to-[#DDEEFC] shadow-[0_6px_18px_-4px_rgba(47,143,221,0.08)] flex flex-col justify-between gap-2.5">
+<div class="flex flex-col gap-2">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-sm bg-[#D4F1FE]">
+<img class="w-full h-full object-cover" data-alt="Cover of computational intelligence and probabilistic modeling book featuring pale cerulean matrix grids, gaussian curves, and subtle cyan accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmj_5z4iEQJHchU19AxMdzrZDo21-h4srLd5oL0AAauPHANaZ2-Pp0W0xY5MidpdYChW7tpE-3o52L7b_zjjYMhl8DTtLJZq_S8V5QCCMjqJ73OmMVV0CkolrZeabzFX2hN1Hf1jpKjyzfXQ3ea_uJGGiC8vbplhquUax3UrJ25N202PRDpPpTh9j703cPMxAvibI7EiT1HTYm_XtqPoGbGwAD-xFVVE-SDMqhT3F_2tF3PCBHw-nV"/>
+<span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm">AI / Math</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-title-md text-title-md text-on-surface font-semibold line-clamp-1 leading-snug">Probabilistic AI</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">Kevin P. Murphy</p>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<div class="w-full h-1 rounded-full bg-[#CFE6F9] overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 5%;"></div>
+</div>
+<div class="flex items-center justify-between text-tertiary font-body-sm text-body-sm">
+<span>5% read</span>
+<span>840p</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-1">
+<button aria-label="Notes" class="w-8 h-8 rounded-full flex items-center justify-center text-tertiary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</button>
+<button aria-label="AI Summary" class="w-8 h-8 rounded-full flex items-center justify-center text-tertiary hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+</button>
+</div>
+<button class="h-8 px-3 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center shadow-sm">
+            Read
+          </button>
+</div>
+</article>
+</div>
+</section>
+<!-- Empty State Preview Collapsible / Toggle -->
+<section class="flex flex-col gap-2">
+<button class="h-10 px-4 rounded-xl bg-surface-container/60 text-tertiary font-label-sm text-label-sm flex items-center justify-between hover:bg-surface-container transition-colors" id="toggle-empty-state-btn">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span>Empty State Preview</span>
+</div>
+<span class="material-symbols-outlined text-[18px] transition-transform" id="empty-state-icon">expand_more</span>
+</button>
+<div class="hidden p-6 rounded-[22px] bg-gradient-to-br from-[#EAF4FD] to-[#DDEEFC] shadow-[0_8px_24px_-4px_rgba(47,143,221,0.08)] flex-col items-center text-center gap-3" id="empty-state-container">
+<div class="w-12 h-12 rounded-full bg-[#D4F1FE] flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[26px]">library_books</span>
+</div>
+<div class="flex flex-col gap-1 max-w-[300px]">
+<h4 class="font-title-md text-title-md text-on-surface font-semibold">No licensed books match this search yet</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Only institution-licensed or legally available PDFs appear here.</p>
+</div>
+<button class="mt-2 h-10 px-5 rounded-full bg-primary text-on-primary font-label-md text-label-md flex items-center gap-2 shadow-[0_4px_14px_rgba(47,143,221,0.3)]">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+<span>Open Digital Library</span>
+</button>
+</div>
+</section>
+</div>
+<script>
+  // Simple interactive toggle for empty state preview
+  const toggleBtn = document.getElementById('toggle-empty-state-btn');
+  const emptyContainer = document.getElementById('empty-state-container');
+  const emptyIcon = document.getElementById('empty-state-icon');
+
+  if (toggleBtn && emptyContainer && emptyIcon) {
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = emptyContainer.classList.contains('hidden');
+      if (isHidden) {
+        emptyContainer.classList.remove('hidden');
+        emptyContainer.classList.add('flex');
+        emptyIcon.style.transform = 'rotate(180deg)';
+      } else {
+        emptyContainer.classList.add('hidden');
+        emptyContainer.classList.remove('flex');
+        emptyIcon.style.transform = 'rotate(0deg)';
+      }
+    });
+  }
+
+  // Category chip interaction
+  const categoryChips = document.querySelectorAll('#category-chips button');
+  categoryChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      categoryChips.forEach(c => {
+        c.className = 'shrink-0 h-9 px-3.5 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm flex items-center shadow-sm';
+      });
+      chip.className = 'shrink-0 h-9 px-3.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center shadow-sm';
+    });
+  });
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-[#CFE6F9]/85 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,95,156,0.06)]" data-active-classes="text-primary font-label-md bg-white/70 shadow-sm"><div class="h-16 px-space-xs flex items-center justify-around"><a class="flex flex-col items-center justify-center min-w-[56px] h-12 rounded-full px-2 text-on-surface-variant hover:text-on-surface transition-all gap-0.5" data-path="explore" href="#"><span class="material-symbols-outlined text-[22px]">explore</span><span class="font-label-sm text-label-sm">Explore</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 rounded-full px-2 text-on-surface-variant hover:text-on-surface transition-all gap-0.5" data-path="studio" href="#"><span class="material-symbols-outlined text-[22px]">draw</span><span class="font-label-sm text-label-sm">Studio</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 rounded-full px-2 text-on-surface-variant hover:text-on-surface transition-all gap-0.5" data-path="workspace" href="#"><span class="material-symbols-outlined text-[22px]">grid_view</span><span class="font-label-sm text-label-sm">Space</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-12 rounded-full px-2 transition-all gap-0.5 text-primary font-label-md bg-white/70 shadow-sm" data-path="mobile-books" href="#"><span class="material-symbols-outlined text-[22px]">menu_book</span><span class="font-label-sm text-label-sm">Library</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-12 rounded-full px-2 text-on-surface-variant hover:text-on-surface transition-all gap-0.5" data-path="analytics" href="#"><span class="material-symbols-outlined text-[22px]">insights</span><span class="font-label-sm text-label-sm">Account</span></a></div></nav></body></html>

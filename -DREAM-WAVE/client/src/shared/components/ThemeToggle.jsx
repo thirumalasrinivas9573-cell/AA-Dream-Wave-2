@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
 
@@ -7,6 +7,7 @@ const OPTIONS = [
   { id: 'dark', label: 'Dark', icon: '🌙', tip: 'Always Dark theme' },
   { id: 'system', label: 'System', icon: '⚙️', tip: 'Match operating system' },
 ]
+
 
 export default function ThemeToggle({
   variant = 'segmented', // 'segmented' | 'compact' | 'icon'
@@ -202,7 +203,8 @@ export default function ThemeToggle({
             >
               Select Theme
             </div>
-            {OPTIONS.map(({ id, label, icon, tip }) => {
+            {OPTIONS.map(({ id, label, icon }) => {
+
               const isSelected = themePreference === id
               return (
                 <button

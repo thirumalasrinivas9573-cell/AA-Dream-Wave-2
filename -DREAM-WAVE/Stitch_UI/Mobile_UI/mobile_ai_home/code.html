@@ -1,0 +1,410 @@
+<!DOCTYPE html><html class="light" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface-container-low": "#f0f3ff", "on-background": "#001c3b", "on-error-container": "#93000a", "tertiary": "#246185", "surface-dim": "#c7dbff", "surface-container": "#e7eeff", "outline-variant": "#c0c7d3", "on-surface-variant": "#404751", "secondary-fixed-dim": "#3dd8f5", "tertiary-container": "#427a9f", "surface-container-lowest": "#ffffff", "on-secondary-fixed-variant": "#004e5b", "secondary": "#006878", "background": "#f9f9ff", "on-secondary": "#ffffff", "primary": "#005f9c", "inverse-primary": "#9bcaff", "surface-container-high": "#dee8ff", "on-surface": "#001c3b", "primary-container": "#0079c4", "surface-container-highest": "#d5e3ff", "surface-bright": "#f9f9ff", "on-primary": "#ffffff", "tertiary-fixed": "#c8e6ff", "secondary-fixed": "#a6eeff", "tertiary-fixed-dim": "#96cdf5", "outline": "#707882", "on-tertiary-container": "#fcfcff", "on-secondary-container": "#006170", "on-primary-container": "#fdfcff", "error-container": "#ffdad6", "inverse-surface": "#193151", "on-tertiary-fixed-variant": "#004c6e", "on-error": "#ffffff", "on-secondary-fixed": "#001f25", "surface-tint": "#0062a0", "on-tertiary": "#ffffff", "on-primary-fixed": "#001d35", "on-primary-fixed-variant": "#00497a", "secondary-container": "#49e1fd", "inverse-on-surface": "#ebf1ff", "error": "#ba1a1a", "surface-variant": "#d5e3ff", "on-tertiary-fixed": "#001e2f", "surface": "#f9f9ff", "primary-fixed": "#d0e4ff", "primary-fixed-dim": "#9bcaff" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-md": "1.25rem", "gutter-mobile": "1rem", "gutter": "1.5rem", "space-lg": "1.75rem", "margin-mobile": "1rem", "space-xl": "2.5rem", "margin": "2rem", "space-xs": "0.375rem", "space-sm": "0.75rem" }, fontFamily: { "display-hero": ["Outfit"], "body-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Outfit"], "label-sm": ["Outfit"], "headline-lg": ["Outfit"], "title-md": ["Outfit"], "display-hero-mobile": ["Outfit"], "body-lg": ["Plus Jakarta Sans"], "headline-md": ["Outfit"], "label-lg": ["Outfit"], "label-md": ["Outfit"], "headline-sm": ["Outfit"], "body-md": ["Plus Jakarta Sans"] }, fontSize: { "display-hero": ["48px", { "lineHeight": "56px", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "headline-lg-mobile": ["26px", { "lineHeight": "32px", "fontWeight": "600" }], "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }], "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }], "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "display-hero-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }], "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }] } } } }</script><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100vh;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;display:inline-block;line-height:1;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md antialiased flex flex-col min-h-screen" style="background: linear-gradient(rgb(212, 236, 251) 0%, rgb(230, 243, 253) 40%, rgb(240, 248, 254) 100%); font-family: Figtree, sans-serif;"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]" style="background: rgba(217, 236, 250, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.8);"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-9 h-9 rounded-full bg-secondary-container/30 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[20px]">auto_awesome</span></div><div class="flex flex-col"><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Dream Wave AI</span><span class="font-title-md text-title-md text-on-surface leading-none">Explore</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="Notifications" class="w-11 h-11 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 w-full pt-16 pb-24 bg-surface flex flex-col" style="background: transparent;"><div class="flex flex-col w-full px-gutter-mobile space-y-space-md pb-6 font-['Figtree',sans-serif]">
+<!-- Header Bar Action Area -->
+<div class="flex items-center justify-between pt-2">
+<div>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim animate-pulse"></span>
+<span class="font-['Outfit'] font-bold text-[11px] tracking-widest uppercase text-secondary">Dream Wave AI</span>
+</div>
+<h1 class="font-['Outfit'] font-semibold text-[22px] text-on-surface leading-tight tracking-tight">Intelligence Workspace</h1>
+</div>
+<div class="flex items-center gap-2">
+<button aria-label="Refresh intelligence cache" class="w-10 h-10 rounded-full bg-surface-container-lowest/80 flex items-center justify-center text-primary shadow-sm active:scale-95 transition-transform" id="refreshBtn">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</button>
+<button class="px-3.5 py-2 rounded-full bg-primary text-on-primary font-['Outfit'] text-[13px] font-semibold flex items-center gap-1.5 shadow-md active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[16px]">psychology</span>
+<span class="">Open Mentor</span>
+</button>
+</div>
+</div>
+<!-- Hero Container: Unified Brain -->
+<div class="relative overflow-hidden rounded-[26px] bg-gradient-to-br from-primary-fixed to-surface-container-high p-5 shadow-[0_12px_28px_-6px_rgba(47,143,221,0.18)]" style="background: linear-gradient(135deg, rgb(170, 211, 241) 0%, rgb(207, 232, 250) 50%, rgb(226, 240, 253) 100%); border: 1px solid rgba(255, 255, 255, 0.8); border-radius: 24px;">
+<!-- Atmospheric decorative blur ring -->
+<div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-secondary-container/40 blur-2xl pointer-events-none"></div>
+<div class="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-surface-container-lowest/60 blur-xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col space-y-3">
+<div class="flex items-start justify-between">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md shadow-sm">
+<span class="material-symbols-outlined text-primary text-[15px]" style="font-variation-settings: &quot;FILL&quot; 1;">hub</span>
+<span class="font-['Outfit'] text-primary font-semibold text-[11px] tracking-wide uppercase">Unified Brain</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary/15 text-secondary text-[10px] font-['Outfit'] font-semibold tracking-wider uppercase">Live Link</span>
+</div>
+<div>
+<h2 class="font-['Outfit'] font-bold text-headline-sm text-on-surface tracking-tight" style="color: rgb(11, 37, 69); font-family: Outfit, sans-serif;">Dream Wave AI — Unified Brain</h2>
+<p class="text-body-sm text-on-surface-variant mt-1 leading-snug">Unified brain across goals, projects, learning, research, career, events, and daily life.</p>
+</div>
+<!-- Current Intelligence Pulse Cards -->
+<div class="bg-surface-container-lowest/85 backdrop-blur-md rounded-2xl p-3.5 space-y-2.5 shadow-sm" style="background: rgb(234, 244, 253); border: 1px solid rgba(255, 255, 255, 0.8);">
+<div class="flex items-center justify-between pb-1 border-b border-surface-container/60">
+<span class="font-['Outfit'] font-semibold text-[12px] text-tertiary uppercase tracking-wider">Current Intelligence</span>
+<span class="material-symbols-outlined text-secondary-fixed-dim text-[16px]">flare</span>
+</div>
+<ul class="space-y-2 text-body-sm">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[16px] mt-0.5">flag</span>
+<span class="text-on-surface"><strong class="font-medium text-on-surface">Goal:</strong> Accelerate ML Research</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px] mt-0.5">deployed_code</span>
+<span class="text-on-surface"><strong class="font-medium text-on-surface">Project:</strong> Spectral Embedding Engine</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary-container text-[16px] mt-0.5">school</span>
+<span class="text-on-surface"><strong class="font-medium text-on-surface">Learning:</strong> Module 4 Benchmark</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-error text-[16px] mt-0.5">schedule</span>
+<span class="text-on-surface"><strong class="font-medium text-on-surface">Deadline:</strong> Masking checkpoint tomorrow 11:59 PM</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary-container text-[16px] mt-0.5">fast_forward</span>
+<span class="text-on-surface"><strong class="font-medium text-on-surface">Next action:</strong> FlashAttention-2 log sync <span class="text-secondary text-[11px] font-medium">(unblocks leaderboard)</span></span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Omnipresent Ask Input Section -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md rounded-[24px] p-4 shadow-[0_8px_24px_-4px_rgba(47,143,221,0.10)] flex flex-col space-y-3" style="background: rgb(234, 244, 253); border: 1px solid rgba(255, 255, 255, 0.8); border-radius: 24px;">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">assistant</span>
+<label class="font-['Outfit'] font-semibold text-[13px] text-on-surface leading-tight" for="aiQueryInput">
+        Ask across Goals, Projects, Learning, Research, Career, Events &amp; Daily Life
+      </label>
+</div>
+<div class="relative flex flex-col">
+<textarea class="w-full bg-surface-container-low/70 text-on-surface placeholder:text-on-surface-variant/70 text-body-md rounded-2xl p-3.5 outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/30 transition-all resize-none" id="aiQueryInput" placeholder="e.g. What should I learn for my current project?" rows="2" style="background: rgb(240, 247, 255); border: 1px solid rgb(210, 227, 248); color: rgb(11, 37, 69); font-family: Figtree, sans-serif;"></textarea>
+<div class="flex items-center justify-between pt-2">
+<button class="text-on-surface-variant hover:text-on-surface text-[12px] font-medium px-2 py-1 transition-colors" id="clearInputBtn">Clear</button>
+<button class="px-5 py-2.5 rounded-full bg-primary hover:bg-primary-container text-on-primary font-['Outfit'] font-semibold text-[13px] flex items-center gap-1.5 shadow-[0_4px_14px_rgba(47,143,221,0.35)] active:scale-95 transition-all" id="submitAskBtn" style="background-color: rgb(47, 143, 221); font-family: Outfit, sans-serif;">
+<span class="material-symbols-outlined text-[16px]">spark</span>
+<span class="">Ask Dream Wave AI</span>
+</button>
+</div>
+</div>
+<!-- Scrollable Suggestion Chips -->
+<div class="pt-1">
+<span class="font-['Outfit'] text-[11px] font-semibold text-tertiary uppercase tracking-wider block mb-2">Prompt Prompters</span>
+<div class="flex gap-2 overflow-x-auto no-scrollbar py-0.5" style="scrollbar-width: none;">
+<button class="prompt-chip shrink-0 px-3 py-1.5 rounded-full bg-secondary-fixed/40 text-on-secondary-fixed-variant hover:bg-secondary-fixed-dim/30 font-['Figtree'] text-[12px] transition-colors">
+          What should I learn for my current project?
+        </button>
+<button class="prompt-chip shrink-0 px-3 py-1.5 rounded-full bg-secondary-fixed/40 text-on-secondary-fixed-variant hover:bg-secondary-fixed-dim/30 font-['Figtree'] text-[12px] transition-colors">
+          How does my project connect to my career?
+        </button>
+<button class="prompt-chip shrink-0 px-3 py-1.5 rounded-full bg-secondary-fixed/40 text-on-secondary-fixed-variant hover:bg-secondary-fixed-dim/30 font-['Figtree'] text-[12px] transition-colors">
+          What skills am I missing?
+        </button>
+<button class="prompt-chip shrink-0 px-3 py-1.5 rounded-full bg-secondary-fixed/40 text-on-secondary-fixed-variant hover:bg-secondary-fixed-dim/30 font-['Figtree'] text-[12px] transition-colors">
+          What should I do today?
+        </button>
+<button class="prompt-chip shrink-0 px-3 py-1.5 rounded-full bg-secondary-fixed/40 text-on-secondary-fixed-variant hover:bg-secondary-fixed-dim/30 font-['Figtree'] text-[12px] transition-colors">
+          Which opportunities align with my project?
+        </button>
+<button class="prompt-chip shrink-0 px-3 py-1.5 rounded-full bg-secondary-fixed/40 text-on-secondary-fixed-variant hover:bg-secondary-fixed-dim/30 font-['Figtree'] text-[12px] transition-colors">
+          What is blocking my progress?
+        </button>
+</div>
+</div>
+<!-- Quick Tool Action Chips -->
+<div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-2 border-t border-surface-container/60" style="scrollbar-width: none;">
+<button class="shrink-0 px-3 py-1 rounded-full bg-surface-container text-on-surface hover:bg-surface-container-high text-[11px] font-['Outfit'] font-semibold flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[13px] text-primary">menu_book</span> My Knowledge
+      </button>
+<button class="shrink-0 px-3 py-1 rounded-full bg-surface-container text-on-surface hover:bg-surface-container-high text-[11px] font-['Outfit'] font-semibold flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[13px] text-primary">neurology</span> My Intelligence
+      </button>
+<button class="shrink-0 px-3 py-1 rounded-full bg-surface-container text-on-surface hover:bg-surface-container-high text-[11px] font-['Outfit'] font-semibold flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[13px] text-primary">person_check</span> Open Mentor
+      </button>
+<button class="shrink-0 px-3 py-1 rounded-full bg-surface-container text-on-surface hover:bg-surface-container-high text-[11px] font-['Outfit'] font-semibold flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[13px] text-primary">smart_toy</span> Open Agent
+      </button>
+<button class="shrink-0 px-3 py-1 rounded-full bg-surface-container text-on-surface hover:bg-surface-container-high text-[11px] font-['Outfit'] font-semibold flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[13px] text-primary">memory</span> AI Memory
+      </button>
+</div>
+</div>
+<!-- 2-Column Grid: Delulu Daylight Stat Cards -->
+<div class="flex flex-col space-y-2">
+<div class="flex items-center justify-between">
+<h3 class="font-['Outfit'] font-semibold text-title-md text-on-surface">Workspace Pulse</h3>
+<span class="font-['Outfit'] text-[11px] font-semibold text-primary uppercase tracking-wider">Synced Live</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Stat 1: Learning Progress (with inline SVG ring gauge) -->
+<div class="rounded-2xl p-3.5 flex flex-col justify-between shadow-sm bg-[#D4F1FE]/80">
+<div class="flex items-center justify-between">
+<span class="font-['Outfit'] text-[12px] font-semibold text-on-surface-variant">Learning progress</span>
+<span class="material-symbols-outlined text-primary text-[18px]">trending_up</span>
+</div>
+<div class="flex items-baseline justify-between mt-3">
+<span class="font-['Outfit'] font-bold text-[28px] text-on-surface" style="color: rgb(11, 37, 69); font-family: Outfit, sans-serif;">2%</span>
+<svg class="w-8 h-8 -rotate-90" viewBox="0 0 36 36">
+<path class="text-surface-container-lowest stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3.5"></path>
+<path class="text-primary stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="2, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+</div>
+<span class="text-[11px] text-on-surface-variant mt-1">Foundational Track</span>
+</div>
+<!-- Stat 2: Active Goals -->
+<div class="rounded-2xl p-3.5 flex flex-col justify-between shadow-sm bg-[#BFE0F7]/85">
+<div class="flex items-center justify-between">
+<span class="font-['Outfit'] text-[12px] font-semibold text-on-surface-variant">Active goals</span>
+<span class="material-symbols-outlined text-tertiary text-[18px]">target</span>
+</div>
+<div class="mt-3">
+<span class="font-['Outfit'] font-bold text-[28px] text-on-surface" style="color: rgb(11, 37, 69); font-family: Outfit, sans-serif;">1</span>
+</div>
+<span class="text-[11px] text-tertiary mt-1 font-medium truncate">Spectral Embedding</span>
+</div>
+<!-- Stat 3: Tasks Done -->
+<div class="rounded-2xl p-3.5 flex flex-col justify-between shadow-sm bg-[#E1F3FF]">
+<div class="flex items-center justify-between">
+<span class="font-['Outfit'] text-[12px] font-semibold text-on-surface-variant">Tasks done</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+</div>
+<div class="mt-3">
+<span class="font-['Outfit'] font-bold text-[28px] text-on-surface" style="color: rgb(11, 37, 69); font-family: Outfit, sans-serif;">2</span>
+</div>
+<span class="text-[11px] text-on-surface-variant mt-1">5 scheduled today</span>
+</div>
+<!-- Stat 4: Books Reading -->
+<div class="rounded-2xl p-3.5 flex flex-col justify-between shadow-sm bg-[#EBFAFF]">
+<div class="flex items-center justify-between">
+<span class="font-['Outfit'] text-[12px] font-semibold text-on-surface-variant">Books reading</span>
+<span class="material-symbols-outlined text-primary-container text-[18px]">auto_stories</span>
+</div>
+<div class="mt-3">
+<span class="font-['Outfit'] font-bold text-[28px] text-on-surface" style="color: rgb(11, 37, 69); font-family: Outfit, sans-serif;">0</span>
+</div>
+<span class="text-[11px] text-primary mt-1 font-medium flex items-center gap-0.5">
+<span class="">Find book</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+</span>
+</div>
+<!-- Stat 5: Streak (spans full width or neat block) -->
+<div class="col-span-2 rounded-2xl p-3.5 flex items-center justify-between shadow-sm bg-[#E0ECF8]/90">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-lowest flex items-center justify-center text-primary shadow-xs">
+<span class="material-symbols-outlined text-[22px]">local_fire_department</span>
+</div>
+<div>
+<span class="font-['Outfit'] text-[12px] font-semibold text-on-surface-variant block">Workspace Streak</span>
+<span class="text-[12px] text-on-surface font-medium">Kickstart Day 1 by closing 1 sprint task!</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-['Outfit'] font-bold text-[24px] text-on-surface leading-none">0d</span>
+<span class="text-[10px] text-tertiary block font-semibold uppercase mt-0.5">Ignite</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Daily AI Brief Card -->
+<div class="rounded-[26px] bg-[#EAF4FD] p-5 shadow-[0_8px_24px_-4px_rgba(47,143,221,0.10)] flex flex-col space-y-3.5" style="background: rgb(234, 244, 253); border: 1px solid rgba(255, 255, 255, 0.8); border-radius: 26px;">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">wb_sunny</span>
+</div>
+<div>
+<h3 class="font-['Outfit'] font-semibold text-title-md text-on-surface leading-snug" style="color: rgb(11, 37, 69); font-family: Outfit, sans-serif;">Good morning, Sharon 👋</h3>
+<p class="text-body-sm text-on-surface-variant">Delulu Daylight Intelligence Digest</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest text-primary font-['Outfit'] text-[11px] font-semibold shadow-xs">Today</span>
+</div>
+<p class="text-body-sm text-on-surface leading-relaxed">
+      Your intelligence system is aligned across active research goals and deadline priorities.
+    </p>
+<!-- Visual Brief Points -->
+<div class="space-y-2.5 pt-1">
+<div class="p-3 rounded-xl bg-surface-container-lowest/80 flex items-start gap-2.5 shadow-xs">
+<span class="w-5 h-5 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center text-[11px] font-['Outfit'] font-bold shrink-0 mt-0.5">1</span>
+<div class="flex-1">
+<span class="text-body-sm text-on-surface font-medium block">Office hours with Dr. Vance at 3:00 PM EST</span>
+<span class="text-[11px] text-tertiary">Topic: Kernel fusion &amp; memory bandwidth bottleneck</span>
+</div>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-lowest/80 flex items-start gap-2.5 shadow-xs">
+<span class="w-5 h-5 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center text-[11px] font-['Outfit'] font-bold shrink-0 mt-0.5">2</span>
+<div class="flex-1">
+<span class="text-body-sm text-on-surface font-medium block">GPU cluster allocation: 128 compute hours remaining</span>
+<span class="text-[11px] text-tertiary">Reservation quota active until Thursday</span>
+</div>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-lowest/80 flex items-start gap-2.5 shadow-xs">
+<span class="w-5 h-5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center text-[11px] font-['Outfit'] font-bold shrink-0 mt-0.5">3</span>
+<div class="flex-1">
+<span class="text-body-sm text-on-surface font-medium block">Rotary Position Embeddings (RoPE) reading assigned</span>
+<span class="text-[11px] text-tertiary">3 key chapters mapped to Module 4 Benchmark</span>
+</div>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-lowest/80 flex items-start gap-2.5 shadow-xs">
+<span class="w-5 h-5 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center text-[11px] font-['Outfit'] font-bold shrink-0 mt-0.5">4</span>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<span class="text-body-sm text-on-surface font-medium block">Semester milestone completion rate at 94.2%</span>
+<span class="font-['Outfit'] font-bold text-[11px] text-secondary">Aspirational</span>
+</div>
+<!-- Spark progress bar -->
+<div class="w-full bg-surface-container-high rounded-full h-1.5 mt-1.5 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 94.2%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Action Center (Vertical List) -->
+<div class="rounded-[26px] bg-[#EAF4FD] p-5 shadow-[0_8px_24px_-4px_rgba(47,143,221,0.10)] flex flex-col space-y-3" style="background: rgb(234, 244, 253); border: 1px solid rgba(255, 255, 255, 0.8); border-radius: 26px;">
+<div class="flex items-center justify-between pb-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">bolt</span>
+<h3 class="font-['Outfit'] font-semibold text-title-md text-on-surface" style="color: rgb(11, 37, 69); font-family: Outfit, sans-serif;">AI Action Center</h3>
+</div>
+<span class="text-on-surface-variant text-[12px] font-medium">One-Tap Accelerators</span>
+</div>
+<div class="flex flex-col space-y-2">
+<!-- Action 1: Ask AI -->
+<button class="action-btn w-full p-3.5 rounded-2xl bg-surface-container-lowest/90 hover:bg-surface-container-lowest flex items-center justify-between shadow-xs active:scale-[0.99] transition-all text-left">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-secondary-fixed/40 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+</div>
+<div>
+<span class="font-['Outfit'] font-semibold text-[14px] text-on-surface block">Ask AI</span>
+<span class="text-body-sm text-on-surface-variant">Converse with your unified contextual model</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">arrow_forward</span>
+</button>
+<!-- Action 2: Generate Study Plan -->
+<button class="action-btn w-full p-3.5 rounded-2xl bg-surface-container-lowest/90 hover:bg-surface-container-lowest flex items-center justify-between shadow-xs active:scale-[0.99] transition-all text-left">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-primary-fixed/40 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</div>
+<div>
+<span class="font-['Outfit'] font-semibold text-[14px] text-on-surface block">Generate Study Plan</span>
+<span class="text-body-sm text-on-surface-variant">Adaptive pacing for upcoming masking deadline</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">arrow_forward</span>
+</button>
+<!-- Action 3: Generate Weekly Plan -->
+<button class="action-btn w-full p-3.5 rounded-2xl bg-surface-container-lowest/90 hover:bg-surface-container-lowest flex items-center justify-between shadow-xs active:scale-[0.99] transition-all text-left">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-tertiary-fixed/50 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">view_timeline</span>
+</div>
+<div>
+<span class="font-['Outfit'] font-semibold text-[14px] text-on-surface block">Generate Weekly Plan</span>
+<span class="text-body-sm text-on-surface-variant">Harmonize lab shifts, classes, and GPU hours</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">arrow_forward</span>
+</button>
+<!-- Action 4: Recommend Books -->
+<button class="action-btn w-full p-3.5 rounded-2xl bg-surface-container-lowest/90 hover:bg-surface-container-lowest flex items-center justify-between shadow-xs active:scale-[0.99] transition-all text-left">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-secondary-container/30 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+</div>
+<div>
+<span class="font-['Outfit'] font-semibold text-[14px] text-on-surface block">Recommend Books</span>
+<span class="text-body-sm text-on-surface-variant">Curated research literature tailored to current thesis</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Interactive Toast Notification Helper -->
+<div class="fixed bottom-20 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-on-surface text-surface font-['Outfit'] text-[12px] font-semibold opacity-0 pointer-events-none transition-opacity duration-300 shadow-xl z-40 flex items-center gap-2" id="statusToast">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed-dim">check_circle</span>
+<span id="toastMessage" class="">Workspace updated</span>
+</div>
+</div>
+<script>
+  (function initWorkspaceInteractions() {
+    const input = document.getElementById('aiQueryInput');
+    const clearBtn = document.getElementById('clearInputBtn');
+    const submitBtn = document.getElementById('submitAskBtn');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const chips = document.querySelectorAll('.prompt-chip');
+    const toast = document.getElementById('statusToast');
+    const toastMsg = document.getElementById('toastMessage');
+
+    function showToast(message) {
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = message;
+      toast.classList.remove('opacity-0');
+      toast.classList.add('opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0');
+      }, 2400);
+    }
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        if (!input) return;
+        input.value = chip.textContent.trim();
+        input.focus();
+        showToast('Prompt populated into unified query');
+      });
+    });
+
+    if (clearBtn && input) {
+      clearBtn.addEventListener('click', () => {
+        input.value = '';
+        input.focus();
+      });
+    }
+
+    if (submitBtn && input) {
+      submitBtn.addEventListener('click', () => {
+        const val = input.value.trim();
+        if (val.length === 0) {
+          input.focus();
+          showToast('Please type a query or choose a prompt');
+          return;
+        }
+        showToast('Consulting Dream Wave AI across 7 modules...');
+        input.value = '';
+      });
+    }
+
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', () => {
+        const icon = refreshBtn.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.classList.add('animate-spin');
+          setTimeout(() => {
+            icon.classList.remove('animate-spin');
+            showToast('All 5 unified intelligence tracks updated');
+          }, 850);
+        }
+      });
+    }
+
+    // Action buttons micro-feedback
+    document.querySelectorAll('.action-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const title = btn.querySelector("span[class*='font-semibold']")?.textContent || 'Action';
+        showToast('Launching ' + title + '...');
+      });
+    });
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-low/85 backdrop-blur-xl shadow-[0_-2px_12px_rgba(47,143,221,0.08)]" data-active-classes="text-primary font-label-md" style="background: rgba(217, 236, 250, 0.85); backdrop-filter: blur(12px); border-top: 1px solid rgba(255, 255, 255, 0.8);"><div class="flex items-center justify-around h-16 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] py-1 transition-colors text-primary font-label-md" data-path="explore" href="#" style="color: rgb(47, 143, 221);"><span class="material-symbols-outlined text-[24px]">explore</span><span class="font-label-md text-label-md tracking-tight mt-0.5">Explore</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] py-1 text-on-surface-variant hover:text-primary transition-colors" data-path="studio" href="#"><span class="material-symbols-outlined text-[24px]">motion_photos_on</span><span class="font-label-md text-label-md tracking-tight mt-0.5">Studio</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] py-1 text-on-surface-variant hover:text-primary transition-colors" data-path="creations" href="#"><span class="material-symbols-outlined text-[24px]">photo_library</span><span class="font-label-md text-label-md tracking-tight mt-0.5">Creations</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] py-1 text-on-surface-variant hover:text-primary transition-colors" data-path="models" href="#"><span class="material-symbols-outlined text-[24px]">psychology</span><span class="font-label-md text-label-md tracking-tight mt-0.5">Models</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] py-1 text-on-surface-variant hover:text-primary transition-colors" data-path="account" href="#"><span class="material-symbols-outlined text-[24px]">manage_accounts</span><span class="font-label-md text-label-md tracking-tight mt-0.5">Account</span></a></div></nav>
+
+</body></html>

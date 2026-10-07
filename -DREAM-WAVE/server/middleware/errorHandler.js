@@ -103,8 +103,12 @@ const errorHandler = (err, req, res, _next) => {
     logger.warn(message, logMeta);
   }
 
+  const validCode = typeof err.code === 'string' && /^[A-Z][A-Z0-9_]+$/.test(err.code) ? err.code : null;
+  const errorCode = validCode || (failureClass ? failureClass.toUpperCase() : 'SERVER_ERROR');
+
   res.status(statusCode).json({
     success: false,
+    code: errorCode,
     message: isProd && statusCode >= 500 ? 'Internal server error' : message,
     failureClass,
     ...(req.requestId ? { requestId: req.requestId } : {}),

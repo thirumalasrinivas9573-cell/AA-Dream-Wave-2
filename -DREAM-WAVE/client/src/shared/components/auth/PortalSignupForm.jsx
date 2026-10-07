@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { authApi } from '../../services/api'
@@ -9,11 +9,12 @@ export default function PortalSignupForm({
   portal,
   portalLabel,
   icon,
-  accent = '#F97316',
-  accentLight = '#FB923C',
+  accent: _accent = '#F97316',
+  accentLight: _accentLight = '#FB923C',
   loginPath,
   cssClass = '',
 }) {
+
   const [step, setStep] = useState('account')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')

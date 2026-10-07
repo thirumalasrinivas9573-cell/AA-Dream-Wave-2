@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
+
 
 /**
  * Futuristic3DBg — 60fps Interactive 3D Cosmic Neural Environment
@@ -236,7 +237,8 @@ export default function Futuristic3DBg({
       }
 
       // ── Render 3D Gyroscopic Orbital Rings ────────────────────────────────
-      st.rings.forEach((ring, idx) => {
+      st.rings.forEach((ring) => {
+
         const ringSteps = 48
         ctx.beginPath()
         let first = null
