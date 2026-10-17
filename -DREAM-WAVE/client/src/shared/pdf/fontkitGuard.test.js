@@ -93,7 +93,7 @@ test('2,000-string sample with ra-vattu (\\u0C4D\\u0C30) yields 0 crashes after 
   const raVattuSample = []
 
   for (const c1 of teluguConsonants) {
-    for (const c2 of teluguC2List) {
+    for (const _c2 of teluguC2List) {
       const cluster = `${c1}\u0C4D\u0C30` // c1 + virama + Ra
       for (const vow of teluguVowels) {
         for (const suf of suffixes) {
@@ -116,7 +116,7 @@ test('2,000-string sample with ra-vattu (\\u0C4D\\u0C30) yields 0 crashes after 
   for (const s of raVattuSample) {
     try {
       font.layout(s)
-    } catch (e) {
+    } catch {
       crashCount++
     }
   }
@@ -144,7 +144,7 @@ test('Devanagari strings yield 0 crashes and 0 extra hits', async () => {
   for (const s of devanagariStrings) {
     try {
       devFont.layout(s)
-    } catch (e) {
+    } catch {
       devCrashes++
     }
   }

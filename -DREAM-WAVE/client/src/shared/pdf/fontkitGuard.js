@@ -1,6 +1,3 @@
-import path from 'path'
-import fs from 'fs'
-
 export const GUARD_MARKER = '__dwFontkitGuard'
 const GUARD_SYMBOL = Symbol.for(GUARD_MARKER)
 
@@ -44,19 +41,8 @@ export async function installFontkitGuard({ fontData } = {}) {
             const ab = await resp.arrayBuffer()
             fontBuffer = new Uint8Array(ab)
           }
-        } catch (fetchErr) {
+        } catch {
           // Fallback to empty/ignore fetch error
-        }
-      }
-
-      if (!fontBuffer && typeof process !== 'undefined' && process.cwd) {
-        try {
-          const possibleFontPath = path.resolve(process.cwd(), 'public/fonts/NotoSansTelugu-Regular.ttf')
-          if (fs.existsSync(possibleFontPath)) {
-            fontBuffer = fs.readFileSync(possibleFontPath)
-          }
-        } catch (fsErr) {
-          // Ignore Node fs error
         }
       }
     }
@@ -70,7 +56,7 @@ export async function installFontkitGuard({ fontData } = {}) {
     try {
       sampleFont = fontkit.create(fontBuffer)
       sampleFont.layout('గైడెన్స్')
-    } catch (e) {
+    } catch {
       // Ignore layout error during initialization
     }
 
