@@ -1,12 +1,14 @@
-const OpenAI = require('openai')
+const { getOpenAI, getApiKey, getModel } = require('../utils/openaiClient')
 const { getPartnershipWorkspace } = require('./partnershipCollaborationService')
 const { SHARING_SCOPES } = require('../constants/partnership')
 
-let openai = null
-function getOpenAI() {
-  if (!process.env.OPENAI_API_KEY?.trim()) return null
-  if (!openai) openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-  return openai
+function getClient() {
+  if (!getApiKey()) return null
+  try {
+    return getOpenAI()
+  } catch {
+    return null
+  }
 }
 
 const AI_INTENTS = [
@@ -137,7 +139,7 @@ async function generateCollaborationInsight({ partnershipId, actor, intent = 'PA
   const workspace = await getPartnershipWorkspace(partnershipId, actor)
   const ruleInsight = buildRuleBasedInsight(intent, workspace)
 
-  const client = getOpenAI()
+  const client = getClient()
   if (!client) {
     return {
       intent,
@@ -175,12 +177,12 @@ Do not suggest creating partnerships without user confirmation.`
     })
 
     const completion = await client.chat.completions.create({
-      model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+      model: getModel(),
       messages: [
         { role: 'system', content: systemPrompt },
         { role: 'user', content: userPrompt },
       ],
-      max_tokens: 500,
+      max_tokens: 1000,
       temperature: 0.2,
     })
 

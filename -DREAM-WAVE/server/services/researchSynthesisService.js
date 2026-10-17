@@ -1,4 +1,4 @@
-const { openai } = require('../utils/openaiClient')
+const { openai, getApiKey, getModel } = require('../utils/openaiClient')
 const researchDocumentService = require('./researchDocumentService')
 const ResearchSource = require('../models/ResearchSource')
 
@@ -16,13 +16,13 @@ async function proposeResearchPlan(project) {
     aiReady: false,
   }
 
-  if (!process.env.OPENAI_API_KEY) return fallback
+  if (!getApiKey()) return fallback
 
   try {
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.35,
-      max_tokens: 800,
+      max_tokens: 1200,
       response_format: { type: 'json_object' },
       messages: [
         {
@@ -71,13 +71,13 @@ async function synthesizeProject(studentId, project) {
     aiReady: false,
   }
 
-  if (!process.env.OPENAI_API_KEY || !excerptBlock) return fallback
+  if (!getApiKey() || !excerptBlock) return fallback
 
   try {
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.25,
-      max_tokens: 1500,
+      max_tokens: 2000,
       response_format: { type: 'json_object' },
       messages: [
         {

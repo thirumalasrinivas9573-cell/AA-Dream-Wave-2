@@ -444,7 +444,7 @@ exports.generateFromRoadmap = async (req, res) => {
       Roadmap.findOne({ _id: roadmapId, userId: req.user._id, goalId }),
     ])
     if (!goal || !roadmap) return fail(res, 404, 'Goal or Roadmap not found.', 'NOT_FOUND')
-    const { days } = await aiTaskService.generateDailyTasks(goal.title, goal.category, roadmap.data)
+    const { days } = await aiTaskService.generateDailyTasks(goal, roadmap.data)
     await Task.deleteMany({
       roadmapId: roadmap._id,
       userId: req.user._id,

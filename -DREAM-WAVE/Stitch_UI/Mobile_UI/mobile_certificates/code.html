@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode": "class", "theme": {"extend": {"colors": {"on-secondary-container": "#006170", "outline-variant": "#c0c7d3", "on-error-container": "#93000a", "on-tertiary-fixed": "#001e2f", "tertiary": "#246185", "on-background": "#001c3b", "primary-container": "#0079c4", "on-tertiary-fixed-variant": "#004c6e", "on-surface": "#001c3b", "surface-dim": "#c7dbff", "on-tertiary": "#ffffff", "inverse-on-surface": "#ebf1ff", "inverse-primary": "#9bcaff", "error": "#ba1a1a", "secondary-fixed": "#a6eeff", "on-primary-fixed-variant": "#00497a", "error-container": "#ffdad6", "background": "#f9f9ff", "on-secondary-fixed-variant": "#004e5b", "secondary-fixed-dim": "#3dd8f5", "secondary-container": "#49e1fd", "on-primary-container": "#fdfcff", "surface-variant": "#d5e3ff", "on-secondary": "#ffffff", "on-primary-fixed": "#001d35", "surface-container-lowest": "#ffffff", "surface": "#f9f9ff", "on-error": "#ffffff", "primary-fixed-dim": "#9bcaff", "surface-container-high": "#dee8ff", "outline": "#707882", "secondary": "#006878", "surface-tint": "#0062a0", "on-surface-variant": "#404751", "surface-container": "#e7eeff", "on-primary": "#ffffff", "tertiary-fixed": "#c8e6ff", "surface-container-low": "#f0f3ff", "primary": "#005f9c", "on-secondary-fixed": "#001f25", "surface-bright": "#f9f9ff", "tertiary-container": "#427a9f", "surface-container-highest": "#d5e3ff", "tertiary-fixed-dim": "#96cdf5", "inverse-surface": "#193151", "primary-fixed": "#d0e4ff", "on-tertiary-container": "#fcfcff"}, "borderRadius": {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"}, "spacing": {"margin": "2rem", "gutter-mobile": "1rem", "space-md": "1.25rem", "space-xs": "0.375rem", "gutter": "1.5rem", "space-xl": "2.5rem", "space-lg": "1.75rem", "margin-mobile": "1rem", "space-sm": "0.75rem"}, "fontFamily": {"headline-md": ["Outfit"], "body-md": ["Plus Jakarta Sans"], "headline-lg": ["Outfit"], "body-lg": ["Plus Jakarta Sans"], "label-sm": ["Outfit"], "display-hero": ["Outfit"], "label-md": ["Outfit"], "headline-sm": ["Outfit"], "label-lg": ["Outfit"], "headline-lg-mobile": ["Outfit"], "body-sm": ["Plus Jakarta Sans"], "display-hero-mobile": ["Outfit"], "title-md": ["Outfit"]}, "fontSize": {"headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}], "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}], "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}], "body-lg": ["16px", {"lineHeight": "26px", "fontWeight": "400"}], "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}], "display-hero": ["48px", {"lineHeight": "56px", "fontWeight": "700"}], "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}], "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}], "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}], "headline-lg-mobile": ["26px", {"lineHeight": "32px", "fontWeight": "600"}], "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}], "display-hero-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}], "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}]}}}};</script><style>@layer base { body { overscroll-behavior-y: none; -webkit-tap-highlight-color: transparent; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } } ::-webkit-scrollbar { display: none; }</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="min-h-full bg-gradient-to-b from-surface-container-low via-surface-bright to-surface text-on-surface flex flex-col antialiased selection:bg-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-[#CFE6F9]/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-9 h-9 rounded-full bg-primary-container/20 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[20px]">waves</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-primary leading-none">DREAM WAVE</span><span class="font-label-sm text-label-sm text-secondary tracking-widest leading-none mt-1 uppercase">AI Studio</span></div></div><div class="flex items-center gap-space-sm"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-on-surface leading-tight">Careers</span><span class="font-label-sm text-label-sm text-on-surface-variant">Active</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 w-full pt-16 pb-24 bg-transparent"><div class="flex flex-col w-full pb-10" style="font-family: 'Outfit', sans-serif;">
+<div class="px-4 pt-2 flex flex-col gap-1">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+<span class="font-headline-sm text-label-sm font-semibold tracking-wider text-[#006878] uppercase">EVIDENCE PORTFOLIO</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-[#0B2545] font-bold tracking-tight">Certificates</h1>
+<p class="text-[15px] leading-snug text-[#0B2545]/70" style="font-family: 'Figtree', sans-serif;">Import, categorize, search, preview and share learning credentials.</p>
+</div>
+<div class="px-4 mt-4 flex flex-col gap-3">
+<div class="relative flex items-center w-full">
+<span class="material-symbols-outlined absolute left-3.5 text-[#006878] text-[20px] pointer-events-none">search</span>
+<input class="w-full h-11 pl-11 pr-10 bg-white rounded-full text-[15px] text-[#0B2545] placeholder-[#707882] shadow-sm focus:outline-none transition-all" id="searchInput" placeholder="Search credentials..." style="font-family: 'Figtree', sans-serif;" type="text"/>
+<button class="hidden absolute right-3 w-6 h-6 rounded-full bg-[#DDEEFC] text-[#0B2545] flex items-center justify-center" id="clearSearchBtn">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 -mx-4 px-4" id="categoryChips">
+<button class="cat-pill active flex-shrink-0 h-[34px] px-4 rounded-full text-[14px] font-semibold transition-all bg-[#2F8FDD] text-white shadow-sm flex items-center gap-1.5" data-cat="all">
+<span>All</span>
+<span class="text-[11px] px-1.5 py-0.5 rounded-full bg-white/20">4</span>
+</button>
+<button class="cat-pill flex-shrink-0 h-[34px] px-4 rounded-full text-[14px] font-medium transition-all bg-white text-[#0B2545] shadow-sm flex items-center" data-cat="deep-learning">
+        Deep Learning
+      </button>
+<button class="cat-pill flex-shrink-0 h-[34px] px-4 rounded-full text-[14px] font-medium transition-all bg-white text-[#0B2545] shadow-sm flex items-center" data-cat="ai-safety">
+        AI Safety
+      </button>
+<button class="cat-pill flex-shrink-0 h-[34px] px-4 rounded-full text-[14px] font-medium transition-all bg-white text-[#0B2545] shadow-sm flex items-center" data-cat="cloud-infra">
+        Cloud Infra
+      </button>
+</div>
+</div>
+<div class="px-4 mt-4 flex items-center justify-between">
+<span class="text-[13px] font-medium text-[#006878]" id="resultsCount" style="font-family: 'Figtree', sans-serif;">Showing 3 verified credentials</span>
+<button class="text-[12px] font-semibold text-[#2F8FDD] hover:underline flex items-center gap-1" id="toggleDemoEmpty">
+<span class="material-symbols-outlined text-[15px]">tune</span>
+<span>Simulate Empty</span>
+</button>
+</div>
+<div class="px-4 mt-3 flex flex-col gap-4" id="certList">
+<div class="cert-card bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] p-4 rounded-[24px] shadow-sm relative overflow-hidden flex flex-col gap-3 transition-all" data-category="deep-learning" data-title="deep learning specialization">
+<div class="relative w-full h-24 rounded-[18px] overflow-hidden bg-[#CFE6F9] flex items-center justify-between p-3.5 shadow-inner">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 rounded-full bg-[#00C2DE]/10 pointer-events-none"></div>
+<div class="relative z-10 flex flex-col justify-between h-full">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[18px]">verified</span>
+<span class="text-[11px] font-semibold tracking-wider text-[#006878] uppercase">Accredited Specialization</span>
+</div>
+<p class="font-headline-sm text-title-md text-[#0B2545] font-bold tracking-tight">DeepLearning.AI</p>
+</div>
+<div class="relative z-10 w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[24px]">school</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-start justify-between gap-2">
+<h3 class="font-headline-sm text-[18px] leading-tight text-[#0B2545] font-bold">Deep Learning Specialization</h3>
+<span class="w-2 h-2 rounded-full bg-[#00C2DE] mt-1.5 flex-shrink-0"></span>
+</div>
+<p class="text-[14px] text-[#0B2545]/80 flex items-center gap-1" style="font-family: 'Figtree', sans-serif;">
+<span>DeepLearning.AI &amp; Stanford</span>
+<span class="text-[11px] text-[#006878]">•</span>
+<span class="text-[13px] text-[#006878]">Issued Sep 2024</span>
+</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-[12px] font-medium bg-white text-[#0B2545] shadow-xs" style="font-family: 'Figtree', sans-serif;">
+          Deep Learning &amp; Systems
+        </span>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 h-[44px] px-4 rounded-full bg-[#2F8FDD] text-white font-semibold text-[14px] flex items-center justify-center gap-1.5 shadow-sm active:scale-[0.98] transition-transform" onclick="openPreviewModal('Deep Learning Specialization', 'DeepLearning.AI &amp; Stanford', 'Sep 2024', 'Credential ID: DL-849202-X9', 'Covers foundational neural networks, CNNs, RNNs, Sequence Models and Optimizers under Professor Andrew Ng.')">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span>Preview</span>
+</button>
+<button aria-label="Share certificate" class="w-[44px] h-[44px] rounded-full bg-white text-[#0B2545] flex items-center justify-center shadow-xs active:scale-95 transition-transform" onclick="shareCert('Deep Learning Specialization')">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+<button aria-label="Delete certificate" class="w-[44px] h-[44px] rounded-full bg-white text-[#ba1a1a] flex items-center justify-center shadow-xs active:scale-95 transition-transform" onclick="deleteCert(this)">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<div class="cert-card bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] p-4 rounded-[24px] shadow-sm relative overflow-hidden flex flex-col gap-3 transition-all" data-category="cloud-infra" data-title="distributed gpu systems">
+<div class="relative w-full h-24 rounded-[18px] overflow-hidden bg-[#BFE0F7] flex items-center justify-between p-3.5 shadow-inner">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 rounded-full bg-[#00C2DE]/10 pointer-events-none"></div>
+<div class="relative z-10 flex flex-col justify-between h-full">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[18px]">developer_board</span>
+<span class="text-[11px] font-semibold tracking-wider text-[#006878] uppercase">Infrastructure Mastery</span>
+</div>
+<p class="font-headline-sm text-title-md text-[#0B2545] font-bold tracking-tight">Modal &amp; CUDA Alliance</p>
+</div>
+<div class="relative z-10 w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[24px]">memory</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-start justify-between gap-2">
+<h3 class="font-headline-sm text-[18px] leading-tight text-[#0B2545] font-bold">Distributed GPU Systems</h3>
+<span class="w-2 h-2 rounded-full bg-[#00C2DE] mt-1.5 flex-shrink-0"></span>
+</div>
+<p class="text-[14px] text-[#0B2545]/80 flex items-center gap-1" style="font-family: 'Figtree', sans-serif;">
+<span>Modal Labs &amp; CUDA Alliance</span>
+<span class="text-[11px] text-[#006878]">•</span>
+<span class="text-[13px] text-[#006878]">Issued Aug 2024</span>
+</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-[12px] font-medium bg-white text-[#0B2545] shadow-xs" style="font-family: 'Figtree', sans-serif;">
+          Cloud &amp; GPU Infra
+        </span>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 h-[44px] px-4 rounded-full bg-[#2F8FDD] text-white font-semibold text-[14px] flex items-center justify-center gap-1.5 shadow-sm active:scale-[0.98] transition-transform" onclick="openPreviewModal('Distributed GPU Systems', 'Modal Labs &amp; CUDA Alliance', 'Aug 2024', 'Credential ID: CUDA-66219-MOD', 'Advanced orchestration, multi-node vLLM deployment, kernel optimizations and serverless GPU cluster management.')">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span>Preview</span>
+</button>
+<button aria-label="Share certificate" class="w-[44px] h-[44px] rounded-full bg-white text-[#0B2545] flex items-center justify-center shadow-xs active:scale-95 transition-transform" onclick="shareCert('Distributed GPU Systems')">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+<button aria-label="Delete certificate" class="w-[44px] h-[44px] rounded-full bg-white text-[#ba1a1a] flex items-center justify-center shadow-xs active:scale-95 transition-transform" onclick="deleteCert(this)">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<div class="cert-card bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] p-4 rounded-[24px] shadow-sm relative overflow-hidden flex flex-col gap-3 transition-all" data-category="ai-safety" data-title="frontier ai safety &amp; alignment">
+<div class="relative w-full h-24 rounded-[18px] overflow-hidden bg-[#D4F1FE] flex items-center justify-between p-3.5 shadow-inner">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 rounded-full bg-[#00C2DE]/10 pointer-events-none"></div>
+<div class="relative z-10 flex flex-col justify-between h-full">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[18px]">shield_with_heart</span>
+<span class="text-[11px] font-semibold tracking-wider text-[#006878] uppercase">Research Fellowship</span>
+</div>
+<p class="font-headline-sm text-title-md text-[#0B2545] font-bold tracking-tight">Anthropic Research</p>
+</div>
+<div class="relative z-10 w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[24px]">verified_user</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-start justify-between gap-2">
+<h3 class="font-headline-sm text-[18px] leading-tight text-[#0B2545] font-bold">Frontier AI Safety &amp; Alignment</h3>
+<span class="w-2 h-2 rounded-full bg-[#00C2DE] mt-1.5 flex-shrink-0"></span>
+</div>
+<p class="text-[14px] text-[#0B2545]/80 flex items-center gap-1" style="font-family: 'Figtree', sans-serif;">
+<span>Anthropic Research</span>
+<span class="text-[11px] text-[#006878]">•</span>
+<span class="text-[13px] text-[#006878]">Issued Jul 2024</span>
+</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-[12px] font-medium bg-white text-[#0B2545] shadow-xs" style="font-family: 'Figtree', sans-serif;">
+          AI Safety
+        </span>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 h-[44px] px-4 rounded-full bg-[#2F8FDD] text-white font-semibold text-[14px] flex items-center justify-center gap-1.5 shadow-sm active:scale-[0.98] transition-transform" onclick="openPreviewModal('Frontier AI Safety &amp; Alignment', 'Anthropic Research', 'Jul 2024', 'Credential ID: ANTH-ALIGN-2024', 'Constitutional AI, interpretability mechanics, red teaming protocols, and scalable oversight paradigms.')">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span>Preview</span>
+</button>
+<button aria-label="Share certificate" class="w-[44px] h-[44px] rounded-full bg-white text-[#0B2545] flex items-center justify-center shadow-xs active:scale-95 transition-transform" onclick="shareCert('Frontier AI Safety &amp; Alignment')">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+<button aria-label="Delete certificate" class="w-[44px] h-[44px] rounded-full bg-white text-[#ba1a1a] flex items-center justify-center shadow-xs active:scale-95 transition-transform" onclick="deleteCert(this)">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+<div class="hidden px-4 mt-6" id="emptyState">
+<div class="bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] p-6 rounded-[24px] shadow-sm flex flex-col items-center text-center gap-3">
+<div class="w-14 h-14 rounded-full bg-[#CFE6F9] flex items-center justify-center text-[#2F8FDD]">
+<span class="material-symbols-outlined text-[30px]">folder_off</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-sm text-[18px] text-[#0B2545] font-bold">No matching certificates</h3>
+<p class="text-[15px] text-[#0B2545]/75 leading-snug" style="font-family: 'Figtree', sans-serif;">
+          Import credentials from institutions, courses and professional issuers.
+        </p>
+</div>
+<button class="mt-2 h-[44px] px-6 rounded-full bg-[#2F8FDD] text-white font-semibold text-[15px] flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-transform" onclick="triggerImportFlow()">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Import Certificate</span>
+</button>
+</div>
+</div>
+<div class="fixed bottom-20 right-4 z-40">
+<button aria-label="Quick import certificate" class="w-14 h-14 rounded-full bg-[#2F8FDD] text-white flex items-center justify-center shadow-[0_8px_20px_rgba(47,143,221,0.4)] active:scale-90 transition-transform" onclick="triggerImportFlow()">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+</div>
+<div class="fixed inset-0 bg-[#001c3b]/40 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300 flex items-end" id="previewSheetOverlay">
+<div class="w-full bg-gradient-to-b from-[#EAF4FD] via-[#F0F8FE] to-[#DDEEFC] rounded-t-[28px] max-h-[751px] overflow-y-auto p-5 shadow-2xl transform translate-y-full transition-transform duration-300 flex flex-col gap-4" id="previewSheet">
+<div class="w-12 h-1.5 bg-[#CFE6F9] rounded-full mx-auto -mt-1 mb-1"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[22px]">workspace_premium</span>
+<span class="text-[12px] font-bold tracking-wider text-[#006878] uppercase">Official Certificate</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-white text-[#0B2545] flex items-center justify-center shadow-xs" onclick="closePreviewModal()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="bg-white rounded-[20px] p-5 shadow-sm flex flex-col gap-4 relative overflow-hidden">
+<div class="flex items-center justify-between pb-3 bg-gradient-to-r from-transparent via-[#CFE6F9]/40 to-transparent">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#00C2DE]"></span>
+<span class="text-[11px] font-bold uppercase tracking-wider text-[#006878]">Dream Wave Verified</span>
+</div>
+<span class="text-[11px] font-semibold text-[#2F8FDD] bg-[#EBFAFF] px-2 py-0.5 rounded-full">Tamper-Proof</span>
+</div>
+<div class="text-center py-2 flex flex-col items-center gap-1">
+<p class="text-[12px] uppercase tracking-widest text-[#006878] font-semibold">This certifies that</p>
+<h2 class="text-[22px] font-bold text-[#0B2545] tracking-tight">Elena Vance</h2>
+<p class="text-[14px] text-[#0B2545]/70 max-w-[260px] mx-auto" style="font-family: 'Figtree', sans-serif;">has successfully fulfilled all core coursework and laboratory mastery for</p>
+<p class="text-[19px] font-bold text-[#2F8FDD] mt-1" id="modalCertTitle">Deep Learning Specialization</p>
+</div>
+<p class="text-[14px] text-[#0B2545]/80 text-center leading-relaxed" id="modalCertDesc" style="font-family: 'Figtree', sans-serif;">
+          Specialization curriculum verified through cryptographically anchored evaluation nodes.
+        </p>
+<div class="bg-[#EAF4FD] p-3 rounded-[16px] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] text-[#006878] uppercase tracking-wider font-semibold">Issuer</span>
+<span class="text-[13px] font-bold text-[#0B2545]" id="modalCertIssuer">DeepLearning.AI</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-[11px] text-[#006878] uppercase tracking-wider font-semibold">Issued Date</span>
+<span class="text-[13px] font-bold text-[#0B2545]" id="modalCertDate">Sep 2024</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-[12px] text-[#006878]" style="font-family: 'Figtree', sans-serif;">
+<span class="truncate max-w-[220px]" id="modalCertId">Credential ID: DL-849202-X9</span>
+<span class="flex items-center gap-1 text-[#2F8FDD] font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+            Valid
+          </span>
+</div>
+</div>
+<div class="flex items-center gap-3 pt-1">
+<button class="flex-1 h-[44px] rounded-full bg-[#2F8FDD] text-white font-semibold text-[14px] flex items-center justify-center gap-2 shadow-md active:scale-98 transition-transform" onclick="downloadMockPDF()">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Download PDF</span>
+</button>
+<button class="flex-1 h-[44px] rounded-full bg-white text-[#0B2545] font-semibold text-[14px] flex items-center justify-center gap-2 shadow-xs active:scale-98 transition-transform" onclick="copyCredentialLink()">
+<span class="material-symbols-outlined text-[18px]">link</span>
+<span id="copyLinkText">Copy Link</span>
+</button>
+</div>
+</div>
+</div>
+<div class="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-[#0B2545] text-white text-[13px] font-medium px-4 py-2 rounded-full shadow-lg opacity-0 pointer-events-none transition-opacity duration-200 flex items-center gap-1.5" id="toast" style="font-family: 'Figtree', sans-serif;">
+<span class="material-symbols-outlined text-[#00C2DE] text-[16px]">check</span>
+<span id="toastMessage">Done</span>
+</div>
+</div>
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
+  const categoryChips = document.querySelectorAll('.cat-pill');
+  const certCards = document.querySelectorAll('.cert-card');
+  const emptyState = document.getElementById('emptyState');
+  const certList = document.getElementById('certList');
+  const resultsCount = document.getElementById('resultsCount');
+  const toggleDemoEmptyBtn = document.getElementById('toggleDemoEmpty');
+
+  let activeCategory = 'all';
+  let isSimulatingEmpty = false;
+
+  function filterCards() {
+    if (isSimulatingEmpty) {
+      certList.classList.add('hidden');
+      emptyState.classList.remove('hidden');
+      resultsCount.textContent = 'Showing 0 verified credentials';
+      return;
+    }
+
+    const query = searchInput.value.toLowerCase().trim();
+    let visibleCount = 0;
+
+    certCards.forEach(card => {
+      const title = card.getAttribute('data-title') || '';
+      const category = card.getAttribute('data-category') || '';
+
+      const matchesSearch = !query || title.includes(query);
+      const matchesCat = activeCategory === 'all' || category === activeCategory;
+
+      if (matchesSearch && matchesCat) {
+        card.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    if (visibleCount === 0) {
+      certList.classList.add('hidden');
+      emptyState.classList.remove('hidden');
+    } else {
+      certList.classList.remove('hidden');
+      emptyState.classList.add('hidden');
+    }
+
+    resultsCount.textContent = `Showing ${visibleCount} verified credential${visibleCount === 1 ? '' : 's'}`;
+  }
+
+  searchInput.addEventListener('input', (e) => {
+    if (e.target.value.length > 0) {
+      clearSearchBtn.classList.remove('hidden');
+    } else {
+      clearSearchBtn.classList.add('hidden');
+    }
+    isSimulatingEmpty = false;
+    toggleDemoEmptyBtn.querySelector('span:last-child').textContent = 'Simulate Empty';
+    filterCards();
+  });
+
+  clearSearchBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    clearSearchBtn.classList.add('hidden');
+    filterCards();
+  });
+
+  categoryChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      categoryChips.forEach(c => {
+        c.classList.remove('bg-[#2F8FDD]', 'text-white', 'font-semibold');
+        c.classList.add('bg-white', 'text-[#0B2545]', 'font-medium');
+      });
+      chip.classList.add('bg-[#2F8FDD]', 'text-white', 'font-semibold');
+      chip.classList.remove('bg-white', 'text-[#0B2545]', 'font-medium');
+
+      activeCategory = chip.getAttribute('data-cat');
+      isSimulatingEmpty = false;
+      toggleDemoEmptyBtn.querySelector('span:last-child').textContent = 'Simulate Empty';
+      filterCards();
+    });
+  });
+
+  toggleDemoEmptyBtn.addEventListener('click', () => {
+    isSimulatingEmpty = !isSimulatingEmpty;
+    const label = toggleDemoEmptyBtn.querySelector('span:last-child');
+    label.textContent = isSimulatingEmpty ? 'Restore View' : 'Simulate Empty';
+    filterCards();
+  });
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toastMessage');
+    toastMessage.textContent = msg;
+    toast.classList.remove('opacity-0');
+    setTimeout(() => {
+      toast.classList.add('opacity-0');
+    }, 2200);
+  }
+
+  function openPreviewModal(title, issuer, date, credId, desc) {
+    document.getElementById('modalCertTitle').textContent = title;
+    document.getElementById('modalCertIssuer').textContent = issuer;
+    document.getElementById('modalCertDate').textContent = date;
+    document.getElementById('modalCertId').textContent = credId;
+    document.getElementById('modalCertDesc').textContent = desc;
+
+    const overlay = document.getElementById('previewSheetOverlay');
+    const sheet = document.getElementById('previewSheet');
+
+    overlay.classList.remove('hidden');
+    setTimeout(() => {
+      overlay.classList.remove('opacity-0');
+      sheet.classList.remove('translate-y-full');
+    }, 10);
+  }
+
+  function closePreviewModal() {
+    const overlay = document.getElementById('previewSheetOverlay');
+    const sheet = document.getElementById('previewSheet');
+
+    overlay.classList.add('opacity-0');
+    sheet.classList.add('translate-y-full');
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+    }, 300);
+  }
+
+  document.getElementById('previewSheetOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'previewSheetOverlay') {
+      closePreviewModal();
+    }
+  });
+
+  function shareCert(title) {
+    if (navigator.share) {
+      navigator.share({
+        title: title,
+        text: `Check out my verified certification for ${title} on Dream Wave AI!`,
+        url: window.location.href,
+      }).catch(() => {});
+    } else {
+      showToast(`Link copied for ${title}`);
+    }
+  }
+
+  function deleteCert(btn) {
+    const card = btn.closest('.cert-card');
+    if (card) {
+      card.style.transform = 'scale(0.95)';
+      card.style.opacity = '0';
+      setTimeout(() => {
+        card.remove();
+        filterCards();
+        showToast('Certificate removed from portfolio');
+      }, 200);
+    }
+  }
+
+  function downloadMockPDF() {
+    showToast('Downloading verified certificate PDF...');
+    setTimeout(() => {
+      closePreviewModal();
+    }, 800);
+  }
+
+  function copyCredentialLink() {
+    const copyLinkText = document.getElementById('copyLinkText');
+    copyLinkText.textContent = 'Copied!';
+    showToast('Credential link copied to clipboard');
+    setTimeout(() => {
+      copyLinkText.textContent = 'Copy Link';
+    }, 2000);
+  }
+
+  function triggerImportFlow() {
+    showToast('Connecting to academic registrar nodes...');
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-[#CFE6F9]/85 backdrop-blur-xl shadow-[0_-1px_12px_rgba(0,0,0,0.05)]" data-active-classes="text-primary font-semibold"><div class="flex justify-around items-center h-16 px-2"><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-primary transition-colors" data-path="explore" href="#"><span class="material-symbols-outlined text-[22px]">explore</span><span class="font-label-sm text-label-sm">Explore</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-primary transition-colors" data-path="studio" href="#"><span class="material-symbols-outlined text-[22px]">auto_fix_high</span><span class="font-label-sm text-label-sm">Studio</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-primary transition-colors" data-path="workspace" href="#"><span class="material-symbols-outlined text-[22px]">space_dashboard</span><span class="font-label-sm text-label-sm">Workspace</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] transition-colors text-primary font-semibold" data-path="careers" href="#"><span class="material-symbols-outlined text-[22px]">school</span><span class="font-label-sm text-label-sm">Careers</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-primary transition-colors" data-path="analytics" href="#"><span class="material-symbols-outlined text-[22px]">insights</span><span class="font-label-sm text-label-sm">Analytics</span></a></div></nav></body></html>

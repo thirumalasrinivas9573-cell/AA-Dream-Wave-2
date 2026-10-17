@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import StudentLayout from '../layouts/StudentLayout'
 import researchService from '@shared/services/researchService'
+import { usePdfExport, DownloadPdfButton } from '@shared/pdf'
 import { EmptyState, ErrorState, LoadingState } from '@shared/components/ui'
 
 export default function Reports() {
@@ -11,6 +12,8 @@ export default function Reports() {
   const [loading, setLoading] = useState(true)
   const [generating, setGenerating] = useState(false)
   const [error, setError] = useState('')
+
+  const { exporting, error: pdfError, setError: setPdfError, notice: pdfNotice, setNotice: setPdfNotice, exportPdf } = usePdfExport()
 
   useEffect(() => {
     load()
@@ -61,6 +64,23 @@ export default function Reports() {
 
   const selected = useMemo(() => workspaces.find((item) => item._id === selectedId) || null, [workspaces, selectedId])
   const selectedReport = selected?.reports?.at(-1) || null
+  const hasSections = Boolean(selectedReport?.sections?.length)
+
+  const handleExportPdf = () => {
+    if (!selectedReport) return
+    const slug = (selectedReport.title || selected?.title || 'report')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '') || 'report'
+    const dateStr = new Date().toISOString().slice(0, 10)
+    const fileName = `dreamwave-report-${slug}-${dateStr}.pdf`
+
+    const docBuilder = async (options = {}) => {
+      const { ReportPdf } = await import('./ReportPdf')
+      return <ReportPdf workspace={selected} report={selectedReport} options={options} />
+    }
+    exportPdf(docBuilder, fileName)
+  }
 
   return (
     <StudentLayout>
@@ -73,6 +93,21 @@ export default function Reports() {
           <Link className="btn btn-secondary btn-sm" to="/student/research">Open research workspace</Link>
         </div>
       </div>
+
+      {pdfError && (
+        <div className="alert alert-error" style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>⚠️ {pdfError}</span>
+          <button type="button" className="btn btn-ghost btn-sm" onClick={() => setPdfError('')} style={{ padding: '2px 8px' }}>✕</button>
+        </div>
+      )}
+
+      {pdfNotice && (
+        <div className="alert alert-warning" style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span>ℹ️ {pdfNotice}</span>
+          <button type="button" className="btn btn-ghost btn-sm" onClick={() => setPdfNotice('')} style={{ padding: '2px 8px' }}>✕</button>
+        </div>
+      )}
+
 
       <div className="card card-purple" style={{ marginBottom: 20 }}>
         <div style={{ marginBottom: 14 }}>
@@ -123,6 +158,12 @@ export default function Reports() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', marginBottom: 12 }}>
                     <strong>{selectedReport.title || 'Latest report'}</strong>
                     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                      <DownloadPdfButton
+                        onExport={handleExportPdf}
+                        loading={exporting}
+                        disabled={!hasSections}
+                        disabledReason="This report has no sections to export."
+                      />
                       <a className="btn btn-secondary btn-sm" href={`/api/research/workspace/${selected._id}/reports/${selectedReport.reportId}/export`} target="_blank" rel="noreferrer">Export CSV</a>
                       <Link className="btn btn-ghost btn-sm" to={`/student/research/${selected._id}`}>Open workspace</Link>
                     </div>

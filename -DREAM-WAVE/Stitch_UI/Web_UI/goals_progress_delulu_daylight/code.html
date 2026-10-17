@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Workspace - Delulu Daylight</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&amp;family=Outfit:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            headline: ['Outfit', 'sans-serif'],
+            body: ['Figtree', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              900: '#0B2545',
+              800: '#1C3D5A',
+              700: '#2A4E70',
+              600: '#3A5A78',
+            },
+            accent: {
+              blue: '#2F8FDD',
+              cyan: '#00C2DE',
+            },
+            surface: {
+              card: '#EAF4FD',
+              cardAlt: '#DDEEFC',
+              tint1: '#D4F1FE',
+              tint2: '#BFE0F7',
+              tint3: '#CFE6F9',
+              rail: '#CFE6F9',
+            }
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #D6EAFB 0%, #E6F3FD 100%);
+      min-height: 100vh;
+      font-family: 'Figtree', sans-serif;
+      color: #0B2545;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: 'Outfit', sans-serif;
+    }
+    .custom-border {
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, #A9D3F1 0%, #7FC0EC 100%);
+    }
+    .card-shadow {
+      box-shadow: 0 12px 36px -8px rgba(47, 143, 221, 0.16);
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"/></head>
+<body class="flex">
+<!-- Slim 72px Icon Rail on the left in frosted soft blue #CFE6F9 -->
+<aside class="fixed left-0 top-0 bottom-0 w-[72px] bg-[#CFE6F9]/90 backdrop-blur-md border-r custom-border z-50 flex flex-col items-center py-6 select-none">
+<!-- Brand Mark (Dream Wave) -->
+<div class="w-11 h-11 rounded-2xl bg-[#2F8FDD] flex items-center justify-center shadow-md mb-8 cursor-pointer text-white">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3" viewbox="0 0 24 24">
+<path d="M2 12c3-4 6-4 9 0s6 4 9 0"></path>
+<path d="M2 16c3-4 6-4 9 0s6 4 9 0"></path>
+</svg>
+</div>
+<!-- Navigation Line Icons -->
+<nav class="flex-1 flex flex-col items-center gap-3 w-full">
+<a class="w-11 h-11 flex items-center justify-center rounded-xl bg-white/70 text-[#2F8FDD] relative shadow-sm" href="#" title="Workspace">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24">
+<rect height="9" rx="1" width="7" x="3" y="3"></rect>
+<rect height="5" rx="1" width="7" x="14" y="3"></rect>
+<rect height="9" rx="1" width="7" x="14" y="12"></rect>
+<rect height="5" rx="1" width="7" x="3" y="16"></rect>
+</svg>
+<span class="absolute right-0 top-1/2 -translate-y-1/2 w-1 h-5 bg-[#00C2DE] rounded-l-full"></span>
+</a>
+<a class="w-11 h-11 flex items-center justify-center rounded-xl text-[#1C3D5A] hover:bg-white/50 transition-colors" href="#" title="AI Studio">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"></path>
+</svg>
+</a>
+<a class="w-11 h-11 flex items-center justify-center rounded-xl text-[#1C3D5A] hover:bg-white/50 transition-colors" href="#" title="Learning Models">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 2a4 4 0 0 1 4 4c0 1.5-.8 2.8-2 3.5V11a2 2 0 0 1-2 2h-1v2.5a2.5 2.5 0 0 1-5 0V13"></path>
+<circle cx="18" cy="18" r="3"></circle>
+<circle cx="6" cy="6" r="2"></circle>
+</svg>
+</a>
+<a class="w-11 h-11 flex items-center justify-center rounded-xl text-[#1C3D5A] hover:bg-white/50 transition-colors" href="#" title="Roadmap &amp; Path">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="18" cy="6" r="3"></circle>
+<circle cx="6" cy="18" r="3"></circle>
+<path d="M18 9v2a4 4 0 0 1-4 4H8"></path>
+</svg>
+</a>
+<a class="w-11 h-11 flex items-center justify-center rounded-xl text-[#1C3D5A] hover:bg-white/50 transition-colors" href="#" title="Analytics &amp; Metrics">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<line x1="18" x2="18" y1="20" y2="10"></line>
+<line x1="12" x2="12" y1="20" y2="4"></line>
+<line x1="6" x2="6" y1="20" y2="14"></line>
+</svg>
+</a>
+</nav>
+<!-- Rail Footer -->
+<div class="flex flex-col items-center gap-3">
+<button class="w-9 h-9 rounded-full text-[#1C3D5A] hover:bg-white/60 flex items-center justify-center transition-colors" title="Settings">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="3"></circle>
+<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+</svg>
+</button>
+<div class="w-9 h-9 rounded-full bg-[#2F8FDD] text-white flex items-center justify-center font-heading font-semibold text-sm shadow-sm cursor-pointer">
+        CG
+      </div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="pl-[72px] w-full min-h-screen flex flex-col">
+<!-- Top Bar in frosted soft blue #CFE6F9 -->
+<header class="h-16 bg-[#CFE6F9]/80 backdrop-blur-md border-b custom-border sticky top-0 z-40 px-8 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="font-heading font-bold text-lg text-[#0B2545] tracking-tight">DREAM WAVE AI</span>
+<span class="text-[11px] font-heading font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/70 text-[#1C3D5A]">STUDENT</span>
+</div>
+<!-- Centered Search Field -->
+<div class="relative w-[420px]">
+<svg class="w-4 h-4 text-[#3A5A78] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24">
+<circle cx="11" cy="11" r="8"></circle>
+<path d="m21 21-4.3-4.3"></path>
+</svg>
+<input class="w-full h-10 pl-10 pr-12 rounded-xl bg-white border border-white/80 text-[14px] text-[#0B2545] placeholder-[#3A5A78]/70 focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/30 transition-all shadow-sm" placeholder="Search your workspace..." type="text"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 rounded bg-[#EAF4FD] text-[10px] font-heading font-bold text-[#1C3D5A]">
+          ⌘K
+        </div>
+</div>
+<!-- Right Actions: Notifications, Profile Menu -->
+<div class="flex items-center gap-3">
+<button class="relative w-9 h-9 rounded-xl bg-white/60 hover:bg-white flex items-center justify-center text-[#1C3D5A] transition-colors" title="Notifications">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+<path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+</svg>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#00C2DE]"></span>
+</button>
+<div class="flex items-center gap-2 pl-2 border-l border-white/60 cursor-pointer">
+<span class="font-heading font-medium text-[14px] text-[#0B2545]">Charan</span>
+<svg class="w-4 h-4 text-[#1C3D5A]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<polyline points="6 9 12 15 18 9"></polyline>
+</svg>
+</div>
+</div>
+</header>
+<!-- Page Body Container -->
+<main class="flex-1 px-8 py-6 max-w-[1368px] mx-auto w-full"><div class="flex flex-col w-full pb-16">
+<!-- Top Header Section -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+<div class="flex flex-col">
+<span class="font-heading text-xs font-semibold tracking-wider uppercase text-[#1C3D5A]/80 mb-1.5 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+        Learning
+      </span>
+<h1 class="font-heading text-3xl md:text-4xl font-bold text-[#0B2545] tracking-tight">Goals &amp; Progress</h1>
+<p class="font-body text-[15px] text-[#1B3B6F] mt-1 font-normal">Convert ambitions into structured, measurable learning journeys.</p>
+</div>
+<div class="flex items-center gap-3 self-start md:self-auto flex-wrap">
+<button class="px-4 py-2.5 rounded-full bg-white/70 hover:bg-white text-[#1B3B6F] text-[14px] font-heading font-semibold border border-white/80 transition-all shadow-sm flex items-center gap-2" type="button">
+<svg class="w-4 h-4 text-[#2F8FDD]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        View analytics
+      </button>
+<button class="px-4 py-2.5 rounded-full bg-white/70 hover:bg-white text-[#1B3B6F] text-[14px] font-heading font-semibold border border-white/80 transition-all shadow-sm flex items-center gap-2" type="button">
+<svg class="w-4 h-4 text-[#00C2DE]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        AI Goal Builder
+      </button>
+<button class="px-5 py-2.5 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] text-white text-[14px] font-heading font-semibold shadow-[0_4px_14px_rgba(47,143,221,0.35)] transition-all flex items-center gap-2" onclick="document.getElementById('createGoalModal').classList.remove('hidden')" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewbox="0 0 24 24"><path d="M12 4.5v15m7.5-7.5h-15" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        Create goal
+      </button>
+</div>
+</section>
+<!-- SECTION 1: Row of 8 Compact Stat Cards with Individual Tints -->
+<section class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-3.5 mb-8">
+<!-- Stat 1 -->
+<div class="bg-[#D4F1FE] rounded-[24px] p-3.5 border border-white/85 shadow-[0_8px_20px_rgba(47,143,221,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-body text-xs font-medium text-[#1B3B6F]">Total Goals</span>
+<div class="w-7 h-7 rounded-xl bg-white/70 flex items-center justify-center text-[#2F8FDD]">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1"></circle></svg>
+</div>
+</div>
+<div class="font-heading text-2xl font-bold text-[#0B2545]">6</div>
+</div>
+<!-- Stat 2 -->
+<div class="bg-[#BFE0F7] rounded-[24px] p-3.5 border border-white/85 shadow-[0_8px_20px_rgba(47,143,221,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-body text-xs font-medium text-[#1B3B6F]">Active Goals</span>
+<div class="w-7 h-7 rounded-xl bg-white/70 flex items-center justify-center text-[#2F8FDD]">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24"><path d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+</div>
+<div class="font-heading text-2xl font-bold text-[#0B2545]">4</div>
+</div>
+<!-- Stat 3 -->
+<div class="bg-[#CFE6F9] rounded-[24px] p-3.5 border border-white/85 shadow-[0_8px_20px_rgba(47,143,221,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-body text-xs font-medium text-[#1B3B6F]">Completed</span>
+<div class="w-7 h-7 rounded-xl bg-white/70 flex items-center justify-center text-[#2F8FDD]">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24"><path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+</div>
+<div class="font-heading text-2xl font-bold text-[#0B2545]">2</div>
+</div>
+<!-- Stat 4 -->
+<div class="bg-[#D8EEFD] rounded-[24px] p-3.5 border border-white/85 shadow-[0_8px_20px_rgba(47,143,221,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-body text-xs font-medium text-[#1B3B6F]">Overdue</span>
+<div class="w-7 h-7 rounded-xl bg-white/70 flex items-center justify-center text-[#2F8FDD]">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+</div>
+<div class="font-heading text-2xl font-bold text-[#0B2545]">0</div>
+</div>
+<!-- Stat 5 -->
+<div class="bg-[#C7E3F9] rounded-[24px] p-3.5 border border-white/85 shadow-[0_8px_20px_rgba(47,143,221,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-body text-xs font-medium text-[#1B3B6F]">Weekly Progress</span>
+<div class="w-7 h-7 rounded-xl bg-white/70 flex items-center justify-center text-[#00C2DE]">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24"><path d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+</div>
+<div class="font-heading text-2xl font-bold text-[#0B2545]">+18%</div>
+</div>
+<!-- Stat 6 -->
+<div class="bg-[#D4E9FA] rounded-[24px] p-3.5 border border-white/85 shadow-[0_8px_20px_rgba(47,143,221,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-body text-xs font-medium text-[#1B3B6F]">Monthly Progress</span>
+<div class="w-7 h-7 rounded-xl bg-white/70 flex items-center justify-center text-[#2F8FDD]">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24"><path d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+</div>
+<div class="font-heading text-2xl font-bold text-[#0B2545]">+64%</div>
+</div>
+<!-- Stat 7 -->
+<div class="bg-[#BCE4FB] rounded-[24px] p-3.5 border border-white/85 shadow-[0_8px_20px_rgba(47,143,221,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-body text-xs font-medium text-[#1B3B6F]">Completion</span>
+<div class="w-7 h-7 rounded-xl bg-white/70 flex items-center justify-center text-[#00C2DE]">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24"><path d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+</div>
+<div class="font-heading text-2xl font-bold text-[#0B2545]">33%</div>
+</div>
+<!-- Stat 8 -->
+<div class="bg-[#CBE7FC] rounded-[24px] p-3.5 border border-white/85 shadow-[0_8px_20px_rgba(47,143,221,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-body text-xs font-medium text-[#1B3B6F]">Streak</span>
+<div class="w-7 h-7 rounded-xl bg-white/70 flex items-center justify-center text-[#2F8FDD]">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24"><path d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+</div>
+<div class="font-heading text-2xl font-bold text-[#0B2545]">12 <span class="text-xs font-medium text-[#1B3B6F]">Days</span></div>
+</div>
+</section>
+<!-- SECTION 2: Row of 4 Chart Cards in Pale Blue (#EAF4FD to #DDEEFC) -->
+<section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+<!-- Chart 1: Weekly Progress -->
+<div class="bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] rounded-[26px] p-6 border border-white/85 shadow-[0_10px_30px_-5px_rgba(47,143,221,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="font-heading text-lg font-bold text-[#0B2545]">Weekly progress</h2>
+<p class="font-body text-xs text-[#1B3B6F]">Daily target completion</p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-white/80 font-heading text-xs font-semibold text-[#2F8FDD]">+18% avg</span>
+</div>
+<!-- Bar Chart -->
+<div class="h-36 flex items-end justify-between gap-2 pt-4 px-1">
+<div class="flex flex-col items-center gap-1.5 flex-1 h-full justify-end">
+<div class="w-full bg-[#BFE0F7] hover:bg-[#2F8FDD] transition-all rounded-t-lg h-[45%]"></div>
+<span class="font-heading text-[11px] font-semibold text-[#1B3B6F]">M</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1 h-full justify-end">
+<div class="w-full bg-[#BFE0F7] hover:bg-[#2F8FDD] transition-all rounded-t-lg h-[65%]"></div>
+<span class="font-heading text-[11px] font-semibold text-[#1B3B6F]">T</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1 h-full justify-end">
+<div class="w-full bg-[#2F8FDD] rounded-t-lg h-[90%] shadow-[0_2px_8px_rgba(47,143,221,0.3)]"></div>
+<span class="font-heading text-[11px] font-semibold text-[#0B2545]">W</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1 h-full justify-end">
+<div class="w-full bg-[#00C2DE] rounded-t-lg h-[75%] shadow-[0_2px_8px_rgba(0,194,222,0.3)]"></div>
+<span class="font-heading text-[11px] font-semibold text-[#0B2545]">T</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1 h-full justify-end">
+<div class="w-full bg-[#BFE0F7] hover:bg-[#2F8FDD] transition-all rounded-t-lg h-[50%]"></div>
+<span class="font-heading text-[11px] font-semibold text-[#1B3B6F]">F</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1 h-full justify-end">
+<div class="w-full bg-[#CFE6F9] hover:bg-[#2F8FDD] transition-all rounded-t-lg h-[30%]"></div>
+<span class="font-heading text-[11px] font-semibold text-[#1B3B6F]">S</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1 h-full justify-end">
+<div class="w-full bg-[#CFE6F9] hover:bg-[#2F8FDD] transition-all rounded-t-lg h-[20%]"></div>
+<span class="font-heading text-[11px] font-semibold text-[#1B3B6F]">S</span>
+</div>
+</div>
+</div>
+<!-- Chart 2: Study Time -->
+<div class="bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] rounded-[26px] p-6 border border-white/85 shadow-[0_10px_30px_-5px_rgba(47,143,221,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="font-heading text-lg font-bold text-[#0B2545]">Study time</h2>
+<p class="font-body text-xs text-[#1B3B6F]">24.8 hrs total this week</p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-white/80 font-heading text-xs font-semibold text-[#0B2545]">4.0h peak</span>
+</div>
+<!-- Bar Chart -->
+<div class="h-36 flex items-end justify-between gap-2 pt-4 px-1">
+<div class="flex flex-col items-center gap-1.5 flex-1 h-full justify-end">
+<span class="font-heading text-[9px] text-[#1B3B6F]">2.5h</span>
+<div class="w-full bg-[#CFE6F9] hover:bg-[#2F8FDD] transition-all rounded-t-lg h-[55%]"></div>
+<span class="font-heading text-[11px] font-semibold text-[#1B3B6F]">M</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1 h-full justify-end">
+<span class="font-heading text-[9px] text-[#1B3B6F]">3.2h</span>
+<div class="w-full bg-[#BFE0F7] hover:bg-[#2F8FDD] transition-all rounded-t-lg h-[70%]"></div>
+<span class="font-heading text-[11px] font-semibold text-[#1B3B6F]">T</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1 h-full justify-end">
+<span class="font-heading text-[9px] text-[#0B2545] font-bold">4.0h</span>
+<div class="w-full bg-[#2F8FDD] rounded-t-lg h-[92%] shadow-[0_2px_8px_rgba(47,143,221,0.3)]"></div>
+<span class="font-heading text-[11px] font-semibold text-[#0B2545]">W</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1 h-full justify-end">
+<span class="font-heading text-[9px] text-[#1B3B6F]">3.6h</span>
+<div class="w-full bg-[#00C2DE] rounded-t-lg h-[80%]"></div>
+<span class="font-heading text-[11px] font-semibold text-[#0B2545]">T</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1 h-full justify-end">
+<span class="font-heading text-[9px] text-[#1B3B6F]">4.2h</span>
+<div class="w-full bg-[#2F8FDD] rounded-t-lg h-[96%]"></div>
+<span class="font-heading text-[11px] font-semibold text-[#0B2545]">F</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1 h-full justify-end">
+<span class="font-heading text-[9px] text-[#1B3B6F]">1.8h</span>
+<div class="w-full bg-[#CFE6F9] rounded-t-lg h-[40%]"></div>
+<span class="font-heading text-[11px] font-semibold text-[#1B3B6F]">S</span>
+</div>
+<div class="flex flex-col items-center gap-1.5 flex-1 h-full justify-end">
+<span class="font-heading text-[9px] text-[#1B3B6F]">1.5h</span>
+<div class="w-full bg-[#CFE6F9] rounded-t-lg h-[32%]"></div>
+<span class="font-heading text-[11px] font-semibold text-[#1B3B6F]">S</span>
+</div>
+</div>
+</div>
+<!-- Chart 3: Completion Ring -->
+<div class="bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] rounded-[26px] p-6 border border-white/85 shadow-[0_10px_30px_-5px_rgba(47,143,221,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-heading text-lg font-bold text-[#0B2545]">Completion ring</h2>
+<p class="font-body text-xs text-[#1B3B6F]">Current sprint focus</p>
+</div>
+<span class="w-2.5 h-2.5 rounded-full bg-[#00C2DE]"></span>
+</div>
+<div class="py-2 flex items-center justify-center gap-4">
+<!-- Circular Progress Ring SVG -->
+<div class="relative w-28 h-28 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<!-- Track -->
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#CFE6F9" stroke-width="9"></circle>
+<!-- Indicator (0% stroke dashoffset) -->
+<circle cx="50" cy="50" fill="transparent" r="40" stroke="#00C2DE" stroke-dasharray="251.2" stroke-dashoffset="251.2" stroke-linecap="round" stroke-width="9"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-heading text-xl font-bold text-[#0B2545]">0%</span>
+<span class="font-body text-[10px] text-[#1B3B6F] uppercase tracking-wider">done</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-heading text-sm font-semibold text-[#0B2545]">0% complete</span>
+<span class="font-body text-xs text-[#1B3B6F] mt-0.5">0 of 1 goals completed</span>
+<div class="mt-2.5 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#CFE6F9]"></span>
+<span class="font-body text-[11px] text-[#1B3B6F]">Target: 1 sprint goal</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Chart 4: Monthly Progress -->
+<div class="bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] rounded-[26px] p-6 border border-white/85 shadow-[0_10px_30px_-5px_rgba(47,143,221,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<div>
+<h2 class="font-heading text-lg font-bold text-[#0B2545]">Monthly progress</h2>
+<p class="font-body text-xs text-[#1B3B6F]">October performance</p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-white/80 font-heading text-xs font-semibold text-[#00C2DE]">+64%</span>
+</div>
+<div class="flex flex-col gap-2.5 pt-2">
+<div>
+<div class="flex justify-between text-xs font-heading font-medium text-[#1B3B6F] mb-1">
+<span>Week 1 (Orientation &amp; Setup)</span>
+<span class="text-[#0B2545] font-bold">100%</span>
+</div>
+<div class="w-full bg-[#CFE6F9] h-2 rounded-full overflow-hidden">
+<div class="bg-[#2F8FDD] h-full rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-heading font-medium text-[#1B3B6F] mb-1">
+<span>Week 2 (Multi-Agent Inference)</span>
+<span class="text-[#0B2545] font-bold">82%</span>
+</div>
+<div class="w-full bg-[#CFE6F9] h-2 rounded-full overflow-hidden">
+<div class="bg-[#00C2DE] h-full rounded-full" style="width: 82%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-heading font-medium text-[#1B3B6F] mb-1">
+<span>Week 3 (Pipelines &amp; LoRA)</span>
+<span class="text-[#0B2545] font-bold">45%</span>
+</div>
+<div class="w-full bg-[#CFE6F9] h-2 rounded-full overflow-hidden">
+<div class="bg-[#2F8FDD] h-full rounded-full" style="width: 45%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-heading font-medium text-[#1B3B6F] mb-1">
+<span>Week 4 (Cluster Evaluation)</span>
+<span class="text-[#1B3B6F]">Upcoming</span>
+</div>
+<div class="w-full bg-[#CFE6F9] h-2 rounded-full overflow-hidden">
+<div class="bg-[#00C2DE] h-full rounded-full" style="width: 10%;"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Filter & Control Bar -->
+<section class="bg-gradient-to-r from-[#EAF4FD] to-[#DDEEFC] rounded-[26px] p-4 border border-white/85 shadow-[0_10px_30px_-5px_rgba(47,143,221,0.08)] mb-8 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+<!-- Search Bar with White Input -->
+<div class="relative w-full lg:w-72">
+<svg class="w-4 h-4 text-[#1B3B6F]/70 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<input class="w-full h-10 pl-10 pr-4 rounded-xl bg-white border border-white/85 text-[14px] text-[#0B2545] placeholder-[#1B3B6F]/60 focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/30 shadow-sm" placeholder="Search goals..." type="text"/>
+</div>
+<!-- Status Tabs -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 scrollbar-none">
+<button class="px-3.5 py-1.5 rounded-full font-heading text-xs font-medium text-[#1B3B6F] hover:bg-white/60 transition-all flex items-center gap-1.5 whitespace-nowrap">
+        All <span class="px-1.5 py-0.5 rounded-full bg-white/70 text-[10px] text-[#0B2545]">6</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full font-heading text-xs font-medium text-[#1B3B6F] hover:bg-white/60 transition-all flex items-center gap-1.5 whitespace-nowrap">
+        Planning <span class="px-1.5 py-0.5 rounded-full bg-white/70 text-[10px] text-[#0B2545]">1</span>
+</button>
+<!-- Active Tab Selected State (#2F8FDD) -->
+<button class="px-3.5 py-1.5 rounded-full font-heading text-xs font-semibold bg-[#2F8FDD] text-white shadow-[0_2px_8px_rgba(47,143,221,0.25)] flex items-center gap-1.5 whitespace-nowrap">
+        Active <span class="px-1.5 py-0.5 rounded-full bg-white text-[10px] text-[#2F8FDD] font-bold">4</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full font-heading text-xs font-medium text-[#1B3B6F] hover:bg-white/60 transition-all flex items-center gap-1.5 whitespace-nowrap">
+        Completed <span class="px-1.5 py-0.5 rounded-full bg-white/70 text-[10px] text-[#0B2545]">2</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full font-heading text-xs font-medium text-[#1B3B6F] hover:bg-white/60 transition-all flex items-center gap-1.5 whitespace-nowrap">
+        Paused <span class="px-1.5 py-0.5 rounded-full bg-white/70 text-[10px] text-[#0B2545]">0</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full font-heading text-xs font-medium text-[#1B3B6F] hover:bg-white/60 transition-all flex items-center gap-1.5 whitespace-nowrap">
+        Archived <span class="px-1.5 py-0.5 rounded-full bg-white/70 text-[10px] text-[#0B2545]">0</span>
+</button>
+</div>
+<!-- Dropdown Selectors -->
+<div class="flex items-center gap-2.5">
+<!-- Category Dropdown -->
+<div class="relative">
+<select class="appearance-none bg-white text-[#0B2545] font-heading text-xs font-medium pl-3.5 pr-8 py-2 rounded-xl border border-white/85 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/30 cursor-pointer">
+<option>All Categories</option>
+<option>Career</option>
+<option>Deep Learning</option>
+<option>System Design</option>
+</select>
+<svg class="w-3.5 h-3.5 text-[#1B3B6F] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<!-- Priority Dropdown -->
+<div class="relative">
+<select class="appearance-none bg-white text-[#0B2545] font-heading text-xs font-medium pl-3.5 pr-8 py-2 rounded-xl border border-white/85 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/30 cursor-pointer">
+<option>All Priorities</option>
+<option>High</option>
+<option>Medium</option>
+<option>Low</option>
+</select>
+<svg class="w-3.5 h-3.5 text-[#1B3B6F] absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+</div>
+</section>
+<!-- SECTION 4: Goal Cards Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+<!-- Goal Card 1 -->
+<div class="bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] rounded-[28px] p-7 border border-white/85 shadow-[0_12px_36px_-8px_rgba(47,143,221,0.16)] flex flex-col justify-between transition-all hover:translate-y-[-2px]">
+<div>
+<!-- Card Header Info -->
+<div class="flex items-start justify-between gap-4 mb-3.5">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-2xl bg-[#CFE6F9] text-[#2F8FDD] flex items-center justify-center border border-white/80 shadow-sm">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1"></circle></svg>
+</div>
+<div>
+<span class="font-heading text-xs font-semibold tracking-wide uppercase text-[#1B3B6F]">Career · Medium priority</span>
+<h3 class="font-heading text-xl font-bold text-[#0B2545] tracking-tight leading-snug">Master Scalable Multi-Agent Systems &amp; Distributed Inference</h3>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-white font-heading text-xs font-bold text-[#2F8FDD] border border-white/85 shadow-sm whitespace-nowrap flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+            ACTIVE
+          </span>
+</div>
+<!-- Description -->
+<p class="font-body text-[15px] text-[#1B3B6F] leading-relaxed mb-5">
+          Develop end-to-end multi-agent orchestration architectures and evaluate throughput bottlenecks on cluster infrastructure.
+        </p>
+<!-- Progress Indicator -->
+<div class="mb-6">
+<div class="flex justify-between items-center mb-1.5">
+<span class="font-heading text-xs font-semibold text-[#1B3B6F]">Course &amp; Lab Progress</span>
+<span class="font-heading text-xs font-bold text-[#0B2545]">68%</span>
+</div>
+<div class="w-full bg-[#CFE6F9] h-2.5 rounded-full overflow-hidden p-0.5">
+<div class="bg-gradient-to-r from-[#2F8FDD] to-[#00C2DE] h-full rounded-full" style="width: 68%;"></div>
+</div>
+</div>
+<!-- 4 Facts Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-2xl bg-white/60 border border-white/80 mb-6">
+<div class="flex flex-col">
+<span class="font-body text-[11px] text-[#1B3B6F]/80 flex items-center gap-1">
+<svg class="w-3 h-3 text-[#2F8FDD]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              Milestones
+            </span>
+<span class="font-heading text-[13px] font-bold text-[#0B2545] mt-0.5">6 / 9 Done</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body text-[11px] text-[#1B3B6F]/80 flex items-center gap-1">
+<svg class="w-3 h-3 text-[#2F8FDD]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              Weekly
+            </span>
+<span class="font-heading text-[13px] font-bold text-[#0B2545] mt-0.5">8.5 hrs logged</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body text-[11px] text-[#1B3B6F]/80 flex items-center gap-1">
+<svg class="w-3 h-3 text-[#2F8FDD]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              Difficulty
+            </span>
+<span class="font-heading text-[13px] font-bold text-[#0B2545] mt-0.5">Advanced</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body text-[11px] text-[#1B3B6F]/80 flex items-center gap-1">
+<svg class="w-3 h-3 text-[#2F8FDD]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              Due Date
+            </span>
+<span class="font-heading text-[13px] font-bold text-[#0B2545] mt-0.5">Oct 28, 2025</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-between pt-2 border-t border-white/60">
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-full bg-white/70 hover:bg-white text-[#1B3B6F] text-xs font-heading font-semibold border border-white/80 transition-all shadow-sm" type="button">
+            Open details
+          </button>
+<button class="px-4 py-2 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] text-white text-xs font-heading font-semibold shadow-sm transition-all flex items-center gap-1.5" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9v2a4 4 0 01-4 4H8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Roadmap
+          </button>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-full bg-white/60 hover:bg-white text-[#1B3B6F] flex items-center justify-center transition-colors" title="Edit goal" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+<button class="w-8 h-8 rounded-full bg-white/60 hover:bg-white text-[#1B3B6F] hover:text-red-500 flex items-center justify-center transition-colors" title="Delete goal" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+</div>
+</div>
+<!-- Goal Card 2 -->
+<div class="bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] rounded-[28px] p-7 border border-white/85 shadow-[0_12px_36px_-8px_rgba(47,143,221,0.16)] flex flex-col justify-between transition-all hover:translate-y-[-2px]">
+<div>
+<!-- Card Header Info -->
+<div class="flex items-start justify-between gap-4 mb-3.5">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-2xl bg-[#CFE6F9] text-[#2F8FDD] flex items-center justify-center border border-white/80 shadow-sm">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24"><path d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m0 0h.01" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<div>
+<span class="font-heading text-xs font-semibold tracking-wide uppercase text-[#1B3B6F]">Deep Learning · High priority</span>
+<h3 class="font-heading text-xl font-bold text-[#0B2545] tracking-tight leading-snug">LoRA &amp; QLoRA Fine-Tuning Pipelines</h3>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-white font-heading text-xs font-bold text-[#2F8FDD] border border-white/85 shadow-sm whitespace-nowrap flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+            ACTIVE
+          </span>
+</div>
+<!-- Description -->
+<p class="font-body text-[15px] text-[#1B3B6F] leading-relaxed mb-5">
+          Execute quantised parameter-efficient adaptation workflows across open-weights LLMs with automated evaluation checkpoints.
+        </p>
+<!-- Progress Indicator -->
+<div class="mb-6">
+<div class="flex justify-between items-center mb-1.5">
+<span class="font-heading text-xs font-semibold text-[#1B3B6F]">Fine-tuning Benchmarks</span>
+<span class="font-heading text-xs font-bold text-[#0B2545]">42%</span>
+</div>
+<div class="w-full bg-[#CFE6F9] h-2.5 rounded-full overflow-hidden p-0.5">
+<div class="bg-gradient-to-r from-[#2F8FDD] to-[#00C2DE] h-full rounded-full" style="width: 42%;"></div>
+</div>
+</div>
+<!-- 4 Facts Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-2xl bg-white/60 border border-white/80 mb-6">
+<div class="flex flex-col">
+<span class="font-body text-[11px] text-[#1B3B6F]/80 flex items-center gap-1">
+<svg class="w-3 h-3 text-[#2F8FDD]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              Milestones
+            </span>
+<span class="font-heading text-[13px] font-bold text-[#0B2545] mt-0.5">3 / 7 Done</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body text-[11px] text-[#1B3B6F]/80 flex items-center gap-1">
+<svg class="w-3 h-3 text-[#2F8FDD]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              Weekly
+            </span>
+<span class="font-heading text-[13px] font-bold text-[#0B2545] mt-0.5">6.0 hrs logged</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body text-[11px] text-[#1B3B6F]/80 flex items-center gap-1">
+<svg class="w-3 h-3 text-[#2F8FDD]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              Difficulty
+            </span>
+<span class="font-heading text-[13px] font-bold text-[#0B2545] mt-0.5">Intermediate</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body text-[11px] text-[#1B3B6F]/80 flex items-center gap-1">
+<svg class="w-3 h-3 text-[#2F8FDD]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              Due Date
+            </span>
+<span class="font-heading text-[13px] font-bold text-[#0B2545] mt-0.5">Nov 14, 2025</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center justify-between pt-2 border-t border-white/60">
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-full bg-white/70 hover:bg-white text-[#1B3B6F] text-xs font-heading font-semibold border border-white/80 transition-all shadow-sm" type="button">
+            Open details
+          </button>
+<button class="px-4 py-2 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] text-white text-xs font-heading font-semibold shadow-sm transition-all flex items-center gap-1.5" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9v2a4 4 0 01-4 4H8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Roadmap
+          </button>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-full bg-white/60 hover:bg-white text-[#1B3B6F] flex items-center justify-center transition-colors" title="Edit goal" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+<button class="w-8 h-8 rounded-full bg-white/60 hover:bg-white text-[#1B3B6F] hover:text-red-500 flex items-center justify-center transition-colors" title="Delete goal" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 5: "CREATE GOAL" MODAL OVERLAY -->
+<div class="fixed inset-0 z-50 bg-[#0B2545]/30 backdrop-blur-sm flex items-center justify-center p-4" id="createGoalModal">
+<div class="w-full max-w-xl bg-gradient-to-b from-[#A9D3F1] to-[#7FC0EC] rounded-[28px] p-8 border border-white/85 shadow-[0_25px_60px_-15px_rgba(11,37,69,0.25)] flex flex-col relative text-[#0B2545]">
+<!-- Modal Header -->
+<div class="flex items-center justify-between pb-4 border-b border-white/40 mb-6">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-[#2F8FDD] text-white flex items-center justify-center shadow-sm">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewbox="0 0 24 24"><path d="M12 4.5v15m7.5-7.5h-15" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<h2 class="font-heading text-2xl font-bold text-[#0B2545]">Create goal</h2>
+</div>
+<button class="w-8 h-8 rounded-full bg-white/70 hover:bg-white text-[#0B2545] flex items-center justify-center transition-colors" onclick="document.getElementById('createGoalModal').classList.add('hidden')" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+<!-- Modal Body Form -->
+<div class="flex flex-col gap-4">
+<!-- Goal Title -->
+<div>
+<label class="block font-heading text-xs font-bold uppercase tracking-wider text-[#0B2545] mb-1.5">Goal Title</label>
+<input class="w-full h-11 px-4 rounded-xl bg-white border border-white/85 text-[14px] text-[#0B2545] placeholder-[#1B3B6F]/50 focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/40 shadow-sm" placeholder="e.g., Master Distributed Training" type="text"/>
+</div>
+<!-- 2 Columns: Category & Due Date -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-heading text-xs font-bold uppercase tracking-wider text-[#0B2545] mb-1.5">Category</label>
+<div class="relative">
+<select class="w-full h-11 appearance-none px-4 rounded-xl bg-white border border-white/85 text-[14px] text-[#0B2545] focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/40 shadow-sm cursor-pointer">
+<option>Career</option>
+<option>Technical</option>
+<option>Academic</option>
+</select>
+<svg class="w-4 h-4 text-[#1B3B6F] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+</div>
+<div>
+<label class="block font-heading text-xs font-bold uppercase tracking-wider text-[#0B2545] mb-1.5">Target Completion Date</label>
+<input class="w-full h-11 px-4 rounded-xl bg-white border border-white/85 text-[14px] text-[#0B2545] focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/40 shadow-sm cursor-pointer" type="date" value="2025-11-30"/>
+</div>
+</div>
+<!-- 2 Columns: Priority & Target Hours -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block font-heading text-xs font-bold uppercase tracking-wider text-[#0B2545] mb-1.5">Priority</label>
+<div class="relative">
+<select class="w-full h-11 appearance-none px-4 rounded-xl bg-white border border-white/85 text-[14px] text-[#0B2545] focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/40 shadow-sm cursor-pointer">
+<option>High</option>
+<option>Medium</option>
+<option>Low</option>
+</select>
+<svg class="w-4 h-4 text-[#1B3B6F] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M19.5 8.25l-7.5 7.5-7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+</div>
+<div>
+<label class="block font-heading text-xs font-bold uppercase tracking-wider text-[#0B2545] mb-1.5">Target Weekly Hours</label>
+<input class="w-full h-11 px-4 rounded-xl bg-white border border-white/85 text-[14px] text-[#0B2545] placeholder-[#1B3B6F]/50 focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/40 shadow-sm" placeholder="e.g., 8" type="number" value="8"/>
+</div>
+</div>
+<!-- Description Textarea -->
+<div>
+<label class="block font-heading text-xs font-bold uppercase tracking-wider text-[#0B2545] mb-1.5">Description</label>
+<textarea class="w-full p-3.5 rounded-xl bg-white border border-white/85 text-[14px] text-[#0B2545] placeholder-[#1B3B6F]/50 focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/40 shadow-sm resize-none" placeholder="Outline specific target competencies, research questions, or engineering milestones..." rows="3"></textarea>
+</div>
+</div>
+<!-- Modal Footer Actions -->
+<div class="flex items-center justify-end gap-3 mt-7 pt-4 border-t border-white/40">
+<button class="px-5 py-2.5 rounded-full bg-white/70 hover:bg-white text-[#0B2545] text-[14px] font-heading font-semibold border border-white/80 transition-all shadow-sm" onclick="document.getElementById('createGoalModal').classList.add('hidden')" type="button">
+          Cancel
+        </button>
+<button class="px-6 py-2.5 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] text-white text-[14px] font-heading font-semibold shadow-[0_4px_14px_rgba(47,143,221,0.35)] transition-all flex items-center gap-2" onclick="document.getElementById('createGoalModal').classList.add('hidden')" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewbox="0 0 24 24"><path d="M12 4.5v15m7.5-7.5h-15" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Create goal
+        </button>
+</div>
+</div>
+</div>
+</div></main>
+</div>
+</body></html>

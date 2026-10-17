@@ -76,3 +76,7 @@ server/.cache/
 **/.cache/
 **/mongodb-memory-server/
 *.node
+
+.tools/
+client/scripts/pdf-verify/out/
+

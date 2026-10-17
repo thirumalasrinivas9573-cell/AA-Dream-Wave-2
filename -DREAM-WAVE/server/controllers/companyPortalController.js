@@ -17,7 +17,7 @@ const HiringAnalytics = require('../models/HiringAnalytics');
 const JobCategory = require('../models/JobCategory');
 const InternshipCategory = require('../models/InternshipCategory');
 const { getCompanyForUser, ensureUniqueSlug, paginate, cleanPromotionInput } = require('../utils/portalHelpers');
-const { openai } = require('../utils/openaiClient');
+const { openai, getModel } = require('../utils/openaiClient');
 
 const fail = (res, err, status = 500) => {
   const statusCode = err.statusCode || status;
@@ -748,7 +748,7 @@ exports.getPublicInsights = async (req, res) => {
     try {
       const prompt = `Company: ${company.name}. Industry: ${company.industry}. Tech: ${(company.techStack || []).join(', ')}. Open jobs: ${jobs.map((j) => j.title).slice(0, 8).join(', ')}. Skills: ${popularSkills.join(', ')}. Return JSON keys: companyGrowth, hiringTrends, popularSkills (array), futureHiring, technologyTrends, salaryTrends, careerGrowth, industryRanking, summary (2 sentences). No invented statistics.`;
       const completion = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
+        model: getModel(),
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.4,
         max_tokens: 700,

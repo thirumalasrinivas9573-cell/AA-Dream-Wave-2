@@ -1,4 +1,4 @@
-const OpenAI = require('openai')
+const { getOpenAI, getApiKey, getModel } = require('../utils/openaiClient')
 const {
   getProgramDashboard,
   getProgramById,
@@ -8,11 +8,13 @@ const {
 const { evaluateEligibility } = require('./institutionPlacementEligibilityService')
 const InstitutionStudent = require('../models/InstitutionStudent')
 
-let openai = null
-function getOpenAI() {
-  if (!process.env.OPENAI_API_KEY?.trim()) return null
-  if (!openai) openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-  return openai
+function getClient() {
+  if (!getApiKey()) return null
+  try {
+    return getOpenAI()
+  } catch {
+    return null
+  }
 }
 
 function err(message, statusCode = 400) {
@@ -167,13 +169,13 @@ async function generateStudentInsight({ programId, studentUserId, intent = 'STUD
 }
 
 async function enrichWithAi(intent, ruleInsight, context, role) {
-  const client = getOpenAI()
+  const client = getClient()
   if (!client) {
     return { intent, source: 'rule', insight: ruleInsight, role }
   }
   try {
     const completion = await client.chat.completions.create({
-      model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+      model: getModel(),
       messages: [
         {
           role: 'system',
@@ -182,7 +184,7 @@ async function enrichWithAi(intent, ruleInsight, context, role) {
         },
         { role: 'user', content: JSON.stringify({ intent, ruleInsight, context: sanitizeContext(context) }) },
       ],
-      max_tokens: 400,
+      max_tokens: 1000,
       temperature: 0.2,
     })
     const text = completion.choices?.[0]?.message?.content?.trim()

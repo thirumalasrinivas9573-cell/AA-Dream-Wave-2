@@ -44,6 +44,7 @@ const OrgLibraryDesk = lazy(() => import('./modules/digital-library/pages/OrgLib
 const PdfReader = lazy(() => import('./modules/digital-library/pages/PdfReader'))
 const StudentPublicPortfolio = lazy(() => import('./modules/student/pages/PublicPortfolio'))
 const AdminDashboard = lazy(() => import('./modules/admin/pages/AdminDashboard'))
+const DevPdfTestPage = import.meta.env.DEV ? lazy(() => import('./modules/student/pages/DevPdfTestPage')) : null
 
 function PageLoader() {
   return (
@@ -170,6 +171,9 @@ export default function AppRouter() {
         <Route path="students/:username" element={<StudentPublicPortfolio />} />
         <Route path="i/:slug" element={<LegacyInstitutionRedirect />} />
         <Route path="c/:slug" element={<LegacyCompanyRedirect />} />
+        {import.meta.env.DEV && DevPdfTestPage && (
+          <Route path="dev/pdf-test" element={<DevPdfTestPage />} />
+        )}
         <Route
           path="admin"
           element={(

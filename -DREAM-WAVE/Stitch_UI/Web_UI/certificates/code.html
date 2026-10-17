@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary-container":"#006170","outline-variant":"#c0c7d3","on-error-container":"#93000a","on-tertiary-fixed":"#001e2f","tertiary":"#246185","on-background":"#001c3b","primary-container":"#0079c4","on-tertiary-fixed-variant":"#004c6e","on-surface":"#001c3b","surface-dim":"#c7dbff","on-tertiary":"#ffffff","inverse-on-surface":"#ebf1ff","inverse-primary":"#9bcaff","error":"#ba1a1a","secondary-fixed":"#a6eeff","on-primary-fixed-variant":"#00497a","error-container":"#ffdad6","background":"#f9f9ff","on-secondary-fixed-variant":"#004e5b","secondary-fixed-dim":"#3dd8f5","secondary-container":"#49e1fd","on-primary-container":"#fdfcff","surface-variant":"#d5e3ff","on-secondary":"#ffffff","on-primary-fixed":"#001d35","surface-container-lowest":"#ffffff","surface":"#f9f9ff","on-error":"#ffffff","primary-fixed-dim":"#9bcaff","surface-container-high":"#dee8ff","outline":"#707882","secondary":"#006878","surface-tint":"#0062a0","on-surface-variant":"#404751","surface-container":"#e7eeff","on-primary":"#ffffff","tertiary-fixed":"#c8e6ff","surface-container-low":"#f0f3ff","primary":"#005f9c","on-secondary-fixed":"#001f25","surface-bright":"#f9f9ff","tertiary-container":"#427a9f","surface-container-highest":"#d5e3ff","tertiary-fixed-dim":"#96cdf5","inverse-surface":"#193151","primary-fixed":"#d0e4ff","on-tertiary-container":"#fcfcff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin":"2rem","gutter-mobile":"1rem","space-md":"1.25rem","space-xs":"0.375rem","gutter":"1.5rem","space-xl":"2.5rem","space-lg":"1.75rem","margin-mobile":"1rem","space-sm":"0.75rem"},"fontFamily":{"headline-md":["Outfit"],"body-md":["Plus Jakarta Sans"],"headline-lg":["Outfit"],"body-lg":["Plus Jakarta Sans"],"label-sm":["Outfit"],"display-hero":["Outfit"],"label-md":["Outfit"],"headline-sm":["Outfit"],"label-lg":["Outfit"],"headline-lg-mobile":["Outfit"],"body-sm":["Plus Jakarta Sans"],"display-hero-mobile":["Outfit"],"title-md":["Outfit"]},"fontSize":{"headline-md":["24px",{"lineHeight":"32px","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"22px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"26px","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","fontWeight":"500"}],"display-hero":["48px",{"lineHeight":"56px","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"600"}],"headline-lg-mobile":["26px",{"lineHeight":"32px","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"display-hero-mobile":["32px",{"lineHeight":"40px","fontWeight":"700"}],"title-md":["18px",{"lineHeight":"24px","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[72px] bg-surface-container-high/70 backdrop-blur-xl z-50 flex flex-col items-center py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-center w-11 h-11 rounded-full bg-primary-container shadow-md text-on-primary-container mb-space-lg"><span class="material-symbols-outlined text-[24px]">waves</span></div><nav class="flex-1 flex flex-col items-center gap-space-sm w-full px-2" data-active-classes="bg-primary text-on-primary shadow-sm"><a class="flex items-center justify-center w-11 h-11 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-200" data-path="home" href="#" title="Home"><span class="material-symbols-outlined text-[22px]">home</span></a><a class="flex items-center justify-center w-11 h-11 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-200" data-path="studio" href="#" title="Studio"><span class="material-symbols-outlined text-[22px]">auto_awesome</span></a><a class="flex items-center justify-center w-11 h-11 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-200" data-path="space" href="#" title="Space"><span class="material-symbols-outlined text-[22px]">rocket_launch</span></a><a aria-current="page" class="flex items-center justify-center w-11 h-11 rounded-xl transition-all duration-200 bg-primary text-on-primary shadow-sm" data-path="careers" href="#" title="Careers"><span class="material-symbols-outlined text-[22px]">work</span></a><a class="flex items-center justify-center w-11 h-11 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-200" data-path="analytics" href="#" title="Analytics"><span class="material-symbols-outlined text-[22px]">insights</span></a></nav><div class="flex flex-col items-center gap-space-sm w-full px-2 mt-auto"><a class="flex items-center justify-center w-11 h-11 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all duration-200" data-path="settings" href="#" title="Settings"><span class="material-symbols-outlined text-[22px]">settings</span></a></div></aside><div class="pl-[72px]"><header class="fixed top-0 left-[72px] right-0 h-16 bg-surface-container-high/70 backdrop-blur-xl z-40 px-gutter flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">DREAM WAVE</span><span class="font-label-sm text-label-sm bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full font-semibold">AI</span></div><div class="flex-1 max-w-xl mx-space-xl"><div class="relative flex items-center w-full"><span class="material-symbols-outlined absolute left-4 text-on-surface-variant text-[20px] pointer-events-none">search</span><input class="w-full h-10 pl-11 pr-4 rounded-full bg-surface-container-lowest/80 text-on-surface placeholder:text-on-surface-variant/70 font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all shadow-sm" placeholder="Search Dream Wave, modules, prompts..." type="text"/></div></div><div class="flex items-center gap-space-sm"><button class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">light_mode</span></button><button class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm ml-space-xs"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 min-h-screen w-full px-gutter py-margin bg-surface"><div class="flex flex-col w-full text-[#0B2545] font-['Figtree',sans-serif]">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap');
+    .sky-page-bg {
+      background: linear-gradient(180deg, #D6EAFB 0%, #E6F3FD 100%);
+    }
+    .card-pale-sky {
+      background: linear-gradient(145deg, #EAF4FD 0%, #DDEEFC 100%);
+      box-shadow: 0 10px 30px -6px rgba(47, 143, 221, 0.12), 0 2px 8px -2px rgba(11, 37, 69, 0.04);
+    }
+    .card-border-glow {
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+    }
+    .glass-frosted {
+      background: rgba(207, 230, 249, 0.75);
+      backdrop-filter: blur(14px);
+    }
+  </style>
+<div class="sky-page-bg rounded-[28px] p-6 lg:p-8 flex flex-col gap-8 card-border-glow shadow-sm">
+<!-- SECTION 1: HEADER -->
+<header class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="flex flex-col gap-1 max-w-2xl">
+<span class="font-['Outfit'] text-[11px] font-bold tracking-[0.2em] uppercase text-[#0B2545]/70">
+          EVIDENCE PORTFOLIO
+        </span>
+<h1 class="font-['Outfit'] text-[36px] lg:text-[42px] font-bold text-[#0B2545] leading-tight">
+          Certificates
+        </h1>
+<p class="text-[15px] lg:text-[16px] text-[#0B2545]/80 font-normal leading-relaxed">
+          Import, categorize, search, preview and share learning credentials.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<div class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#D4F1FE] card-border-glow shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#00C2DE] animate-pulse"></span>
+<span class="text-[13px] font-semibold text-[#0B2545]">4 Verified Credentials</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#BFE0F7] card-border-glow shadow-sm">
+<span class="material-symbols-outlined text-[17px] text-[#006878]">verified_user</span>
+<span class="text-[13px] font-semibold text-[#0B2545]">100% Cryptographic Proof</span>
+</div>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] text-white font-['Outfit'] font-semibold text-[15px] transition-all transform active:scale-95 shadow-[0_4px_14px_rgba(47,143,221,0.35)]" onclick="openImportModal()">
+<span class="material-symbols-outlined text-[19px]">add</span>
+<span>+ Import certificate</span>
+</button>
+</div>
+</header>
+<!-- SECTION 2: TOOLBAR CARD -->
+<section class="card-pale-sky rounded-[26px] p-4 lg:p-5 card-border-glow">
+<div class="flex flex-col xl:flex-row gap-4 xl:items-center justify-between">
+<div class="flex flex-col sm:flex-row gap-3 flex-1">
+<!-- Search Field -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[#0B2545]/60 text-[20px]">
+              search
+            </span>
+<input class="w-full h-11 pl-11 pr-4 rounded-full bg-white text-[#0B2545] placeholder-[#0B2545]/45 text-[15px] shadow-[inset_0_1px_2px_rgba(0,0,0,0.03)] card-border-glow focus:outline-none focus:ring-2 focus:ring-[#00C2DE]/40 transition-all" id="cert-search" placeholder="Search certificates, issuers, skills..." type="text"/>
+</div>
+<!-- All categories Dropdown -->
+<div class="relative min-w-[210px]">
+<select class="w-full h-11 px-4 pr-10 rounded-full bg-white text-[#0B2545] font-medium text-[14px] appearance-none card-border-glow shadow-[inset_0_1px_2px_rgba(0,0,0,0.03)] focus:outline-none focus:ring-2 focus:ring-[#00C2DE]/40 cursor-pointer" id="category-select" onchange="filterCategory(this.value)">
+<option value="All">All categories</option>
+<option value="Deep Learning &amp; Systems">Deep Learning &amp; Systems</option>
+<option value="AI Safety &amp; Alignment">AI Safety &amp; Alignment</option>
+<option value="Cloud &amp; GPU Infra">Cloud &amp; GPU Infra</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-[#0B2545]/70 pointer-events-none text-[20px]">
+              expand_more
+            </span>
+</div>
+</div>
+<!-- Filter Tags -->
+<div class="flex flex-wrap items-center gap-2" id="filter-pill-container">
+<button class="filter-pill active px-3.5 py-1.5 rounded-full text-[13px] font-semibold bg-[#2F8FDD] text-white shadow-sm transition-colors" data-filter="All" onclick="setFilter('All')">
+            All (4)
+          </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full text-[13px] font-medium bg-white/70 hover:bg-white text-[#0B2545] card-border-glow transition-colors" data-filter="Deep Learning &amp; Systems" onclick="setFilter('Deep Learning &amp; Systems')">
+            Deep Learning &amp; Systems (2)
+          </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full text-[13px] font-medium bg-white/70 hover:bg-white text-[#0B2545] card-border-glow transition-colors" data-filter="AI Safety &amp; Alignment" onclick="setFilter('AI Safety &amp; Alignment')">
+            AI Safety &amp; Alignment (1)
+          </button>
+<button class="filter-pill px-3.5 py-1.5 rounded-full text-[13px] font-medium bg-white/70 hover:bg-white text-[#0B2545] card-border-glow transition-colors" data-filter="Cloud &amp; GPU Infra" onclick="setFilter('Cloud &amp; GPU Infra')">
+            Cloud &amp; GPU Infra (1)
+          </button>
+</div>
+</div>
+</section>
+<!-- SECTION 3: MAIN CARD "EVIDENCE AND TRUST" -->
+<section class="card-pale-sky rounded-[28px] p-6 lg:p-7 card-border-glow flex flex-col gap-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/60">
+<div class="flex flex-col">
+<span class="font-['Outfit'] text-[11px] font-bold tracking-[0.18em] uppercase text-[#0B2545]/70">
+            EVIDENCE AND TRUST
+          </span>
+<h2 class="font-['Outfit'] text-[24px] font-bold text-[#0B2545]">
+            Certificates
+          </h2>
+</div>
+<div class="flex items-center gap-3">
+<!-- View Toggle: Active Grid vs Empty State -->
+<div class="flex p-1 bg-[#CFE6F9] rounded-full card-border-glow text-[13px] font-semibold">
+<button class="px-4 py-1.5 rounded-full bg-white text-[#0B2545] shadow-sm transition-all" id="toggle-grid-btn" onclick="setViewMode('grid')">
+              Active Grid (4)
+            </button>
+<button class="px-4 py-1.5 rounded-full text-[#0B2545]/70 hover:text-[#0B2545] transition-all" id="toggle-empty-btn" onclick="setViewMode('empty')">
+              Preview Empty State
+            </button>
+</div>
+<button class="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] text-white font-['Outfit'] font-semibold text-[14px] shadow-[0_4px_12px_rgba(47,143,221,0.3)] transition-all" onclick="openImportModal()">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>+ Import certificate</span>
+</button>
+</div>
+</div>
+<!-- SECTION 4: ACTIVE GRID VIEW -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5" id="grid-view">
+<!-- CARD 1 -->
+<article class="cert-item flex flex-col justify-between card-pale-sky rounded-[24px] p-5 card-border-glow hover:-translate-y-1 transition-all duration-300 group" data-category="Deep Learning &amp; Systems">
+<div class="flex flex-col gap-4">
+<!-- Thumbnail preview -->
+<div class="h-36 rounded-[18px] bg-gradient-to-br from-[#D4F1FE] via-[#CFE6F9] to-[#BFE0F7] p-3 flex flex-col justify-between relative overflow-hidden card-border-glow shadow-inner">
+<div class="flex items-start justify-between">
+<span class="px-2 py-0.5 rounded-md bg-white/80 text-[10px] font-['Outfit'] font-bold tracking-wider text-[#0B2545] uppercase">
+                  STANFORD &amp; DL.AI
+                </span>
+<div class="w-6 h-6 rounded-full bg-[#00C2DE]/20 flex items-center justify-center">
+<span class="w-3 h-3 rounded-full bg-[#00C2DE]"></span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[18px]">workspace_premium</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[11px] font-bold text-[#0B2545] leading-tight">SPECIALIZATION HONORS</span>
+<span class="text-[9px] text-[#0B2545]/70">Cryptographic Seal Verified</span>
+</div>
+</div>
+</div>
+<!-- Content -->
+<div class="flex flex-col gap-2">
+<span class="self-start px-2.5 py-1 rounded-full bg-white text-[#0B2545] text-[12px] font-semibold card-border-glow">
+                Deep Learning &amp; Systems
+              </span>
+<h3 class="font-['Outfit'] text-[18px] font-bold text-[#0B2545] leading-snug line-clamp-2">
+                Deep Learning Specialization &amp; Systems Architecture
+              </h3>
+<p class="text-[14px] text-[#0B2545]/75 font-medium">
+                DeepLearning.AI &amp; Stanford Online
+              </p>
+<p class="text-[12px] text-[#0B2545]/60">
+                Issued Sep 2024 · ID: DL-884920
+              </p>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-4 mt-4 border-t border-white/60 flex items-center justify-between text-[13px] font-medium text-[#0B2545]/80">
+<button class="flex items-center gap-1 hover:text-[#2F8FDD] transition-colors" onclick="previewCert('Deep Learning Specialization &amp; Systems Architecture', 'DeepLearning.AI &amp; Stanford Online', 'DL-884920', 'Sep 18, 2024')">
+<span class="material-symbols-outlined text-[17px]">visibility</span>
+<span>Preview</span>
+</button>
+<button class="flex items-center gap-1 hover:text-[#2F8FDD] transition-colors" onclick="shareCert('DL-884920')">
+<span class="material-symbols-outlined text-[17px]">share</span>
+<span>Share</span>
+</button>
+<button class="flex items-center gap-1 hover:text-red-600 transition-colors" onclick="deleteCard(this)">
+<span class="material-symbols-outlined text-[17px]">delete</span>
+<span>Delete</span>
+</button>
+</div>
+</article>
+<!-- CARD 2 -->
+<article class="cert-item flex flex-col justify-between card-pale-sky rounded-[24px] p-5 card-border-glow hover:-translate-y-1 transition-all duration-300 group" data-category="Cloud &amp; GPU Infra">
+<div class="flex flex-col gap-4">
+<!-- Thumbnail preview -->
+<div class="h-36 rounded-[18px] bg-gradient-to-br from-[#CFE6F9] via-[#D4F1FE] to-[#DDEEFC] p-3 flex flex-col justify-between relative overflow-hidden card-border-glow shadow-inner">
+<div class="flex items-start justify-between">
+<span class="px-2 py-0.5 rounded-md bg-white/80 text-[10px] font-['Outfit'] font-bold tracking-wider text-[#0B2545] uppercase">
+                  MODAL LABS
+                </span>
+<span class="px-2 py-0.5 rounded-full bg-[#00C2DE] text-white text-[9px] font-bold">CUDA L4</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[18px]">memory</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[11px] font-bold text-[#0B2545] leading-tight">KERNEL ARCHITECTURE</span>
+<span class="text-[9px] text-[#0B2545]/70">Signature Block Signed</span>
+</div>
+</div>
+</div>
+<!-- Content -->
+<div class="flex flex-col gap-2">
+<span class="self-start px-2.5 py-1 rounded-full bg-white text-[#0B2545] text-[12px] font-semibold card-border-glow">
+                Cloud &amp; GPU Infra
+              </span>
+<h3 class="font-['Outfit'] text-[18px] font-bold text-[#0B2545] leading-snug line-clamp-2">
+                Distributed GPU Systems &amp; Triton Kernel Engineering
+              </h3>
+<p class="text-[14px] text-[#0B2545]/75 font-medium">
+                Modal Labs &amp; CUDA Alliance
+              </p>
+<p class="text-[12px] text-[#0B2545]/60">
+                Issued Aug 2024 · ID: GPU-771902
+              </p>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-4 mt-4 border-t border-white/60 flex items-center justify-between text-[13px] font-medium text-[#0B2545]/80">
+<button class="flex items-center gap-1 hover:text-[#2F8FDD] transition-colors" onclick="previewCert('Distributed GPU Systems &amp; Triton Kernel Engineering', 'Modal Labs &amp; CUDA Alliance', 'GPU-771902', 'Aug 29, 2024')">
+<span class="material-symbols-outlined text-[17px]">visibility</span>
+<span>Preview</span>
+</button>
+<button class="flex items-center gap-1 hover:text-[#2F8FDD] transition-colors" onclick="shareCert('GPU-771902')">
+<span class="material-symbols-outlined text-[17px]">share</span>
+<span>Share</span>
+</button>
+<button class="flex items-center gap-1 hover:text-red-600 transition-colors" onclick="deleteCard(this)">
+<span class="material-symbols-outlined text-[17px]">delete</span>
+<span>Delete</span>
+</button>
+</div>
+</article>
+<!-- CARD 3 -->
+<article class="cert-item flex flex-col justify-between card-pale-sky rounded-[24px] p-5 card-border-glow hover:-translate-y-1 transition-all duration-300 group" data-category="AI Safety &amp; Alignment">
+<div class="flex flex-col gap-4">
+<!-- Thumbnail preview -->
+<div class="h-36 rounded-[18px] bg-gradient-to-br from-[#BFE0F7] via-[#D4F1FE] to-[#CFE6F9] p-3 flex flex-col justify-between relative overflow-hidden card-border-glow shadow-inner">
+<div class="flex items-start justify-between">
+<span class="px-2 py-0.5 rounded-md bg-white/80 text-[10px] font-['Outfit'] font-bold tracking-wider text-[#0B2545] uppercase">
+                  ANTHROPIC RS
+                </span>
+<span class="material-symbols-outlined text-[#006878] text-[20px]">shield</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#00C2DE] text-[18px]">verified</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[11px] font-bold text-[#0B2545] leading-tight">ALIGNMENT PROTOCOL</span>
+<span class="text-[9px] text-[#0B2545]/70">Cyan Trust Seal</span>
+</div>
+</div>
+</div>
+<!-- Content -->
+<div class="flex flex-col gap-2">
+<span class="self-start px-2.5 py-1 rounded-full bg-white text-[#0B2545] text-[12px] font-semibold card-border-glow">
+                AI Safety &amp; Alignment
+              </span>
+<h3 class="font-['Outfit'] text-[18px] font-bold text-[#0B2545] leading-snug line-clamp-2">
+                Frontier AI Safety, Alignment &amp; RLHF Auditing
+              </h3>
+<p class="text-[14px] text-[#0B2545]/75 font-medium">
+                Anthropic Research Initiative
+              </p>
+<p class="text-[12px] text-[#0B2545]/60">
+                Issued Jul 2024 · ID: SAFE-440192
+              </p>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-4 mt-4 border-t border-white/60 flex items-center justify-between text-[13px] font-medium text-[#0B2545]/80">
+<button class="flex items-center gap-1 hover:text-[#2F8FDD] transition-colors" onclick="previewCert('Frontier AI Safety, Alignment &amp; RLHF Auditing', 'Anthropic Research Initiative', 'SAFE-440192', 'Jul 15, 2024')">
+<span class="material-symbols-outlined text-[17px]">visibility</span>
+<span>Preview</span>
+</button>
+<button class="flex items-center gap-1 hover:text-[#2F8FDD] transition-colors" onclick="shareCert('SAFE-440192')">
+<span class="material-symbols-outlined text-[17px]">share</span>
+<span>Share</span>
+</button>
+<button class="flex items-center gap-1 hover:text-red-600 transition-colors" onclick="deleteCard(this)">
+<span class="material-symbols-outlined text-[17px]">delete</span>
+<span>Delete</span>
+</button>
+</div>
+</article>
+<!-- CARD 4 -->
+<article class="cert-item flex flex-col justify-between card-pale-sky rounded-[24px] p-5 card-border-glow hover:-translate-y-1 transition-all duration-300 group" data-category="Deep Learning &amp; Systems">
+<div class="flex flex-col gap-4">
+<!-- Thumbnail preview -->
+<div class="h-36 rounded-[18px] bg-gradient-to-br from-[#DDEEFC] via-[#CFE6F9] to-[#D4F1FE] p-3 flex flex-col justify-between relative overflow-hidden card-border-glow shadow-inner">
+<div class="flex items-start justify-between">
+<span class="px-2 py-0.5 rounded-md bg-white/80 text-[10px] font-['Outfit'] font-bold tracking-wider text-[#0B2545] uppercase">
+                  META FAIR
+                </span>
+<span class="text-[9px] font-mono text-[#006878] bg-white/70 px-2 py-0.5 rounded">0x3b8f...4e</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[18px]">neurology</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[11px] font-bold text-[#0B2545] leading-tight">LLM INFRA FOUNDATION</span>
+<span class="text-[9px] text-[#0B2545]/70">Cryptographic Hash 256-bit</span>
+</div>
+</div>
+</div>
+<!-- Content -->
+<div class="flex flex-col gap-2">
+<span class="self-start px-2.5 py-1 rounded-full bg-white text-[#0B2545] text-[12px] font-semibold card-border-glow">
+                Deep Learning &amp; Systems
+              </span>
+<h3 class="font-['Outfit'] text-[18px] font-bold text-[#0B2545] leading-snug line-clamp-2">
+                Large Language Model Pre-Training &amp; Inference Infra
+              </h3>
+<p class="text-[14px] text-[#0B2545]/75 font-medium">
+                Meta AI / FAIR Open Academy
+              </p>
+<p class="text-[12px] text-[#0B2545]/60">
+                Issued Jun 2024 · ID: LLM-319801
+              </p>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-4 mt-4 border-t border-white/60 flex items-center justify-between text-[13px] font-medium text-[#0B2545]/80">
+<button class="flex items-center gap-1 hover:text-[#2F8FDD] transition-colors" onclick="previewCert('Large Language Model Pre-Training &amp; Inference Infra', 'Meta AI / FAIR Open Academy', 'LLM-319801', 'Jun 04, 2024')">
+<span class="material-symbols-outlined text-[17px]">visibility</span>
+<span>Preview</span>
+</button>
+<button class="flex items-center gap-1 hover:text-[#2F8FDD] transition-colors" onclick="shareCert('LLM-319801')">
+<span class="material-symbols-outlined text-[17px]">share</span>
+<span>Share</span>
+</button>
+<button class="flex items-center gap-1 hover:text-red-600 transition-colors" onclick="deleteCard(this)">
+<span class="material-symbols-outlined text-[17px]">delete</span>
+<span>Delete</span>
+</button>
+</div>
+</article>
+</div>
+<!-- SECTION 5: (a) EMPTY STATE (Toggleable or displayed cleanly) -->
+<div class="hidden flex-col items-center justify-center p-12 text-center card-pale-sky rounded-[24px] card-border-glow gap-4 my-2" id="empty-state-view">
+<div class="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm card-border-glow">
+<span class="material-symbols-outlined text-[#006878] text-[32px]">verified</span>
+</div>
+<div class="max-w-md flex flex-col gap-1.5">
+<h4 class="font-['Outfit'] text-[20px] font-bold text-[#0B2545]">
+            No matching certificates
+          </h4>
+<p class="text-[15px] text-[#0B2545]/75">
+            Import credentials from institutions, courses and professional issuers.
+          </p>
+</div>
+<button class="mt-2 flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] text-white font-['Outfit'] font-semibold text-[15px] shadow-[0_4px_14px_rgba(47,143,221,0.35)] transition-all" onclick="openImportModal()">
+<span class="material-symbols-outlined text-[19px]">add</span>
+<span>+ Import certificate</span>
+</button>
+</div>
+</section>
+</div>
+<!-- SECTION 6: MODALS & OVERLAYS -->
+<!-- 6.1 IMPORT DIALOG MODAL -->
+<div class="fixed inset-0 z-50 bg-[#0B2545]/40 backdrop-blur-sm hidden items-center justify-center p-4" id="import-modal">
+<div class="w-full max-w-xl card-pale-sky rounded-[28px] p-6 lg:p-7 card-border-glow shadow-2xl flex flex-col gap-6 relative">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-full bg-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[20px]">upload_file</span>
+</div>
+<h3 class="font-['Outfit'] text-[22px] font-bold text-[#0B2545]">Import Certificate</h3>
+</div>
+<button class="w-8 h-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center text-[#0B2545] transition-colors" onclick="closeImportModal()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Upload dropzone -->
+<div class="border-2 border-dashed border-[#BFE0F7] rounded-[22px] p-7 bg-white/50 flex flex-col items-center justify-center text-center gap-2 hover:bg-white/80 transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-full bg-[#D4F1FE] flex items-center justify-center text-[#006878]">
+<span class="material-symbols-outlined text-[24px]">cloud_upload</span>
+</div>
+<span class="font-['Outfit'] font-semibold text-[15px] text-[#0B2545]">Drag &amp; drop PDF, JSON credential or enter credential URL</span>
+<span class="text-[13px] text-[#0B2545]/60">Supports Blockcerts, OpenBadges 2.0, PDF with digital signature</span>
+</div>
+<div class="flex flex-col gap-4">
+<div>
+<label class="block text-[13px] font-semibold text-[#0B2545] mb-1.5 font-['Outfit']">Credential URL / Token</label>
+<input class="w-full h-11 px-4 rounded-full bg-white text-[#0B2545] text-[14px] card-border-glow focus:outline-none focus:ring-2 focus:ring-[#00C2DE]/40" placeholder="https://verify.stanford.edu/cert/..." type="text"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-[13px] font-semibold text-[#0B2545] mb-1.5 font-['Outfit']">Issuer</label>
+<input class="w-full h-11 px-4 rounded-full bg-white text-[#0B2545] text-[14px] card-border-glow focus:outline-none focus:ring-2 focus:ring-[#00C2DE]/40" placeholder="e.g. DeepLearning.AI" type="text"/>
+</div>
+<div>
+<label class="block text-[13px] font-semibold text-[#0B2545] mb-1.5 font-['Outfit']">Category</label>
+<select class="w-full h-11 px-4 rounded-full bg-white text-[#0B2545] text-[14px] card-border-glow focus:outline-none focus:ring-2 focus:ring-[#00C2DE]/40">
+<option>Deep Learning &amp; Systems</option>
+<option>AI Safety &amp; Alignment</option>
+<option>Cloud &amp; GPU Infra</option>
+</select>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-end gap-3 pt-2">
+<button class="px-5 py-2.5 rounded-full bg-white/70 hover:bg-white text-[#0B2545] font-semibold text-[14px] transition-colors" onclick="closeImportModal()">
+          Cancel
+        </button>
+<button class="px-6 py-2.5 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] text-white font-['Outfit'] font-semibold text-[14px] shadow-[0_4px_14px_rgba(47,143,221,0.35)] transition-all" onclick="confirmImport()">
+          Confirm Import
+        </button>
+</div>
+</div>
+</div>
+<!-- 6.2 PREVIEW MODAL -->
+<div class="fixed inset-0 z-50 bg-[#0B2545]/40 backdrop-blur-sm hidden items-center justify-center p-4" id="preview-modal">
+<div class="w-full max-w-2xl card-pale-sky rounded-[28px] p-6 lg:p-8 card-border-glow shadow-2xl flex flex-col gap-6 relative">
+<div class="flex items-center justify-between">
+<span class="px-3 py-1 rounded-full bg-[#D4F1FE] text-[#006878] font-bold text-[12px] uppercase tracking-wider flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#00C2DE]"></span>
+          Verified Credential Preview
+        </span>
+<button class="w-8 h-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center text-[#0B2545] transition-colors" onclick="closePreviewModal()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- High fidelity credential mockup -->
+<div class="rounded-[22px] bg-white p-7 card-border-glow shadow-md flex flex-col items-center text-center gap-5 border border-[#CFE6F9] relative overflow-hidden">
+<div class="absolute -right-12 -top-12 w-36 h-36 rounded-full bg-[#D4F1FE]/40 blur-xl pointer-events-none"></div>
+<div class="absolute -left-12 -bottom-12 w-36 h-36 rounded-full bg-[#BFE0F7]/40 blur-xl pointer-events-none"></div>
+<!-- University Crest / Badge -->
+<div class="w-16 h-16 rounded-full bg-[#EAF4FD] border-2 border-[#2F8FDD] flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[34px]">school</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-['Outfit'] text-[12px] font-bold text-[#006878] tracking-[0.25em] uppercase">
+            Official Certification of Excellence
+          </span>
+<h2 class="font-['Outfit'] text-[24px] font-bold text-[#0B2545]" id="modal-cert-title">
+            Deep Learning Specialization &amp; Systems Architecture
+          </h2>
+<p class="text-[14px] text-[#0B2545]/70">
+            Awarded to <span class="font-bold text-[#0B2545]">Julian Rivera</span> for rigorous mastery in frontier machine learning.
+          </p>
+</div>
+<!-- Meta row -->
+<div class="w-full grid grid-cols-3 gap-2 py-4 px-3 rounded-xl bg-[#F0F8FE] text-left text-[12px]">
+<div>
+<span class="block text-[#0B2545]/60 font-medium">Issuer</span>
+<span class="font-bold text-[#0B2545]" id="modal-cert-issuer">DeepLearning.AI</span>
+</div>
+<div>
+<span class="block text-[#0B2545]/60 font-medium">Issue Date</span>
+<span class="font-bold text-[#0B2545]" id="modal-cert-date">Sep 18, 2024</span>
+</div>
+<div>
+<span class="block text-[#0B2545]/60 font-medium">Credential Hash</span>
+<span class="font-mono font-bold text-[#006878]" id="modal-cert-hash">DL-884920</span>
+</div>
+</div>
+<!-- Signature & Seal bar -->
+<div class="w-full flex items-center justify-between pt-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#00C2DE] text-[20px]">qr_code_2</span>
+<span class="text-[11px] text-[#0B2545]/60">Decentralized Trust ID Validated</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D4F1FE] text-[#006878] text-[11px] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+            Cryptographic Integrity 100%
+          </div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="flex items-center justify-end gap-3">
+<button class="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white text-[#0B2545] font-semibold text-[14px] card-border-glow shadow-sm hover:bg-white/90 transition-colors" onclick="copyShareLink()">
+<span class="material-symbols-outlined text-[18px]">link</span>
+<span id="copy-btn-text">Copy Share Link</span>
+</button>
+<button class="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] text-white font-['Outfit'] font-semibold text-[14px] shadow-[0_4px_14px_rgba(47,143,221,0.35)] transition-all" onclick="downloadPdf()">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Download PDF</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+    function setViewMode(mode) {
+      const gridView = document.getElementById('grid-view');
+      const emptyView = document.getElementById('empty-state-view');
+      const gridBtn = document.getElementById('toggle-grid-btn');
+      const emptyBtn = document.getElementById('toggle-empty-btn');
+
+      if (mode === 'grid') {
+        gridView.classList.remove('hidden');
+        emptyView.classList.add('hidden');
+        emptyView.classList.remove('flex');
+        gridBtn.className = 'px-4 py-1.5 rounded-full bg-white text-[#0B2545] shadow-sm transition-all';
+        emptyBtn.className = 'px-4 py-1.5 rounded-full text-[#0B2545]/70 hover:text-[#0B2545] transition-all';
+      } else {
+        gridView.classList.add('hidden');
+        emptyView.classList.remove('hidden');
+        emptyView.classList.add('flex');
+        emptyBtn.className = 'px-4 py-1.5 rounded-full bg-white text-[#0B2545] shadow-sm transition-all';
+        gridBtn.className = 'px-4 py-1.5 rounded-full text-[#0B2545]/70 hover:text-[#0B2545] transition-all';
+      }
+    }
+
+    function setFilter(category) {
+      const select = document.getElementById('category-select');
+      select.value = category;
+      filterCategory(category);
+    }
+
+    function filterCategory(category) {
+      const pills = document.querySelectorAll('.filter-pill');
+      pills.forEach(p => {
+        if (p.getAttribute('data-filter') === category) {
+          p.className = 'filter-pill active px-3.5 py-1.5 rounded-full text-[13px] font-semibold bg-[#2F8FDD] text-white shadow-sm transition-colors';
+        } else {
+          p.className = 'filter-pill px-3.5 py-1.5 rounded-full text-[13px] font-medium bg-white/70 hover:bg-white text-[#0B2545] card-border-glow transition-colors';
+        }
+      });
+
+      const cards = document.querySelectorAll('.cert-item');
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const itemCat = card.getAttribute('data-category');
+        if (category === 'All' || itemCat === category) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    const searchInput = document.getElementById('cert-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        const val = e.target.value.toLowerCase();
+        const cards = document.querySelectorAll('.cert-item');
+        cards.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          card.style.display = text.includes(val) ? 'flex' : 'none';
+        });
+      });
+    }
+
+    function openImportModal() {
+      const modal = document.getElementById('import-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeImportModal() {
+      const modal = document.getElementById('import-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function confirmImport() {
+      closeImportModal();
+      setViewMode('grid');
+    }
+
+    function previewCert(title, issuer, id, date) {
+      document.getElementById('modal-cert-title').textContent = title;
+      document.getElementById('modal-cert-issuer').textContent = issuer;
+      document.getElementById('modal-cert-hash').textContent = id;
+      document.getElementById('modal-cert-date').textContent = date;
+      const modal = document.getElementById('preview-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closePreviewModal() {
+      const modal = document.getElementById('preview-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function shareCert(id) {
+      navigator.clipboard?.writeText(window.location.origin + '/cert/' + id);
+      alert('Verification URL for certificate ' + id + ' copied to clipboard!');
+    }
+
+    function copyShareLink() {
+      const btn = document.getElementById('copy-btn-text');
+      btn.textContent = 'Link Copied!';
+      setTimeout(() => {
+        btn.textContent = 'Copy Share Link';
+      }, 1500);
+    }
+
+    function downloadPdf() {
+      alert('Generating verifiable cryptographic PDF bundle...');
+    }
+
+    function deleteCard(button) {
+      const card = button.closest('.cert-item');
+      if (card && confirm('Are you sure you want to remove this verified credential?')) {
+        card.remove();
+      }
+    }
+  </script>
+</div></main></div></body></html>

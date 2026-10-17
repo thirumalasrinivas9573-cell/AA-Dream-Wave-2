@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "tertiary-fixed": "#c7e7ff", "on-secondary": "#ffffff", "surface-container": "#e7eeff", "surface": "#f9f9ff", "inverse-primary": "#9bcaff", "tertiary-container": "#517994", "on-secondary-container": "#006170", "on-tertiary-container": "#fcfcff", "tertiary": "#37607a", "tertiary-fixed-dim": "#a3cce9", "on-background": "#001c3b", "primary": "#005f9c", "inverse-surface": "#193151", "background": "#f9f9ff", "surface-variant": "#d5e3ff", "secondary-fixed": "#a6eeff", "primary-fixed": "#d0e4ff", "on-tertiary-fixed": "#001e2e", "surface-dim": "#c7dbff", "secondary": "#006878", "on-error": "#ffffff", "secondary-container": "#49e1fd", "primary-fixed-dim": "#9bcaff", "surface-container-high": "#dee8ff", "outline-variant": "#c0c7d3", "on-secondary-fixed-variant": "#004e5b", "on-primary": "#ffffff", "secondary-fixed-dim": "#3dd8f5", "outline": "#707882", "on-surface": "#001c3b", "on-primary-fixed": "#001d35", "surface-container-highest": "#d5e3ff", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#204b64", "surface-bright": "#f9f9ff", "on-primary-container": "#fdfcff", "primary-container": "#0079c4", "error-container": "#ffdad6", "on-secondary-fixed": "#001f25", "surface-container-low": "#f0f3ff", "surface-container-lowest": "#ffffff", "inverse-on-surface": "#ebf1ff", "on-tertiary": "#ffffff", "on-primary-fixed-variant": "#00497a", "surface-tint": "#0062a0", "error": "#ba1a1a", "on-surface-variant": "#404751" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-sm": "0.75rem", "space-xl": "2.5rem", "space-md": "1.25rem", "margin": "2.5rem", "gutter-sm": "1rem", "margin-sm": "1.25rem", "space-lg": "1.75rem", "space-xs": "0.375rem", "gutter": "1.5rem" }, fontFamily: { "body-md": ["Plus Jakarta Sans"], "title-md": ["Outfit"], "headline-xl-mobile": ["Outfit"], "body-lg": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "headline-lg": ["Outfit"], "headline-xl": ["Outfit"], "headline-sm": ["Outfit"], "label-sm": ["Plus Jakarta Sans"], "headline-md": ["Outfit"], "display-lg": ["Outfit"], "display-lg-mobile": ["Outfit"] }, fontSize: { "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }], "title-md": ["17px", { "lineHeight": "24px", "fontWeight": "500" }], "headline-xl-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-lg": ["17px", { "lineHeight": "26px", "fontWeight": "400" }], "label-lg": ["15px", { "lineHeight": "22px", "fontWeight": "500" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }], "label-sm": ["15px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.005em", "fontWeight": "500" }], "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-full antialiased selection:bg-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-[#cfe6f9]/80 backdrop-blur-xl shadow-[0_1px_12px_rgba(0,95,156,0.06)]"><div class="h-16 px-gutter-sm flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[20px]">auto_awesome</span></div><h1 class="font-title-md text-title-md text-on-surface tracking-tight">Mentor Chat</h1></div><div class="flex items-center gap-space-xs"><button class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">tune</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full relative">
+<!-- Top Context Header Area -->
+<div class="px-gutter-sm pt-2 pb-3 flex flex-col gap-3">
+<!-- Eyebrow & Page Intro -->
+<div class="flex flex-col gap-0.5">
+<span class="text-[11px] font-bold tracking-wider uppercase text-primary">AI TOOLS</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface leading-tight">AI Mentor</h2>
+<p class="font-body-md text-[13px] text-tertiary leading-snug">Context-aware guidance for your active goals and roadmap.</p>
+</div>
+<!-- Mentor Identity & Utility Action Cluster -->
+<div class="flex items-center justify-between p-3 rounded-[24px] bg-gradient-to-r from-[#EAF4FD] to-[#DDEEFC] shadow-[0_4px_16px_-2px_rgba(11,37,69,0.05)] border border-white/80">
+<div class="flex items-center gap-2.5">
+<div class="relative w-11 h-11 rounded-full bg-secondary-fixed flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-secondary text-[22px]">psychology</span>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-[#00C2DE] border-2 border-white"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-title-md text-[16px] text-on-surface font-semibold">Sage</span>
+<span class="bg-[#D4F1FE] text-primary text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">Live</span>
+</div>
+<span class="font-body-md text-[12px] text-tertiary">General Mentor · Standard depth</span>
+</div>
+</div>
+<!-- Drawer and Settings Buttons -->
+<div class="flex items-center gap-1">
+<button aria-label="Open Conversation History" class="w-10 h-10 rounded-full flex items-center justify-center bg-[#D4F1FE]/80 hover:bg-[#BFE0F7] text-on-surface transition-colors" id="open-history-btn">
+<span class="material-symbols-outlined text-[20px]">history</span>
+</button>
+<button aria-label="Mentor Settings Menu" class="w-10 h-10 rounded-full flex items-center justify-center bg-[#D4F1FE]/80 hover:bg-[#BFE0F7] text-on-surface transition-colors relative" id="open-mentor-menu">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Mentor Modes Segmented Control -->
+<div class="flex items-center gap-1.5 p-1 rounded-full bg-[#CFE6F9]/60 backdrop-blur-sm overflow-x-auto no-scrollbar">
+<button class="mode-chip px-3.5 py-1.5 min-h-[38px] rounded-full bg-white text-on-surface font-medium text-[13px] shadow-[0_2px_8px_rgba(11,37,69,0.06)] flex items-center gap-1 shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+        Learning Assistant
+      </button>
+<button class="mode-chip px-3.5 py-1.5 min-h-[38px] rounded-full text-tertiary hover:text-on-surface font-medium text-[13px] transition-colors shrink-0">
+        Project Guide
+      </button>
+<button class="mode-chip px-3.5 py-1.5 min-h-[38px] rounded-full text-tertiary hover:text-on-surface font-medium text-[13px] transition-colors shrink-0">
+        Research Assistant
+      </button>
+</div>
+<!-- Quick Access History Peek Strip -->
+<button class="w-full flex items-center justify-between px-3.5 py-2 rounded-[16px] bg-[#D4F1FE]/70 hover:bg-[#BFE0F7]/70 text-on-surface transition-all text-left border border-white/60" id="history-peek-pill">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">forum</span>
+<span class="font-body-md text-[13px] font-medium text-on-surface">History (4 conversations)</span>
+</div>
+<div class="flex items-center gap-1 text-primary text-[12px] font-semibold">
+<span>Recent: Rough Cut Review</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+</button>
+</div>
+<!-- Chat Flow Scrollable Area -->
+<div class="flex flex-col gap-4 px-gutter-sm pb-36 pt-1">
+<!-- Mentor Welcome Bubble -->
+<div class="flex items-start gap-2.5 max-w-[92%]">
+<div class="w-8 h-8 rounded-full bg-[#D4F1FE] text-primary flex items-center justify-center shrink-0 shadow-sm mt-1">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="p-4 rounded-[24px] rounded-tl-sm bg-[#EAF4FD] border border-white text-on-surface shadow-[0_4px_16px_-2px_rgba(11,37,69,0.04)]">
+<p class="font-body-md text-[15px] leading-relaxed text-[#0B2545]">
+            Hey Charan, I'm Sage, your context-aware AI mentor. I can see your goals, tasks, roadmaps, and learning progress to give personalized guidance.
+          </p>
+</div>
+<span class="text-[11px] text-tertiary px-2">11:40 AM</span>
+</div>
+</div>
+<!-- User Query Bubble -->
+<div class="flex flex-col items-end self-end max-w-[86%]">
+<div class="p-4 rounded-[22px] rounded-br-sm bg-primary text-white shadow-[0_8px_20px_-4px_rgba(0,95,156,0.3)]">
+<p class="font-body-md text-[15px] leading-relaxed">
+          I've got 45 minutes right now before my next class. Which roadmap milestone should I tackle first to stay on schedule?
+        </p>
+</div>
+<span class="text-[11px] text-tertiary px-2 mt-1">11:42 AM</span>
+</div>
+<!-- Mentor Response Bubble with Rich Roadmapping Hook -->
+<div class="flex items-start gap-2.5 max-w-[94%]">
+<div class="w-8 h-8 rounded-full bg-[#D4F1FE] text-primary flex items-center justify-center shrink-0 shadow-sm mt-1">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="p-4 rounded-[24px] rounded-tl-sm bg-gradient-to-br from-[#EAF4FD] to-[#DDEEFC] border border-white text-[#0B2545] shadow-[0_6px_20px_-3px_rgba(11,37,69,0.05)]">
+<p class="font-body-md text-[15px] leading-relaxed mb-3">
+            Looking at your active stage in <strong class="font-medium text-primary">Video Editor &amp; AI Systems</strong>, your top priority is <strong class="font-medium text-on-surface">“Assemble 60-second rough cut with J-cuts &amp; L-cuts”</strong>.
+          </p>
+<!-- Rich Context Linked Badge Card -->
+<div class="p-3 rounded-[16px] bg-white/70 border border-white flex flex-col gap-2.5 mb-3">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#D4F1FE] text-primary font-bold text-[11px] uppercase tracking-wide">
+<span class="material-symbols-outlined text-[14px]">alt_route</span>
+                Linked to Roadmap Stage 03
+              </span>
+<span class="text-[12px] font-semibold text-secondary">Est. 35 mins</span>
+</div>
+<p class="text-[13px] text-tertiary leading-snug">
+              Milestone 3.2 is at 60% completion. Trimming dialogue overlap now frees up your evening rendering pipeline.
+            </p>
+</div>
+<!-- Quick Action CTA -->
+<button class="w-full h-11 rounded-[14px] bg-primary hover:bg-[#00497a] active:scale-[0.99] text-white font-medium text-[14px] flex items-center justify-center gap-2 shadow-[0_4px_12px_rgba(0,95,156,0.2)] transition-all">
+<span class="material-symbols-outlined text-[18px]">center_focus_strong</span>
+            Start Focus Mode (45m Sprint)
+          </button>
+</div>
+<span class="text-[11px] text-tertiary px-2">11:42 AM</span>
+</div>
+</div>
+<!-- Sage Synthesizing / Typing Indicator Bubble -->
+<div class="flex items-center gap-2.5 max-w-[85%]">
+<div class="w-8 h-8 rounded-full bg-[#D4F1FE] text-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-2.5 rounded-full bg-[#EAF4FD] border border-white text-tertiary shadow-[0_2px_8px_rgba(11,37,69,0.03)]">
+<div class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-bounce"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-bounce [animation-delay:150ms]"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-bounce [animation-delay:300ms]"></span>
+</div>
+<span class="font-body-md text-[13px] text-tertiary">Sage is synthesizing recommendations...</span>
+</div>
+</div>
+</div>
+<!-- Bottom Floating Input & Chips Dock Container -->
+<div class="fixed bottom-16 left-0 right-0 z-40 bg-gradient-to-t from-[#D6EAFB] via-[#D6EAFB]/95 to-transparent pt-3 pb-2 px-gutter-sm flex flex-col gap-2">
+<!-- Horizontally Scrollable Action Chips Strip -->
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+<button class="action-chip min-h-[44px] px-4 rounded-full bg-white hover:bg-[#D4F1FE] active:scale-95 text-[#0B2545] font-medium text-[13px] flex items-center gap-1.5 shadow-[0_2px_8px_rgba(11,37,69,0.04)] border border-white shrink-0 transition-all">
+<span class="material-symbols-outlined text-primary text-[18px]">calendar_today</span>
+        Plan My Day
+      </button>
+<button class="action-chip min-h-[44px] px-4 rounded-full bg-white hover:bg-[#D4F1FE] active:scale-95 text-[#0B2545] font-medium text-[13px] flex items-center gap-1.5 shadow-[0_2px_8px_rgba(11,37,69,0.04)] border border-white shrink-0 transition-all">
+<span class="material-symbols-outlined text-secondary text-[18px]">trending_up</span>
+        Review My Progress
+      </button>
+<button class="action-chip min-h-[44px] px-4 rounded-full bg-white hover:bg-[#D4F1FE] active:scale-95 text-[#0B2545] font-medium text-[13px] flex items-center gap-1.5 shadow-[0_2px_8px_rgba(11,37,69,0.04)] border border-white shrink-0 transition-all">
+<span class="material-symbols-outlined text-primary text-[18px]">navigation</span>
+        Recommend Next Step
+      </button>
+<button class="action-chip min-h-[44px] px-4 rounded-full bg-white hover:bg-[#D4F1FE] active:scale-95 text-[#0B2545] font-medium text-[13px] flex items-center gap-1.5 shadow-[0_2px_8px_rgba(11,37,69,0.04)] border border-white shrink-0 transition-all">
+<span class="material-symbols-outlined text-primary text-[18px]">splitscreen</span>
+        Break Down a Task
+      </button>
+<button class="action-chip min-h-[44px] px-4 rounded-full bg-white hover:bg-[#D4F1FE] active:scale-95 text-[#0B2545] font-medium text-[13px] flex items-center gap-1.5 shadow-[0_2px_8px_rgba(11,37,69,0.04)] border border-white shrink-0 transition-all">
+<span class="material-symbols-outlined text-secondary text-[18px]">work</span>
+        Help With Career
+      </button>
+<button class="action-chip min-h-[44px] px-4 rounded-full bg-white hover:bg-[#D4F1FE] active:scale-95 text-[#0B2545] font-medium text-[13px] flex items-center gap-1.5 shadow-[0_2px_8px_rgba(11,37,69,0.04)] border border-white shrink-0 transition-all">
+<span class="material-symbols-outlined text-primary text-[18px]">menu_book</span>
+        Research a Topic
+      </button>
+</div>
+<!-- Chat Prompt Input Bar -->
+<div class="w-full flex items-center gap-2 p-1.5 pl-3 rounded-[24px] bg-white shadow-[0_6px_20px_rgba(11,37,69,0.08)] border border-white">
+<button aria-label="Attach audio or context document" class="w-9 h-9 rounded-full flex items-center justify-center text-tertiary hover:text-primary transition-colors shrink-0">
+<span class="material-symbols-outlined text-[20px]">mic</span>
+</button>
+<input class="w-full bg-transparent text-on-surface placeholder:text-tertiary text-[15px] outline-none border-none py-1.5 min-w-0" placeholder="Talk to Sage…" type="text"/>
+<button aria-label="Send query" class="w-10 h-10 rounded-full bg-primary hover:bg-[#00497a] active:scale-95 text-white flex items-center justify-center shadow-md transition-all shrink-0" id="send-btn">
+<span class="material-symbols-outlined text-[18px]">arrow_upward</span>
+</button>
+</div>
+</div>
+<!-- Slide-Over Conversation History Drawer (Hidden by default, slides in) -->
+<div class="fixed inset-0 bg-[#0B2545]/30 backdrop-blur-sm z-50 transition-opacity duration-300 opacity-0 pointer-events-none" id="history-backdrop">
+<div class="absolute top-0 right-0 h-full w-[86%] max-w-[340px] bg-gradient-to-b from-[#E6F3FD] to-[#D6EAFB] shadow-[0_0_32px_rgba(11,37,69,0.2)] p-4 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-out border-l border-white/60" id="history-drawer">
+<!-- Drawer Top Bar -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between pt-safe">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">forum</span>
+<h3 class="font-title-md text-[17px] text-[#0B2545] font-semibold">Conversations</h3>
+</div>
+<button aria-label="Close history drawer" class="w-9 h-9 rounded-full flex items-center justify-center bg-white/70 text-on-surface hover:bg-white transition-colors" id="close-history-btn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- New Thread Action Button -->
+<button class="w-full h-11 rounded-[14px] bg-white border border-white text-primary font-medium text-[14px] flex items-center justify-center gap-2 shadow-sm hover:bg-[#D4F1FE] transition-colors">
+<span class="material-symbols-outlined text-[18px]">add_comment</span>
+          Start New Conversation
+        </button>
+<!-- Threads List -->
+<div class="flex flex-col gap-2.5 overflow-y-auto max-h-[530px] pr-1">
+<!-- Item 1: Active -->
+<div class="p-3 rounded-[18px] bg-[#CFE6F9] border border-white/80 flex flex-col gap-1.5 shadow-sm relative">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-bold text-primary uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+                Active · 8 msgs
+              </span>
+<div class="flex items-center gap-1 text-tertiary">
+<button class="p-1 hover:text-primary" title="Pin"><span class="material-symbols-outlined text-[16px]">keep</span></button>
+<button class="p-1 hover:text-primary" title="Rename"><span class="material-symbols-outlined text-[16px]">edit</span></button>
+<button class="p-1 hover:text-error" title="Delete"><span class="material-symbols-outlined text-[16px]">delete</span></button>
+</div>
+</div>
+<p class="font-title-md text-[14px] text-on-surface font-medium truncate">Video Editor Rough Cut Review</p>
+</div>
+<!-- Item 2 -->
+<div class="p-3 rounded-[18px] bg-white/60 hover:bg-white/85 border border-white/60 flex flex-col gap-1.5 transition-colors">
+<div class="flex items-center justify-between">
+<span class="text-[11px] text-tertiary font-medium">Yesterday · 14 msgs</span>
+<div class="flex items-center gap-1 text-tertiary">
+<button class="p-1 hover:text-primary" title="Pin"><span class="material-symbols-outlined text-[16px]">keep</span></button>
+<button class="p-1 hover:text-primary" title="Rename"><span class="material-symbols-outlined text-[16px]">edit</span></button>
+<button class="p-1 hover:text-error" title="Delete"><span class="material-symbols-outlined text-[16px]">delete</span></button>
+</div>
+</div>
+<p class="font-title-md text-[14px] text-on-surface font-medium truncate">Neural Networks Exam Prep</p>
+</div>
+<!-- Item 3 -->
+<div class="p-3 rounded-[18px] bg-white/60 hover:bg-white/85 border border-white/60 flex flex-col gap-1.5 transition-colors">
+<div class="flex items-center justify-between">
+<span class="text-[11px] text-tertiary font-medium">3 days ago</span>
+<div class="flex items-center gap-1 text-tertiary">
+<button class="p-1 hover:text-primary" title="Pin"><span class="material-symbols-outlined text-[16px]">keep</span></button>
+<button class="p-1 hover:text-primary" title="Rename"><span class="material-symbols-outlined text-[16px]">edit</span></button>
+<button class="p-1 hover:text-error" title="Delete"><span class="material-symbols-outlined text-[16px]">delete</span></button>
+</div>
+</div>
+<p class="font-title-md text-[14px] text-on-surface font-medium truncate">Career Roadmap Milestones</p>
+</div>
+<!-- Item 4: Empty draft -->
+<div class="p-3 rounded-[18px] bg-white/40 hover:bg-white/70 border border-white/40 flex flex-col gap-1.5 transition-colors">
+<div class="flex items-center justify-between">
+<span class="text-[11px] text-tertiary font-medium">0 messages</span>
+<div class="flex items-center gap-1 text-tertiary">
+<button class="p-1 hover:text-error" title="Delete"><span class="material-symbols-outlined text-[16px]">delete</span></button>
+</div>
+</div>
+<p class="font-title-md text-[14px] text-tertiary font-normal italic truncate">New conversation, 0 messages</p>
+</div>
+</div>
+</div>
+<!-- Drawer Footer Telemetry -->
+<div class="pt-4 border-t border-white/60 flex items-center justify-between text-tertiary text-[12px]">
+<span>Storage: 4 / 20 chats</span>
+<button class="text-primary font-semibold hover:underline">Manage All</button>
+</div>
+</div>
+</div>
+<!-- Overflow Menu Dropdown Modal -->
+<div class="fixed top-28 right-4 z-50 w-52 rounded-[20px] bg-white p-2 shadow-[0_12px_32px_rgba(11,37,69,0.15)] border border-white flex flex-col gap-1 hidden" id="mentor-menu-dropdown">
+<button class="w-full px-3 py-2 rounded-[12px] hover:bg-[#D4F1FE] text-left text-[14px] text-[#0B2545] font-medium flex items-center gap-2.5 transition-colors">
+<span class="material-symbols-outlined text-[18px] text-primary">bookmark</span>
+      Save chat
+    </button>
+<button class="w-full px-3 py-2 rounded-[12px] hover:bg-[#D4F1FE] text-left text-[14px] text-[#0B2545] font-medium flex items-center gap-2.5 transition-colors">
+<span class="material-symbols-outlined text-[18px] text-secondary">tune</span>
+      Depth: Standard
+    </button>
+<div class="h-[1px] bg-[#CFE6F9] my-0.5"></div>
+<button class="w-full px-3 py-2 rounded-[12px] hover:bg-error-container text-left text-[14px] text-error font-medium flex items-center gap-2.5 transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete_sweep</span>
+      Clear chat
+    </button>
+</div>
+</div>
+<script>
+  (function initMentorInteractions() {
+    // History Drawer Toggle Logic
+    const openBtn = document.getElementById('open-history-btn');
+    const peekPill = document.getElementById('history-peek-pill');
+    const closeBtn = document.getElementById('close-history-btn');
+    const backdrop = document.getElementById('history-backdrop');
+    const drawer = document.getElementById('history-drawer');
+
+    function openDrawer() {
+      backdrop.classList.remove('opacity-0', 'pointer-events-none');
+      backdrop.classList.add('opacity-100');
+      drawer.classList.remove('translate-x-full');
+    }
+
+    function closeDrawer() {
+      backdrop.classList.add('opacity-0', 'pointer-events-none');
+      backdrop.classList.remove('opacity-100');
+      drawer.classList.add('translate-x-full');
+    }
+
+    if (openBtn) openBtn.addEventListener('click', openDrawer);
+    if (peekPill) peekPill.addEventListener('click', openDrawer);
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    if (backdrop) {
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) closeDrawer();
+      });
+    }
+
+    // Overflow Menu Toggle
+    const menuBtn = document.getElementById('open-mentor-menu');
+    const dropdown = document.getElementById('mentor-menu-dropdown');
+
+    if (menuBtn && dropdown) {
+      menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('hidden');
+      });
+      document.addEventListener('click', () => {
+        if (!dropdown.classList.contains('hidden')) {
+          dropdown.classList.add('hidden');
+        }
+      });
+    }
+
+    // Mode Selector Pill Toggles
+    const modeChips = document.querySelectorAll('.mode-chip');
+    modeChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        modeChips.forEach(c => {
+          c.classList.remove('bg-white', 'text-on-surface', 'shadow-[0_2px_8px_rgba(11,37,69,0.06)]');
+          c.classList.add('text-tertiary');
+          const dot = c.querySelector('span');
+          if (dot) dot.remove();
+        });
+        chip.classList.remove('text-tertiary');
+        chip.classList.add('bg-white', 'text-on-surface', 'shadow-[0_2px_8px_rgba(11,37,69,0.06)]');
+        const dot = document.createElement('span');
+        dot.className = 'w-1.5 h-1.5 rounded-full bg-[#00C2DE] mr-1';
+        chip.prepend(dot);
+      });
+    });
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-[#cfe6f9]/85 backdrop-blur-xl shadow-[0_-2px_16px_rgba(0,95,156,0.08)]" data-active-classes="text-primary font-bold"><div class="flex justify-between items-center h-16 px-space-xs"><a class="flex-1 flex flex-col items-center justify-center min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="home" href="#"><span class="material-symbols-outlined text-[22px]">home</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Home</span></a><a class="flex-1 flex flex-col items-center justify-center min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="goals" href="#"><span class="material-symbols-outlined text-[22px]">flag</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Goals</span></a><a class="flex-1 flex flex-col items-center justify-center min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="roadmap" href="#"><span class="material-symbols-outlined text-[22px]">alt_route</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Roadmap</span></a><a class="flex-1 flex flex-col items-center justify-center min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-colors" data-path="focus" href="#"><span class="material-symbols-outlined text-[22px]">center_focus_strong</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Focus</span></a><a aria-current="page" class="flex-1 flex flex-col items-center justify-center min-h-[44px] py-1 transition-colors text-primary font-bold" data-path="mentor-chat" href="#"><span class="material-symbols-outlined text-[22px]">psychology</span><span class="font-label-sm text-[11px] leading-tight mt-0.5">Mentor</span></a></div></nav></body></html>

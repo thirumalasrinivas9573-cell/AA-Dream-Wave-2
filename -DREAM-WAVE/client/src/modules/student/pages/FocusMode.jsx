@@ -38,12 +38,13 @@ export default function FocusMode() {
 
   useEffect(() => {
     if (!taskIdParam) return
-    taskApi.get(taskIdParam)
+    taskApi
+      .get(taskIdParam)
       .then(({ data }) => setTask(data.task || data))
       .catch(() => setError('Task not found.'))
   }, [taskIdParam, setError])
 
-  const taskTitle = session?.taskId?.title || task?.title || 'Focus session'
+  const taskTitle = session?.taskId?.title || task?.title || 'Focus Session'
   const goalTitle = session?.goalId?.title || task?.goalId?.title
 
   const handleStart = async () => {
@@ -72,67 +73,152 @@ export default function FocusMode() {
   }
 
   const presetLabel = useMemo(() => {
-    if (timerMode === 'custom') return 'Custom timer'
-    return `${timerMode}-minute focus`
+    if (timerMode === 'custom') return 'Custom Timer'
+    return `${timerMode}-Minute Focus`
   }, [timerMode])
 
-  if (loading && !session) return <LoadingState label="Loading focus session…" />
+  if (loading && !session)
+    return (
+      <div className="min-h-screen bg-canvas flex items-center justify-center p-4">
+        <LoadingState label="Loading focus session…" />
+      </div>
+    )
 
   return (
-    <div className="focus-mode">
-      <header className="focus-mode__header">
-        <Link to={studentPath('planner')} className="focus-mode__exit">← Exit focus</Link>
+    <div className="min-h-screen bg-canvas text-content-heading flex flex-col justify-between p-4 md:p-8 font-body select-none">
+      {/* Top Exit Header */}
+      <header className="flex items-center justify-between max-w-4xl mx-auto w-full">
+        <Link
+          to={studentPath('planner')}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface border border-divider text-xs font-semibold text-content-body hover:text-content-heading hover:border-brand-primary transition-all"
+        >
+          <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+          <span>Exit Focus Mode</span>
+        </Link>
+        <span className="px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-wider">
+          Zen Mode
+        </span>
       </header>
 
-      <main className="focus-mode__main">
+      {/* Main Focus Center Container */}
+      <main className="max-w-2xl mx-auto w-full my-auto py-8">
         {error && <ErrorState message={error} onRetry={() => setError('')} />}
 
         {!session ? (
-          <div className="focus-mode__ready">
-            <h1>Focus Mode</h1>
-            <p className="focus-mode__task">{taskTitle}</p>
-            {goalTitle && <p className="focus-mode__goal">Goal: {goalTitle}</p>}
+          <div className="p-8 md:p-12 rounded-stitch bg-surface border border-divider text-center shadow-xl space-y-6">
+            <div className="w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary mx-auto flex items-center justify-center">
+              <span className="material-symbols-outlined text-[32px]">center_focus_strong</span>
+            </div>
 
-            <div className="focus-mode__modes">
+            <div>
+              <h1 className="text-3xl font-heading font-bold text-content-heading tracking-tight">Focus Mode</h1>
+              <p className="text-base font-semibold text-brand-primary mt-2">{taskTitle}</p>
+              {goalTitle && <p className="text-xs text-content-muted mt-1">Goal: {goalTitle}</p>}
+            </div>
+
+            {/* Timer Presets Selection */}
+            <div className="flex items-center justify-center gap-2 flex-wrap pt-2">
               {Object.keys(TIMER_PRESETS).map((mode) => (
                 <button
                   key={mode}
                   type="button"
-                  className={timerMode === mode ? 'is-active' : ''}
                   onClick={() => setTimerMode(mode)}
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    timerMode === mode
+                      ? 'bg-brand-primary text-white shadow-md shadow-brand-primary/25'
+                      : 'bg-surface-elevated border border-divider text-content-muted hover:text-content-heading'
+                  }`}
                 >
                   {mode === 'custom' ? 'Custom' : `${mode} min`}
                 </button>
               ))}
             </div>
 
-            {taskIdParam || task?._id ? (
-              <Button size="lg" disabled={starting} onClick={handleStart}>
-                {starting ? 'Starting…' : 'Start focus'}
-              </Button>
-            ) : (
-              <EmptyState title="No task selected" description="Open a task from the planner or tasks page to start focus." />
-            )}
+            <div className="pt-4">
+              {taskIdParam || task?._id ? (
+                <button
+                  type="button"
+                  disabled={starting}
+                  onClick={handleStart}
+                  className="w-full md:w-auto px-8 h-12 rounded-xl bg-brand-primary text-white text-sm font-semibold hover:bg-brand-hover transition-all shadow-lg shadow-brand-primary/25 cursor-pointer"
+                >
+                  {starting ? 'Starting Session…' : 'Start Focus Timer'}
+                </button>
+              ) : (
+                <EmptyState
+                  title="No task selected"
+                  description="Open a task from the planner or tasks page to start a dedicated focus session."
+                />
+              )}
+            </div>
           </div>
         ) : (
-          <div className="focus-mode__active">
-            <h1>{taskTitle}</h1>
-            {goalTitle && <p className="focus-mode__goal">{goalTitle}</p>}
-            <div className="focus-mode__timer" aria-live="polite" aria-label={`Elapsed time ${formattedElapsed}`}>
+          <div className="p-8 md:p-12 rounded-stitch bg-surface border border-divider text-center shadow-2xl space-y-6">
+            <div>
+              <h1 className="text-2xl md:text-3xl font-heading font-bold text-content-heading">{taskTitle}</h1>
+              {goalTitle && <p className="text-xs font-semibold text-brand-primary mt-1">{goalTitle}</p>}
+            </div>
+
+            {/* Large Digital Timer */}
+            <div
+              className="text-6xl md:text-7xl font-heading font-bold tracking-tight text-brand-primary py-4 font-mono"
+              aria-live="polite"
+              aria-label={`Elapsed time ${formattedElapsed}`}
+            >
               {formattedElapsed}
             </div>
+
+            {/* Progress Bar */}
             {presetSeconds > 0 && (
-              <div className="focus-mode__progress">
-                <div style={{ width: `${presetProgress || 0}%` }} />
-                <span>{presetLabel}</span>
+              <div className="space-y-2 max-w-sm mx-auto">
+                <div className="w-full bg-canvas h-2 rounded-full overflow-hidden border border-divider">
+                  <div
+                    className="bg-brand-primary h-full rounded-full transition-all duration-300"
+                    style={{ width: `${presetProgress || 0}%` }}
+                  />
+                </div>
+                <span className="text-xs font-medium text-content-muted block">{presetLabel}</span>
               </div>
             )}
-            <p className="focus-mode__status">{isPaused ? 'Paused' : isActive ? 'In focus' : session.status}</p>
-            <div className="focus-mode__controls">
-              {isActive && <Button onClick={pause}>Pause</Button>}
-              {isPaused && <Button onClick={resume}>Resume</Button>}
-              <Button variant="secondary" onClick={() => setFinishOpen(true)}>Finish session</Button>
-              <Button variant="ghost" onClick={cancel}>Cancel</Button>
+
+            <p className="text-xs font-semibold uppercase tracking-widest text-content-muted">
+              {isPaused ? '⏸ Paused' : isActive ? '⚡ In Focus' : session.status}
+            </p>
+
+            {/* Timer Controls */}
+            <div className="flex items-center justify-center gap-3 pt-4 flex-wrap">
+              {isActive && (
+                <button
+                  type="button"
+                  onClick={pause}
+                  className="h-11 px-6 rounded-xl bg-brand-primary text-white text-xs font-semibold hover:bg-brand-hover transition-all shadow-md shadow-brand-primary/25"
+                >
+                  Pause
+                </button>
+              )}
+              {isPaused && (
+                <button
+                  type="button"
+                  onClick={resume}
+                  className="h-11 px-6 rounded-xl bg-brand-primary text-white text-xs font-semibold hover:bg-brand-hover transition-all shadow-md shadow-brand-primary/25"
+                >
+                  Resume
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => setFinishOpen(true)}
+                className="h-11 px-6 rounded-xl bg-surface-elevated border border-divider text-content-heading text-xs font-semibold hover:bg-surface transition-all"
+              >
+                Finish Session
+              </button>
+              <button
+                type="button"
+                onClick={cancel}
+                className="h-11 px-4 rounded-xl text-xs font-medium text-rose-500 hover:bg-rose-500/10 transition-colors"
+              >
+                Cancel
+              </button>
             </div>
           </div>
         )}
@@ -141,20 +227,45 @@ export default function FocusMode() {
       <Dialog
         open={finishOpen}
         title="Finish focus session"
-        description="Finishing the timer does not automatically complete the task."
+        description="Finishing the timer does not automatically complete the task unless checked."
         onClose={() => setFinishOpen(false)}
       >
-        <div className="focus-finish">
-          <p>Focused for <strong>{formatTimer(elapsedSeconds)}</strong> on {taskTitle}</p>
-          <label>Session note (optional)<textarea value={note} onChange={(e) => setNote(e.target.value)} rows={2} /></label>
-          <label>Distraction note (optional)<input value={distraction} onChange={(e) => setDistraction(e.target.value)} placeholder="Phone, tired, topic difficult…" /></label>
-          <label className="focus-finish__check">
-            <input type="checkbox" checked={markComplete} onChange={(e) => setMarkComplete(e.target.checked)} />
-            Mark task complete
+        <div className="space-y-4 pt-2">
+          <p className="text-xs text-content-body">
+            Focused for <strong className="text-brand-primary">{formatTimer(elapsedSeconds)}</strong> on {taskTitle}
+          </p>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-content-heading block">Session note (optional)</label>
+            <textarea
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              rows={2}
+              className="w-full p-3 rounded-xl bg-canvas border border-divider text-xs text-content-heading focus:outline-none focus:border-brand-primary"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-semibold text-content-heading block">Distraction note (optional)</label>
+            <input
+              value={distraction}
+              onChange={(e) => setDistraction(e.target.value)}
+              placeholder="Phone, tired, topic difficult…"
+              className="w-full h-10 px-3 rounded-xl bg-canvas border border-divider text-xs text-content-heading focus:outline-none focus:border-brand-primary"
+            />
+          </div>
+          <label className="flex items-center gap-2 text-xs font-semibold text-content-heading cursor-pointer pt-1">
+            <input
+              type="checkbox"
+              checked={markComplete}
+              onChange={(e) => setMarkComplete(e.target.checked)}
+              className="rounded accent-brand-primary"
+            />
+            <span>Mark task complete</span>
           </label>
-          <div className="planner-preview__actions">
-            <Button variant="ghost" onClick={() => setFinishOpen(false)}>Continue later</Button>
-            <Button onClick={handleFinish}>Finish session</Button>
+          <div className="flex items-center justify-end gap-3 pt-3">
+            <Button variant="ghost" onClick={() => setFinishOpen(false)}>
+              Continue Later
+            </Button>
+            <Button onClick={handleFinish}>Finish Session</Button>
           </div>
         </div>
       </Dialog>

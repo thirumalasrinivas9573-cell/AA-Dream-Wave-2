@@ -14,11 +14,11 @@ const booleanFromString = z
 
 const publicEnvSchema = z.object({
   NEXT_PUBLIC_APP_NAME: z.string().min(1).default("Dream Wave"),
-  NEXT_PUBLIC_APP_URL: z.url().default("http://localhost:3000"),
+  NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
   NEXT_PUBLIC_APP_ENV: z
     .enum(["development", "test", "staging", "production"])
     .default("development"),
-  NEXT_PUBLIC_API_BASE_URL: z.url().default("http://localhost:5001/api"),
+  NEXT_PUBLIC_API_BASE_URL: z.string().url().default("http://localhost:5001/api"),
   NEXT_PUBLIC_ENABLE_ANALYTICS: booleanFromString,
   NEXT_PUBLIC_ENABLE_THREE_JS: z
     .enum(["true", "false"])

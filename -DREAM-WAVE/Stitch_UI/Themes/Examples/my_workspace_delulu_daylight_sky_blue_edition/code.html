@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_dashboard" name="shell-type"/>
+<title>Student Workspace - Dream Wave AI</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Outfit:wght@500;600;700;800&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#2F8FDD",
+            "primary-hover": "#2478BE",
+            "accent-cyan": "#00C2DE",
+            "navy": "#0B2545",
+            "navy-secondary": "#4F6A85",
+            "status-green": "#1FB77A",
+            "sky-bg-start": "#D4ECFB",
+            "sky-bg-mid": "#E6F3FD",
+            "sky-bg-end": "#F0F8FE",
+            "card-light": "#F3FAFF",
+            "card-tint": "#EAF5FD",
+            "sb-100": "#EBFAFF",
+            "sb-200": "#D4F1FE",
+            "sb-300": "#BFE0F7",
+            "sb-400": "#AAD3F1",
+            "sb-500": "#8CC3EB",
+          },
+          fontFamily: {
+            outfit: ["Outfit", "sans-serif"],
+            figtree: ["Figtree", "sans-serif"],
+          },
+          borderRadius: {
+            '2xl': '1.5rem',
+            '3xl': '1.75rem', /* 28px */
+          },
+          boxShadow: {
+            'soft-blue': '0 16px 36px -12px rgba(47, 143, 221, 0.12), 0 2px 8px -2px rgba(11, 37, 69, 0.04)',
+            'card-lift': '0 20px 40px -10px rgba(47, 143, 221, 0.18), 0 4px 12px -2px rgba(11, 37, 69, 0.06)',
+            'pill-blue': '0 4px 14px 0 rgba(47, 143, 221, 0.35)',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-[#E6F3FD] font-figtree text-[15px] text-navy antialiased min-h-screen relative" style="background: linear-gradient(180deg, #D4ECFB 0%, #E6F3FD 40%, #F0F8FE 100%);">
+<!-- Top Announcement Banner: Amber #F5A524 alert -->
+<div class="fixed top-0 left-0 right-0 z-50 h-10 bg-[#FFF7E8]/90 backdrop-blur-md border-b border-[#F5A524]/20 flex items-center justify-center px-4 gap-2 text-navy text-[15px] font-medium shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-[#F5A524]">notifications_active</span>
+<span>Workflow needs approval</span>
+<a class="text-[#2F8FDD] font-semibold hover:text-[#2478BE] ml-1.5 inline-flex items-center gap-1 transition-colors" href="#">
+      Review <span class="text-[14px]">→</span>
+</a>
+</div>
+<!-- Left Icon Rail (72px) -->
+<aside class="fixed left-6 top-16 bottom-6 w-[72px] z-40 bg-[#D9ECFA]/80 backdrop-blur-xl border border-white/80 rounded-[28px] shadow-soft-blue flex flex-col items-center py-5 justify-between">
+<!-- Top Nav Stack -->
+<div class="flex flex-col items-center w-full gap-5">
+<!-- App Brand Mark -->
+<a class="w-12 h-12 rounded-full bg-gradient-to-tr from-[#2F8FDD] to-[#00C2DE] flex items-center justify-center shadow-pill-blue group relative" href="#" title="Dream Wave AI">
+<span class="material-symbols-outlined text-white text-[24px]">tsunami</span>
+<span class="absolute left-20 bg-navy text-white text-[12px] font-medium font-outfit px-3 py-1.5 rounded-full opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
+          Dream Wave AI
+        </span>
+</a>
+<!-- Navigation Icons -->
+<nav class="flex flex-col items-center gap-2.5 w-full px-2">
+<!-- Active Dashboard Pill -->
+<a aria-current="page" class="relative group w-11 h-11 flex items-center justify-center rounded-[20px] bg-[#2F8FDD] text-white shadow-pill-blue transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">space_dashboard</span>
+<span class="absolute left-20 bg-navy text-white text-[12px] font-medium font-outfit px-3 py-1.5 rounded-full opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg z-50">
+            Dashboard
+          </span>
+</a>
+<a class="relative group w-11 h-11 rounded-[20px] flex items-center justify-center text-navy-secondary hover:text-navy hover:bg-white/60 transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">calendar_today</span>
+<span class="absolute left-20 bg-navy text-white text-[12px] font-medium font-outfit px-3 py-1.5 rounded-full opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg z-50">
+            Daily Life
+          </span>
+</a>
+<a class="relative group w-11 h-11 rounded-[20px] flex items-center justify-center text-navy-secondary hover:text-navy hover:bg-white/60 transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">psychology</span>
+<span class="absolute left-20 bg-navy text-white text-[12px] font-medium font-outfit px-3 py-1.5 rounded-full opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg z-50">
+            My Intelligence
+          </span>
+</a>
+<a class="relative group w-11 h-11 rounded-[20px] flex items-center justify-center text-navy-secondary hover:text-navy hover:bg-white/60 transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">terminal</span>
+<span class="absolute left-20 bg-navy text-white text-[12px] font-medium font-outfit px-3 py-1.5 rounded-full opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg z-50">
+            AI Command
+          </span>
+</a>
+<a class="relative group w-11 h-11 rounded-[20px] flex items-center justify-center text-navy-secondary hover:text-navy hover:bg-white/60 transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">auto_stories</span>
+<span class="absolute left-20 bg-navy text-white text-[12px] font-medium font-outfit px-3 py-1.5 rounded-full opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg z-50">
+            Learning
+          </span>
+</a>
+<a class="relative group w-11 h-11 rounded-[20px] flex items-center justify-center text-navy-secondary hover:text-navy hover:bg-white/60 transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">smart_toy</span>
+<span class="absolute left-20 bg-navy text-white text-[12px] font-medium font-outfit px-3 py-1.5 rounded-full opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg z-50">
+            AI Tools
+          </span>
+</a>
+<a class="relative group w-11 h-11 rounded-[20px] flex items-center justify-center text-navy-secondary hover:text-navy hover:bg-white/60 transition-all" href="#">
+<span class="material-symbols-outlined text-[22px]">manage_accounts</span>
+<span class="absolute left-20 bg-navy text-white text-[12px] font-medium font-outfit px-3 py-1.5 rounded-full opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg z-50">
+            Account
+          </span>
+</a>
+</nav>
+</div>
+<!-- Bottom Actions & Avatar with Cyan XP Ring -->
+<div class="flex flex-col items-center gap-3.5 w-full">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-navy-secondary hover:text-navy hover:bg-white/70 transition-all" title="Toggle Theme" type="button">
+<span class="material-symbols-outlined text-[20px]">light_mode</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-navy-secondary hover:text-navy hover:bg-white/70 transition-all" title="Sign Out" type="button">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+</button>
+<!-- Avatar with Cyan XP Ring -->
+<div class="relative flex items-center justify-center pt-1 group cursor-pointer">
+<div class="w-11 h-11 rounded-full p-[2.5px] bg-[#00C2DE] shadow-[0_0_12px_rgba(0,194,222,0.45)] flex items-center justify-center">
+<div class="w-full h-full rounded-full bg-[#2F8FDD] flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-white text-[18px]">person</span>
+</div>
+</div>
+<span class="absolute top-1 right-0 w-3.5 h-3.5 rounded-full bg-[#00C2DE] ring-2 ring-white"></span>
+<span class="absolute left-20 bg-navy text-white text-[12px] font-medium font-outfit px-3 py-1.5 rounded-full opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg z-50">
+          Charan • Lvl 24 XP
+        </span>
+</div>
+</div>
+</aside>
+<!-- Main Container -->
+<div class="pl-[112px] min-h-screen flex flex-col">
+<!-- Top Bar: Frosted soft-blue glass -->
+<header class="fixed top-10 left-[112px] right-0 h-16 bg-[#D9ECFA]/80 backdrop-blur-xl border-b border-white/80 z-30 flex items-center justify-between px-8 shadow-[0_2px_12px_rgba(47,143,221,0.06)]">
+<div class="flex-1 max-w-xl mx-auto">
+<div class="relative flex items-center w-full">
+<span class="material-symbols-outlined absolute left-4 text-navy-secondary text-[20px] pointer-events-none">search</span>
+<input class="w-full h-11 pl-11 pr-14 bg-white/75 backdrop-blur-sm border border-white/90 rounded-full font-figtree text-[15px] text-navy placeholder:text-navy-secondary/70 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2F8FDD]/30 transition-all" placeholder="Search commands, models, modules..." type="text"/>
+<div class="absolute right-3.5 flex items-center pointer-events-none">
+<kbd class="px-2 py-0.5 bg-[#BFE0F7]/50 text-navy font-outfit font-semibold rounded-md text-[11px] border border-white/70">⌘K</kbd>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4 ml-6">
+<button class="relative w-10 h-10 rounded-full bg-white/60 hover:bg-white text-navy-secondary hover:text-navy border border-white/80 flex items-center justify-center transition-all shadow-sm" title="Notifications" type="button">
+<span class="material-symbols-outlined text-[21px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#00C2DE] ring-2 ring-white"></span>
+</button>
+<button class="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-full bg-white/60 hover:bg-white border border-white/80 transition-all shadow-sm" type="button">
+<div class="w-8 h-8 rounded-full bg-[#2F8FDD] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[18px]">person</span>
+</div>
+<span class="font-outfit font-semibold text-[15px] text-navy hidden md:inline">Charan</span>
+<span class="material-symbols-outlined text-[16px] text-navy-secondary">expand_more</span>
+</button>
+</div>
+</header>
+<!-- Workspace Main Content -->
+<main class="w-full pt-28 px-8 pb-14 flex-1">
+<div class="max-w-[1400px] mx-auto flex flex-col w-full">
+<!-- Top Intro Section -->
+<header class="flex flex-col gap-2 mb-8">
+<div class="inline-flex items-center gap-2.5">
+<span class="font-outfit text-[12px] font-bold text-[#2F8FDD] uppercase tracking-[0.2em]">STUDENT WORKSPACE</span>
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+<span class="font-outfit text-[13px] font-medium text-navy-secondary tracking-wide">TERM 02 • AUTUMN</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-outfit text-[44px] md:text-[48px] font-bold text-navy leading-[1.1] tracking-tight">
+                Good evening, Charan
+              </h1>
+<p class="font-figtree text-[16px] text-navy-secondary mt-1.5">
+                Here is your calm overview, next best action, and focus priorities for today.
+              </p>
+</div>
+<!-- Active Session Sync Pill -->
+<div class="flex items-center gap-3 self-start md:self-auto bg-white/70 backdrop-blur-md border border-white/90 px-4 py-2 rounded-full shadow-soft-blue">
+<span class="flex h-2.5 w-2.5 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00C2DE] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#00C2DE]"></span>
+</span>
+<span class="font-outfit text-[13px] text-navy font-semibold">Session Sync Active</span>
+<span class="text-navy-secondary/60 text-[12px]">•</span>
+<span class="font-outfit text-[13px] text-[#2F8FDD] font-bold">18:42 PST</span>
+</div>
+</div>
+</header>
+<!-- Section 1: Hero Card (What should I do now?) -->
+<section class="relative w-full rounded-[28px] overflow-hidden border border-white/90 shadow-soft-blue p-8 md:p-10 mb-8" style="background: linear-gradient(135deg, #AAD3F1 0%, #CFE8FA 52%, #8EE3F2 100%);">
+<!-- Dreamy Cloud Wave Backgrounds & Gentle Sun-glow -->
+<div class="absolute -top-20 -right-16 w-80 h-80 rounded-full bg-white/40 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-24 left-1/4 w-96 h-96 rounded-full bg-white/30 blur-2xl pointer-events-none"></div>
+<div class="absolute top-1/2 right-1/3 w-64 h-64 rounded-full bg-[#00C2DE]/15 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+<div class="flex-1 max-w-2xl">
+<!-- Eyebrow Pill -->
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/90 mb-4 shadow-sm">
+<span class="text-[14px]">✨</span>
+<span class="font-outfit text-[13px] font-bold text-navy tracking-wide">What should I do now?</span>
+</div>
+<!-- Main Title -->
+<h2 class="font-outfit text-[30px] md:text-[34px] font-bold text-navy leading-tight tracking-tight">
+                Complete Attention Mechanisms &amp; FlashAttention-2 Lab
+              </h2>
+<p class="font-figtree text-[16px] text-navy-secondary mt-3 leading-relaxed max-w-xl">
+                Your prompt architecture milestone is 82% complete and scheduled for evaluation tomorrow morning.
+              </p>
+<!-- Translucent White Glass Chips -->
+<div class="flex flex-wrap items-center gap-2.5 mt-5">
+<span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/90 text-navy font-outfit text-[13px] font-semibold shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-[#2F8FDD]">assignment</span>
+                  Task
+                </span>
+<span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/90 text-navy font-outfit text-[13px] font-semibold shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-[#2F8FDD]">psychology</span>
+                  Goal: Deep Learning Core
+                </span>
+<span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/90 text-navy font-outfit text-[13px] font-semibold shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-[#00C2DE]">route</span>
+                  Roadmap: Phase 2
+                </span>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-wrap items-center gap-4 mt-8">
+<button class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] text-white font-outfit font-bold text-[15px] shadow-pill-blue transition-all hover:scale-[1.02] active:scale-[0.98]" type="button">
+<span>Open task</span>
+<span class="material-symbols-outlined text-[18px]">north_east</span>
+</button>
+<button class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/70 hover:bg-white text-navy font-outfit font-semibold text-[15px] border border-white/90 shadow-sm transition-all hover:scale-[1.01]" type="button">
+<span class="material-symbols-outlined text-[18px] text-navy-secondary">calendar_month</span>
+<span>Plan my day</span>
+</button>
+</div>
+</div>
+<!-- Right: Circular Progress Ring (Cyan Accent #00C2DE) -->
+<div class="flex flex-col items-center justify-center p-7 bg-white/80 backdrop-blur-md border border-white/90 rounded-[28px] shadow-soft-blue w-full lg:w-auto min-w-[250px]">
+<div class="relative w-40 h-40 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 120 120">
+<!-- Background track -->
+<circle cx="60" cy="60" fill="transparent" r="50" stroke="#D4ECFB" stroke-width="10"></circle>
+<!-- Accent cyan #00C2DE progress arc -->
+<circle cx="60" cy="60" fill="transparent" r="50" stroke="#00C2DE" stroke-dasharray="314.16" stroke-dashoffset="56.5" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-outfit text-[34px] font-extrabold text-navy tracking-tight">82%</span>
+<span class="font-outfit text-[11px] tracking-wider text-navy-secondary font-bold -mt-1">DONE</span>
+</div>
+</div>
+<div class="text-center mt-3">
+<span class="font-figtree text-[15px] text-navy-secondary font-medium">Phase Completion</span>
+<p class="font-outfit text-[13px] text-[#2F8FDD] font-bold mt-0.5">+4% from yesterday</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Row of 3 Bento Stat Cards in Soft Blue Tints -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<!-- Stat 1: Level and XP (#D4F1FE tint) -->
+<div class="bg-[#D4F1FE]/85 backdrop-blur-md border border-white/90 rounded-[28px] p-6 shadow-soft-blue hover:shadow-card-lift transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#2F8FDD] shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">military_tech</span>
+</div>
+<span class="px-3 py-1 rounded-full bg-[#BFE0F7] text-navy font-outfit text-[12px] font-bold uppercase tracking-wider">
+                  XP TIER
+                </span>
+</div>
+<p class="font-outfit text-[12px] uppercase tracking-wider text-navy-secondary font-semibold">MASTERY RANK</p>
+<h3 class="font-outfit text-[22px] text-navy font-bold mt-0.5">Level 1 Explorer</h3>
+<div class="mt-4">
+<div class="flex justify-between items-center text-[15px] mb-2 font-figtree">
+<span class="text-navy-secondary font-medium">350 / 500 XP</span>
+<span class="font-outfit font-bold text-[#2F8FDD]">70% to Lvl 2</span>
+</div>
+<!-- Blue to Cyan Progress Bar -->
+<div class="w-full h-3 rounded-full bg-white/80 overflow-hidden p-0.5 border border-white/80">
+<div class="h-full rounded-full bg-gradient-to-r from-[#2F8FDD] to-[#00C2DE] transition-all duration-500 shadow-sm" style="width: 70%"></div>
+</div>
+</div>
+</div>
+<div class="mt-5 pt-3 bg-white/70 border border-white/80 rounded-[18px] px-3.5 py-2.5 flex items-center gap-2">
+<span class="text-sm">⚡</span>
+<p class="font-figtree text-[14px] text-navy-secondary font-medium truncate">150 XP until Level 2 Prompt Architect</p>
+</div>
+</div>
+<!-- Stat 2: Learning Streak (#BFE0F7 tint) -->
+<div class="bg-[#BFE0F7]/80 backdrop-blur-md border border-white/90 rounded-[28px] p-6 shadow-soft-blue hover:shadow-card-lift transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#2F8FDD] shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">local_fire_department</span>
+</div>
+<span class="px-3 py-1 rounded-full bg-[#AAD3F1] text-navy font-outfit text-[12px] font-bold uppercase tracking-wider">
+                  ACTIVE
+                </span>
+</div>
+<p class="font-outfit text-[12px] uppercase tracking-wider text-navy-secondary font-semibold">MOMENTUM</p>
+<h3 class="font-outfit text-[22px] text-navy font-bold mt-0.5">7 Days Active</h3>
+<!-- 7 Days Dot Matrix -->
+<div class="grid grid-cols-7 gap-2 mt-4">
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-outfit text-[12px] font-bold text-navy-secondary">M</span>
+<div class="w-7 h-7 rounded-full bg-[#00C2DE] flex items-center justify-center text-navy shadow-sm">
+<span class="material-symbols-outlined text-[15px] font-bold">check</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-outfit text-[12px] font-bold text-navy-secondary">T</span>
+<div class="w-7 h-7 rounded-full bg-[#00C2DE] flex items-center justify-center text-navy shadow-sm">
+<span class="material-symbols-outlined text-[15px] font-bold">check</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-outfit text-[12px] font-bold text-navy-secondary">W</span>
+<div class="w-7 h-7 rounded-full bg-[#00C2DE] flex items-center justify-center text-navy shadow-sm">
+<span class="material-symbols-outlined text-[15px] font-bold">check</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-outfit text-[12px] font-bold text-navy-secondary">T</span>
+<div class="w-7 h-7 rounded-full bg-[#00C2DE] flex items-center justify-center text-navy shadow-sm">
+<span class="material-symbols-outlined text-[15px] font-bold">check</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-outfit text-[12px] font-bold text-navy-secondary">F</span>
+<div class="w-7 h-7 rounded-full bg-[#00C2DE] flex items-center justify-center text-navy shadow-sm">
+<span class="material-symbols-outlined text-[15px] font-bold">check</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-outfit text-[12px] font-bold text-navy-secondary">S</span>
+<div class="w-7 h-7 rounded-full bg-[#00C2DE] flex items-center justify-center text-navy shadow-sm">
+<span class="material-symbols-outlined text-[15px] font-bold">check</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-outfit text-[12px] font-bold text-[#2F8FDD]">S</span>
+<div class="w-7 h-7 rounded-full bg-[#2F8FDD] flex items-center justify-center text-white shadow-sm ring-2 ring-white">
+<span class="material-symbols-outlined text-[15px] font-bold">check</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-5 pt-3 bg-white/70 border border-white/80 rounded-[18px] px-3.5 py-2.5 flex items-center justify-between">
+<span class="font-figtree text-[14px] text-navy-secondary font-medium">Consistent daily momentum</span>
+<span class="font-outfit text-[13px] text-[#2F8FDD] font-bold">Personal best 🔥</span>
+</div>
+</div>
+<!-- Stat 3: Goal Health (#E1F3FF tint) with Success Green #1FB77A Pill -->
+<div class="bg-[#E1F3FF]/85 backdrop-blur-md border border-white/90 rounded-[28px] p-6 shadow-soft-blue hover:shadow-card-lift transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-[#1FB77A] shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+<!-- Green Pill for ON TRACK -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1FB77A]/15 text-[#007D4C] font-outfit text-[12px] font-bold tracking-wide border border-[#1FB77A]/30">
+<span class="w-2 h-2 rounded-full bg-[#1FB77A] animate-pulse"></span>
+                  ON TRACK
+                </div>
+</div>
+<p class="font-outfit text-[12px] uppercase tracking-wider text-navy-secondary font-semibold">CURRICULUM PATH</p>
+<h3 class="font-outfit text-[22px] text-navy font-bold mt-0.5">Core AI Pathway</h3>
+<!-- Tiny Sparkline -->
+<div class="mt-3 flex items-center justify-between gap-4">
+<div class="h-10 flex-1">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 160 40">
+<defs>
+<lineargradient id="sparklineGrad" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#00C2DE" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="#00C2DE" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,32 Q30,28 60,20 T110,12 T160,4 L160,40 L0,40 Z" fill="url(#sparklineGrad)"></path>
+<path d="M0,32 Q30,28 60,20 T110,12 T160,4" fill="none" stroke="#2F8FDD" stroke-linecap="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<div class="text-right">
+<span class="font-outfit text-[20px] text-[#1FB77A] font-extrabold leading-none">+14%</span>
+<p class="font-figtree text-[13px] text-navy-secondary">ahead</p>
+</div>
+</div>
+</div>
+<div class="mt-5 pt-3 bg-white/70 border border-white/80 rounded-[18px] px-3.5 py-2.5 flex items-center justify-between">
+<span class="font-figtree text-[14px] text-navy-secondary font-medium">Paced for completion in 18 days</span>
+<span class="material-symbols-outlined text-[18px] text-[#1FB77A]">trending_up</span>
+</div>
+</div>
+</section>
+<!-- Section 3: Two-Column Core Workspace -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+<!-- Left Column: Today's Priorities (~60% = 7 cols) on Pale Blue-White Cards -->
+<section class="lg:col-span-7 bg-[#F3FAFF]/90 backdrop-blur-md border border-white/80 rounded-[28px] p-6 md:p-8 shadow-soft-blue flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-3">
+<h2 class="font-outfit text-[24px] text-navy font-bold">Today's Priorities</h2>
+<span class="px-3 py-0.5 rounded-full bg-[#D4F1FE] text-[#2F8FDD] font-outfit text-[12px] font-bold">4 pending</span>
+</div>
+<button class="w-9 h-9 rounded-full bg-white/60 hover:bg-white text-navy-secondary hover:text-navy flex items-center justify-center transition-colors border border-white/60" type="button">
+<span class="material-symbols-outlined text-[20px]">sort</span>
+</button>
+</div>
+<p class="font-figtree text-[15px] text-navy-secondary mb-6">High-impact tasks sequenced by dependency and deadlines</p>
+<!-- 4 Rows on soft blue backgrounds (#EBF5FD / hover #DFEFFD) with primary-blue #2F8FDD number badge (white text) -->
+<div class="flex flex-col gap-3.5">
+<!-- Row 1 -->
+<div class="group flex items-start gap-4 p-4 rounded-[22px] bg-[#EBF5FD] hover:bg-[#DFEFFD] border border-white/80 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm cursor-pointer">
+<div class="w-9 h-9 rounded-full bg-[#2F8FDD] text-white flex items-center justify-center font-outfit text-[14px] font-bold shrink-0 shadow-sm">
+                    01
+                  </div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center gap-2 mb-1">
+<h4 class="font-outfit text-[16px] font-bold text-navy truncate group-hover:text-[#2F8FDD] transition-colors">
+                        Synthesize LoRA Fine-Tuning Benchmarks
+                      </h4>
+<span class="px-2.5 py-0.5 rounded-full bg-red-100 text-red-700 font-outfit text-[11px] font-bold">High</span>
+</div>
+<p class="font-figtree text-[14px] text-navy-secondary truncate">Required before setting up tomorrow's distributed run</p>
+</div>
+<a class="inline-flex items-center gap-1 font-outfit text-[14px] text-[#2F8FDD] font-bold self-center shrink-0 hover:text-[#2478BE] hover:underline" href="#">
+<span>Open task</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Row 2 -->
+<div class="group flex items-start gap-4 p-4 rounded-[22px] bg-[#EBF5FD] hover:bg-[#DFEFFD] border border-white/80 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm cursor-pointer">
+<div class="w-9 h-9 rounded-full bg-[#2F8FDD] text-white flex items-center justify-center font-outfit text-[14px] font-bold shrink-0 shadow-sm">
+                    02
+                  </div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center gap-2 mb-1">
+<h4 class="font-outfit text-[16px] font-bold text-navy truncate group-hover:text-[#2F8FDD] transition-colors">
+                        Review AI Mentor Feedback on Transformer Prompt
+                      </h4>
+<span class="px-2.5 py-0.5 rounded-full bg-[#D4F1FE] text-[#006878] font-outfit text-[11px] font-bold">Lab</span>
+</div>
+<p class="font-figtree text-[14px] text-navy-secondary truncate">3 specific optimizations suggested for latency reduction</p>
+</div>
+<a class="inline-flex items-center gap-1 font-outfit text-[14px] text-[#2F8FDD] font-bold self-center shrink-0 hover:text-[#2478BE] hover:underline" href="#">
+<span>Open task</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Row 3 -->
+<div class="group flex items-start gap-4 p-4 rounded-[22px] bg-[#EBF5FD] hover:bg-[#DFEFFD] border border-white/80 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm cursor-pointer">
+<div class="w-9 h-9 rounded-full bg-[#2F8FDD] text-white flex items-center justify-center font-outfit text-[14px] font-bold shrink-0 shadow-sm">
+                    03
+                  </div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center gap-2 mb-1">
+<h4 class="font-outfit text-[16px] font-bold text-navy truncate group-hover:text-[#2F8FDD] transition-colors">
+                        Inspect Embeddings Vector Space Visualization
+                      </h4>
+<span class="px-2.5 py-0.5 rounded-full bg-[#EAF5FD] text-navy-secondary font-outfit text-[11px] font-bold border border-white/60">Routine</span>
+</div>
+<p class="font-figtree text-[14px] text-navy-secondary truncate">Weekly verification checkpoint for token alignment</p>
+</div>
+<a class="inline-flex items-center gap-1 font-outfit text-[14px] text-[#2F8FDD] font-bold self-center shrink-0 hover:text-[#2478BE] hover:underline" href="#">
+<span>Open task</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Row 4 -->
+<div class="group flex items-start gap-4 p-4 rounded-[22px] bg-[#EBF5FD] hover:bg-[#DFEFFD] border border-white/80 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm cursor-pointer">
+<div class="w-9 h-9 rounded-full bg-[#2F8FDD] text-white flex items-center justify-center font-outfit text-[14px] font-bold shrink-0 shadow-sm">
+                    04
+                  </div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center gap-2 mb-1">
+<h4 class="font-outfit text-[16px] font-bold text-navy truncate group-hover:text-[#2F8FDD] transition-colors">
+                        Submit System Architecture Capstone Draft
+                      </h4>
+<span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 font-outfit text-[11px] font-bold">48h left</span>
+</div>
+<p class="font-figtree text-[14px] text-navy-secondary truncate">Final review deadline closes in 48 hours</p>
+</div>
+<a class="inline-flex items-center gap-1 font-outfit text-[14px] text-[#2F8FDD] font-bold self-center shrink-0 hover:text-[#2478BE] hover:underline" href="#">
+<span>Open task</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="mt-6 pt-4 border-t border-white/70 flex items-center justify-between text-[14px] text-navy-secondary">
+<span class="font-figtree">Focus Mode: Recommended sequence enabled</span>
+<button class="text-[#2F8FDD] font-outfit font-bold hover:underline" type="button">
+                View all backlog (12) →
+              </button>
+</div>
+</section>
+<!-- Right Column: Daily Brief (~40% = 5 cols) on Pale Blue-White Cards -->
+<section class="lg:col-span-5 bg-[#F3FAFF]/90 backdrop-blur-md border border-white/80 rounded-[28px] p-6 md:p-8 shadow-soft-blue flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#2F8FDD] shadow-sm">
+<span class="material-symbols-outlined text-[20px]">event_note</span>
+</div>
+<h2 class="font-outfit text-[24px] text-navy font-bold">Daily Brief</h2>
+</div>
+<span class="px-3 py-1 rounded-full bg-[#BFE0F7] text-navy font-outfit text-[12px] font-bold">Today</span>
+</div>
+<p class="font-figtree text-[15px] text-navy-secondary mb-5">Curated digest from your network &amp; compute runs</p>
+<!-- 5 Short Bullets with Small Blue Dots -->
+<ul class="flex flex-col gap-4">
+<li class="flex items-start gap-3 text-[14px] leading-relaxed text-navy">
+<span class="w-2.5 h-2.5 rounded-full bg-[#2F8FDD] mt-1.5 shrink-0 ring-4 ring-[#2F8FDD]/20"></span>
+<span>Stanford CS231n cohort synchronous review starts today at <strong class="font-outfit font-bold text-navy">4:00 PM</strong>.</span>
+</li>
+<li class="flex items-start gap-3 text-[14px] leading-relaxed text-navy">
+<span class="w-2.5 h-2.5 rounded-full bg-[#2F8FDD] mt-1.5 shrink-0 ring-4 ring-[#2F8FDD]/20"></span>
+<span>Your research notebook on <strong class="font-outfit font-bold text-navy">Rotary Positional Embeddings</strong> was starred by 2 peers.</span>
+</li>
+<li class="flex items-start gap-3 text-[14px] leading-relaxed text-navy">
+<span class="w-2.5 h-2.5 rounded-full bg-[#2F8FDD] mt-1.5 shrink-0 ring-4 ring-[#2F8FDD]/20"></span>
+<span><strong class="font-outfit font-bold text-navy">3 new internship listings</strong> in AI Alignment matched your candidate profile.</span>
+</li>
+<li class="flex items-start gap-3 text-[14px] leading-relaxed text-navy">
+<span class="w-2.5 h-2.5 rounded-full bg-[#2F8FDD] mt-1.5 shrink-0 ring-4 ring-[#2F8FDD]/20"></span>
+<span>Platform weights synchronized with checkpoint <strong class="font-outfit font-bold text-navy">v2.4</strong> at 09:30 AM.</span>
+</li>
+<li class="flex items-start gap-3 text-[14px] leading-relaxed text-navy">
+<span class="w-2.5 h-2.5 rounded-full bg-[#2F8FDD] mt-1.5 shrink-0 ring-4 ring-[#2F8FDD]/20"></span>
+<span>Weekly goal progress is currently <strong class="font-outfit font-bold text-[#1FB77A]">14% ahead</strong> of your cohort median.</span>
+</li>
+</ul>
+</div>
+<!-- Card Footer -->
+<div class="mt-6 pt-3 bg-white/70 border border-white/80 rounded-[18px] p-3 flex items-center justify-between">
+<span class="font-figtree text-[13px] text-navy-secondary font-medium">All 5 updates live</span>
+<button class="inline-flex items-center gap-1 font-outfit text-[14px] text-[#2F8FDD] font-bold hover:text-[#2478BE] hover:underline" type="button">
+<span>Mark all read</span>
+<span class="material-symbols-outlined text-[16px]">done_all</span>
+</button>
+</div>
+</section>
+</div>
+<!-- Section 4: Bottom Section - Intelligent Suggestions -->
+<section class="flex flex-col gap-4">
+<div class="flex items-end justify-between">
+<div>
+<h2 class="font-outfit text-[24px] text-navy font-bold">Intelligent Suggestions</h2>
+<p class="font-figtree text-[15px] text-navy-secondary mt-0.5">Recommended next steps synthesized from your telemetry</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full bg-white/80 hover:bg-white text-navy flex items-center justify-center shadow-soft-blue border border-white/80 transition-all hover:scale-105 active:scale-95" title="Previous" type="button">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-white/80 hover:bg-white text-navy flex items-center justify-center shadow-soft-blue border border-white/80 transition-all hover:scale-105 active:scale-95" title="Next" type="button">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- 4 Alternating Soft Blue & Pale Cyan Cards (#E8F4FD, #E0F2FE, #EBF8FF, #DDF0FD) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+<!-- Card 1 (#E8F4FD) -->
+<div class="relative bg-[#E8F4FD]/90 backdrop-blur-sm border border-white/85 rounded-[28px] p-6 shadow-soft-blue hover:shadow-card-lift transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#2F8FDD] to-[#8CC3EB]"></div>
+<div>
+<div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#2F8FDD] mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[22px]">hub</span>
+</div>
+<h3 class="font-outfit text-[17px] font-bold text-navy group-hover:text-[#2F8FDD] transition-colors leading-snug">
+                  Explore Multi-Agent Orchestration
+                </h3>
+<p class="font-figtree text-[14px] text-navy-secondary mt-2 leading-relaxed">
+                  Interactive playground with LangGraph and CrewAI design patterns.
+                </p>
+</div>
+<div class="mt-6 pt-3 border-t border-white/70 flex items-center justify-between">
+<span class="px-2.5 py-0.5 rounded-full bg-white/80 text-navy-secondary font-outfit text-[12px] font-semibold">15 min read</span>
+<a class="inline-flex items-center gap-1 font-outfit text-[14px] text-[#2F8FDD] font-bold group-hover:translate-x-1 transition-transform" href="#">
+<span>Read</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2 (#E0F2FE) -->
+<div class="relative bg-[#E0F2FE]/90 backdrop-blur-sm border border-white/85 rounded-[28px] p-6 shadow-soft-blue hover:shadow-card-lift transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#00C2DE] to-[#2F8FDD]"></div>
+<div>
+<div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#006878] mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[22px]">video_camera_front</span>
+</div>
+<h3 class="font-outfit text-[17px] font-bold text-navy group-hover:text-[#2F8FDD] transition-colors leading-snug">
+                  Schedule 1:1 with Dr. Aris Thorne
+                </h3>
+<p class="font-figtree text-[14px] text-navy-secondary mt-2 leading-relaxed">
+                  Office hours available Thursday for foundational research mentoring.
+                </p>
+</div>
+<div class="mt-6 pt-3 border-t border-white/70 flex items-center justify-between">
+<span class="px-2.5 py-0.5 rounded-full bg-white/80 text-navy-secondary font-outfit text-[12px] font-semibold">2 slots open</span>
+<a class="inline-flex items-center gap-1 font-outfit text-[14px] text-[#2F8FDD] font-bold group-hover:translate-x-1 transition-transform" href="#">
+<span>Book session</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3 (#EBF8FF) -->
+<div class="relative bg-[#EBF8FF]/90 backdrop-blur-sm border border-white/85 rounded-[28px] p-6 shadow-soft-blue hover:shadow-card-lift transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1FB77A] to-[#2F8FDD]"></div>
+<div>
+<div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#1FB77A] mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[22px]">speed</span>
+</div>
+<h3 class="font-outfit text-[17px] font-bold text-navy group-hover:text-[#2F8FDD] transition-colors leading-snug">
+                  Optimize Inference Budget
+                </h3>
+<p class="font-figtree text-[14px] text-navy-secondary mt-2 leading-relaxed">
+                  Run a 5-minute audit on your active vector store retrieval queries.
+                </p>
+</div>
+<div class="mt-6 pt-3 border-t border-white/70 flex items-center justify-between">
+<span class="px-2.5 py-0.5 rounded-full bg-white/80 text-navy-secondary font-outfit text-[12px] font-semibold">Diagnostics</span>
+<a class="inline-flex items-center gap-1 font-outfit text-[14px] text-[#2F8FDD] font-bold group-hover:translate-x-1 transition-transform" href="#">
+<span>Run audit</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 4 (#DDF0FD) -->
+<div class="relative bg-[#DDF0FD]/90 backdrop-blur-sm border border-white/85 rounded-[28px] p-6 shadow-soft-blue hover:shadow-card-lift transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#2F8FDD] to-[#00C2DE]"></div>
+<div>
+<div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center text-[#2F8FDD] mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[22px]">terminal</span>
+</div>
+<h3 class="font-outfit text-[17px] font-bold text-navy group-hover:text-[#2F8FDD] transition-colors leading-snug">
+                  Practice System Design Mock
+                </h3>
+<p class="font-figtree text-[14px] text-navy-secondary mt-2 leading-relaxed">
+                  AI-evaluated technical interview simulation on KV caching &amp; latency.
+                </p>
+</div>
+<div class="mt-6 pt-3 border-t border-white/70 flex items-center justify-between">
+<span class="px-2.5 py-0.5 rounded-full bg-white/80 text-navy-secondary font-outfit text-[12px] font-semibold">~25 mins</span>
+<a class="inline-flex items-center gap-1 font-outfit text-[14px] text-[#2F8FDD] font-bold group-hover:translate-x-1 transition-transform" href="#">
+<span>Start mock</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

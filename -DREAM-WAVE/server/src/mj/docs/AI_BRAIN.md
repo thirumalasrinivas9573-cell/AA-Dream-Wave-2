@@ -113,11 +113,11 @@ Return Structured JSON    → AIResponseBuilder
 ### Provider Selection (Config-Driven)
 
 ```env
-MJ_AI_PROVIDER=openai          # Primary provider
+MJ_AI_PROVIDER=gemini          # Primary provider
 MJ_AI_FALLBACK=gemini          # Fallback provider
 MJ_AI_MAX_RETRIES=2
-MJ_OPENAI_MODEL=gpt-4o-mini
-MJ_GEMINI_MODEL=gemini-1.5-flash
+GEMINI_MODEL=gemini-3.5-flash
+MJ_GEMINI_MODEL=gemini-3.5-flash
 ```
 
 Never hardcoded — selection via `MJConfig` → `ProviderSelector` → `FallbackManager`.
@@ -309,12 +309,11 @@ server/src/mj/
 
 ```env
 # AI Provider
-OPENAI_API_KEY=sk-...
 GEMINI_API_KEY=...
-MJ_AI_PROVIDER=openai
+MJ_AI_PROVIDER=gemini
 MJ_AI_FALLBACK=gemini
-MJ_OPENAI_MODEL=gpt-4o-mini
-MJ_GEMINI_MODEL=gemini-1.5-flash
+GEMINI_MODEL=gemini-3.5-flash
+MJ_GEMINI_MODEL=gemini-3.5-flash
 
 # Optional future
 MJ_CLAUDE_API_KEY=

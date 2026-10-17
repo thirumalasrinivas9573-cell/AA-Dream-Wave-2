@@ -1,5 +1,5 @@
 const { robustAiCall } = require('./openaiService')
-const { getOpenAI } = require('../utils/openaiClient')
+const { getOpenAI, getModel } = require('../utils/openaiClient')
 const client = new Proxy({}, { get(_t, p) { return getOpenAI()[p]; } })
 
 // ── AI Lesson Generator — Cinematic Learning Engine ───────────────────────────
@@ -227,11 +227,12 @@ Requirements:
     }
   ]
 
-  const result = await robustAiCall(messages, 'gpt-4o-mini', FALLBACK_LESSON)
+  const result = await robustAiCall(messages, getModel())
 
   if (!result.scenes || !Array.isArray(result.scenes)) {
-    console.warn('[aiLessonService] Invalid structure, using fallback')
-    return FALLBACK_LESSON
+    const err = new Error('[aiLessonService] Invalid structure returned by AI.')
+    err.statusCode = 502
+    throw err
   }
 
   return result
@@ -332,10 +333,12 @@ Requirements:
     },
   ]
 
-  const result = await robustAiCall(messages, 'gpt-4o-mini', VIDEO_FALLBACK)
+  const result = await robustAiCall(messages, getModel())
 
   if (!result.scenes || !Array.isArray(result.scenes)) {
-    return VIDEO_FALLBACK
+    const err = new Error('[aiLessonService] Invalid video script structure returned by AI.')
+    err.statusCode = 502
+    throw err
   }
 
   return result

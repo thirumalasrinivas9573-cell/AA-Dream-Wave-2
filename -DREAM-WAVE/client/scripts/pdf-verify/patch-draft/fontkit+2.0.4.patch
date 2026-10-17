@@ -1,0 +1,9 @@
+--- node_modules/fontkit/dist/module.mjs
++++ node_modules/fontkit/dist/module.mjs
+@@ -9949,3 +9949,6 @@
+     getAnchor(anchor) {
++        if (!anchor) {
++            return { x: 0, y: 0 };
++        }
+         // TODO: contour point, device tables
+         let x = anchor.xCoordinate;

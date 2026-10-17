@@ -184,31 +184,46 @@ export default function ResearchWorkspace() {
 
   return (
     <StudentLayout>
-      <div className="research-shell">
-        <nav className="research-breadcrumb"><Link to="/student/research">Research</Link> / <span>{workspace?.title}</span></nav>
-        <header className="research-project-header">
+      <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
+        <nav className="text-xs text-content-muted flex items-center gap-2">
+          <Link to="/student/research" className="hover:text-brand-primary">Research</Link> / <span className="text-content-heading font-medium">{workspace?.title}</span>
+        </nav>
+        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface p-6 rounded-stitch border border-divider shadow-sm">
           <div>
-            <h1>{workspace?.title}</h1>
-            {workspace?.researchQuestion && <p>{workspace.researchQuestion}</p>}
-            <span className="research-status">{workspace?.status}</span>
-            {dashboard?.reports?.length > 0 && <span className="research-badge">{dashboard.reports.length} report version(s)</span>}
+            <h1 className="text-2xl sm:text-3xl font-bold text-content-heading tracking-tight">{workspace?.title}</h1>
+            {workspace?.researchQuestion && <p className="text-sm text-content-muted mt-1">{workspace.researchQuestion}</p>}
+            <div className="flex items-center gap-2 mt-2">
+              <span className="px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider bg-brand-primary/10 text-brand-primary rounded-full border border-brand-primary/20">{workspace?.status}</span>
+              {dashboard?.reports?.length > 0 && <span className="px-2.5 py-0.5 text-xs font-semibold bg-surface-elevated text-content-muted rounded-full border border-divider">{dashboard.reports.length} report version(s)</span>}
+            </div>
           </div>
-          <div className="research-header-actions">
-            <button type="button" className="btn btn-secondary" onClick={extractEvidence} disabled={busy || !sourceCount}>Extract evidence</button>
-            <button type="button" className="btn btn-secondary" onClick={runSynthesis} disabled={busy || !sourceCount}>Run synthesis</button>
-            <button type="button" className="btn btn-primary" onClick={generateReport} disabled={busy || !sourceCount}>Generate report</button>
+          <div className="flex flex-wrap items-center gap-3">
+            <button type="button" className="px-3.5 py-2 text-xs font-medium bg-surface-elevated hover:bg-surface text-content-heading rounded-stitch border border-divider transition-colors" onClick={extractEvidence} disabled={busy || !sourceCount}>Extract evidence</button>
+            <button type="button" className="px-3.5 py-2 text-xs font-medium bg-surface-elevated hover:bg-surface text-content-heading rounded-stitch border border-divider transition-colors" onClick={runSynthesis} disabled={busy || !sourceCount}>Run synthesis</button>
+            <button type="button" className="px-4 py-2 text-xs font-semibold bg-brand-primary hover:bg-brand-primary-hover text-white rounded-stitch transition-colors" onClick={generateReport} disabled={busy || !sourceCount}>Generate report</button>
           </div>
         </header>
 
-        <div className="research-tabs" role="tablist" aria-label="Research sections">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-divider" role="tablist" aria-label="Research sections">
           {TABS.map((item) => (
-            <button key={item} type="button" role="tab" aria-selected={tab === item} className={tab === item ? 'is-active' : ''} onClick={() => setTab(item)}>
+            <button
+              key={item}
+              type="button"
+              role="tab"
+              aria-selected={tab === item}
+              className={`px-4 py-2 text-sm font-medium rounded-full transition-all whitespace-nowrap ${
+                tab === item
+                  ? 'bg-brand-primary text-white shadow-sm'
+                  : 'text-content-muted hover:text-content-heading hover:bg-surface-elevated'
+              }`}
+              onClick={() => setTab(item)}
+            >
               {item.charAt(0).toUpperCase() + item.slice(1)}
             </button>
           ))}
         </div>
 
-        {error && <p className="research-error" role="alert">{error}</p>}
+        {error && <p className="p-4 bg-red-500/10 text-red-500 border border-red-500/20 rounded-stitch text-sm" role="alert">{error}</p>}
 
         {tab === 'overview' && (
           <section className="research-panel">

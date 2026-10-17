@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'outline-variant': '#c0c7d3', 'tertiary': '#246185', 'error': '#ba1a1a', 'on-primary-fixed-variant': '#00497a', 'on-secondary': '#ffffff', 'surface-container': '#e7eeff', 'on-tertiary-fixed': '#001e2f', 'surface-container-highest': '#d5e3ff', 'on-secondary-container': '#006170', 'on-primary-fixed': '#001d35', 'secondary-fixed': '#a6eeff', 'on-surface': '#001c3b', 'surface-dim': '#c7dbff', 'inverse-surface': '#193151', 'primary-fixed': '#d0e4ff', 'tertiary-fixed-dim': '#96cdf5', 'surface-bright': '#f9f9ff', 'on-primary': '#ffffff', 'inverse-on-surface': '#ebf1ff', 'surface-container-low': '#f0f3ff', 'on-secondary-fixed-variant': '#004e5b', 'on-error': '#ffffff', 'on-tertiary-fixed-variant': '#004c6e', 'surface-container-high': '#dee8ff', 'inverse-primary': '#9bcaff', 'on-surface-variant': '#404751', 'surface-variant': '#d5e3ff', 'on-tertiary-container': '#fcfcff', 'on-error-container': '#93000a', 'background': '#f9f9ff', 'secondary-container': '#49e1fd', 'on-background': '#001c3b', 'secondary-fixed-dim': '#3dd8f5', 'on-primary-container': '#fdfcff', 'surface-container-lowest': '#ffffff', 'primary-fixed-dim': '#9bcaff', 'tertiary-container': '#427a9f', 'primary-container': '#0079c4', 'surface': '#f9f9ff', 'on-tertiary': '#ffffff', 'tertiary-fixed': '#c8e6ff', 'secondary': '#006878', 'outline': '#707882', 'primary': '#005f9c', 'surface-tint': '#0062a0', 'on-secondary-fixed': '#001f25', 'error-container': '#ffdad6' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'space-sm': '0.75rem', 'space-md': '1.25rem', 'margin-mobile': '1rem', 'gutter': '1.5rem', 'space-xl': '2.5rem', 'space-xs': '0.375rem', 'space-lg': '1.75rem', 'margin': '2rem', 'gutter-mobile': '1rem' }, fontFamily: { 'label-md': ['Outfit'], 'display-hero-mobile': ['Outfit'], 'body-lg': ['Plus Jakarta Sans'], 'title-md': ['Outfit'], 'headline-lg-mobile': ['Outfit'], 'label-lg': ['Outfit'], 'body-sm': ['Plus Jakarta Sans'], 'headline-md': ['Outfit'], 'body-md': ['Plus Jakarta Sans'], 'headline-sm': ['Outfit'], 'headline-lg': ['Outfit'], 'display-hero': ['Outfit'], 'label-sm': ['Outfit'] }, fontSize: { 'label-md': ['12px', { 'lineHeight': '16px', 'fontWeight': '600' }], 'display-hero-mobile': ['32px', { 'lineHeight': '40px', 'fontWeight': '700' }], 'body-lg': ['16px', { 'lineHeight': '26px', 'fontWeight': '400' }], 'title-md': ['18px', { 'lineHeight': '24px', 'fontWeight': '600' }], 'headline-lg-mobile': ['26px', { 'lineHeight': '32px', 'fontWeight': '600' }], 'label-lg': ['14px', { 'lineHeight': '20px', 'fontWeight': '600' }], 'body-sm': ['12px', { 'lineHeight': '18px', 'fontWeight': '400' }], 'headline-md': ['24px', { 'lineHeight': '32px', 'fontWeight': '600' }], 'body-md': ['14px', { 'lineHeight': '22px', 'fontWeight': '400' }], 'headline-sm': ['20px', { 'lineHeight': '28px', 'fontWeight': '600' }], 'headline-lg': ['32px', { 'lineHeight': '40px', 'fontWeight': '600' }], 'display-hero': ['48px', { 'lineHeight': '56px', 'fontWeight': '700' }], 'label-sm': ['11px', { 'lineHeight': '14px', 'fontWeight': '500' }] } } } }</script><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100vh;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md antialiased"><header class="fixed top-0 w-full z-50 pt-safe bg-surface-container-high/80 backdrop-blur-xl shadow-[0_4px_20px_-4px_rgba(0,95,156,0.06)]"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-9 h-9 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-[0_2px_8px_rgba(0,121,196,0.25)]"><span class="material-symbols-outlined text-[20px]">auto_awesome</span></div><div class="flex flex-col"><span class="font-title-md text-title-md text-on-surface tracking-tight leading-none">DREAM WAVE</span><span class="font-label-sm text-label-sm text-primary tracking-widest uppercase">AI OS</span></div></div><div class="flex items-center gap-1"><button aria-label="Search" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary active:scale-95 transition-all" type="button"><span class="material-symbols-outlined text-[22px]">search</span></button><button aria-label="Notifications" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary active:scale-95 transition-all relative" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-secondary"></span></button><div class="w-11 h-11 flex items-center justify-center"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_2px_8px_rgba(0,95,156,0.3)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full bg-gradient-to-b from-[#D6EAFB] to-[#E6F3FD] px-4 py-4 space-y-4 text-[#0B2545]" style="font-family: 'Figtree', sans-serif;">
+<!-- Header Section -->
+<header class="flex flex-col space-y-1">
+<span class="text-xs uppercase tracking-widest text-[#246185] font-semibold" style="font-family: 'Outfit', sans-serif;">STUDENT PROFILE</span>
+<h1 class="text-2xl font-bold tracking-tight text-[#0B2545]" style="font-family: 'Outfit', sans-serif;">Profile</h1>
+<p class="text-[15px] leading-relaxed text-[#246185]">Manage your learning identity, public credentials, and portfolio readiness.</p>
+</header>
+<!-- 1. Cover and Avatar Header Card -->
+<section class="flex flex-col rounded-[24px] bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] shadow-sm overflow-hidden" style="box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.9);">
+<!-- Cover Banner -->
+<div class="relative h-28 w-full bg-gradient-to-r from-[#A9D3F1] to-[#7FC0EC] flex items-start justify-end p-3">
+<button aria-label="Change cover image" class="h-11 px-3.5 rounded-full bg-white/80 backdrop-blur-md text-[#0B2545] text-[15px] font-medium flex items-center gap-1.5 shadow-sm active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+<span>Change cover</span>
+</button>
+</div>
+<!-- Student Info Body -->
+<div class="px-4 pb-5 pt-0 relative flex flex-col">
+<!-- Avatar with '+' badge -->
+<div class="relative -mt-12 w-20 h-20 mb-3">
+<div class="w-20 h-20 rounded-full bg-[#2F8FDD] text-white flex items-center justify-center font-bold text-3xl shadow-md" style="font-family: 'Outfit', sans-serif; box-shadow: 0 0 0 4px #EAF4FD;">
+          C
+        </div>
+<button aria-label="Upload profile photo" class="absolute bottom-0 right-0 w-7 h-7 rounded-full bg-[#00C2DE] text-white flex items-center justify-center shadow-md active:scale-95 transition-all" style="box-shadow: 0 0 0 2px #EAF4FD;" type="button">
+<span class="material-symbols-outlined text-[16px] leading-none">add</span>
+</button>
+</div>
+<!-- Identity details -->
+<div class="flex flex-col">
+<div class="flex items-center justify-between gap-2">
+<h2 class="text-xl font-bold tracking-tight text-[#0B2545]" style="font-family: 'Outfit', sans-serif;">Charan Gurajapu</h2>
+<span class="px-2.5 py-1 rounded-full bg-white text-xs font-semibold text-[#0B2545] shadow-xs" style="font-family: 'Outfit', sans-serif;">
+            Level 1 · 0 XP
+          </span>
+</div>
+<span class="text-[15px] text-[#246185] mt-0.5">@charan-gurajapu-8e0a9</span>
+<p class="text-[15px] text-[#246185]/80 mt-1 italic">Add a professional headline to your identity.</p>
+</div>
+<!-- Action buttons -->
+<div class="flex flex-col gap-2 mt-4">
+<div class="grid grid-cols-2 gap-2">
+<button class="h-11 rounded-full bg-[#2F8FDD] text-white font-semibold text-[15px] flex items-center justify-center gap-1.5 shadow-[0_4px_14px_rgba(47,143,221,0.35)] active:scale-95 transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+<span>Edit Profile</span>
+</button>
+<button class="h-11 rounded-full bg-[#D4F1FE] text-[#0B2545] font-semibold text-[15px] flex items-center justify-center gap-1.5 active:scale-95 transition-all" style="font-family: 'Outfit', sans-serif; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8);" type="button">
+<span class="material-symbols-outlined text-[18px]">share</span>
+<span>Share Profile</span>
+</button>
+</div>
+<button class="h-11 w-full rounded-full bg-white/40 text-[#246185]/50 font-medium text-[15px] flex items-center justify-center gap-1.5 cursor-not-allowed" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">link</span>
+<span>Copy link</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 2. Horizontally Scrollable Tabs -->
+<section class="w-full overflow-x-auto py-1 no-scrollbar -mx-4 px-4 flex gap-2" style="scrollbar-width: none;">
+<button class="h-11 px-4 rounded-full bg-[#2F8FDD] text-white font-semibold text-[15px] shrink-0 shadow-sm transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+      Overview
+    </button>
+<button class="h-11 px-4 rounded-full bg-white text-[#0B2545] font-medium text-[15px] shrink-0 shadow-xs active:bg-[#D4F1FE] transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+      Academic
+    </button>
+<button class="h-11 px-4 rounded-full bg-white text-[#0B2545] font-medium text-[15px] shrink-0 shadow-xs active:bg-[#D4F1FE] transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+      Experience
+    </button>
+<button class="h-11 px-4 rounded-full bg-white text-[#0B2545] font-medium text-[15px] shrink-0 shadow-xs active:bg-[#D4F1FE] transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+      Learning
+    </button>
+<button class="h-11 px-4 rounded-full bg-white text-[#0B2545] font-medium text-[15px] shrink-0 shadow-xs active:bg-[#D4F1FE] transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+      Skills
+    </button>
+<button class="h-11 px-4 rounded-full bg-white text-[#0B2545] font-medium text-[15px] shrink-0 shadow-xs active:bg-[#D4F1FE] transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+      Projects
+    </button>
+<button class="h-11 px-4 rounded-full bg-white text-[#0B2545] font-medium text-[15px] shrink-0 shadow-xs active:bg-[#D4F1FE] transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+      Certificates
+    </button>
+<button class="h-11 px-4 rounded-full bg-white text-[#0B2545] font-medium text-[15px] shrink-0 shadow-xs active:bg-[#D4F1FE] transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+      Achievements
+    </button>
+<button class="h-11 px-4 rounded-full bg-white text-[#0B2545] font-medium text-[15px] shrink-0 shadow-xs active:bg-[#D4F1FE] transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+      Portfolio
+    </button>
+<button class="h-11 px-4 rounded-full bg-white text-[#0B2545] font-medium text-[15px] shrink-0 shadow-xs active:bg-[#D4F1FE] transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+      Knowledge Graph
+    </button>
+</section>
+<!-- 3. Stat Cards in 2-Column Grid (7 items) -->
+<section class="grid grid-cols-2 gap-2.5">
+<!-- Goals -->
+<div class="p-3.5 rounded-[24px] bg-[#D4F1FE] flex flex-col justify-between shadow-sm" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,0.9);">
+<div class="flex items-center justify-between">
+<span class="text-xs uppercase font-semibold text-[#246185] tracking-wider" style="font-family: 'Outfit', sans-serif;">Goals</span>
+<span class="material-symbols-outlined text-[#246185] text-[18px]">flag</span>
+</div>
+<div class="mt-2">
+<div class="text-3xl font-bold text-[#0B2545] leading-none" style="font-family: 'Outfit', sans-serif;">1</div>
+<div class="text-[13px] text-[#246185] mt-1">0 completed</div>
+</div>
+</div>
+<!-- Roadmaps -->
+<div class="p-3.5 rounded-[24px] bg-[#BFE0F7] flex flex-col justify-between shadow-sm" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,0.9);">
+<div class="flex items-center justify-between">
+<span class="text-xs uppercase font-semibold text-[#246185] tracking-wider" style="font-family: 'Outfit', sans-serif;">Roadmaps</span>
+<span class="material-symbols-outlined text-[#246185] text-[18px]">alt_route</span>
+</div>
+<div class="mt-2">
+<div class="text-3xl font-bold text-[#0B2545] leading-none" style="font-family: 'Outfit', sans-serif;">6</div>
+<div class="text-[13px] text-[#246185] mt-1">0 completed</div>
+</div>
+</div>
+<!-- Books read -->
+<div class="p-3.5 rounded-[24px] bg-[#CFE6F9] flex flex-col justify-between shadow-sm" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,0.9);">
+<div class="flex items-center justify-between">
+<span class="text-xs uppercase font-semibold text-[#246185] tracking-wider" style="font-family: 'Outfit', sans-serif;">Books read</span>
+<span class="material-symbols-outlined text-[#246185] text-[18px]">menu_book</span>
+</div>
+<div class="mt-2">
+<div class="text-3xl font-bold text-[#0B2545] leading-none" style="font-family: 'Outfit', sans-serif;">0</div>
+<div class="text-[13px] text-[#246185] mt-1">0 reading min</div>
+</div>
+</div>
+<!-- Tasks completed -->
+<div class="p-3.5 rounded-[24px] bg-[#D4F1FE] flex flex-col justify-between shadow-sm" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,0.9);">
+<div class="flex items-center justify-between">
+<span class="text-xs uppercase font-semibold text-[#246185] tracking-wider" style="font-family: 'Outfit', sans-serif;">Tasks</span>
+<span class="material-symbols-outlined text-[#246185] text-[18px]">check_circle</span>
+</div>
+<div class="mt-2">
+<div class="text-3xl font-bold text-[#0B2545] leading-none" style="font-family: 'Outfit', sans-serif;">2</div>
+<div class="text-[13px] text-[#246185] mt-1">30 total</div>
+</div>
+</div>
+<!-- Certificates -->
+<div class="p-3.5 rounded-[24px] bg-[#BFE0F7] flex flex-col justify-between shadow-sm" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,0.9);">
+<div class="flex items-center justify-between">
+<span class="text-xs uppercase font-semibold text-[#246185] tracking-wider" style="font-family: 'Outfit', sans-serif;">Certificates</span>
+<span class="material-symbols-outlined text-[#246185] text-[18px]">verified</span>
+</div>
+<div class="mt-2">
+<div class="text-3xl font-bold text-[#0B2545] leading-none" style="font-family: 'Outfit', sans-serif;">0</div>
+<div class="text-[13px] text-[#246185] mt-1">Credentials</div>
+</div>
+</div>
+<!-- Projects -->
+<div class="p-3.5 rounded-[24px] bg-[#CFE6F9] flex flex-col justify-between shadow-sm" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,0.9);">
+<div class="flex items-center justify-between">
+<span class="text-xs uppercase font-semibold text-[#246185] tracking-wider" style="font-family: 'Outfit', sans-serif;">Projects</span>
+<span class="material-symbols-outlined text-[#246185] text-[18px]">folder_special</span>
+</div>
+<div class="mt-2">
+<div class="text-3xl font-bold text-[#0B2545] leading-none" style="font-family: 'Outfit', sans-serif;">0</div>
+<div class="text-[13px] text-[#246185] mt-1">Portfolio</div>
+</div>
+</div>
+<!-- Learning hours (spans full width) -->
+<div class="col-span-2 p-3.5 rounded-[24px] bg-[#D4F1FE] flex items-center justify-between shadow-sm" style="box-shadow: inset 0 0 0 1px rgba(255,255,255,0.9);">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-full bg-white flex items-center justify-center text-[#2F8FDD] shadow-xs">
+<span class="material-symbols-outlined text-[22px]">schedule</span>
+</div>
+<div>
+<span class="text-xs uppercase font-semibold text-[#246185] tracking-wider block" style="font-family: 'Outfit', sans-serif;">Learning hours</span>
+<div class="text-[13px] text-[#246185]">Tracked activity</div>
+</div>
+</div>
+<div class="text-3xl font-bold text-[#0B2545] pr-2" style="font-family: 'Outfit', sans-serif;">0</div>
+</div>
+</section>
+<!-- 4. Stacked Cards -->
+<!-- A. Digital identity card -->
+<section class="p-4 rounded-[24px] bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] shadow-sm flex flex-col space-y-3" style="box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.9);">
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xs uppercase font-bold text-[#246185] tracking-wider block" style="font-family: 'Outfit', sans-serif;">ABOUT</span>
+<h2 class="text-lg font-bold text-[#0B2545]" style="font-family: 'Outfit', sans-serif;">Digital identity</h2>
+</div>
+<button class="h-9 px-3 rounded-full bg-white text-[#2F8FDD] text-[14px] font-semibold flex items-center gap-1 active:scale-95 transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>Edit</span>
+</button>
+</div>
+<p class="text-[15px] text-[#246185] leading-relaxed">Tell the Dream Wave community about your learning journey.</p>
+<!-- 4 Info Tiles -->
+<div class="grid grid-cols-1 gap-2 pt-1">
+<div class="p-3 rounded-[16px] bg-white flex items-center justify-between shadow-xs">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[#246185] text-[20px]">mail</span>
+<span class="text-xs font-semibold text-[#246185]" style="font-family: 'Outfit', sans-serif;">Email</span>
+</div>
+<span class="text-[14px] text-[#0B2545] font-medium">charan@example.com</span>
+</div>
+<div class="p-3 rounded-[16px] bg-white flex items-center justify-between shadow-xs">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[#246185] text-[20px]">call</span>
+<span class="text-xs font-semibold text-[#246185]" style="font-family: 'Outfit', sans-serif;">Phone</span>
+</div>
+<span class="text-[14px] text-[#246185]/60 italic">Not set</span>
+</div>
+<div class="p-3 rounded-[16px] bg-white flex items-center justify-between shadow-xs">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[#246185] text-[20px]">translate</span>
+<span class="text-xs font-semibold text-[#246185]" style="font-family: 'Outfit', sans-serif;">Languages</span>
+</div>
+<span class="text-[14px] text-[#0B2545] font-medium">English</span>
+</div>
+<div class="p-3 rounded-[16px] bg-white flex items-center justify-between shadow-xs">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[#246185] text-[20px]">fingerprint</span>
+<span class="text-xs font-semibold text-[#246185]" style="font-family: 'Outfit', sans-serif;">Dream Wave ID</span>
+</div>
+<span class="text-[14px] text-[#0B2545] font-mono">DW-8E0A9</span>
+</div>
+</div>
+</section>
+<!-- B. Portfolio readiness card -->
+<section class="p-4 rounded-[24px] bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] shadow-sm flex flex-col space-y-3" style="box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.9);">
+<div class="flex items-center justify-between">
+<span class="text-xs uppercase font-bold text-[#246185] tracking-wider" style="font-family: 'Outfit', sans-serif;">SHAREABLE IDENTITY</span>
+<span class="text-lg font-bold text-[#0B2545]" style="font-family: 'Outfit', sans-serif;">0%</span>
+</div>
+<!-- Progress bar with cyan accent -->
+<div class="w-full h-2 rounded-full bg-[#BFE0F7] overflow-hidden">
+<div class="h-full bg-[#00C2DE] rounded-full" style="width: 4%;"></div>
+</div>
+<!-- 8-item checklist in compact 2-column grid -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<div class="flex items-center gap-2 p-2 rounded-[14px] bg-white/70">
+<span class="material-symbols-outlined text-[#246185]/40 text-[18px]">radio_button_unchecked</span>
+<span class="text-[14px] text-[#0B2545]">Profile photo</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-[14px] bg-white/70">
+<span class="material-symbols-outlined text-[#246185]/40 text-[18px]">radio_button_unchecked</span>
+<span class="text-[14px] text-[#0B2545]">About section</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-[14px] bg-white/70">
+<span class="material-symbols-outlined text-[#246185]/40 text-[18px]">radio_button_unchecked</span>
+<span class="text-[14px] text-[#0B2545]">Headline</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-[14px] bg-white/70">
+<span class="material-symbols-outlined text-[#246185]/40 text-[18px]">radio_button_unchecked</span>
+<span class="text-[14px] text-[#0B2545]">Academic journey</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-[14px] bg-white/70">
+<span class="material-symbols-outlined text-[#246185]/40 text-[18px]">radio_button_unchecked</span>
+<span class="text-[14px] text-[#0B2545]">Public skills</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-[14px] bg-white/70">
+<span class="material-symbols-outlined text-[#246185]/40 text-[18px]">radio_button_unchecked</span>
+<span class="text-[14px] text-[#0B2545]">Public project</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-[14px] bg-white/70">
+<span class="material-symbols-outlined text-[#246185]/40 text-[18px]">radio_button_unchecked</span>
+<span class="text-[14px] text-[#0B2545]">Certificate</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-[14px] bg-white/70">
+<span class="material-symbols-outlined text-[#246185]/40 text-[18px]">radio_button_unchecked</span>
+<span class="text-[14px] text-[#0B2545]">Career direction</span>
+</div>
+</div>
+<!-- Note -->
+<div class="pt-1 flex items-start gap-2 text-[#246185] text-[13px] leading-relaxed">
+<span class="material-symbols-outlined text-[16px] mt-0.5 text-[#00C2DE]">info</span>
+<span>Set profile visibility to unlisted or public in Settings before sharing.</span>
+</div>
+</section>
+<!-- C. AI profile assistant card -->
+<section class="p-4 rounded-[24px] bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] shadow-sm flex flex-col space-y-3" style="box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.9);">
+<div>
+<span class="text-xs uppercase font-bold text-[#246185] tracking-wider block" style="font-family: 'Outfit', sans-serif;">PREVIEW BEFORE SAVING</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<h2 class="text-lg font-bold text-[#0B2545]" style="font-family: 'Outfit', sans-serif;">AI profile assistant</h2>
+<span class="w-2 h-2 rounded-full bg-[#00C2DE]"></span>
+</div>
+</div>
+<p class="text-[15px] text-[#246185] leading-relaxed">Suggestions use your existing profile facts. Nothing is published automatically.</p>
+<!-- Stacked Buttons -->
+<div class="flex flex-col gap-2 pt-1">
+<button class="h-11 w-full rounded-full bg-white text-[#0B2545] font-semibold text-[15px] flex items-center justify-between px-4 shadow-xs active:bg-[#D4F1FE] transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[18px]">auto_fix_high</span>
+<span>Improve headline</span>
+</span>
+<span class="material-symbols-outlined text-[#246185] text-[18px]">chevron_right</span>
+</button>
+<button class="h-11 w-full rounded-full bg-white text-[#0B2545] font-semibold text-[15px] flex items-center justify-between px-4 shadow-xs active:bg-[#D4F1FE] transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[18px]">psychology</span>
+<span>Improve about</span>
+</span>
+<span class="material-symbols-outlined text-[#246185] text-[18px]">chevron_right</span>
+</button>
+<button class="h-11 w-full rounded-full bg-white text-[#0B2545] font-semibold text-[15px] flex items-center justify-between px-4 shadow-xs active:bg-[#D4F1FE] transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2F8FDD] text-[18px]">lightbulb</span>
+<span>Portfolio suggestions</span>
+</span>
+<span class="material-symbols-outlined text-[#246185] text-[18px]">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- D. Career direction card -->
+<section class="p-4 rounded-[24px] bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] shadow-sm flex flex-col space-y-3" style="box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.9);">
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xs uppercase font-bold text-[#246185] tracking-wider block" style="font-family: 'Outfit', sans-serif;">CAREER FOCUS</span>
+<h2 class="text-lg font-bold text-[#0B2545]" style="font-family: 'Outfit', sans-serif;">Career direction</h2>
+</div>
+<button class="h-9 px-3 rounded-full bg-white text-[#2F8FDD] text-[14px] font-semibold flex items-center gap-1 active:scale-95 transition-all" style="font-family: 'Outfit', sans-serif;" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Add</span>
+</button>
+</div>
+<!-- Empty State -->
+<div class="p-6 rounded-[20px] bg-white/60 flex flex-col items-center text-center space-y-2">
+<div class="w-12 h-12 rounded-full bg-white text-[#246185] flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[24px]">explore</span>
+</div>
+<div class="text-[16px] font-bold text-[#0B2545]" style="font-family: 'Outfit', sans-serif;">No career direction yet</div>
+<p class="text-[15px] text-[#246185] leading-relaxed max-w-xs">
+        Set your dream roles, industries, and target skill milestones so your AI study coach can build custom roadmaps.
+      </p>
+</div>
+</section>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-high/85 backdrop-blur-xl shadow-[0_-4px_24px_-4px_rgba(0,95,156,0.08)]" data-active-classes="text-primary font-bold"><div class="flex items-center justify-around h-16 px-space-xs"><a class="flex-1 flex flex-col items-center justify-center h-full gap-0.5 text-on-surface-variant hover:text-on-surface active:scale-95 transition-all" data-path="explore" href="#"><span class="material-symbols-outlined text-[24px]">explore</span><span class="font-label-sm text-label-sm tracking-tight">Explore</span></a><a class="flex-1 flex flex-col items-center justify-center h-full gap-0.5 text-on-surface-variant hover:text-on-surface active:scale-95 transition-all" data-path="studio" href="#"><span class="material-symbols-outlined text-[24px]">draw</span><span class="font-label-sm text-label-sm tracking-tight">Studio</span></a><a class="flex-1 flex flex-col items-center justify-center h-full gap-0.5 text-on-surface-variant hover:text-on-surface active:scale-95 transition-all" data-path="workspace" href="#"><span class="material-symbols-outlined text-[24px]">hub</span><span class="font-label-sm text-label-sm tracking-tight">Workspace</span></a><a class="flex-1 flex flex-col items-center justify-center h-full gap-0.5 text-on-surface-variant hover:text-on-surface active:scale-95 transition-all" data-path="community" href="#"><span class="material-symbols-outlined text-[24px]">groups</span><span class="font-label-sm text-label-sm tracking-tight">Community</span></a><a aria-current="page" class="flex-1 flex flex-col items-center justify-center h-full gap-0.5 active:scale-95 transition-all text-primary font-bold" data-path="profile-account" href="#"><span class="material-symbols-outlined text-[24px]">account_circle</span><span class="font-label-sm text-label-sm tracking-tight">Profile</span></a></div></nav></body></html>

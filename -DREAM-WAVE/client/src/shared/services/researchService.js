@@ -22,3 +22,4 @@ function invalidate(prefix = 'research:') {
 }
 
 export default { list, workspace, invalidate, api: researchWorkspaceApi }
+

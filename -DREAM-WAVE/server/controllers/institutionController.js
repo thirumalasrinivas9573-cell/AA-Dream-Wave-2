@@ -15,7 +15,7 @@ const Application = require('../models/Application');
 const Review = require('../models/Review');
 const LibraryBook = require('../models/LibraryBook');
 const { getInstitutionForUser, ensureUniqueSlug, paginate, cleanPromotionInput } = require('../utils/portalHelpers');
-const { openai } = require('../utils/openaiClient');
+const { openai, getModel } = require('../utils/openaiClient');
 
 const fail = (res, err, status = 500) => {
   const statusCode = err.statusCode || status;
@@ -492,10 +492,10 @@ exports.getCourseInsights = async (req, res) => {
     let insights = { popularity: 50, salaryRank: 50, demandScore: 50, summary: 'AI insights pending configuration.' };
     try {
       const completion = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
+        model: getModel(),
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.4,
-        max_tokens: 500,
+        max_tokens: 1000,
       });
       const raw = completion.choices[0]?.message?.content || '';
       const jsonMatch = raw.match(/\{[\s\S]*\}/);
@@ -722,10 +722,10 @@ exports.getPublicInsights = async (req, res) => {
     try {
       const prompt = `Institution: ${inst.name}. Type: ${inst.institutionType}. Courses: ${courseTitles.join(', ')}. Placements: ${topPackages.join(', ')}. Placement rate: ${inst.stats.placementRate}%. Return JSON with keys: bestCourses (array), trendingPrograms (array), industryDemand, placementForecast, salaryOutlook, futureSkills (array), admissionCompetition, careerOpportunities (array), summary (2 sentences).`;
       const completion = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
+        model: getModel(),
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.4,
-        max_tokens: 700,
+        max_tokens: 1200,
       });
       const raw = completion.choices[0]?.message?.content || '';
       const jsonMatch = raw.match(/\{[\s\S]*\}/);

@@ -171,13 +171,15 @@ export default function Goals() {
 
   return (
     <StudentLayout>
-      <div className="student-goals">
-        <header className="goals-header">
+      <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
+        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface p-6 rounded-stitch border border-divider shadow-sm">
           <div>
-            <h1><span className="gradient-text">Goals</span> & Progress</h1>
-            <p>Convert ambitions into structured, measurable learning journeys.</p>
-        </div>
-          <div className="goals-header__actions">
+            <h1 className="text-2xl sm:text-3xl font-bold text-content-heading tracking-tight">
+              <span className="gradient-text">Goals</span> & Progress
+            </h1>
+            <p className="text-sm text-content-muted mt-1">Convert ambitions into structured, measurable learning journeys.</p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
             <Button variant="secondary" onClick={() => document.getElementById('goal-analytics')?.scrollIntoView({ behavior: 'smooth' })}>View analytics</Button>
             <Button variant="secondary" onClick={() => setAiBuilder(true)}>AI Goal Builder</Button>
             <Button onClick={() => setWizard({ goal: null })}>+ Create goal</Button>
@@ -189,7 +191,7 @@ export default function Goals() {
 
         <div id="goal-analytics">
           <GoalAnalytics analytics={analytics} />
-      </div>
+        </div>
 
         <GoalFilters
           query={query}
@@ -204,7 +206,7 @@ export default function Goals() {
         />
 
         {loading ? <LoadingState label="Loading learning goals…" rows={5} /> : filtered.length ? (
-          <section className="goal-grid" aria-label="Goals">
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="Goals">
             {filtered.map((goal) => (
               <GoalCard
                 goal={goal}
@@ -217,10 +219,10 @@ export default function Goals() {
             ))}
           </section>
         ) : (
-          <section className="goal-empty">
-            <span aria-hidden="true">🎯</span>
-            <h2>{goals.length ? 'No goals match these filters' : 'Create your first learning goal'}</h2>
-            <p>{goals.length ? 'Adjust your search or filters to find another goal.' : 'Define an ambition, set a target, and build a trackable learning journey.'}</p>
+          <section className="bg-surface p-12 rounded-stitch border border-divider text-center flex flex-col items-center space-y-3 shadow-sm">
+            <span aria-hidden="true" className="text-4xl">🎯</span>
+            <h2 className="text-lg font-semibold text-content-heading">{goals.length ? 'No goals match these filters' : 'Create your first learning goal'}</h2>
+            <p className="text-sm text-content-muted max-w-md">{goals.length ? 'Adjust your search or filters to find another goal.' : 'Define an ambition, set a target, and build a trackable learning journey.'}</p>
             {goals.length ? <Button variant="secondary" onClick={() => { setQuery(''); setStatus('all'); setCategory('all'); setPriority('all') }}>Clear filters</Button> : <Button onClick={() => setWizard({ goal: null })}>Create goal</Button>}
           </section>
         )}

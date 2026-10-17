@@ -47,20 +47,20 @@ class MJConfig {
   }
 
   _loadFromEnv() {
-    const openaiKey = process.env.OPENAI_API_KEY || process.env.MJ_OPENAI_API_KEY || null
+    const openaiKey = process.env.MJ_OPENAI_API_KEY || null
     const geminiKey = process.env.GEMINI_API_KEY || process.env.MJ_GEMINI_API_KEY || null
     const elevenLabsKey = process.env.ELEVENLABS_API_KEY || process.env.MJ_ELEVENLABS_API_KEY || null
     const voiceEnabled = process.env.MJ_VOICE_ENABLED === 'true'
 
     return {
       ai: {
-        primaryProvider: process.env.MJ_AI_PROVIDER || 'openai',
+        primaryProvider: process.env.MJ_AI_PROVIDER || 'gemini',
         fallbackProvider: process.env.MJ_AI_FALLBACK || 'gemini',
         maxRetries: parseInt(process.env.MJ_AI_MAX_RETRIES || '2', 10),
         openai: {
           provider: 'openai',
           apiKey: openaiKey,
-          model: process.env.MJ_OPENAI_MODEL || 'gpt-4o-mini',
+          model: process.env.GEMINI_MODEL || 'gemini-3.5-flash',
           embeddingModel: process.env.MJ_OPENAI_EMBEDDING_MODEL || 'text-embedding-3-small',
           maxTokens: parseInt(process.env.MJ_OPENAI_MAX_TOKENS || '4096', 10),
           temperature: parseFloat(process.env.MJ_OPENAI_TEMPERATURE || '0.7'),
@@ -69,7 +69,7 @@ class MJConfig {
         gemini: {
           provider: 'gemini',
           apiKey: geminiKey,
-          model: process.env.MJ_GEMINI_MODEL || 'gemini-1.5-flash',
+          model: process.env.GEMINI_MODEL || process.env.MJ_GEMINI_MODEL || 'gemini-3.5-flash',
           enabled: !!geminiKey,
         },
         claude: {
@@ -88,13 +88,13 @@ class MJConfig {
       openai: {
         provider: 'openai',
         apiKey: openaiKey,
-        model: process.env.MJ_OPENAI_MODEL || 'gpt-4o-mini',
+        model: process.env.GEMINI_MODEL || 'gemini-3.5-flash',
         enabled: !!openaiKey,
       },
       gemini: {
         provider: 'gemini',
         apiKey: geminiKey,
-        model: process.env.MJ_GEMINI_MODEL || 'gemini-1.5-flash',
+        model: process.env.GEMINI_MODEL || process.env.MJ_GEMINI_MODEL || 'gemini-3.5-flash',
         enabled: !!geminiKey,
       },
       elevenLabs: {

@@ -5,6 +5,23 @@ export default {
   theme: {
     extend: {
       colors: {
+        canvas: 'var(--bg-canvas)',
+        surface: {
+          DEFAULT: 'var(--bg-surface)',
+          elevated: 'var(--bg-surface-elevated)',
+        },
+        brand: {
+          primary: 'var(--primary)',
+          hover: 'var(--primary-hover)',
+          secondary: 'var(--secondary)',
+        },
+        content: {
+          heading: 'var(--text-heading)',
+          body: 'var(--text-body)',
+          muted: 'var(--text-muted)',
+        },
+        divider: 'var(--border-subtle)',
+        focus: 'var(--border-focus)',
         wave: {
           50: '#f0fdfa',
           100: '#ccfbf1',
@@ -28,11 +45,19 @@ export default {
         },
       },
       fontFamily: {
-        display: ['Syne', 'system-ui', 'sans-serif'],
-        sans: ['Manrope', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-heading)', 'sans-serif'],
+        body: ['var(--font-body)', 'sans-serif'],
+        display: ['var(--font-heading)', 'sans-serif'],
+        sans: ['var(--font-body)', 'sans-serif'],
+      },
+      borderRadius: {
+        stitch: 'var(--radius-card)',
       },
       boxShadow: {
         glass: '0 8px 32px rgba(15, 23, 42, 0.12)',
+        oceanic: '0 10px 28px -4px rgba(47, 143, 221, 0.12), 0 4px 12px -2px rgba(47, 143, 221, 0.08)',
+        oceanicLg: '0 16px 36px -6px rgba(47, 143, 221, 0.16), 0 6px 16px -3px rgba(47, 143, 221, 0.10)',
+        oceanicSm: '0 2px 8px rgba(47, 143, 221, 0.08)',
       },
       backgroundImage: {
         'wave-grid':
@@ -42,3 +67,4 @@ export default {
   },
   plugins: [],
 };
+

@@ -3,7 +3,7 @@ const Task = require('../models/Task')
 const Roadmap = require('../models/Roadmap')
 const LibraryBook = require('../models/LibraryBook')
 const LibraryProgress = require('../models/LibraryProgress')
-const { openai } = require('../utils/openaiClient')
+const { openai, getModel } = require('../utils/openaiClient')
 const { validateRoadmapPayload, diffRoadmapAdaptation } = require('./roadmapValidator')
 const progressEngine = require('./progressEngine')
 
@@ -40,7 +40,7 @@ async function suggestGoal(userId, { ambition = '', category = 'Career' } = {}) 
 
   const libraryBooks = await loadLibraryTitles(userId)
   const completion = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
+    model: getModel(),
     temperature: 0.65,
     max_tokens: 2200,
     response_format: { type: 'json_object' },
@@ -107,7 +107,7 @@ async function clarifyGoal({ ambition = '' } = {}) {
   if (!text) throw Object.assign(new Error('Enter a goal idea to clarify.'), { statusCode: 400 })
 
   const completion = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
+    model: getModel(),
     temperature: 0.6,
     max_tokens: 1200,
     response_format: { type: 'json_object' },
@@ -204,7 +204,7 @@ async function suggestRoadmapAdaptation(userId, goalId) {
 
   const progress = await progressEngine.computeGoalProgress(goalId, userId)
   const completion = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
+    model: getModel(),
     temperature: 0.5,
     max_tokens: 1800,
     response_format: { type: 'json_object' },
@@ -294,7 +294,7 @@ async function suggestTasks(userId, goalId, { stageTitle = '' } = {}) {
   if (!goal) throw Object.assign(new Error('Goal not found.'), { statusCode: 404 })
 
   const completion = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
+    model: getModel(),
     temperature: 0.55,
     max_tokens: 1200,
     response_format: { type: 'json_object' },

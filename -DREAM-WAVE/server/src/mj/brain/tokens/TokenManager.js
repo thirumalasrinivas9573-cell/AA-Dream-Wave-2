@@ -7,10 +7,9 @@
 const { MJLogger } = require('../../logger')
 
 const COST_PER_1K = {
-  'gpt-4o-mini': { input: 0.00015, output: 0.0006 },
-  'gpt-4o': { input: 0.0025, output: 0.01 },
-  'gemini-1.5-flash': { input: 0.000075, output: 0.0003 },
-  default: { input: 0.001, output: 0.002 },
+  'gemini-3.5-flash': { input: 0.000075, output: 0.0003 },
+  'gemini-3.1-flash-lite': { input: 0.00005, output: 0.0002 },
+  default: { input: 0.0001, output: 0.0003 },
 }
 
 class TokenManager {

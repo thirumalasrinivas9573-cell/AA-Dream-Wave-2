@@ -99,7 +99,7 @@ exports.remove = asyncHandler(async (req, res) => {
 
 exports.downloadPdf = asyncHandler(async (req, res) => {
   const report = await findAccessible(Report, req.user, req.params.id);
-  if (!report) throw new AppError('Report not found', 404);
+  if (!report) throw new AppError('Report not found', 404, { code: 'NOT_FOUND' });
   if (!report.pdfPath || !fs.existsSync(report.pdfPath)) {
     const fileName = `report-${report._id}.pdf`;
     report.pdfPath = await generatePDF(

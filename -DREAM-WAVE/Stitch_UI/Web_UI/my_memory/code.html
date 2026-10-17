@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-fixed":"#001f25","on-surface":"#001c3b","tertiary":"#246185","inverse-primary":"#9bcaff","surface-bright":"#f9f9ff","primary-fixed-dim":"#9bcaff","error-container":"#ffdad6","on-secondary-fixed-variant":"#004e5b","tertiary-fixed-dim":"#96cdf5","on-background":"#001c3b","outline":"#707882","primary":"#005f9c","on-primary-container":"#fdfcff","on-primary":"#ffffff","outline-variant":"#c0c7d3","surface-tint":"#0062a0","primary-container":"#0079c4","surface-variant":"#d5e3ff","primary-fixed":"#d0e4ff","tertiary-fixed":"#c8e6ff","on-secondary":"#ffffff","surface-dim":"#c7dbff","surface-container-low":"#f0f3ff","on-primary-fixed-variant":"#00497a","on-secondary-container":"#006170","background":"#f9f9ff","secondary-container":"#49e1fd","error":"#ba1a1a","surface-container-lowest":"#ffffff","secondary-fixed":"#a6eeff","inverse-surface":"#193151","surface-container-high":"#dee8ff","surface":"#f9f9ff","on-error":"#ffffff","tertiary-container":"#427a9f","on-tertiary":"#ffffff","on-surface-variant":"#404751","on-tertiary-fixed":"#001e2f","surface-container-highest":"#d5e3ff","surface-container":"#e7eeff","inverse-on-surface":"#ebf1ff","on-error-container":"#93000a","on-tertiary-fixed-variant":"#004c6e","on-primary-fixed":"#001d35","secondary-fixed-dim":"#3dd8f5","on-tertiary-container":"#fcfcff","secondary":"#006878"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-lg":"1.75rem","gutter-mobile":"1rem","space-xl":"2.5rem","margin-mobile":"1rem","space-sm":"0.75rem","space-xs":"0.375rem",margin:"2rem",gutter:"1.5rem","space-md":"1.25rem"},fontFamily:{"label-lg":["Outfit"],"headline-md":["Outfit"],"headline-sm":["Outfit"],"label-md":["Outfit"],"title-md":["Outfit"],"body-lg":["Plus Jakarta Sans"],"headline-lg":["Outfit"],"display-hero":["Outfit"],"body-sm":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-sm":["Outfit"],"headline-lg-mobile":["Outfit"],"display-hero-mobile":["Outfit"]},fontSize:{"label-lg":["14px",{lineHeight:"20px",fontWeight:"600"}],"headline-md":["24px",{lineHeight:"32px",fontWeight:"600"}],"headline-sm":["20px",{lineHeight:"28px",fontWeight:"600"}],"label-md":["12px",{lineHeight:"16px",fontWeight:"600"}],"title-md":["18px",{lineHeight:"24px",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"26px",fontWeight:"400"}],"headline-lg":["32px",{lineHeight:"40px",fontWeight:"600"}],"display-hero":["48px",{lineHeight:"56px",fontWeight:"700"}],"body-sm":["12px",{lineHeight:"18px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"22px",fontWeight:"400"}],"label-sm":["11px",{lineHeight:"14px",fontWeight:"500"}],"headline-lg-mobile":["26px",{lineHeight:"32px",fontWeight:"600"}],"display-hero-mobile":["32px",{lineHeight:"40px",fontWeight:"700"}]}}}}</script></head><body class="min-h-screen bg-gradient-to-b from-[#E6F3FD] via-[#F0F8FE] to-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[72px] bg-[#CFE6F9]/80 backdrop-blur-xl z-50 flex flex-col items-center py-space-md justify-between shadow-[0_4px_24px_rgba(47,143,221,0.08)]"><div class="flex flex-col items-center gap-space-md w-full"><a class="w-11 h-11 rounded-full bg-primary flex items-center justify-center shadow-[0_4px_14px_rgba(47,143,221,0.35)] hover:scale-105 transition-transform" data-path="my-memory" href="#"><span class="material-symbols-outlined text-on-primary text-[22px]">waves</span></a><nav class="flex flex-col items-center gap-space-xs w-full px-2" data-active-classes="bg-primary-container text-on-primary-container shadow-[0_4px_14px_rgba(47,143,221,0.3)]"><a aria-current="page" class="w-11 h-11 flex items-center justify-center rounded-xl transition-all bg-primary-container text-on-primary-container shadow-[0_4px_14px_rgba(47,143,221,0.3)]" data-path="my-memory" href="#" title="My Memory"><span class="material-symbols-outlined text-[22px]">psychology</span></a><a class="w-11 h-11 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="dream-roadmap" href="#" title="Roadmap"><span class="material-symbols-outlined text-[22px]">alt_route</span></a><a class="w-11 h-11 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="daylight-studio" href="#" title="Studio"><span class="material-symbols-outlined text-[22px]">auto_awesome</span></a><a class="w-11 h-11 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="study-vault" href="#" title="Study Vault"><span class="material-symbols-outlined text-[22px]">folder_special</span></a></nav></div><div class="flex flex-col items-center gap-space-xs"><a class="w-11 h-11 flex items-center justify-center rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="settings" href="#" title="Settings"><span class="material-symbols-outlined text-[22px]">tune</span></a></div></aside><div class="pl-[72px]"><header class="fixed top-0 left-[72px] right-0 z-40 bg-[#CFE6F9]/60 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="h-16 w-full px-space-md flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">DREAM WAVE</span><span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm uppercase tracking-wider">Daylight</span></div><div class="flex-1 max-w-xl mx-auto"><div class="relative flex items-center w-full"><span class="material-symbols-outlined absolute left-4 text-outline text-[20px] pointer-events-none">search</span><input class="w-full h-10 pl-11 pr-11 bg-surface-container-lowest/80 backdrop-blur-md rounded-full text-body-sm font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest shadow-[0_2px_8px_rgba(47,143,221,0.06)] transition-all" placeholder="Search your dream memories, notes, or prompts..." type="text"/><span class="material-symbols-outlined absolute right-3 text-secondary text-[18px] cursor-pointer hover:text-primary transition-colors">spark</span></div></div><div class="flex items-center gap-space-sm"><button class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span></button><button class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">help</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_2px_8px_rgba(0,95,156,0.25)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 w-full px-gutter"><div class="py-space-md"><div class="flex flex-col w-full">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&amp;family=Outfit:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    .font-delulu-heading { font-family: 'Outfit', sans-serif !important; }
+    .font-delulu-body { font-family: 'Figtree', sans-serif !important; }
+    .shadow-daylight-card {
+      box-shadow: 0 10px 30px -6px rgba(47, 143, 221, 0.12), 0 2px 8px -2px rgba(11, 37, 69, 0.04);
+    }
+    .shadow-daylight-glow {
+      box-shadow: 0 4px 16px rgba(47, 143, 221, 0.28);
+    }
+  </style>
+<section class="w-full max-w-7xl mx-auto space-y-6 pb-12 font-delulu-body text-[#0B2545]">
+<!-- Top Action / Context Header -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-gradient-to-r from-[#DDEEFC]/90 to-[#EAF4FD]/90 p-6 rounded-[28px] shadow-daylight-card">
+<div class="space-y-1.5 max-w-3xl">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#BFE0F7] text-[#0B2545] font-delulu-heading font-semibold text-xs tracking-wider uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+            Personal AI Memory 2.0
+          </span>
+<span class="text-xs font-medium text-[#2F8FDD] bg-[#FFFFFF]/80 px-2.5 py-0.5 rounded-full">v2.4 Active Core</span>
+</div>
+<h1 class="font-delulu-heading font-bold text-3xl md:text-4xl text-[#0B2545] tracking-tight">
+          My Memory
+        </h1>
+<p class="text-sm md:text-[15px] leading-relaxed text-[#246185]">
+          Useful, minimal, and under your control. Dream Wave keeps confirmed context — not every conversation. Current instructions always win over old memory.
+        </p>
+</div>
+<div class="flex items-center gap-2.5 self-start lg:self-center shrink-0">
+<button class="px-4 py-2.5 rounded-full bg-[#FFFFFF]/80 hover:bg-[#FFFFFF] text-[#0B2545] font-delulu-heading font-semibold text-sm transition-all duration-200 flex items-center gap-2 shadow-sm hover:-translate-y-0.5" type="button">
+<span class="material-symbols-outlined text-[19px] text-[#2F8FDD]">school</span>
+          AI Mentor
+        </button>
+<button class="px-4 py-2.5 rounded-full bg-[#FFFFFF]/80 hover:bg-[#FFFFFF] text-[#0B2545] font-delulu-heading font-semibold text-sm transition-all duration-200 flex items-center gap-2 shadow-sm hover:-translate-y-0.5" type="button">
+<span class="material-symbols-outlined text-[19px] text-[#006878]">psychology</span>
+          Personal AI
+        </button>
+<button class="px-5 py-2.5 rounded-full bg-[#2F8FDD] hover:bg-[#2478BE] text-white font-delulu-heading font-semibold text-sm transition-all duration-200 flex items-center gap-2 shadow-daylight-glow hover:-translate-y-0.5 active:translate-y-0" id="refresh-memory-btn" type="button">
+<span class="material-symbols-outlined text-[19px] transition-transform duration-500" id="refresh-icon">autorenew</span>
+          Refresh
+        </button>
+</div>
+</div>
+<!-- Top 3-Card Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Card 1: Memory Settings -->
+<div class="bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] rounded-[26px] p-6 shadow-daylight-card flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-4">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-[#FFFFFF] text-[#2F8FDD] flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</div>
+<div>
+<h2 class="font-delulu-heading font-semibold text-lg text-[#0B2545]">Memory settings</h2>
+<p class="text-xs text-[#246185]">Context orchestration policies</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[#707882] text-[20px]" title="Security verified">verified_user</span>
+</div>
+<div class="space-y-4 pt-1">
+<!-- Toggle 1 -->
+<div class="flex items-start justify-between gap-3">
+<div class="space-y-0.5">
+<label class="font-delulu-heading font-semibold text-sm text-[#0B2545] cursor-pointer" for="toggle-personalization">Personalization memory</label>
+<p class="text-xs text-[#246185] leading-snug">Adapt tone and recommendations to your learning style</p>
+</div>
+<button aria-checked="true" class="switch-toggle shrink-0 w-11 h-6 rounded-full bg-[#2F8FDD] p-0.5 relative transition-colors focus:outline-none" data-state="on" id="toggle-personalization" role="switch">
+<span class="block w-5 h-5 rounded-full bg-[#FFFFFF] shadow-sm transform translate-x-5 transition-transform"></span>
+</button>
+</div>
+<!-- Toggle 2 -->
+<div class="flex items-start justify-between gap-3">
+<div class="space-y-0.5">
+<label class="font-delulu-heading font-semibold text-sm text-[#0B2545] cursor-pointer" for="toggle-injection">Use memory in AI</label>
+<p class="text-xs text-[#246185] leading-snug">Inject relevant saved memories into prompt context</p>
+</div>
+<button aria-checked="true" class="switch-toggle shrink-0 w-11 h-6 rounded-full bg-[#2F8FDD] p-0.5 relative transition-colors focus:outline-none" data-state="on" id="toggle-injection" role="switch">
+<span class="block w-5 h-5 rounded-full bg-[#FFFFFF] shadow-sm transform translate-x-5 transition-transform"></span>
+</button>
+</div>
+<!-- Toggle 3 -->
+<div class="flex items-start justify-between gap-3">
+<div class="space-y-0.5">
+<label class="font-delulu-heading font-semibold text-sm text-[#0B2545] cursor-pointer" for="toggle-proactive">Proactive use</label>
+<p class="text-xs text-[#246185] leading-snug">Allow agents to recall context without explicit mentions</p>
+</div>
+<button aria-checked="true" class="switch-toggle shrink-0 w-11 h-6 rounded-full bg-[#2F8FDD] p-0.5 relative transition-colors focus:outline-none" data-state="on" id="toggle-proactive" role="switch">
+<span class="block w-5 h-5 rounded-full bg-[#FFFFFF] shadow-sm transform translate-x-5 transition-transform"></span>
+</button>
+</div>
+<!-- Toggle 4 -->
+<div class="flex items-start justify-between gap-3">
+<div class="space-y-0.5">
+<label class="font-delulu-heading font-semibold text-sm text-[#0B2545] cursor-pointer" for="toggle-proposals">Allow AI proposals</label>
+<p class="text-xs text-[#246185] leading-snug">Suggest saving recurring habits or preferences</p>
+</div>
+<button aria-checked="true" class="switch-toggle shrink-0 w-11 h-6 rounded-full bg-[#2F8FDD] p-0.5 relative transition-colors focus:outline-none" data-state="on" id="toggle-proposals" role="switch">
+<span class="block w-5 h-5 rounded-full bg-[#FFFFFF] shadow-sm transform translate-x-5 transition-transform"></span>
+</button>
+</div>
+</div>
+</div>
+<div class="pt-4 mt-2 flex items-center justify-between text-xs text-[#404751]">
+<span class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#00C2DE]"></span> All 4 policies active
+          </span>
+<span class="font-delulu-heading font-medium text-[#2F8FDD] hover:underline cursor-pointer">Defaults</span>
+</div>
+</div>
+<!-- Card 2: What Dream Wave Remembers -->
+<div class="bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] rounded-[26px] p-6 shadow-daylight-card flex flex-col justify-between">
+<div class="space-y-3.5">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-[#FFFFFF] text-[#006878] flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]">database</span>
+</div>
+<div>
+<h2 class="font-delulu-heading font-semibold text-lg text-[#0B2545]">What Dream Wave remembers</h2>
+<p class="text-xs text-[#246185]">Epistemic memory boundaries</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[#CFE6F9] text-[#001c3b] font-delulu-heading font-semibold text-xs whitespace-nowrap">
+              Active: 6 Confirmed
+            </span>
+</div>
+<!-- Key system notice box -->
+<div class="bg-[#D4F1FE] rounded-xl p-3.5 flex items-start gap-2.5 shadow-sm">
+<span class="material-symbols-outlined text-[#006878] text-[20px] shrink-0 mt-0.5">info</span>
+<p class="text-xs leading-relaxed text-[#0B2545] font-medium">
+<strong class="font-delulu-heading font-bold text-[#004e5b]">Memory is DATA — not truth.</strong> Canonical goals, schedule constraints, and active milestones are synced from live system data.
+            </p>
+</div>
+<p class="text-xs md:text-[13px] text-[#246185] leading-relaxed">
+            Dream Wave keeps confirmed context — not every conversational aside. Current system instructions and explicit prompts always override old memory layers.
+          </p>
+<div class="p-3 bg-[#FFFFFF]/70 rounded-xl flex items-center justify-between text-xs text-[#0B2545]">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#2F8FDD]">storage</span>
+              Memory Storage Tier
+            </span>
+<span class="font-delulu-heading font-semibold text-[#2F8FDD]">4.2 KB / 250 KB</span>
+</div>
+</div>
+<div class="pt-3 text-[11px] text-[#707882] flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">history_edu</span>
+          Indexed across 4 categories · Zero unconfirmed proposals
+        </div>
+</div>
+<!-- Card 3: Remember Something Form -->
+<div class="bg-gradient-to-br from-[#A9D3F1] to-[#7FC0EC] rounded-[26px] p-6 shadow-daylight-card flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-[#FFFFFF] text-[#2F8FDD] flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+</div>
+<h2 class="font-delulu-heading font-semibold text-lg text-[#0B2545]">What should AI remember?</h2>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-[#FFFFFF]/70 text-[#0B2545] font-delulu-heading text-xs font-semibold uppercase">Direct Input</span>
+</div>
+<form class="space-y-3" id="new-memory-form" onsubmit="event.preventDefault(); window.addNewMemoryItem();">
+<div>
+<textarea class="w-full bg-[#FFFFFF] rounded-xl p-3 text-sm text-[#0B2545] placeholder-[#707882] focus:outline-none focus:ring-2 focus:ring-[#00C2DE] transition-all resize-none shadow-sm" id="memory-input-text" placeholder="e.g. I prefer concise explanations and practical code over theoretical proofs..." required="" rows="3"></textarea>
+</div>
+<div class="flex items-center gap-2">
+<div class="relative flex-1">
+<select class="w-full appearance-none bg-[#FFFFFF] rounded-xl px-3.5 py-2.5 text-xs font-delulu-heading font-semibold text-[#0B2545] focus:outline-none focus:ring-2 focus:ring-[#00C2DE] shadow-sm cursor-pointer pr-8" id="memory-category-select">
+<option value="PREFERENCE">PREFERENCE</option>
+<option value="CAREER">CAREER</option>
+<option value="LEARNING">LEARNING</option>
+<option value="PROJECTS">PROJECTS</option>
+<option value="COMMUNICATION">COMMUNICATION</option>
+<option value="GOALS">GOALS</option>
+<option value="WORKFLOW">WORKFLOW</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-[#707882] pointer-events-none text-[18px]">expand_more</span>
+</div>
+<button class="px-5 py-2.5 rounded-xl bg-[#2F8FDD] hover:bg-[#2578BD] text-white font-delulu-heading font-semibold text-xs tracking-wide uppercase transition-all duration-200 shadow-daylight-glow flex items-center gap-1.5 shrink-0 hover:-translate-y-0.5 active:translate-y-0" type="submit">
+<span class="material-symbols-outlined text-[16px]">bookmark_add</span>
+                Remember
+              </button>
+</div>
+</form>
+</div>
+<div class="pt-3 text-[11px] text-[#0B2545]/80 flex items-center justify-between font-medium">
+<span>Encrypted with client salt</span>
+<span>Instant prompt injection</span>
+</div>
+</div>
+</div>
+<!-- Search & Filter Controls -->
+<div class="space-y-3.5">
+<div class="flex flex-col md:flex-row items-stretch md:items-center gap-3">
+<!-- Search Field -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[#2F8FDD] text-[20px] pointer-events-none">search</span>
+<input class="w-full bg-[#FFFFFF] text-sm text-[#0B2545] placeholder-[#707882] rounded-xl pl-11 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#2F8FDD] shadow-sm transition-all" id="search-memory-input" placeholder="Search memories, topics, or instruction tags..." type="text"/>
+<button class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[#707882] hover:text-[#0B2545] bg-[#EAF4FD] px-2 py-0.5 rounded-md font-delulu-heading" id="clear-search-btn">
+            Clear
+          </button>
+</div>
+<!-- Secondary summary indicator -->
+<div class="flex items-center justify-between md:justify-end gap-3 px-1">
+<span class="text-xs text-[#246185] font-medium" id="memory-counter-label">Showing 4 of 4 memories</span>
+<div class="h-4 w-px bg-[#BFE0F7] hidden md:block"></div>
+<button class="inline-flex items-center gap-1.5 px-3 py-2 bg-[#FFFFFF]/80 hover:bg-[#FFFFFF] rounded-xl text-xs font-delulu-heading font-semibold text-[#0B2545] shadow-sm transition-all" id="sort-order-btn" type="button">
+<span class="material-symbols-outlined text-[16px] text-[#2F8FDD]">sort</span>
+<span id="sort-label">Most Recent</span>
+</button>
+</div>
+</div>
+<!-- Horizontal Category Chips Bar -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none" id="category-filter-chips">
+<button class="category-chip shrink-0 px-4 py-1.5 rounded-full text-xs font-delulu-heading font-semibold transition-all duration-150 bg-[#2F8FDD] text-white shadow-sm" data-category="ALL" type="button">
+          All
+        </button>
+<button class="category-chip shrink-0 px-4 py-1.5 rounded-full text-xs font-delulu-heading font-semibold transition-all duration-150 bg-[#FFFFFF] hover:bg-[#DDEEFC] text-[#0B2545] shadow-sm" data-category="PREFERENCE" type="button">
+          Preferences
+        </button>
+<button class="category-chip shrink-0 px-4 py-1.5 rounded-full text-xs font-delulu-heading font-semibold transition-all duration-150 bg-[#FFFFFF] hover:bg-[#DDEEFC] text-[#0B2545] shadow-sm" data-category="LEARNING" type="button">
+          Learning
+        </button>
+<button class="category-chip shrink-0 px-4 py-1.5 rounded-full text-xs font-delulu-heading font-semibold transition-all duration-150 bg-[#FFFFFF] hover:bg-[#DDEEFC] text-[#0B2545] shadow-sm" data-category="WORKFLOW" type="button">
+          Workflow
+        </button>
+<button class="category-chip shrink-0 px-4 py-1.5 rounded-full text-xs font-delulu-heading font-semibold transition-all duration-150 bg-[#FFFFFF] hover:bg-[#DDEEFC] text-[#0B2545] shadow-sm" data-category="COMMUNICATION" type="button">
+          Communication
+        </button>
+<button class="category-chip shrink-0 px-4 py-1.5 rounded-full text-xs font-delulu-heading font-semibold transition-all duration-150 bg-[#FFFFFF] hover:bg-[#DDEEFC] text-[#0B2545] shadow-sm" data-category="CAREER" type="button">
+          Career
+        </button>
+<button class="category-chip shrink-0 px-4 py-1.5 rounded-full text-xs font-delulu-heading font-semibold transition-all duration-150 bg-[#FFFFFF] hover:bg-[#DDEEFC] text-[#0B2545] shadow-sm" data-category="PROJECTS" type="button">
+          Projects
+        </button>
+<button class="category-chip shrink-0 px-4 py-1.5 rounded-full text-xs font-delulu-heading font-semibold transition-all duration-150 bg-[#FFFFFF] hover:bg-[#DDEEFC] text-[#0B2545] shadow-sm" data-category="GOALS" type="button">
+          Goals
+        </button>
+<button class="category-chip shrink-0 px-4 py-1.5 rounded-full text-xs font-delulu-heading font-semibold transition-all duration-150 bg-[#FFFFFF] hover:bg-[#DDEEFC] text-[#0B2545] shadow-sm" data-category="DECISIONS" type="button">
+          Decisions
+        </button>
+<button class="category-chip shrink-0 px-4 py-1.5 rounded-full text-xs font-delulu-heading font-semibold transition-all duration-150 bg-[#FFFFFF] hover:bg-[#DDEEFC] text-[#0B2545] shadow-sm" data-category="PERSONALIZATION" type="button">
+          Personalization
+        </button>
+</div>
+</div>
+<!-- Active Memory Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5" id="memory-cards-container">
+<!-- Card 1 -->
+<article class="memory-card bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] rounded-[24px] p-5 shadow-daylight-card flex flex-col justify-between transition-all duration-200 hover:-translate-y-1" data-category="PREFERENCE">
+<div class="space-y-3">
+<div class="flex items-start justify-between gap-3">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#BFE0F7] text-[#0B2545] font-delulu-heading text-xs font-semibold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+              PREFERENCE
+            </span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg bg-[#FFFFFF]/80 hover:bg-[#FFFFFF] text-[#246185] hover:text-[#0B2545] flex items-center justify-center transition-colors" title="Edit memory" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-[#FFFFFF]/80 hover:bg-[#ffdad6] text-[#246185] hover:text-[#ba1a1a] flex items-center justify-center transition-colors" onclick="window.removeMemoryCard(this)" title="Delete memory" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<h3 class="font-delulu-heading font-semibold text-lg text-[#0B2545] leading-snug">
+            Concise Explanations &amp; Bullet Summaries
+          </h3>
+<p class="text-[15px] leading-relaxed text-[#246185]">
+            Prefers responses structured in concise bullet points with direct architectural implications before detailed rationale.
+          </p>
+</div>
+<div class="pt-4 mt-3 flex items-center justify-between text-xs text-[#707882]">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-[#2F8FDD]">check_circle</span>
+            Added 2 days ago · Confirmed by you
+          </span>
+<span class="font-medium text-[#2F8FDD]">High Priority</span>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="memory-card bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] rounded-[24px] p-5 shadow-daylight-card flex flex-col justify-between transition-all duration-200 hover:-translate-y-1" data-category="LEARNING">
+<div class="space-y-3">
+<div class="flex items-start justify-between gap-3">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D4F1FE] text-[#004e5b] font-delulu-heading text-xs font-semibold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+              LEARNING
+            </span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg bg-[#FFFFFF]/80 hover:bg-[#FFFFFF] text-[#246185] hover:text-[#0B2545] flex items-center justify-center transition-colors" title="Edit memory" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-[#FFFFFF]/80 hover:bg-[#ffdad6] text-[#246185] hover:text-[#ba1a1a] flex items-center justify-center transition-colors" onclick="window.removeMemoryCard(this)" title="Delete memory" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<h3 class="font-delulu-heading font-semibold text-lg text-[#0B2545] leading-snug">
+            Focus on Distributed Systems &amp; Vector DBs
+          </h3>
+<p class="text-[15px] leading-relaxed text-[#246185]">
+            Currently prepping for AI systems engineering; prioritize vector search pipelines and latency profiling in tutorials.
+          </p>
+</div>
+<div class="pt-4 mt-3 flex items-center justify-between text-xs text-[#707882]">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-[#006878]">auto_awesome</span>
+            Added 4 days ago · Auto-proposed &amp; approved
+          </span>
+<span class="font-medium text-[#2F8FDD]">Active Study</span>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="memory-card bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] rounded-[24px] p-5 shadow-daylight-card flex flex-col justify-between transition-all duration-200 hover:-translate-y-1" data-category="WORKFLOW">
+<div class="space-y-3">
+<div class="flex items-start justify-between gap-3">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#CFE6F9] text-[#001c3b] font-delulu-heading text-xs font-semibold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2F8FDD]"></span>
+              WORKFLOW
+            </span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg bg-[#FFFFFF]/80 hover:bg-[#FFFFFF] text-[#246185] hover:text-[#0B2545] flex items-center justify-center transition-colors" title="Edit memory" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-[#FFFFFF]/80 hover:bg-[#ffdad6] text-[#246185] hover:text-[#ba1a1a] flex items-center justify-center transition-colors" onclick="window.removeMemoryCard(this)" title="Delete memory" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<h3 class="font-delulu-heading font-semibold text-lg text-[#0B2545] leading-snug">
+            Sandbox Safety Gating
+          </h3>
+<p class="text-[15px] leading-relaxed text-[#246185]">
+            Always require explicit human approval before shell commands or external API push actions are executed.
+          </p>
+</div>
+<div class="pt-4 mt-3 flex items-center justify-between text-xs text-[#707882]">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-[#2F8FDD]">lock</span>
+            Added 1 week ago · Policy anchor
+          </span>
+<span class="font-medium text-[#006878]">Guardrail</span>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="memory-card bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] rounded-[24px] p-5 shadow-daylight-card flex flex-col justify-between transition-all duration-200 hover:-translate-y-1" data-category="COMMUNICATION">
+<div class="space-y-3">
+<div class="flex items-start justify-between gap-3">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E1F3FF] text-[#0B2545] font-delulu-heading text-xs font-semibold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+              COMMUNICATION
+            </span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg bg-[#FFFFFF]/80 hover:bg-[#FFFFFF] text-[#246185] hover:text-[#0B2545] flex items-center justify-center transition-colors" title="Edit memory" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-[#FFFFFF]/80 hover:bg-[#ffdad6] text-[#246185] hover:text-[#ba1a1a] flex items-center justify-center transition-colors" onclick="window.removeMemoryCard(this)" title="Delete memory" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<h3 class="font-delulu-heading font-semibold text-lg text-[#0B2545] leading-snug">
+            Tone: Pragmatic &amp; Opinionated
+          </h3>
+<p class="text-[15px] leading-relaxed text-[#246185]">
+            Respond in friendly but direct technical tone. Skip boilerplate introductory pleasantries and start with solution blueprints.
+          </p>
+</div>
+<div class="pt-4 mt-3 flex items-center justify-between text-xs text-[#707882]">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-[#2F8FDD]">check_circle</span>
+            Added 2 weeks ago · Confirmed by you
+          </span>
+<span class="font-medium text-[#2F8FDD]">System Bias</span>
+</div>
+</article>
+</div>
+<!-- Empty State Alert Banner -->
+<div class="hidden bg-gradient-to-r from-[#DDEEFC] to-[#EAF4FD] p-8 rounded-[24px] shadow-daylight-card text-center space-y-3" id="empty-state-alert">
+<div class="w-12 h-12 rounded-2xl bg-[#FFFFFF] text-[#2F8FDD] mx-auto flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[28px]">search_off</span>
+</div>
+<div class="space-y-1">
+<h4 class="font-delulu-heading font-bold text-lg text-[#0B2545]">No memories in this view</h4>
+<p class="text-sm text-[#246185] max-w-md mx-auto leading-relaxed">
+          Save a preference or important context to personalize Dream Wave over time, or switch filters to view other saved anchors.
+        </p>
+</div>
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2F8FDD] text-white font-delulu-heading font-semibold text-xs tracking-wider uppercase shadow-sm hover:bg-[#2478BE]" onclick="window.resetFilters()" type="button">
+        Show All Memories
+      </button>
+</div>
+<!-- Bottom Delulu Daylight Insight Strip -->
+<div class="rounded-[22px] bg-[#CFE6F9]/60 p-4 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-[#0B2545]">
+<div class="flex items-center gap-3">
+<span class="flex h-2.5 w-2.5 rounded-full bg-[#00C2DE] ring-4 ring-[#FFFFFF]"></span>
+<span><strong>Delulu Daylight Context Sync:</strong> All confirmed memories synchronize seamlessly across Studio sessions and Roadmap planners.</span>
+</div>
+<div class="flex items-center gap-4 text-[#246185]">
+<span class="hover:text-[#0B2545] cursor-pointer">Export Memory JSON</span>
+<span>·</span>
+<span class="hover:text-[#0B2545] cursor-pointer">Security Audit</span>
+</div>
+</div>
+</section>
+<script>
+    (function initMemoryApp() {
+      // Toggle Switch Handlers
+      const toggles = document.querySelectorAll('.switch-toggle');
+      toggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+          const isChecked = toggle.getAttribute('aria-checked') === 'true';
+          const newState = !isChecked;
+          toggle.setAttribute('aria-checked', String(newState));
+          const knob = toggle.querySelector('span');
+          if (newState) {
+            toggle.classList.remove('bg-[#BFE0F7]');
+            toggle.classList.add('bg-[#2F8FDD]');
+            knob.classList.remove('translate-x-0');
+            knob.classList.add('translate-x-5');
+          } else {
+            toggle.classList.remove('bg-[#2F8FDD]');
+            toggle.classList.add('bg-[#BFE0F7]');
+            knob.classList.remove('translate-x-5');
+            knob.classList.add('translate-x-0');
+          }
+        });
+      });
+
+      // Search & Category Filtering
+      const searchInput = document.getElementById('search-memory-input');
+      const clearSearchBtn = document.getElementById('clear-search-btn');
+      const categoryChips = document.querySelectorAll('.category-chip');
+      const cardsContainer = document.getElementById('memory-cards-container');
+      const emptyStateAlert = document.getElementById('empty-state-alert');
+      const counterLabel = document.getElementById('memory-counter-label');
+      let activeCategory = 'ALL';
+
+      function filterCards() {
+        const query = (searchInput.value || '').trim().toLowerCase();
+        const cards = cardsContainer.querySelectorAll('.memory-card');
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          const title = (card.querySelector('h3')?.innerText || '').toLowerCase();
+          const desc = (card.querySelector('p')?.innerText || '').toLowerCase();
+          
+          const matchesCategory = (activeCategory === 'ALL' || category === activeCategory);
+          const matchesQuery = (!query || title.includes(query) || desc.includes(query) || category.toLowerCase().includes(query));
+
+          if (matchesCategory && matchesQuery) {
+            card.style.display = 'flex';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        if (query) {
+          clearSearchBtn.classList.remove('hidden');
+        } else {
+          clearSearchBtn.classList.add('hidden');
+        }
+
+        counterLabel.innerText = `Showing ${visibleCount} memory item${visibleCount === 1 ? '' : 's'}`;
+
+        if (visibleCount === 0) {
+          emptyStateAlert.classList.remove('hidden');
+        } else {
+          emptyStateAlert.classList.add('hidden');
+        }
+      }
+
+      searchInput.addEventListener('input', filterCards);
+
+      clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        filterCards();
+      });
+
+      categoryChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          categoryChips.forEach(c => {
+            c.classList.remove('bg-[#2F8FDD]', 'text-white');
+            c.classList.add('bg-[#FFFFFF]', 'text-[#0B2545]');
+          });
+          chip.classList.remove('bg-[#FFFFFF]', 'text-[#0B2545]');
+          chip.classList.add('bg-[#2F8FDD]', 'text-white');
+
+          activeCategory = chip.getAttribute('data-category');
+          filterCards();
+        });
+      });
+
+      // Reset Filters Helper
+      window.resetFilters = function() {
+        searchInput.value = '';
+        activeCategory = 'ALL';
+        categoryChips.forEach((c, idx) => {
+          if (idx === 0) {
+            c.classList.remove('bg-[#FFFFFF]', 'text-[#0B2545]');
+            c.classList.add('bg-[#2F8FDD]', 'text-white');
+          } else {
+            c.classList.remove('bg-[#2F8FDD]', 'text-white');
+            c.classList.add('bg-[#FFFFFF]', 'text-[#0B2545]');
+          }
+        });
+        filterCards();
+      };
+
+      // Remove Card Action
+      window.removeMemoryCard = function(button) {
+        const card = button.closest('.memory-card');
+        if (card) {
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.95)';
+          card.style.transition = 'all 0.25s ease';
+          setTimeout(() => {
+            card.remove();
+            filterCards();
+          }, 250);
+        }
+      };
+
+      // Add New Memory Item
+      window.addNewMemoryItem = function() {
+        const input = document.getElementById('memory-input-text');
+        const select = document.getElementById('memory-category-select');
+        const text = input.value.trim();
+        const category = select.value;
+
+        if (!text) return;
+
+        const newCard = document.createElement('article');
+        newCard.setAttribute('data-category', category);
+        newCard.className = 'memory-card bg-gradient-to-b from-[#EAF4FD] to-[#DDEEFC] rounded-[24px] p-5 shadow-daylight-card flex flex-col justify-between transition-all duration-200 hover:-translate-y-1';
+        
+        let tint = '#BFE0F7';
+        if (category === 'LEARNING') tint = '#D4F1FE';
+        if (category === 'WORKFLOW') tint = '#CFE6F9';
+        if (category === 'COMMUNICATION') tint = '#E1F3FF';
+
+        newCard.innerHTML = `
+          <div class="space-y-3">
+            <div class="flex items-start justify-between gap-3">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[${tint}] text-[#0B2545] font-delulu-heading text-xs font-semibold uppercase tracking-wider">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#00C2DE]"></span>
+                ${category}
+              </span>
+              <div class="flex items-center gap-1">
+                <button type="button" title="Edit memory" class="w-8 h-8 rounded-lg bg-[#FFFFFF]/80 hover:bg-[#FFFFFF] text-[#246185] hover:text-[#0B2545] flex items-center justify-center transition-colors">
+                  <span class="material-symbols-outlined text-[18px]">edit</span>
+                </button>
+                <button type="button" title="Delete memory" onclick="window.removeMemoryCard(this)" class="w-8 h-8 rounded-lg bg-[#FFFFFF]/80 hover:bg-[#ffdad6] text-[#246185] hover:text-[#ba1a1a] flex items-center justify-center transition-colors">
+                  <span class="material-symbols-outlined text-[18px]">delete</span>
+                </button>
+              </div>
+            </div>
+
+            <h3 class="font-delulu-heading font-semibold text-lg text-[#0B2545] leading-snug">
+              ${text.slice(0, 48)}${text.length > 48 ? '...' : ''}
+            </h3>
+            <p class="text-[15px] leading-relaxed text-[#246185]">
+              ${text}
+            </p>
+          </div>
+
+          <div class="pt-4 mt-3 flex items-center justify-between text-xs text-[#707882]">
+            <span class="flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[15px] text-[#2F8FDD]">check_circle</span>
+              Added just now · Confirmed by you
+            </span>
+            <span class="font-medium text-[#2F8FDD]">New Entry</span>
+          </div>
+        `;
+
+        cardsContainer.prepend(newCard);
+        input.value = '';
+        filterCards();
+      };
+
+      // Refresh Button Animation
+      const refreshBtn = document.getElementById('refresh-memory-btn');
+      const refreshIcon = document.getElementById('refresh-icon');
+      refreshBtn.addEventListener('click', () => {
+        refreshIcon.classList.add('rotate-180');
+        refreshBtn.classList.add('opacity-90');
+        setTimeout(() => {
+          refreshIcon.classList.remove('rotate-180');
+          refreshBtn.classList.remove('opacity-90');
+          filterCards();
+        }, 500);
+      });
+    })();
+  </script>
+</div></div></main></div></body></html>

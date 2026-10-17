@@ -3,7 +3,7 @@ const Roadmap = require('../models/Roadmap')
 const Task = require('../models/Task')
 const LibraryBook = require('../models/LibraryBook')
 const LibraryProgress = require('../models/LibraryProgress')
-const { openai } = require('../utils/openaiClient')
+const { openai, getApiKey, getModel } = require('../utils/openaiClient')
 
 const PRIORITY_WEIGHT = { beginner: 1, intermediate: 2, advanced: 3 }
 
@@ -293,14 +293,14 @@ async function parseNaturalLanguageSearch(query, userId) {
     intent: 'search',
   }
 
-  if (!process.env.OPENAI_API_KEY) return fallback
+  if (!getApiKey()) return fallback
 
   try {
     const goals = await Goal.find({ userId, status: { $ne: 'archived' } }).select('title category').limit(3).lean()
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.2,
-      max_tokens: 300,
+      max_tokens: 1000,
       response_format: { type: 'json_object' },
       messages: [
         {

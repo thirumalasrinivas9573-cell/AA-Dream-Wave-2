@@ -611,7 +611,7 @@ export const roadmapApi = {
   initialize: (goalId) => api.post('/roadmap/initialize', { goalId }),
   updateArchitecture: (goalId, data) => api.put(`/roadmap/${goalId}/architecture`, data),
   updateStep: (goalId, data) => api.put(`/roadmap/${goalId}/task`, data),
-  generate: (data)   => api.post('/roadmap/generate', data),
+  generate: (data, config = {}) => api.post('/roadmap/generate', data, { timeout: 150000, ...config }),
 }
 
 // ── Reports ───────────────────────────────────────────────────────────────────

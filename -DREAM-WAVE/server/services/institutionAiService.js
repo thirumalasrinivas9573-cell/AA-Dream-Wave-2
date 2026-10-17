@@ -1,12 +1,14 @@
-const OpenAI = require('openai')
+const { getOpenAI, getApiKey, getModel } = require('../utils/openaiClient')
 const { AI_INTENTS } = require('../constants/institutionIntelligence')
 const { buildAiContext, SUPPORT_THRESHOLDS } = require('./institutionIntelligenceService')
 
-let openai = null
-function getOpenAI() {
-  if (!process.env.OPENAI_API_KEY?.trim()) return null
-  if (!openai) openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-  return openai
+function getClient() {
+  if (!getApiKey()) return null
+  try {
+    return getOpenAI()
+  } catch {
+    return null
+  }
 }
 
 function buildRuleBasedInsights(intent, context) {
@@ -160,14 +162,14 @@ async function generateInstitutionInsights(institutionId, intent = 'INSTITUTION_
   const context = await buildAiContext(institutionId, filters)
   const grounded = buildRuleBasedInsights(normalizedIntent, context)
 
-  const client = getOpenAI()
+  const client = getClient()
   if (!client) return grounded
 
   try {
     const completion = await client.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: getModel(),
       temperature: 0.2,
-      max_tokens: 700,
+      max_tokens: 1000,
       messages: [
         {
           role: 'system',

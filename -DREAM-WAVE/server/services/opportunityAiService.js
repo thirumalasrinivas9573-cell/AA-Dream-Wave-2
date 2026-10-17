@@ -1,4 +1,4 @@
-const { getOpenAI, getApiKey } = require('../utils/openaiClient')
+const { getOpenAI, getApiKey, getModel } = require('../utils/openaiClient')
 const { OPPORTUNITY_AI_INTENTS } = require('../constants/opportunityMatching')
 const {
   getStudentFeed,
@@ -167,9 +167,9 @@ async function generateOpportunityInsights(userId, intent = 'OPPORTUNITY_DISCOVE
 
   try {
     const completion = await client.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: getModel(),
       temperature: 0.2,
-      max_tokens: 600,
+      max_tokens: 1000,
       messages: [
         {
           role: 'system',

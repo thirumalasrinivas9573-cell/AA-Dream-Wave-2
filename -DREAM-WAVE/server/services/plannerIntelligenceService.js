@@ -1,5 +1,5 @@
 const crypto = require('crypto')
-const { openai } = require('../utils/openaiClient')
+const { openai, getApiKey, getModel } = require('../utils/openaiClient')
 const plannerService = require('./plannerService')
 const scheduleEngine = require('./scheduleEngine')
 const { validatePlanItems } = require('./planValidator')
@@ -35,12 +35,12 @@ async function suggestDailyPlan(userId, { date, availableMinutes } = {}) {
     })
 
     let aiNotes = null
-    if (process.env.OPENAI_API_KEY && deterministic.items.length) {
+    if (getApiKey() && deterministic.items.length) {
       try {
         const completion = await openai.chat.completions.create({
-          model: 'gpt-4o-mini',
+          model: getModel(),
           temperature: 0.4,
-          max_tokens: 600,
+          max_tokens: 1000,
           response_format: { type: 'json_object' },
           messages: [
             {
@@ -162,15 +162,15 @@ async function suggestTaskBreakdown(userId, taskId) {
     { title: `Apply: ${task.title}`, estimatedMinutes: 25 },
   ]
 
-  if (!process.env.OPENAI_API_KEY) {
+  if (!getApiKey()) {
     return { taskId, subtasks: fallback, aiReady: false, requiresApproval: true }
   }
 
   try {
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.5,
-      max_tokens: 800,
+      max_tokens: 1200,
       response_format: { type: 'json_object' },
       messages: [
         {

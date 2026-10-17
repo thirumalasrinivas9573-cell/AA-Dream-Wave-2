@@ -1,0 +1,405 @@
+<!DOCTYPE html><html class="h-full" lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-background": "#001c3b",
+          "on-primary-container": "#fdfcff",
+          "on-primary-fixed": "#001d35",
+          "surface-container-low": "#f0f3ff",
+          "surface-tint": "#0062a0",
+          "tertiary": "#246185",
+          "secondary": "#006878",
+          "on-secondary-fixed-variant": "#004e5b",
+          "on-secondary": "#ffffff",
+          "tertiary-fixed-dim": "#96cdf5",
+          "error": "#ba1a1a",
+          "surface-bright": "#f9f9ff",
+          "surface-variant": "#d5e3ff",
+          "inverse-primary": "#9bcaff",
+          "on-tertiary-fixed": "#001e2f",
+          "outline-variant": "#c0c7d3",
+          "on-error": "#ffffff",
+          "primary-fixed": "#d0e4ff",
+          "surface-container-lowest": "#ffffff",
+          "secondary-fixed-dim": "#3dd8f5",
+          "surface-container": "#e7eeff",
+          "on-tertiary-container": "#fcfcff",
+          "primary-fixed-dim": "#9bcaff",
+          "secondary-container": "#49e1fd",
+          "inverse-surface": "#193151",
+          "secondary-fixed": "#a6eeff",
+          "background": "#f9f9ff",
+          "primary": "#005f9c",
+          "surface": "#f9f9ff",
+          "on-tertiary": "#ffffff",
+          "outline": "#707882",
+          "surface-container-high": "#dee8ff",
+          "on-primary": "#ffffff",
+          "tertiary-container": "#427a9f",
+          "on-secondary-container": "#006170",
+          "on-secondary-fixed": "#001f25",
+          "surface-container-highest": "#d5e3ff",
+          "primary-container": "#0079c4",
+          "on-surface-variant": "#404751",
+          "surface-dim": "#c7dbff",
+          "on-primary-fixed-variant": "#00497a",
+          "on-surface": "#001c3b",
+          "error-container": "#ffdad6",
+          "tertiary-fixed": "#c8e6ff",
+          "on-error-container": "#93000a",
+          "inverse-on-surface": "#ebf1ff",
+          "on-tertiary-fixed-variant": "#004c6e"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "gutter-mobile": "1rem",
+          "space-xl": "2.5rem",
+          "margin": "2rem",
+          "margin-mobile": "1rem",
+          "space-lg": "1.75rem",
+          "gutter": "1.5rem",
+          "space-xs": "0.375rem",
+          "space-md": "1.25rem",
+          "space-sm": "0.75rem"
+        },
+        "fontFamily": {
+          "display-hero-mobile": [
+            "Outfit"
+          ],
+          "headline-md": [
+            "Outfit"
+          ],
+          "body-lg": [
+            "Plus Jakarta Sans"
+          ],
+          "label-sm": [
+            "Outfit"
+          ],
+          "headline-lg-mobile": [
+            "Outfit"
+          ],
+          "label-md": [
+            "Outfit"
+          ],
+          "body-md": [
+            "Plus Jakarta Sans"
+          ],
+          "title-md": [
+            "Outfit"
+          ],
+          "body-sm": [
+            "Plus Jakarta Sans"
+          ],
+          "label-lg": [
+            "Outfit"
+          ],
+          "headline-lg": [
+            "Outfit"
+          ],
+          "headline-sm": [
+            "Outfit"
+          ],
+          "display-hero": [
+            "Outfit"
+          ]
+        },
+        "fontSize": {
+          "display-hero-mobile": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-md": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "fontWeight": "600"
+            }
+          ],
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "26px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-sm": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-lg-mobile": [
+            "26px",
+            {
+              "lineHeight": "32px",
+              "fontWeight": "600"
+            }
+          ],
+          "label-md": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "600"
+            }
+          ],
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "22px",
+              "fontWeight": "400"
+            }
+          ],
+          "title-md": [
+            "18px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "600"
+            }
+          ],
+          "body-sm": [
+            "12px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "400"
+            }
+          ],
+          "label-lg": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-sm": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "600"
+            }
+          ],
+          "display-hero": [
+            "48px",
+            {
+              "lineHeight": "56px",
+              "fontWeight": "700"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-gradient-to-br from-surface to-surface-container-low font-body-md text-on-surface min-h-screen antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed" style="font-family: Figtree, sans-serif; background: linear-gradient(rgb(212, 236, 251) 0%, rgb(230, 243, 253) 40%, rgb(240, 248, 254) 100%); color: rgb(11, 37, 69);"><div class="fixed top-0 left-0 right-0 z-50 flex flex-col"><div class="w-full bg-[#fef7ee] border-b border-[#fde8c3] px-margin-mobile md:px-margin h-10 flex items-center justify-between shadow-[0_1px_6px_rgba(245,165,36,0.06)]"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[#d97706] text-[18px]">info</span><span class="font-label-md text-body-sm text-[#78350f]">Workflow needs approval</span><span class="hidden sm:inline-block w-1 h-1 rounded-full bg-[#d97706]/40"></span><a class="font-label-md text-body-sm text-[#b45309] hover:text-[#78350f] underline underline-offset-2 transition-colors" data-path="workflow-approval" href="#">Review details</a></div><button class="text-[#b45309] hover:text-[#78350f] p-1 rounded-full hover:bg-[#fde8c3]/40 transition-colors flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[16px]">close</span></button></div><header class="w-full h-16 bg-surface-container-low/80 backdrop-blur-xl border-b border-surface-container-lowest/80 shadow-[0_8px_24px_-4px_rgba(47,143,221,0.08)] flex items-center justify-between px-space-md md:px-margin" style="background: rgba(217, 236, 250, 0.8); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 255, 255, 0.8); box-shadow: rgba(47, 143, 221, 0.12) 0px 8px 24px -4px;"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs"><div class="w-8 h-8 rounded-xl bg-primary flex items-center justify-center shadow-[0_4px_14px_rgba(0,95,156,0.25)]"><span class="material-symbols-outlined text-on-primary text-[20px]">neurology</span></div><span class="font-headline-sm text-title-md tracking-tight text-on-surface">DREAM WAVE <span class="text-primary font-bold">AI</span></span></div></div><div class="flex-1 max-w-xl mx-space-md hidden sm:block"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-4 text-outline text-[20px] pointer-events-none">search</span><input class="w-full h-11 pl-11 pr-14 rounded-full bg-surface-container-lowest/90 border border-outline-variant/40 font-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-2 focus:ring-secondary-fixed/50 shadow-[0_2px_8px_rgba(0,98,160,0.04)] transition-all" placeholder="Search tasks, concepts, resources..." type="text"><span class="absolute right-3.5 px-2 py-0.5 rounded-lg bg-surface-container font-label-sm text-label-sm text-on-surface-variant font-medium tracking-wide border border-outline-variant/30">⌘K</span></div></div><div class="flex items-center gap-space-sm"><button aria-label="Notifications" class="relative w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-secondary ring-2 ring-surface-container-low"></span></button><div class="flex items-center pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header></div><aside class="fixed left-margin top-[120px] bottom-margin w-[72px] z-40 hidden md:flex flex-col items-center justify-between py-space-md bg-surface-container-low/80 backdrop-blur-xl border border-surface-container-lowest/80 rounded-3xl shadow-[0_16px_36px_-6px_rgba(47,143,221,0.16)]" style="background: rgba(217, 236, 250, 0.8); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.8); box-shadow: rgba(47, 143, 221, 0.16) 0px 16px 36px -6px;"><nav class="flex flex-col items-center gap-space-sm w-full px-2" data-active-classes="bg-primary text-on-primary shadow-[0_4px_14px_rgba(0,95,156,0.35)]"><a class="group relative w-12 h-12 rounded-2xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="workspace" href="#"><span class="material-symbols-outlined text-[24px]">grid_view</span><span class="absolute left-16 px-2.5 py-1 rounded-lg bg-inverse-surface font-label-md text-label-md text-inverse-on-surface whitespace-nowrap shadow-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">Workspace</span></a><a class="group relative w-12 h-12 rounded-2xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="tasks" href="#"><span class="material-symbols-outlined text-[24px]">task_alt</span><span class="absolute left-16 px-2.5 py-1 rounded-lg bg-inverse-surface font-label-md text-label-md text-inverse-on-surface whitespace-nowrap shadow-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">Tasks</span></a><a class="group relative w-12 h-12 rounded-2xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="learning-path" href="#"><span class="material-symbols-outlined text-[24px]">route</span><span class="absolute left-16 px-2.5 py-1 rounded-lg bg-inverse-surface font-label-md text-label-md text-inverse-on-surface whitespace-nowrap shadow-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">Learning Roadmap</span></a><a class="group relative w-12 h-12 rounded-2xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="knowledge-analytics" href="#"><span class="material-symbols-outlined text-[24px]">query_stats</span><span class="absolute left-16 px-2.5 py-1 rounded-lg bg-inverse-surface font-label-md text-label-md text-inverse-on-surface whitespace-nowrap shadow-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">Analytics</span></a><a class="group relative w-12 h-12 rounded-2xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="community" href="#"><span class="material-symbols-outlined text-[24px]">forum</span><span class="absolute left-16 px-2.5 py-1 rounded-lg bg-inverse-surface font-label-md text-label-md text-inverse-on-surface whitespace-nowrap shadow-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">Community</span></a></nav><div class="flex flex-col items-center gap-space-sm w-full px-2"><button aria-label="Theme Switch" class="group relative w-10 h-10 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" type="button"><span class="material-symbols-outlined text-[20px]">light_mode</span><span class="absolute left-16 px-2.5 py-1 rounded-lg bg-inverse-surface font-label-md text-label-md text-inverse-on-surface whitespace-nowrap shadow-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">Theme</span></button><a class="group relative w-10 h-10 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="user-settings" href="#"><span class="material-symbols-outlined text-[20px]">tune</span><span class="absolute left-16 px-2.5 py-1 rounded-lg bg-inverse-surface font-label-md text-label-md text-inverse-on-surface whitespace-nowrap shadow-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50">Settings</span></a><div class="group relative pt-space-xs"><div class="p-[2px] rounded-full ring-2 ring-secondary-container ring-offset-2 ring-offset-surface-container-low cursor-pointer"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div><div class="absolute left-16 bottom-0 w-44 p-2 bg-surface-container-lowest border border-outline-variant/30 rounded-2xl shadow-[0_20px_48px_-10px_rgba(0,194,222,0.12)] opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity z-50 flex flex-col gap-1"><div class="px-3 py-1.5 border-b border-outline-variant/20"><div class="font-label-md text-label-md text-on-surface">Student Level 8</div><div class="font-body-sm text-body-sm text-secondary font-medium">2,450 / 3,000 XP</div></div><a class="flex items-center gap-2 px-3 py-2 rounded-xl text-error hover:bg-error-container hover:text-on-error-container transition-colors font-label-md text-label-md" data-path="login" href="#"><span class="material-symbols-outlined text-[16px]">logout</span>Sign Out</a></div></div></div></aside><div class="md:pl-32 transition-all duration-300"><main class="w-full pt-[104px] p-margin-mobile md:p-margin bg-transparent min-h-screen"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-space-lg w-full max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md bg-surface-container-lowest/70 backdrop-blur-md p-space-lg rounded-[24px] shadow-sm" style="background: rgba(234, 244, 253, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: rgba(47, 143, 221, 0.12) 0px 10px 28px -6px;">
+<div class="flex flex-col max-w-3xl">
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span class="font-label-md text-label-md tracking-widest uppercase text-tertiary">PERSONAL KNOWLEDGE GRAPH</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight" style="font-family: Outfit, sans-serif; color: rgb(11, 37, 69);">My Knowledge</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+          Goals, skills, projects, research, and documents — connected with evidence. Documents are treated as data, never instructions.
+        </p>
+</div>
+<div class="flex items-center flex-wrap gap-space-sm">
+<button class="group flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-surface-container-low hover:bg-surface-container text-tertiary transition-all duration-200" type="button">
+<span class="material-symbols-outlined text-[18px] group-hover:rotate-180 transition-transform duration-500">sync</span>
+<span class="font-label-lg text-label-lg">Sync graph</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-surface-container-low hover:bg-surface-container text-tertiary transition-all duration-200" type="button">
+<span class="material-symbols-outlined text-[18px]">science</span>
+<span class="font-label-lg text-label-lg">Research</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-lg py-2.5 rounded-full bg-primary text-on-primary shadow-md hover:bg-primary-container transition-all duration-200 hover:-translate-y-0.5" type="button" style="background-color: rgb(47, 143, 221); color: rgb(255, 255, 255); box-shadow: rgba(47, 143, 221, 0.35) 0px 4px 14px;">
+<span class="material-symbols-outlined text-[18px]">neurology</span>
+<span class="font-label-lg text-label-lg font-semibold">AI Workspace</span>
+</button>
+</div>
+</div>
+<!-- Main Recovery & Error Showcase -->
+<div class="relative overflow-hidden bg-gradient-to-b from-surface-container-low via-surface-container-lowest to-surface-container-low p-space-xl rounded-[28px] shadow-sm flex flex-col items-center text-center" style="background: linear-gradient(135deg, rgb(170, 211, 241) 0%, rgb(207, 232, 250) 55%, rgb(227, 244, 252) 100%); border: 1px solid rgba(255, 255, 255, 0.85); box-shadow: rgba(47, 143, 221, 0.2) 0px 16px 40px -8px;">
+<!-- Ambient light reflections -->
+<div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-secondary-fixed/40 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-20 -right-20 w-96 h-96 rounded-full bg-primary-fixed/40 blur-3xl pointer-events-none"></div>
+<!-- Center Card Graphic / Icon -->
+<div class="relative z-10 flex flex-col items-center max-w-xl mx-auto">
+<div class="relative w-28 h-28 mb-space-md flex items-center justify-center">
+<!-- Atmospheric backdrop rings -->
+<div class="absolute inset-0 rounded-full bg-surface-container-high/60 animate-pulse"></div>
+<div class="absolute inset-2 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center"></div>
+<!-- Stylized Custom Line Illustration SVG -->
+<svg class="relative w-16 h-16 text-primary" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 64 64">
+<!-- Node network links -->
+<path d="M18 36L28 28M36 28L46 36M24 44L40 44" opacity="0.45" stroke="currentColor" stroke-dasharray="3 3"></path>
+<!-- Nodes -->
+<circle cx="16" cy="38" fill="currentColor" fill-opacity="0.1" r="5"></circle>
+<circle cx="48" cy="38" fill="currentColor" fill-opacity="0.1" r="5"></circle>
+<circle cx="32" cy="22" fill="currentColor" fill-opacity="0.15" r="6"></circle>
+<!-- Cloud Boundary -->
+<path d="M22 24C16.48 24 12 28.48 12 34C12 39.52 16.48 44 22 44H42C47.52 44 52 39.52 52 34C52 28.7 47.9 24.35 42.7 24.03C41.25 17.18 35.22 12 28 12C23.2 12 19 14.33 16.4 17.9" opacity="0.8" stroke="currentColor"></path>
+<!-- Reconnection / Alert flash -->
+<path d="M37 27L29 37H35L31 47" stroke="#b45309" stroke-linejoin="miter" stroke-width="2.5"></path>
+</svg>
+<!-- Subtle Warning Status Chip -->
+<div class="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-[#fef7ee] text-[#b45309] shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">sync_problem</span>
+</div>
+</div>
+<!-- Headline & Explanation -->
+<span class="px-space-md py-1 rounded-full bg-surface-container text-tertiary font-label-sm text-label-sm uppercase tracking-wider mb-space-sm">
+          Offline Buffer Engaged
+        </span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight" style="font-family: Outfit, sans-serif; color: rgb(11, 37, 69);">
+          Unable to load — Knowledge center unavailable.
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-space-xs max-w-lg leading-relaxed" style="color: rgb(79, 106, 133);">
+          We couldn't synchronize your personal knowledge graph nodes. Your local documents and citations remain secure and intact.
+        </p>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row items-center gap-space-sm mt-space-lg w-full justify-center">
+<button class="w-full sm:w-auto px-space-xl py-3 rounded-full bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg shadow-md hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-space-xs" id="retry-btn" type="button" style="background-color: rgb(47, 143, 221); color: rgb(255, 255, 255); box-shadow: rgba(47, 143, 221, 0.35) 0px 4px 14px;">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+<span class="">Try again</span>
+</button>
+<a class="w-full sm:w-auto px-space-md py-3 rounded-full bg-surface-container-high/60 hover:bg-surface-container-high text-on-surface font-label-lg text-label-lg transition-all duration-200 flex items-center justify-center gap-space-xs" href="#" style="background-color: rgba(255, 255, 255, 0.7); color: rgb(11, 37, 69); border: 1px solid rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px);">
+<span class="material-symbols-outlined text-[18px]">router</span>
+<span class="">Check network diagnostics</span>
+</a>
+</div>
+<button class="mt-space-md text-secondary hover:text-on-surface-variant font-label-md text-label-md underline underline-offset-4 transition-colors" type="button">
+          Continue in offline workspace mode →
+        </button>
+</div>
+<!-- Diagnostic Status Indicators Below -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md w-full max-w-2xl mt-space-xl pt-space-lg border-t-0">
+<!-- Vault Card -->
+<div class="flex items-center gap-space-md p-space-md rounded-[20px] bg-surface-container-low hover:bg-surface-container transition-colors text-left shadow-sm" style="background: rgb(212, 241, 254); border: 1px solid rgba(255, 255, 255, 0.85); box-shadow: rgba(47, 143, 221, 0.18) 0px 8px 20px -4px;">
+<div class="w-12 h-12 rounded-2xl bg-secondary-fixed/50 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">verified_user</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#1FB77A]"></span>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Local Vault Status</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Protected · In-memory mirror encrypted</span>
+</div>
+</div>
+<!-- Node Cache Card -->
+<div class="flex items-center gap-space-md p-space-md rounded-[20px] bg-surface-container-low hover:bg-surface-container transition-colors text-left shadow-sm" style="background: rgb(191, 224, 247); border: 1px solid rgba(255, 255, 255, 0.85); box-shadow: rgba(47, 143, 221, 0.18) 0px 8px 20px -4px;">
+<div class="w-12 h-12 rounded-2xl bg-primary-fixed/50 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">hub</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Cached Nodes</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">28 items available for offline review</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Fallback Resources & Knowledge Snippets -->
+<div class="flex flex-col gap-space-md mt-space-xs">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface" style="font-family: Outfit, sans-serif; color: rgb(11, 37, 69);">Cached Offline Records</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Read-only snapshots available without cloud graph indexing.</p>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary bg-surface-container px-space-sm py-1 rounded-full">Device storage: 14.2 MB</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Item 1 -->
+<div class="p-space-md rounded-[22px] bg-surface-container-lowest shadow-sm flex flex-col justify-between hover:shadow-md transition-all" style="background: rgb(234, 244, 253); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: rgba(47, 143, 221, 0.12) 0px 10px 24px -4px;">
+<div>
+<div class="flex items-center justify-between text-on-surface-variant mb-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">description</span>
+<span class="font-label-sm text-label-sm text-tertiary">Research Paper</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface line-clamp-1" style="font-family: Outfit, sans-serif; color: rgb(11, 37, 69);">Quantum Neural Architectures</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">
+              Annotated draft with 14 connected claims and bibliography references.
+            </p>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between font-label-md text-label-md text-on-surface-variant">
+<span class="">Last syncd 2h ago</span>
+<span class="text-primary hover:underline cursor-pointer">Open cache →</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-space-md rounded-[22px] bg-surface-container-lowest shadow-sm flex flex-col justify-between hover:shadow-md transition-all" style="background: rgb(225, 243, 255); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: rgba(47, 143, 221, 0.12) 0px 10px 24px -4px;">
+<div>
+<div class="flex items-center justify-between text-on-surface-variant mb-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">account_tree</span>
+<span class="font-label-sm text-label-sm text-secondary">Skill Map</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface line-clamp-1" style="font-family: Outfit, sans-serif; color: rgb(11, 37, 69);">Stochastic Calculus &amp; ML</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">
+              Full prerequisite graph tree retained with 6 active flashcard decks.
+            </p>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between font-label-md text-label-md text-on-surface-variant">
+<span class="">Ready offline</span>
+<span class="text-primary hover:underline cursor-pointer">Open cache →</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-space-md rounded-[22px] bg-surface-container-lowest shadow-sm flex flex-col justify-between hover:shadow-md transition-all" style="background: rgb(235, 250, 255); border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: rgba(47, 143, 221, 0.12) 0px 10px 24px -4px;">
+<div>
+<div class="flex items-center justify-between text-on-surface-variant mb-space-sm">
+<span class="material-symbols-outlined text-tertiary text-[20px]">fact_check</span>
+<span class="font-label-sm text-label-sm text-tertiary">Evidence Ledger</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface line-clamp-1" style="font-family: Outfit, sans-serif; color: rgb(11, 37, 69);">Thesis Citations (Spring '25)</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">
+              42 verified citations mapped directly to source PDF extracts.
+            </p>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between font-label-md text-label-md text-on-surface-variant">
+<span class="">34 items cached</span>
+<span class="text-primary hover:underline cursor-pointer">Open cache →</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+    const retryBtn = document.getElementById('retry-btn');
+    if (retryBtn) {
+      retryBtn.addEventListener('click', function() {
+        const icon = this.querySelector('.material-symbols-outlined');
+        const text = this.querySelector('span:last-child');
+        if (icon && text) {
+          icon.classList.add('animate-spin');
+          text.textContent = 'Connecting...';
+          setTimeout(() => {
+            icon.classList.remove('animate-spin');
+            text.textContent = 'Try again';
+          }, 1800);
+        }
+      });
+    }
+  </script>
+</div></main></div>
+
+</body></html>

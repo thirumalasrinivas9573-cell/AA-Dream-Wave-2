@@ -1,30 +1,72 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Be_Vietnam_Pro,
+  IBM_Plex_Sans,
+  Lexend,
+  Manrope,
+  Outfit,
+  Plus_Jakarta_Sans,
+  Sora,
+  Space_Grotesk,
+} from "next/font/google";
 
 /**
- * Dream Wave — Font loading foundation.
+ * Dream Wave — 4-Theme Font Loading Foundation.
  *
- * Primary: Geist Sans (`--font-sans`, also mapped to `--font-heading`)
- * Secondary: Geist Mono (`--font-mono`)
- *
- * Typography scale / component styles are deferred to the Design System phase.
+ * Barely Working: Sora / IBM Plex Sans
+ * Delulu Daylight: Outfit / Plus Jakarta Sans
+ * Green Flag Energy: Lexend / Be Vietnam Pro
+ * Midnight Intelligence: Space Grotesk / Manrope
  */
 
-export const fontSans = Geist({
+export const sora = Sora({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-sora",
   display: "swap",
-  preload: true,
-  fallback: ["system-ui", "Segoe UI", "sans-serif"],
-  adjustFontFallback: true,
 });
 
-export const fontMono = Geist_Mono({
+export const ibmPlexSans = IBM_Plex_Sans({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-ibm-plex",
   display: "swap",
-  preload: false,
-  fallback: ["ui-monospace", "SFMono-Regular", "Consolas", "monospace"],
-  adjustFontFallback: true,
 });
 
-export const fontVariables = `${fontSans.variable} ${fontMono.variable}`;
+export const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+
+export const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-plus-jakarta",
+  display: "swap",
+});
+
+export const lexend = Lexend({
+  subsets: ["latin"],
+  variable: "--font-lexend",
+  display: "swap",
+});
+
+export const beVietnamPro = Be_Vietnam_Pro({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-be-vietnam",
+  display: "swap",
+});
+
+export const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+});
+
+export const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
+export const fontVariables = `${sora.variable} ${ibmPlexSans.variable} ${outfit.variable} ${plusJakartaSans.variable} ${lexend.variable} ${beVietnamPro.variable} ${spaceGrotesk.variable} ${manrope.variable}`;
+

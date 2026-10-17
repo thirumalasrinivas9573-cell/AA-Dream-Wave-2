@@ -30,7 +30,7 @@ class GeminiProvider extends IAIProvider {
   }
 
   _model(override) {
-    return override || this._config.model || 'gemini-1.5-flash'
+    return override || this._config.model || process.env.GEMINI_MODEL || 'gemini-3.5-flash'
   }
 
   _baseUrl() {

@@ -132,44 +132,53 @@ export default function AgentWorkspace() {
 
   return (
     <StudentLayout title="AI Agent">
-      <div className="dw-agent">
-        <header className="dw-agent__hero">
+      <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
+        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface p-6 rounded-stitch border border-divider shadow-sm">
           <div>
-            <p className="dw-agent__eyebrow">Multi-Agent Intelligence</p>
-            <h1>Dream Wave Agent Network</h1>
-            <p>
+            <span className="text-xs font-semibold uppercase tracking-wider text-brand-primary">Multi-Agent Intelligence</span>
+            <h1 className="text-2xl sm:text-3xl font-bold text-content-heading tracking-tight mt-1">Dream Wave Agent Network</h1>
+            <p className="text-sm text-content-muted mt-1 max-w-2xl">
               One Dream Wave AI — specialist agents for Project, Learning, Research, Career,
               Daily Life, Opportunities, and Events under the existing orchestrator.
             </p>
           </div>
-          <div className="dw-agent__hero-actions">
-            <Link className="btn btn-secondary" to="/student/intelligence">Unified Brain</Link>
-            <Link className="btn btn-secondary" to="/student/daily-life">Daily Life</Link>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link className="px-4 py-2 text-sm font-medium bg-surface-elevated hover:bg-surface text-content-heading rounded-stitch border border-divider transition-colors" to="/student/intelligence">Unified Brain</Link>
+            <Link className="px-4 py-2 text-sm font-medium bg-surface-elevated hover:bg-surface text-content-heading rounded-stitch border border-divider transition-colors" to="/student/daily-life">Daily Life</Link>
           </div>
         </header>
 
-        <section className="dw-agent__composer" aria-labelledby="agent-request">
-          <h2 id="agent-request">Request</h2>
-          <label htmlFor="agent-message">What should the agent network help with?</label>
+        <section className="bg-surface p-6 rounded-stitch border border-divider shadow-sm space-y-4" aria-labelledby="agent-request">
+          <h2 id="agent-request" className="text-lg font-semibold text-content-heading">Request</h2>
+          <label htmlFor="agent-message" className="text-xs font-medium text-content-muted uppercase tracking-wider block">What should the agent network help with?</label>
           <textarea
             id="agent-message"
             rows={4}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            className="w-full bg-surface-elevated text-content-body border border-divider rounded-stitch p-3 text-sm focus:outline-none focus:border-brand-primary"
             aria-label="Agent request"
           />
 
-          <div className="dw-agent__modes" role="group" aria-label="Execution mode">
+          <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Execution mode">
             <button
               type="button"
-              className={networkMode ? 'is-active' : ''}
+              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
+                networkMode
+                  ? 'bg-brand-primary text-white shadow-sm'
+                  : 'bg-surface-elevated hover:bg-surface text-content-muted border border-divider'
+              }`}
               onClick={() => setNetworkMode(true)}
             >
               Specialist network
             </button>
             <button
               type="button"
-              className={!networkMode ? 'is-active' : ''}
+              className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
+                !networkMode
+                  ? 'bg-brand-primary text-white shadow-sm'
+                  : 'bg-surface-elevated hover:bg-surface text-content-muted border border-divider'
+              }`}
               onClick={() => setNetworkMode(false)}
             >
               Classic tool plan
@@ -178,7 +187,11 @@ export default function AgentWorkspace() {
               <button
                 key={m.id}
                 type="button"
-                className={mode === m.id ? 'is-active' : ''}
+                className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all ${
+                  mode === m.id
+                    ? 'bg-brand-primary text-white shadow-sm'
+                    : 'bg-surface-elevated hover:bg-surface text-content-muted border border-divider'
+                }`}
                 onClick={() => setMode(m.id)}
               >
                 {m.label}
@@ -187,12 +200,12 @@ export default function AgentWorkspace() {
           </div>
 
           {networkMode && planPreview?.specialists?.length > 0 && (
-            <div className="dw-agent__plan-preview" aria-live="polite">
-              <p className="dw-agent__label">Plan ({planPreview.mode})</p>
-              <ol>
+            <div className="p-4 bg-surface-elevated rounded-stitch border border-divider space-y-2" aria-live="polite">
+              <p className="text-xs font-semibold text-content-heading">Plan ({planPreview.mode})</p>
+              <ol className="space-y-1 text-xs text-content-body">
                 {planPreview.specialists.map((s, i) => (
                   <li key={s.agent}>
-                    {i + 1}. {s.agent}
+                    {i + 1}. <span className="font-medium text-brand-primary">{s.agent}</span>
                     {s.dependsOn?.length ? ` ← after ${s.dependsOn.join(', ')}` : ''}
                   </li>
                 ))}
@@ -200,18 +213,18 @@ export default function AgentWorkspace() {
             </div>
           )}
 
-          <div className="dw-agent__examples">
+          <div className="flex flex-wrap gap-2 pt-1">
             {EXAMPLES.map((ex) => (
-              <button key={ex} type="button" onClick={() => setMessage(ex)}>{ex}</button>
+              <button key={ex} type="button" className="px-3 py-1 text-xs font-medium bg-surface-elevated hover:bg-brand-primary/10 text-content-body hover:text-brand-primary border border-divider rounded-full transition-colors" onClick={() => setMessage(ex)}>{ex}</button>
             ))}
           </div>
 
-          <div className="dw-agent__actions">
-            <button type="button" className="btn btn-primary" disabled={loading || !message.trim()} onClick={run}>
+          <div className="flex items-center gap-3 pt-2">
+            <button type="button" className="px-5 py-2.5 text-sm font-medium bg-brand-primary hover:bg-brand-primary-hover text-white rounded-stitch transition-colors disabled:opacity-50" disabled={loading || !message.trim()} onClick={run}>
               {loading ? 'Running…' : networkMode ? 'Run specialist network' : 'Run agent'}
             </button>
             {result?.executionId && result?.state === 'RUNNING' && (
-              <button type="button" className="btn btn-secondary" onClick={cancel}>Cancel</button>
+              <button type="button" className="px-4 py-2.5 text-sm font-medium bg-surface-elevated hover:bg-surface text-content-heading rounded-stitch border border-divider transition-colors" onClick={cancel}>Cancel</button>
             )}
           </div>
         </section>
@@ -221,60 +234,62 @@ export default function AgentWorkspace() {
         {loading && !result && <LoadingState label="Understanding your request…" rows={4} />}
 
         {result && (
-          <section className="dw-agent__result" aria-live="polite">
-            <header>
-              <h2>Result</h2>
-              <span className="dw-agent__state" data-state={result.state}>{result.state}</span>
+          <section className="bg-surface p-6 rounded-stitch border border-divider shadow-sm space-y-4" aria-live="polite">
+            <header className="flex items-center justify-between pb-3 border-b border-divider">
+              <h2 className="text-lg font-semibold text-content-heading">Result</h2>
+              <span className="px-2.5 py-1 text-xs font-semibold uppercase tracking-wider bg-brand-primary/10 text-brand-primary rounded-full border border-brand-primary/20">{result.state}</span>
             </header>
 
             {result.activity?.length > 0 && (
-              <ul className="dw-agent__activity" aria-label="Agent progress">
+              <ul className="space-y-1 text-xs text-content-body" aria-label="Agent progress">
                 {result.activity.map((a, i) => (
-                  <li key={i}>{a.summary || a.status}</li>
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="text-brand-primary">•</span> {a.summary || a.status}
+                  </li>
                 ))}
               </ul>
             )}
 
             {result.plan?.length > 0 && (
-              <div className="dw-agent__plan">
-                <p className="dw-agent__label">Executed plan</p>
-                <ol>
+              <div className="p-4 bg-surface-elevated rounded-stitch border border-divider space-y-2">
+                <p className="text-xs font-semibold text-content-heading">Executed plan</p>
+                <ol className="space-y-1 text-xs text-content-body">
                   {result.plan.map((step, i) => (
-                    <li key={i}>{step.summary || step.agent || step.tool || JSON.stringify(step)}</li>
+                    <li key={i}>{i + 1}. {step.summary || step.agent || step.tool || JSON.stringify(step)}</li>
                   ))}
                 </ol>
               </div>
             )}
 
             {(result.summary || result.resultSummary) && (
-              <p className="dw-agent__summary"><strong>Summary:</strong> {result.summary || result.resultSummary}</p>
+              <p className="text-sm text-content-body"><strong className="text-content-heading">Summary:</strong> {result.summary || result.resultSummary}</p>
             )}
 
             {result.facts?.length > 0 && (
               <div>
-                <p className="dw-agent__label">Facts</p>
-                <ul>{result.facts.map((f, i) => <li key={i}>{f.text || f}</li>)}</ul>
+                <p className="text-xs font-semibold text-content-heading mb-1">Facts</p>
+                <ul className="list-disc list-inside text-xs text-content-body space-y-0.5">{result.facts.map((f, i) => <li key={i}>{f.text || f}</li>)}</ul>
               </div>
             )}
 
             {result.inferences?.length > 0 && (
               <div>
-                <p className="dw-agent__label">Inferences</p>
-                <ul>{result.inferences.map((f, i) => <li key={i}>{f.text || f}</li>)}</ul>
+                <p className="text-xs font-semibold text-content-heading mb-1">Inferences</p>
+                <ul className="list-disc list-inside text-xs text-content-body space-y-0.5">{result.inferences.map((f, i) => <li key={i}>{f.text || f}</li>)}</ul>
               </div>
             )}
 
             {result.recommendations?.length > 0 && (
               <div>
-                <p className="dw-agent__label">Recommendations</p>
-                <ul>{result.recommendations.map((f, i) => <li key={i}>{f.text || f}</li>)}</ul>
+                <p className="text-xs font-semibold text-content-heading mb-1">Recommendations</p>
+                <ul className="list-disc list-inside text-xs text-content-body space-y-0.5">{result.recommendations.map((f, i) => <li key={i}>{f.text || f}</li>)}</ul>
               </div>
             )}
 
             {result.conflicts?.length > 0 && (
-              <div className="dw-agent__confirm" role="status">
-                <p className="dw-agent__label">Data conflict</p>
-                <ul>
+              <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-stitch space-y-2" role="status">
+                <p className="text-xs font-semibold text-amber-600">Data conflict</p>
+                <ul className="text-xs text-content-body space-y-1">
                   {result.conflicts.map((c, i) => (
                     <li key={i}>{c.what} — {(c.sources || []).join(', ')}</li>
                   ))}
@@ -283,59 +298,62 @@ export default function AgentWorkspace() {
             )}
 
             {result.availability?.failed?.length > 0 && (
-              <p className="dw-agent__summary">
+              <p className="text-xs text-content-muted">
                 Partial: unavailable — {result.availability.failed.join(', ')}
               </p>
             )}
 
             {result.confirmationRequired && (
-              <div className="dw-agent__confirm" role="region" aria-label="Confirmation required">
-                <p>Write actions require confirmation.</p>
-                <div className="dw-agent__actions">
-                  <button type="button" className="btn btn-primary" disabled={loading} onClick={confirm}>Confirm</button>
-                  <button type="button" className="btn btn-secondary" disabled={loading} onClick={cancel}>Cancel</button>
+              <div className="p-4 bg-brand-primary/10 border border-brand-primary/20 rounded-stitch space-y-3" role="region" aria-label="Confirmation required">
+                <p className="text-xs font-medium text-brand-primary">Write actions require confirmation.</p>
+                <div className="flex items-center gap-2">
+                  <button type="button" className="px-3 py-1.5 text-xs font-medium bg-brand-primary text-white rounded-lg" disabled={loading} onClick={confirm}>Confirm</button>
+                  <button type="button" className="px-3 py-1.5 text-xs font-medium bg-surface text-content-muted rounded-lg border border-divider" disabled={loading} onClick={cancel}>Cancel</button>
                 </div>
               </div>
             )}
           </section>
         )}
 
-        <div className="dw-agent__grid">
-          <section className="dw-agent__panel">
-            <h2>Registered specialists</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <section className="bg-surface p-6 rounded-stitch border border-divider shadow-sm space-y-4">
+            <h2 className="text-base font-semibold text-content-heading">Registered specialists</h2>
             {!specialists.length ? (
               <EmptyState title="No specialists" message="Specialist registry loads for your role." />
             ) : (
-              <ul className="dw-agent__tools">
+              <ul className="space-y-3">
                 {specialists.map((a) => (
-                  <li key={a.name}>
-                    <strong>{a.name}</strong>
-                    <small>{a.domain} · {(a.capabilities || []).slice(0, 2).join(', ')}</small>
+                  <li key={a.name} className="p-3 bg-surface-elevated rounded-stitch border border-divider space-y-1">
+                    <strong className="text-xs font-semibold text-content-heading block">{a.name}</strong>
+                    <small className="text-[11px] text-content-muted block">{a.domain} · {(a.capabilities || []).slice(0, 2).join(', ')}</small>
                   </li>
                 ))}
               </ul>
             )}
           </section>
 
-          <section className="dw-agent__panel">
-            <h2>Allowlisted tools</h2>
-            <ul className="dw-agent__tools">
+          <section className="bg-surface p-6 rounded-stitch border border-divider shadow-sm space-y-4">
+            <h2 className="text-base font-semibold text-content-heading">Allowlisted tools</h2>
+            <ul className="space-y-2">
               {tools.slice(0, 12).map((t) => (
-                <li key={t.name}><strong>{t.name}</strong><small>{t.riskLevel}</small></li>
+                <li key={t.name} className="flex items-center justify-between p-2.5 bg-surface-elevated rounded-lg border border-divider">
+                  <strong className="text-xs font-medium text-content-body">{t.name}</strong>
+                  <small className="text-[10px] font-semibold text-content-muted uppercase">{t.riskLevel}</small>
+                </li>
               ))}
             </ul>
           </section>
 
-          <section className="dw-agent__panel">
-            <h2>Recent executions</h2>
+          <section className="bg-surface p-6 rounded-stitch border border-divider shadow-sm space-y-4">
+            <h2 className="text-base font-semibold text-content-heading">Recent executions</h2>
             {!history.length ? (
               <EmptyState title="No runs yet" message="Run a network or classic agent request." />
             ) : (
-              <ul className="dw-agent__history">
+              <ul className="space-y-3">
                 {history.map((item) => (
-                  <li key={item.executionId || item.id}>
-                    <strong>{(item.request || '').slice(0, 60)}</strong>
-                    <small>{item.state} · {item.agentType}</small>
+                  <li key={item.executionId || item.id} className="p-3 bg-surface-elevated rounded-stitch border border-divider space-y-1">
+                    <strong className="text-xs font-medium text-content-heading block truncate">{(item.request || '').slice(0, 60)}</strong>
+                    <small className="text-[11px] text-content-muted block">{item.state} · {item.agentType}</small>
                   </li>
                 ))}
               </ul>

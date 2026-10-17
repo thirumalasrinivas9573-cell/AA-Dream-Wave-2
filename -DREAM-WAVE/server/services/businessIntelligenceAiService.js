@@ -1,12 +1,14 @@
-const OpenAI = require('openai')
+const { getOpenAI, getApiKey, getModel } = require('../utils/openaiClient')
 const { BI_INTENTS, INSIGHT_CONTRACT_FIELDS } = require('../constants/businessIntelligence')
 const { buildBiContext } = require('./businessIntelligenceService')
 
-let openai = null
-function getOpenAI() {
-  if (!process.env.OPENAI_API_KEY?.trim()) return null
-  if (!openai) openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-  return openai
+function getClient() {
+  if (!getApiKey()) return null
+  try {
+    return getOpenAI()
+  } catch {
+    return null
+  }
 }
 
 function buildContractInsight(intent, context) {
@@ -144,14 +146,14 @@ async function generateBiInsights(scope, scopeId, intent = 'INSTITUTION_OVERVIEW
       'Insights reflect observed records within authorized scope. Correlation is reported; causation is not inferred.',
   }
 
-  const client = getOpenAI()
+  const client = getClient()
   if (!client) return result
 
   try {
     const completion = await client.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: getModel(),
       temperature: 0.2,
-      max_tokens: 500,
+      max_tokens: 1000,
       messages: [
         {
           role: 'system',

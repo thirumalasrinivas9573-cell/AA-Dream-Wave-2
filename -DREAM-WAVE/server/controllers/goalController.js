@@ -4,7 +4,7 @@ const Roadmap = require('../models/Roadmap')
 const Task = require('../models/Task')
 const notificationService = require('../services/notificationService')
 const knowledgeGraphService = require('../services/knowledgeGraphService')
-const { openai } = require('../utils/openaiClient')
+const { openai, getModel } = require('../utils/openaiClient')
 
 const CATEGORIES = [
   'Academic', 'Career', 'Certification', 'Education', 'Finance', 'Health', 'Personal', 'Skill',
@@ -416,7 +416,7 @@ exports.generateAIPlan = async (req, res) => {
     const goal = await Goal.findOne({ _id: req.params.id, userId: req.user._id })
     if (!goal) return fail(res, 404, 'Goal not found.', 'NOT_FOUND')
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.7,
       max_tokens: 2000,
       response_format: { type: 'json_object' },

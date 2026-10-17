@@ -49,14 +49,14 @@ body.student-nav-open {
   align-items: center;
   gap: 12px;
   padding: 10px 14px;
-  border-bottom: 1px solid rgba(139, 132, 163, 0.2);
-  background: #F3EEFA;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
   backdrop-filter: blur(12px);
 }
 
 .student-module .mobile-topbar__brand {
   flex: 1;
-  color: #3A3153;
+  color: var(--text-primary);
   font-size: .95rem;
   font-weight: 750;
   text-decoration: none;

@@ -10,9 +10,11 @@ export const STUDENT_THEME = {
   accentLight: '#7C69DC',
   glow: 'rgba(140,122,230,0.25)',
   gradient: 'linear-gradient(135deg, #8C7AE6, #A7D8F0)',
-  sidebarBg: '#F3EEFA',
-  sidebarBorder: 'rgba(139, 132, 163, 0.2)',
-  bg: '#FBF9FC',
+  sidebarBg: 'var(--bg-secondary)',
+  sidebarBorder: 'var(--border)',
+  bg: 'var(--bg-primary)',
+  text: 'var(--text-primary)',
+  muted: 'var(--text-secondary)',
 }
 
 export function studentPath(segment = '') {

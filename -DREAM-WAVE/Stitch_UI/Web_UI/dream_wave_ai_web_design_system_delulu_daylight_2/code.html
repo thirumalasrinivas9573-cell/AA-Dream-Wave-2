@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;family=Figtree:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary-fixed": "#a6eeff", "on-secondary": "#ffffff", "primary-fixed": "#d0e4ff", "outline": "#707882", "on-secondary-fixed": "#001f25", "tertiary-fixed-dim": "#a3cce9", "on-tertiary-fixed-variant": "#204b64", "tertiary-container": "#517994", "on-surface-variant": "#404751", "inverse-primary": "#9bcaff", "on-primary-fixed-variant": "#00497a", "inverse-on-surface": "#ebf1ff", "on-error-container": "#93000a", "surface": "#f9f9ff", "on-tertiary": "#ffffff", "inverse-surface": "#193151", "error": "#ba1a1a", "surface-bright": "#f9f9ff", "on-secondary-fixed-variant": "#004e5b", "background": "#f9f9ff", "surface-container-lowest": "#ffffff", "on-error": "#ffffff", "error-container": "#ffdad6", "tertiary": "#37607a", "surface-tint": "#0062a0", "on-surface": "#001c3b", "secondary-fixed-dim": "#3dd8f5", "surface-container-low": "#f0f3ff", "surface-dim": "#c7dbff", "surface-container": "#e7eeff", "outline-variant": "#c0c7d3", "on-tertiary-fixed": "#001e2e", "on-primary": "#ffffff", "surface-variant": "#d5e3ff", "secondary-container": "#49e1fd", "on-background": "#001c3b", "secondary": "#006878", "tertiary-fixed": "#c7e7ff", "surface-container-high": "dee8ff", "on-secondary-container": "#006170", "primary-fixed-dim": "#9bcaff", "primary": "#005f9c", "surface-container-highest": "#d5e3ff", "on-primary-container": "#fdfcff", "on-primary-fixed": "#001d35", "on-tertiary-container": "#fcfcff", "primary-container": "#0079c4" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-sm": "0.75rem", "space-md": "1.25rem", "margin-sm": "1.25rem", "gutter": "1.5rem", "space-lg": "1.75rem", "space-xs": "0.375rem", "space-xl": "2.5rem", "gutter-sm": "1rem", "margin": "2.5rem" }, "fontFamily": { "headline-md": ["Outfit"], "label-sm": ["Figtree"], "headline-lg": ["Outfit"], "headline-xl-mobile": ["Outfit"], "title-md": ["Outfit"], "label-lg": ["Figtree"], "headline-xl": ["Outfit"], "body-md": ["Figtree"], "display-lg-mobile": ["Outfit"], "body-lg": ["Figtree"], "display-lg": ["Outfit"], "headline-sm": ["Outfit"] }, "fontSize": { "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.005em", "fontWeight": "500" }], "label-sm": ["15px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "headline-xl-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "title-md": ["17px", { "lineHeight": "24px", "fontWeight": "500" }], "label-lg": ["15px", { "lineHeight": "22px", "fontWeight": "500" }], "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }], "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-lg": ["17px", { "lineHeight": "26px", "fontWeight": "400" }], "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }] } } } };</script></head><body class="bg-gradient-to-b from-[#D4ECFB] via-[#E6F3FD] to-[#F0F8FE] font-body-md text-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 h-full w-[72px] bg-[#E1F1FD]/75 backdrop-blur-2xl border-r border-[#2F8FDD]/15 shadow-[0_4px_24px_rgba(47,143,221,0.08)] z-50 flex flex-col items-center justify-between py-space-md"><div class="flex flex-col items-center gap-space-lg w-full"><a class="w-11 h-11 rounded-xl bg-primary-container flex items-center justify-center shadow-[0_4px_16px_-2px_rgba(47,143,221,0.3)]" data-path="overview-canvas" href="#"><span class="material-symbols-outlined text-on-primary-container text-[22px]">waves</span></a><nav class="flex flex-col items-center gap-space-sm w-full px-space-xs" data-active-classes="bg-primary text-on-primary font-bold shadow-[0_4px_12px_-2px_rgba(47,143,221,0.25)]"><a aria-current="page" class="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-200 bg-primary text-on-primary font-bold shadow-[0_4px_12px_-2px_rgba(47,143,221,0.25)]" data-path="overview-canvas" href="#" title="Overview Canvas"><span class="material-symbols-outlined text-[20px]">grid_view</span></a><a class="w-11 h-11 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-[#D2EAFD]/70 hover:text-on-surface transition-all duration-200" data-path="generative-studio" href="#" title="Generative Studio"><span class="material-symbols-outlined text-[20px]">auto_awesome</span></a><a class="w-11 h-11 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-[#D2EAFD]/70 hover:text-on-surface transition-all duration-200" data-path="flow-orchestrator" href="#" title="Flow Orchestrator"><span class="material-symbols-outlined text-[20px]">account_tree</span></a><a class="w-11 h-11 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-[#D2EAFD]/70 hover:text-on-surface transition-all duration-200" data-path="neural-models" href="#" title="Neural Models"><span class="material-symbols-outlined text-[20px]">memory</span></a><a class="w-11 h-11 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-[#D2EAFD]/70 hover:text-on-surface transition-all duration-200" data-path="asset-vault" href="#" title="Asset Vault"><span class="material-symbols-outlined text-[20px]">folder_data</span></a></nav></div><div class="flex flex-col items-center gap-space-sm w-full px-space-xs"><button class="w-11 h-11 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-[#D2EAFD]/70 hover:text-on-surface transition-all duration-200" title="Toggle Theme" type="button"><span class="material-symbols-outlined text-[20px]">light_mode</span></button><button class="w-11 h-11 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-[#D2EAFD]/70 hover:text-on-surface transition-all duration-200" title="Sign Out" type="button"><span class="material-symbols-outlined text-[20px]">logout</span></button><div class="pt-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ring-2 ring-primary/20"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></aside><div class="pl-[72px]"><header class="fixed top-0 left-[72px] right-0 h-16 bg-[#E8F4FD]/80 backdrop-blur-xl border-b border-[#2F8FDD]/15 shadow-[0_1px_12px_rgba(47,143,221,0.06)] z-40"><div class="w-full h-16 px-space-xl flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface">DREAM WAVE</span><span class="font-label-sm text-label-sm px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed uppercase tracking-wider font-semibold">AI System</span></div><div class="flex-1 max-w-lg mx-auto"><div class="relative flex items-center w-full"><span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px] pointer-events-none">search</span><input class="w-full h-10 pl-10 pr-14 rounded-full bg-[#D7EDFC]/70 border border-[#2F8FDD]/20 text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body-md text-body-md" placeholder="Search commands, prompts, or neural assets..." type="text"/><div class="absolute right-3 px-2 py-0.5 rounded-lg bg-[#EAF4FD] text-on-surface-variant font-label-sm text-[11px] font-semibold tracking-wide pointer-events-none border border-[#2F8FDD]/15">⌘K</div></div></div><div class="flex items-center gap-space-sm"><button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-[#D7EDFC]/70 hover:text-on-surface transition-all relative" title="Notifications" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-secondary-container"></span></button><div class="h-5 w-px bg-outline-variant/50 mx-1"></div><div class="flex items-center gap-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-16 bg-transparent min-h-screen"><div class="flex flex-col w-full">
+<div class="w-full max-w-[1440px] mx-auto px-space-md py-space-xl flex flex-col gap-space-xl">
+<!-- 1. HEADER SECTION -->
+<header class="w-full bg-gradient-to-br from-[#D4ECFB]/95 via-[#E6F3FD]/90 to-[#EBFAFF]/95 backdrop-blur-2xl p-space-xl rounded-[28px] border border-white/80 shadow-[0_16px_36px_-6px_rgba(47,143,221,0.18),0_4px_16px_rgba(255,255,255,0.7)_inset] flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg relative overflow-hidden">
+<div class="flex flex-col gap-space-xs max-w-2xl relative z-10">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(0,95,156,0.6)] animate-pulse"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">FOUNDATIONS &amp; UI LIBRARY</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface font-semibold tracking-tight">Delulu Daylight Design System</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Living style guide and component specification for DREAM WAVE AI web and enterprise applications.</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm relative z-10">
+<button class="px-space-md py-space-xs rounded-[14px] bg-[#EAF4FD]/90 border border-white/80 text-on-surface font-label-lg text-label-lg hover:bg-[#DFF0FC] transition-all shadow-[0_2px_8px_rgba(47,143,221,0.08)] flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary">data_object</span>
+<span>Export Tokens (JSON)</span>
+</button>
+<button class="px-space-md py-space-xs rounded-[14px] bg-[#EAF4FD]/90 border border-white/80 text-on-surface font-label-lg text-label-lg hover:bg-[#DFF0FC] transition-all shadow-[0_2px_8px_rgba(47,143,221,0.08)] flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary">content_copy</span>
+<span>Copy CSS Variables</span>
+</button>
+<button class="px-space-md py-space-xs rounded-[14px] bg-primary text-on-primary font-label-lg text-label-lg hover:bg-primary-container transition-all shadow-[0_4px_18px_rgba(0,98,160,0.3)] flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">travel_explore</span>
+<span>Inspect Components</span>
+</button>
+</div>
+</header>
+<!-- 2. COLOR PALETTE SECTION -->
+<section class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">01. CHROMATIC FOUNDATION</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Color Palette &amp; Contrast Tiers</h2>
+</div>
+<span class="font-label-sm text-label-sm px-3.5 py-1 rounded-full bg-[#D4F1FE] border border-[#2F8FDD]/20 text-on-surface font-semibold shadow-sm">WCAG 2.1 AA Compliant</span>
+</div>
+<!-- Blue scale swatches -->
+<div class="grid grid-cols-1 md:grid-cols-5 gap-space-md">
+<div class="p-space-md rounded-[24px] bg-[#EBFAFF] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col justify-between h-48">
+<div class="w-full h-16 rounded-[14px] bg-[#EBFAFF] border border-[#BFE0F7] flex items-end p-2 shadow-inner">
+<span class="font-label-sm text-xs text-[#0B2545] font-semibold">#EBFAFF</span>
+</div>
+<div>
+<div class="font-title-md text-title-md text-on-surface font-semibold">Blue Tint Light</div>
+<div class="font-body-md text-sm text-on-surface-variant">Badge and pill backgrounds</div>
+</div>
+<div class="font-label-sm text-xs text-tertiary font-mono">--sys-color-blue-50</div>
+</div>
+<div class="p-space-md rounded-[24px] bg-[#D4F1FE]/60 border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col justify-between h-48">
+<div class="w-full h-16 rounded-[14px] bg-[#D4F1FE] border border-[#BFE0F7] flex items-end p-2 shadow-inner">
+<span class="font-label-sm text-xs text-[#0B2545] font-semibold">#D4F1FE</span>
+</div>
+<div>
+<div class="font-title-md text-title-md text-on-surface font-semibold">Blue Tint Mid</div>
+<div class="font-body-md text-sm text-on-surface-variant">Active chip surface fill</div>
+</div>
+<div class="font-label-sm text-xs text-tertiary font-mono">--sys-color-blue-100</div>
+</div>
+<div class="p-space-md rounded-[24px] bg-[#E1F0FC] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col justify-between h-48">
+<div class="w-full h-16 rounded-[14px] bg-[#BFE0F7] flex items-end p-2 shadow-inner">
+<span class="font-label-sm text-xs text-[#0B2545] font-semibold">#BFE0F7</span>
+</div>
+<div>
+<div class="font-title-md text-title-md text-on-surface font-semibold">Blue Outline</div>
+<div class="font-body-md text-sm text-on-surface-variant">Hairline borders &amp; separators</div>
+</div>
+<div class="font-label-sm text-xs text-tertiary font-mono">--sys-color-blue-200</div>
+</div>
+<div class="p-space-md rounded-[24px] bg-[#EAF5FD] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col justify-between h-48">
+<div class="w-full h-16 rounded-[14px] bg-[#AAD3F1] flex items-end p-2 shadow-inner">
+<span class="font-label-sm text-xs text-[#0B2545] font-semibold">#AAD3F1</span>
+</div>
+<div>
+<div class="font-title-md text-title-md text-on-surface font-semibold">Blue Muted</div>
+<div class="font-body-md text-sm text-on-surface-variant">Hover states &amp; control track</div>
+</div>
+<div class="font-label-sm text-xs text-tertiary font-mono">--sys-color-blue-300</div>
+</div>
+<div class="p-space-md rounded-[24px] bg-[#EAF4FD] border border-[#2F8FDD]/30 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.14)] flex flex-col justify-between h-48 ring-2 ring-primary/25">
+<div class="w-full h-16 rounded-[14px] bg-[#2F8FDD] flex items-end justify-between p-2 shadow-md">
+<span class="font-label-sm text-xs text-white font-semibold">#2F8FDD</span>
+<span class="font-label-sm text-[11px] bg-white/20 text-white px-1.5 py-0.5 rounded backdrop-blur-sm">4.8:1 AA</span>
+</div>
+<div>
+<div class="font-title-md text-title-md text-on-surface font-semibold">Primary Blue</div>
+<div class="font-body-md text-sm text-on-surface-variant">Interactive triggers &amp; focus</div>
+</div>
+<div class="font-label-sm text-xs text-primary font-mono font-bold">--sys-color-primary</div>
+</div>
+</div>
+<!-- Accent & Functional Semantic Swatches -->
+<div class="grid grid-cols-2 md:grid-cols-6 gap-space-md">
+<div class="p-space-sm rounded-[16px] bg-[#EAF4FD] border border-[#2F8FDD]/15 shadow-[0_4px_14px_rgba(47,143,221,0.07)] flex flex-col gap-2">
+<div class="w-full h-10 rounded-[10px] bg-[#00C2DE] shadow-sm"></div>
+<div>
+<div class="font-title-md text-sm text-on-surface font-semibold">Accent Cyan</div>
+<div class="font-body-md text-xs text-on-surface-variant">Telemetry &amp; rings only</div>
+<div class="font-mono text-[11px] text-tertiary">#00C2DE</div>
+</div>
+</div>
+<div class="p-space-sm rounded-[16px] bg-[#EAF4FD] border border-[#2F8FDD]/15 shadow-[0_4px_14px_rgba(47,143,221,0.07)] flex flex-col gap-2">
+<div class="w-full h-10 rounded-[10px] bg-[#0B2545] shadow-sm"></div>
+<div>
+<div class="font-title-md text-sm text-on-surface font-semibold">Ocean Navy</div>
+<div class="font-body-md text-xs text-on-surface-variant">Primary headings &amp; copy</div>
+<div class="font-mono text-[11px] text-tertiary">#0B2545</div>
+</div>
+</div>
+<div class="p-space-sm rounded-[16px] bg-[#EAF4FD] border border-[#2F8FDD]/15 shadow-[0_4px_14px_rgba(47,143,221,0.07)] flex flex-col gap-2">
+<div class="w-full h-10 rounded-[10px] bg-[#4F6A85] shadow-sm"></div>
+<div>
+<div class="font-title-md text-sm text-on-surface font-semibold">Slate Muted</div>
+<div class="font-body-md text-xs text-on-surface-variant">Secondary descriptions</div>
+<div class="font-mono text-[11px] text-tertiary">#4F6A85</div>
+</div>
+</div>
+<div class="p-space-sm rounded-[16px] bg-[#EAF4FD] border border-[#2F8FDD]/15 shadow-[0_4px_14px_rgba(47,143,221,0.07)] flex flex-col gap-2">
+<div class="w-full h-10 rounded-[10px] bg-[#1FB77A] shadow-sm"></div>
+<div>
+<div class="font-title-md text-sm text-on-surface font-semibold">Success Green</div>
+<div class="font-body-md text-xs text-on-surface-variant">Passing / on track state</div>
+<div class="font-mono text-[11px] text-tertiary">#1FB77A</div>
+</div>
+</div>
+<div class="p-space-sm rounded-[16px] bg-[#EAF4FD] border border-[#2F8FDD]/15 shadow-[0_4px_14px_rgba(47,143,221,0.07)] flex flex-col gap-2">
+<div class="w-full h-10 rounded-[10px] bg-[#F5A524] shadow-sm"></div>
+<div>
+<div class="font-title-md text-sm text-on-surface font-semibold">Warning Amber</div>
+<div class="font-body-md text-xs text-on-surface-variant">Pending user action</div>
+<div class="font-mono text-[11px] text-tertiary">#F5A524</div>
+</div>
+</div>
+<div class="p-space-sm rounded-[16px] bg-[#EAF4FD] border border-[#2F8FDD]/15 shadow-[0_4px_14px_rgba(47,143,221,0.07)] flex flex-col gap-2">
+<div class="w-full h-10 rounded-[10px] bg-[#E63946] shadow-sm"></div>
+<div>
+<div class="font-title-md text-sm text-on-surface font-semibold">Danger Red</div>
+<div class="font-body-md text-xs text-on-surface-variant">Validation failure alert</div>
+<div class="font-mono text-[11px] text-tertiary">#E63946</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. TYPOGRAPHY SCALE & SPECIFICATION -->
+<section class="flex flex-col gap-space-md">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">02. TYPOGRAPHIC MATRIX</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Outfit (Headings) &amp; Figtree (Body)</h2>
+</div>
+<div class="bg-[#EAF4FD] p-space-lg rounded-[28px] border border-[#2F8FDD]/15 shadow-[0_12px_28px_-6px_rgba(47,143,221,0.1)] flex flex-col gap-space-lg">
+<!-- Display Row -->
+<div class="flex flex-col lg:flex-row lg:items-baseline justify-between gap-2 pb-space-sm border-b border-[#2F8FDD]/15">
+<span class="font-mono text-xs text-tertiary w-40 shrink-0">Display 48/56 (Outfit)</span>
+<div class="font-headline-xl text-[48px] leading-[56px] font-semibold text-[#0B2545] flex-1">Fluid Neural Synthesis</div>
+<span class="font-label-sm text-xs text-on-surface-variant font-mono">Outfit Semibold / 48px</span>
+</div>
+<!-- H1 Row -->
+<div class="flex flex-col lg:flex-row lg:items-baseline justify-between gap-2 pb-space-sm border-b border-[#2F8FDD]/15">
+<span class="font-mono text-xs text-tertiary w-40 shrink-0">H1 36/44 (Outfit)</span>
+<div class="font-headline-lg text-[36px] leading-[44px] font-semibold text-[#0B2545] flex-1">Delulu Daylight Framework Specs</div>
+<span class="font-label-sm text-xs text-on-surface-variant font-mono">Outfit Semibold / 36px</span>
+</div>
+<!-- H2 Row -->
+<div class="flex flex-col lg:flex-row lg:items-baseline justify-between gap-2 pb-space-sm border-b border-[#2F8FDD]/15">
+<span class="font-mono text-xs text-tertiary w-40 shrink-0">H2 28/36 (Outfit)</span>
+<div class="font-headline-md text-[28px] leading-[36px] font-medium text-[#0B2545] flex-1">Autonomous Flow Orchestration</div>
+<span class="font-label-sm text-xs text-on-surface-variant font-mono">Outfit Medium / 28px</span>
+</div>
+<!-- H3 Row -->
+<div class="flex flex-col lg:flex-row lg:items-baseline justify-between gap-2 pb-space-sm border-b border-[#2F8FDD]/15">
+<span class="font-mono text-xs text-tertiary w-40 shrink-0">H3 22/28 (Outfit)</span>
+<div class="font-headline-sm text-[22px] leading-[28px] font-medium text-[#0B2545] flex-1">Parameter Calibration and Weight Tensors</div>
+<span class="font-label-sm text-xs text-on-surface-variant font-mono">Outfit Medium / 22px</span>
+</div>
+<!-- H4 Row -->
+<div class="flex flex-col lg:flex-row lg:items-baseline justify-between gap-2 pb-space-sm border-b border-[#2F8FDD]/15">
+<span class="font-mono text-xs text-tertiary w-40 shrink-0">H4 18/24 (Outfit)</span>
+<div class="font-title-md text-[18px] leading-[24px] font-medium text-[#0B2545] flex-1">Layer Activation Matrices</div>
+<span class="font-label-sm text-xs text-on-surface-variant font-mono">Outfit Medium / 18px</span>
+</div>
+<!-- Body Large -->
+<div class="flex flex-col lg:flex-row lg:items-baseline justify-between gap-2 pb-space-sm border-b border-[#2F8FDD]/15">
+<span class="font-mono text-xs text-tertiary w-40 shrink-0">Large 18/26 (Body)</span>
+<div class="font-body-lg text-body-lg text-[#4F6A85] flex-1">Designed for introductory paragraphs and high-order summaries across canvas telemetry dashboards.</div>
+<span class="font-label-sm text-xs text-on-surface-variant font-mono">Figtree / 18px</span>
+</div>
+<!-- Body Regular -->
+<div class="flex flex-col lg:flex-row lg:items-baseline justify-between gap-2 pb-space-sm border-b border-[#2F8FDD]/15">
+<span class="font-mono text-xs text-tertiary w-40 shrink-0">Body 16/24 (Body)</span>
+<div class="font-body-md text-[16px] leading-[24px] text-[#4F6A85] flex-1">The primary narrative type used for long-form descriptions, parameter manuals, and node inspection cards.</div>
+<span class="font-label-sm text-xs text-on-surface-variant font-mono">Figtree / 16px</span>
+</div>
+<!-- Small (15px threshold) -->
+<div class="flex flex-col lg:flex-row lg:items-baseline justify-between gap-2 pb-space-sm border-b border-[#2F8FDD]/15">
+<span class="font-mono text-xs text-tertiary w-40 shrink-0">Small 15/22 (Min limit)</span>
+<div class="font-body-md text-body-md text-[#4F6A85] flex-1">Complies strictly with 15px minimum readable spec for metadata, hints, and secondary attributes.</div>
+<span class="font-label-sm text-xs text-on-surface-variant font-mono">Figtree / 15px</span>
+</div>
+<!-- Eyebrow 12px -->
+<div class="flex flex-col lg:flex-row lg:items-baseline justify-between gap-2">
+<span class="font-mono text-xs text-tertiary w-40 shrink-0">Micro / Eyebrow 12px</span>
+<div class="font-label-sm text-[12px] uppercase font-bold tracking-widest text-primary flex-1">SECTION METRIC HEADER OVERVIEW</div>
+<span class="font-label-sm text-xs text-on-surface-variant font-mono">Uppercase / 12px / +0.08em</span>
+</div>
+</div>
+</section>
+<!-- 4. ELEVATION, RADII & SPACING SCALE -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg">
+<!-- Radii & Elevation -->
+<div class="bg-[#EAF4FD] p-space-lg rounded-[28px] border border-[#2F8FDD]/15 shadow-[0_12px_28px_-6px_rgba(47,143,221,0.1)] flex flex-col gap-space-md">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">03. GEOMETRY &amp; ELEVATION</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Corner Radii &amp; Depth Profiles</h3>
+</div>
+<div class="grid grid-cols-2 gap-space-md">
+<div class="p-space-md rounded-[28px] bg-[#D7EDFC] border border-[#2F8FDD]/20 shadow-[0_12px_32px_-4px_rgba(47,143,221,0.15)] flex flex-col justify-between h-36">
+<span class="font-label-sm text-xs font-bold text-primary">radius-28</span>
+<div class="font-title-md text-title-md text-on-surface font-semibold">Hero Cards &amp; Canvas Containers</div>
+<span class="font-mono text-xs text-tertiary">28px curvature</span>
+</div>
+<div class="p-space-md rounded-[24px] bg-[#D7EDFC] border border-[#2F8FDD]/20 shadow-[0_6px_20px_-2px_rgba(47,143,221,0.12)] flex flex-col justify-between h-36">
+<span class="font-label-sm text-xs font-bold text-primary">radius-24</span>
+<div class="font-title-md text-title-md text-on-surface font-semibold">Standard Workspaces &amp; Modals</div>
+<span class="font-mono text-xs text-tertiary">24px curvature</span>
+</div>
+<div class="p-space-md rounded-[14px] bg-[#D7EDFC] border border-[#2F8FDD]/20 shadow-sm flex flex-col justify-between h-32">
+<span class="font-label-sm text-xs font-bold text-primary">radius-14</span>
+<div class="font-title-md text-sm text-on-surface font-semibold">Buttons, Inputs &amp; Dropdowns</div>
+<span class="font-mono text-xs text-tertiary">14px curvature</span>
+</div>
+<div class="p-space-md rounded-full bg-[#D7EDFC] border border-[#2F8FDD]/20 shadow-sm flex flex-col justify-between h-32">
+<span class="font-label-sm text-xs font-bold text-primary">radius-full</span>
+<div class="font-title-md text-sm text-on-surface font-semibold">Chips, Badges &amp; Status Pills</div>
+<span class="font-mono text-xs text-tertiary">9999px pill</span>
+</div>
+</div>
+</div>
+<!-- Spacing Scale -->
+<div class="bg-[#EAF4FD] p-space-lg rounded-[28px] border border-[#2F8FDD]/15 shadow-[0_12px_28px_-6px_rgba(47,143,221,0.1)] flex flex-col gap-space-md justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">04. METRIC RHYTHM</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">8-Point Architectural Spacing</h3>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-md">
+<span class="font-mono text-xs text-tertiary w-14">4px</span>
+<div class="h-4 bg-primary/40 rounded" style="width: 4px;"></div>
+<span class="font-label-sm text-xs text-on-surface-variant">space-4 (micro padding)</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-mono text-xs text-tertiary w-14">8px</span>
+<div class="h-4 bg-primary/50 rounded" style="width: 8px;"></div>
+<span class="font-label-sm text-xs text-on-surface-variant">space-8 (compact gap)</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-mono text-xs text-tertiary w-14">12px</span>
+<div class="h-4 bg-primary/60 rounded" style="width: 12px;"></div>
+<span class="font-label-sm text-xs text-on-surface-variant">space-12 (element inline)</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-mono text-xs text-tertiary w-14">16px</span>
+<div class="h-4 bg-primary/70 rounded" style="width: 16px;"></div>
+<span class="font-label-sm text-xs text-on-surface-variant">space-16 (standard control)</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-mono text-xs text-tertiary w-14">20px</span>
+<div class="h-4 bg-primary/80 rounded" style="width: 20px;"></div>
+<span class="font-label-sm text-xs text-on-surface-variant">space-20 (panel cushion)</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-mono text-xs text-tertiary w-14">24px</span>
+<div class="h-4 bg-primary/90 rounded" style="width: 24px;"></div>
+<span class="font-label-sm text-xs text-on-surface-variant">space-24 (card margin)</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-mono text-xs text-tertiary w-14">32px</span>
+<div class="h-4 bg-primary rounded" style="width: 32px;"></div>
+<span class="font-label-sm text-xs text-on-surface-variant">space-32 (major section)</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-mono text-xs text-tertiary w-14">48px</span>
+<div class="h-4 bg-primary-container rounded" style="width: 48px;"></div>
+<span class="font-label-sm text-xs text-on-surface-variant">space-48 (canvas module)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. BUTTONS & INTERACTIVE CONTROLS -->
+<section class="flex flex-col gap-space-md">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">05. INTERACTION TARGETS</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Button States &amp; Semantic Actions</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-md">
+<!-- Primary -->
+<div class="bg-[#EAF4FD] p-space-md rounded-[24px] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col justify-between items-center text-center gap-space-md">
+<span class="font-label-sm text-xs text-tertiary">Primary Trigger</span>
+<button class="w-full py-3 px-space-md rounded-[14px] bg-[#2F8FDD] text-white font-label-lg text-label-lg hover:bg-[#257ec5] transition-all shadow-[0_4px_16px_rgba(47,143,221,0.25)] flex items-center justify-center gap-2" type="button">
+<span>Primary Action</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<span class="font-mono text-[11px] text-on-surface-variant">#2F8FDD / 14px Rad</span>
+</div>
+<!-- Ghost -->
+<div class="bg-[#EAF4FD] p-space-md rounded-[24px] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col justify-between items-center text-center gap-space-md">
+<span class="font-label-sm text-xs text-tertiary">Ghost Variant</span>
+<button class="w-full py-3 px-space-md rounded-[14px] bg-transparent text-[#2F8FDD] hover:bg-[#D7EDFC] font-label-lg text-label-lg transition-all flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>Ghost Action</span>
+</button>
+<span class="font-mono text-[11px] text-on-surface-variant">Hover #EBFAFF</span>
+</div>
+<!-- Danger -->
+<div class="bg-[#EAF4FD] p-space-md rounded-[24px] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col justify-between items-center text-center gap-space-md">
+<span class="font-label-sm text-xs text-tertiary">Destructive</span>
+<button class="w-full py-3 px-space-md rounded-[14px] bg-[#E63946] text-white hover:bg-error font-label-lg text-label-lg transition-all shadow-sm flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+<span>Delete Node</span>
+</button>
+<span class="font-mono text-[11px] text-on-surface-variant">#E63946 / Error</span>
+</div>
+<!-- Disabled -->
+<div class="bg-[#EAF4FD] p-space-md rounded-[24px] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col justify-between items-center text-center gap-space-md">
+<span class="font-label-sm text-xs text-tertiary">Disabled State</span>
+<button class="w-full py-3 px-space-md rounded-[14px] bg-[#D4ECFB]/60 text-on-surface-variant/50 font-label-lg text-label-lg opacity-50 cursor-not-allowed flex items-center justify-center gap-2" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span>Unavailable</span>
+</button>
+<span class="font-mono text-[11px] text-on-surface-variant">opacity: 0.5</span>
+</div>
+<!-- Loading -->
+<div class="bg-[#EAF4FD] p-space-md rounded-[24px] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col justify-between items-center text-center gap-space-md">
+<span class="font-label-sm text-xs text-tertiary">Active Synthesis</span>
+<button class="w-full py-3 px-space-md rounded-[14px] bg-primary text-on-primary font-label-lg text-label-lg shadow-sm flex items-center justify-center gap-2" type="button">
+<svg class="animate-spin h-4 w-4 text-white" fill="none" viewbox="0 0 24 24">
+<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+<path class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
+</svg>
+<span>Generating...</span>
+</button>
+<span class="font-mono text-[11px] text-on-surface-variant">Animated Spinner</span>
+</div>
+</div>
+</section>
+<!-- 6. FORM CONTROLS & INPUT SYSTEM -->
+<section class="flex flex-col gap-space-md">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">06. INPUT APPARATUS</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Data Entry, Validation &amp; Micro-Controls</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- Standard Input -->
+<div class="bg-[#EAF4FD] p-space-lg rounded-[24px] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col gap-space-xs">
+<label class="font-label-lg text-label-lg text-[#0B2545] font-semibold">Student Email</label>
+<input class="w-full h-12 px-space-md rounded-[14px] bg-[#D7EDFC]/70 border border-[#2F8FDD]/20 text-on-surface placeholder:text-[#4F6A85] focus:outline-none focus:ring-2 focus:ring-primary/20 font-body-md text-body-md transition-all shadow-inner" placeholder="neural.researcher@dreamwave.ai" type="email"/>
+<span class="font-body-md text-sm text-[#4F6A85]">Used for workspace validation credentials.</span>
+</div>
+<!-- Error State Input -->
+<div class="bg-[#EAF4FD] p-space-lg rounded-[24px] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col gap-space-xs">
+<label class="font-label-lg text-label-lg text-[#0B2545] font-semibold">Student Email (Validation Failed)</label>
+<input class="w-full h-12 px-space-md rounded-[14px] bg-error-container/20 border border-[#E63946] text-[#0B2545] ring-2 ring-[#E63946] focus:outline-none font-body-md text-body-md" type="email" value="invalid-address.com"/>
+<span class="font-body-md text-sm text-[#E63946] flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[16px]">error</span>
+<span>Please enter a valid academic email address</span>
+</span>
+</div>
+<!-- Select Dropdown -->
+<div class="bg-[#EAF4FD] p-space-lg rounded-[24px] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col gap-space-xs">
+<label class="font-label-lg text-label-lg text-[#0B2545] font-semibold">Neural Accelerator Model</label>
+<div class="relative">
+<select class="w-full h-12 px-space-md pr-10 rounded-[14px] bg-[#D7EDFC]/70 border border-[#2F8FDD]/20 text-on-surface appearance-none focus:outline-none focus:ring-2 focus:ring-primary/20 font-body-md text-body-md">
+<option>DREAM-WAVE Flux Ultra v4.2</option>
+<option>Delulu Daylight Diffuser Lite</option>
+<option>Quantum Tensor Wave (Quantized)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-tertiary pointer-events-none">expand_more</span>
+</div>
+<span class="font-body-md text-sm text-[#4F6A85]">Select backend compute instance.</span>
+</div>
+<!-- Textarea -->
+<div class="bg-[#EAF4FD] p-space-lg rounded-[24px] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col gap-space-xs md:col-span-2">
+<label class="font-label-lg text-label-lg text-[#0B2545] font-semibold">Career Statement</label>
+<textarea class="w-full p-space-md rounded-[14px] bg-[#D7EDFC]/70 border border-[#2F8FDD]/20 text-on-surface placeholder:text-[#4F6A85] focus:outline-none focus:ring-2 focus:ring-primary/20 font-body-md text-body-md transition-all shadow-inner resize-none" placeholder="Outline your aspirations in next-generation multi-modal autonomous agents..." rows="3"></textarea>
+<span class="font-body-md text-sm text-[#4F6A85]">Highlight cognitive architectures, model training or design experiences.</span>
+</div>
+<!-- Toggles & Checkboxes -->
+<div class="bg-[#EAF4FD] p-space-lg rounded-[24px] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col justify-between gap-space-md">
+<label class="font-label-lg text-label-lg text-[#0B2545] font-semibold">Binary Control Toggles</label>
+<!-- Switches -->
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface">Ambient Telemetry</span>
+<button class="w-12 h-7 bg-[#2F8FDD] rounded-full p-1 transition-colors flex items-center justify-end shadow-[0_0_10px_rgba(0,194,222,0.4)]" type="button">
+<div class="w-5 h-5 bg-white rounded-full shadow-md"></div>
+</button>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface">Verbose Checkpoints</span>
+<button class="w-12 h-7 bg-[#BFE0F7] rounded-full p-1 transition-colors flex items-center justify-start" type="button">
+<div class="w-5 h-5 bg-white rounded-full shadow-md"></div>
+</button>
+</div>
+<!-- Checkboxes -->
+<div class="flex items-center gap-space-sm pt-2">
+<div class="w-5 h-5 rounded-[6px] bg-[#2F8FDD] flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[16px] font-bold">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">Synchronize with Cloud Vault</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="w-5 h-5 rounded-[6px] bg-[#D7EDFC] ring-1 ring-outline-variant"></div>
+<span class="font-body-md text-body-md text-on-surface-variant">Automatic GPU failover</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. NAVIGATION, TABS & CHIPS -->
+<section class="flex flex-col gap-space-md">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">07. WAYFINDING &amp; TAXONOMY</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Segmented Tabs &amp; Filter Chips</h2>
+</div>
+<div class="bg-[#EAF4FD] p-space-lg rounded-[28px] border border-[#2F8FDD]/15 shadow-[0_12px_28px_-6px_rgba(47,143,221,0.1)] flex flex-col gap-space-lg">
+<!-- Segmented Tab Bar -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-xs text-tertiary">Segmented Controls</span>
+<div class="inline-flex p-1.5 rounded-[16px] bg-[#D7EDFC]/80 border border-[#2F8FDD]/15 max-w-xl">
+<button class="flex-1 py-2 px-space-md rounded-[12px] bg-[#2F8FDD] text-white font-label-lg text-label-lg font-semibold shadow-sm transition-all text-center" type="button">Neural Canvas</button>
+<button class="flex-1 py-2 px-space-md rounded-[12px] text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-all text-center" type="button">Flow Nodes</button>
+<button class="flex-1 py-2 px-space-md rounded-[12px] text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-all text-center" type="button">Dataset Vault</button>
+<button class="flex-1 py-2 px-space-md rounded-[12px] text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-all text-center" type="button">Inference Logs</button>
+</div>
+</div>
+<!-- Filter Chips -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-xs text-tertiary">Filter Chips &amp; Categorization Tags</span>
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Active Chip -->
+<button class="px-space-md py-1.5 rounded-full bg-[#D4F1FE] text-[#0B2545] ring-1 ring-primary font-label-lg text-label-lg flex items-center gap-2 shadow-sm font-medium" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">check</span>
+<span>Generative Video v3</span>
+</button>
+<!-- Default Chip -->
+<button class="px-space-md py-1.5 rounded-full bg-[#EBFAFF] border border-[#2F8FDD]/20 text-[#0B2545] font-label-lg text-label-lg hover:bg-[#D7EDFC] transition-all flex items-center gap-2" type="button">
+<span>Text-to-3D Tensor</span>
+</button>
+<button class="px-space-md py-1.5 rounded-full bg-[#EBFAFF] border border-[#2F8FDD]/20 text-[#0B2545] font-label-lg text-label-lg hover:bg-[#D7EDFC] transition-all flex items-center gap-2" type="button">
+<span>Voice Latent Cloner</span>
+</button>
+<!-- Removable Chip -->
+<div class="px-space-md py-1.5 rounded-full bg-[#D7EDFC] border border-[#2F8FDD]/20 text-[#0B2545] font-label-lg text-label-lg flex items-center gap-2">
+<span>Filter: In-Progress</span>
+<button class="hover:text-error transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. STAT CARDS, HEALTH PILLS & BADGES -->
+<section class="flex flex-col gap-space-md">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">08. ANALYTICS &amp; STATUS TIERS</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Data Cards, Health Indicators &amp; Badges</h2>
+</div>
+<!-- 3 Stat Cards with distinct soft blue tints -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Level & XP (distinct tint #EBFAFF) -->
+<div class="p-space-lg rounded-[28px] bg-gradient-to-br from-[#EBFAFF] to-[#DDF0FE] border border-[#2F8FDD]/20 shadow-[0_8px_24px_-4px_rgba(47,143,221,0.12)] flex flex-col justify-between gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-xs font-bold text-primary uppercase tracking-wider">PRACTITIONER LEVEL</span>
+<span class="material-symbols-outlined text-primary text-[22px]">military_tech</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg font-semibold text-[#0B2545]">Level 14</div>
+<div class="font-body-md text-sm text-[#4F6A85]">7,420 / 10,000 XP to Senior Researcher</div>
+</div>
+<div class="w-full bg-[#D4F1FE] h-2.5 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-primary to-[#00C2DE] h-full rounded-full w-[74%] shadow-[0_0_8px_rgba(0,194,222,0.4)]"></div>
+</div>
+</div>
+<!-- 7 Days Active (distinct tint #D4F1FE) -->
+<div class="p-space-lg rounded-[28px] bg-gradient-to-br from-[#D4F1FE] to-[#C9E7FC] border border-[#2F8FDD]/25 shadow-[0_8px_24px_-4px_rgba(47,143,221,0.14)] flex flex-col justify-between gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-xs font-bold text-primary uppercase tracking-wider">ACTIVE STREAK</span>
+<span class="material-symbols-outlined text-[#1FB77A] text-[22px]">verified</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg font-semibold text-[#0B2545]">7 Days Active</div>
+<div class="font-body-md text-sm text-[#4F6A85]">Consistent daily pipeline deployment</div>
+</div>
+<div class="flex items-center justify-between gap-1">
+<span class="w-8 h-8 rounded-full bg-[#1FB77A] text-white flex items-center justify-center font-bold text-xs shadow-sm">M</span>
+<span class="w-8 h-8 rounded-full bg-[#1FB77A] text-white flex items-center justify-center font-bold text-xs shadow-sm">T</span>
+<span class="w-8 h-8 rounded-full bg-[#1FB77A] text-white flex items-center justify-center font-bold text-xs shadow-sm">W</span>
+<span class="w-8 h-8 rounded-full bg-[#1FB77A] text-white flex items-center justify-center font-bold text-xs shadow-sm">T</span>
+<span class="w-8 h-8 rounded-full bg-[#1FB77A] text-white flex items-center justify-center font-bold text-xs shadow-sm">F</span>
+<span class="w-8 h-8 rounded-full bg-[#1FB77A] text-white flex items-center justify-center font-bold text-xs shadow-sm">S</span>
+<span class="w-8 h-8 rounded-full bg-[#1FB77A] text-white flex items-center justify-center font-bold text-xs shadow-sm">S</span>
+</div>
+</div>
+<!-- Core AI Pathway (distinct tint #E1F0FC) -->
+<div class="p-space-lg rounded-[28px] bg-gradient-to-br from-[#E1F0FC] to-[#D5EAFD] border border-[#2F8FDD]/20 shadow-[0_8px_24px_-4px_rgba(47,143,221,0.12)] flex flex-col justify-between gap-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-xs font-bold text-primary uppercase tracking-wider">CORE AI PATHWAY</span>
+<span class="material-symbols-outlined text-[#00C2DE] text-[22px]">trending_up</span>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<div class="font-headline-lg text-headline-lg font-semibold text-[#0B2545]">94.2%</div>
+<div class="font-body-md text-sm text-[#4F6A85]">Convergence Accuracy</div>
+</div>
+<!-- Sparkline SVG -->
+<div class="w-24 h-10">
+<svg class="w-full h-full text-primary" fill="none" viewbox="0 0 100 40">
+<path d="M0 32 L20 28 L40 18 L60 22 L80 8 L100 4" stroke="#2F8FDD" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+<path d="M0 32 L20 28 L40 18 L60 22 L80 8 L100 4 L100 40 L0 40 Z" fill="currentColor" fill-opacity="0.15"></path>
+</svg>
+</div>
+</div>
+<div class="font-label-sm text-xs text-[#1FB77A] font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span>+3.8% performance delta vs baseline</span>
+</div>
+</div>
+</div>
+<!-- Health Status Pills & Priority Badges -->
+<div class="p-space-lg rounded-[28px] bg-[#EAF4FD] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col gap-space-md">
+<div>
+<span class="font-label-sm text-xs text-tertiary">Health Status Classification</span>
+<div class="flex flex-wrap items-center gap-space-md pt-2">
+<!-- ON TRACK -->
+<div class="px-space-md py-1.5 rounded-full bg-[#1FB77A]/15 text-[#0f8b57] border border-[#1FB77A]/30 font-label-sm text-xs font-bold tracking-wide flex items-center gap-2 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#1FB77A]"></span>
+<span>ON TRACK</span>
+</div>
+<!-- INSUFFICIENT DATA -->
+<div class="px-space-md py-1.5 rounded-full bg-[#7A8FA5]/20 text-[#3a526b] border border-[#7A8FA5]/30 font-label-sm text-xs font-bold tracking-wide flex items-center gap-2 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#7A8FA5]"></span>
+<span>INSUFFICIENT DATA</span>
+</div>
+<!-- AWAITING APPROVAL -->
+<div class="px-space-md py-1.5 rounded-full bg-[#F5A524]/20 text-[#a05f00] border border-[#F5A524]/30 font-label-sm text-xs font-bold tracking-wide flex items-center gap-2 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#F5A524]"></span>
+<span>AWAITING APPROVAL</span>
+</div>
+<!-- LOW_RISK -->
+<div class="px-space-md py-1.5 rounded-full bg-[#00C2DE]/20 text-[#006878] border border-[#00C2DE]/30 font-label-sm text-xs font-bold tracking-wide flex items-center gap-2 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-[#00C2DE]"></span>
+<span>LOW_RISK</span>
+</div>
+</div>
+</div>
+<div class="pt-space-sm border-t border-[#2F8FDD]/15">
+<span class="font-label-sm text-xs text-tertiary">Workload Badges</span>
+<div class="flex flex-wrap items-center gap-space-sm pt-2">
+<span class="px-3 py-1 rounded-[8px] bg-error-container text-[#93000a] font-label-sm text-xs font-semibold shadow-sm">High Priority</span>
+<span class="px-3 py-1 rounded-[8px] bg-[#D7EDFC] border border-[#2F8FDD]/20 text-[#0B2545] font-label-sm text-xs font-semibold shadow-sm">Routine Task</span>
+<span class="px-3 py-1 rounded-[8px] bg-[#D4F1FE] text-primary font-label-sm text-xs font-semibold shadow-sm">Neural Lab</span>
+<span class="px-3 py-1 rounded-[8px] bg-primary-fixed text-on-primary-fixed font-label-sm text-xs font-semibold shadow-sm">Capstone Release</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. FEEDBACK, OVERLAYS & EMPTY STATES -->
+<section class="flex flex-col gap-space-md">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">09. FEEDBACK LOOPS &amp; MODALS</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Dialogs, Banners, Skeletons &amp; Empty States</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg">
+<!-- Modal Preview -->
+<div class="p-space-lg rounded-[28px] bg-[#EAF4FD] border border-[#2F8FDD]/20 shadow-[0_16px_36px_-6px_rgba(47,143,221,0.16)] flex flex-col justify-between gap-space-md relative overflow-hidden">
+<div class="flex items-center justify-between pb-2 border-b border-[#2F8FDD]/15">
+<h3 class="font-headline-md text-headline-md font-semibold text-[#0B2545]">Confirm Enrollment</h3>
+<button class="w-8 h-8 rounded-full bg-[#D7EDFC] flex items-center justify-center text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-[#4F6A85]">
+            You are committing 40 Compute Credits to the Autonomous Latent Diffusion workspace. This allocates dedicated V100 GPU clusters for uninterrupted model inference.
+          </p>
+<div class="flex items-center justify-end gap-space-sm pt-2">
+<button class="px-space-md py-2.5 rounded-[14px] bg-transparent text-[#2F8FDD] hover:bg-[#D7EDFC] font-label-lg text-label-lg transition-all" type="button">Cancel</button>
+<button class="px-space-md py-2.5 rounded-[14px] bg-[#2F8FDD] text-white hover:bg-primary-container font-label-lg text-label-lg transition-all shadow-[0_4px_14px_rgba(47,143,221,0.25)]" type="button">Confirm &amp; Provision</button>
+</div>
+</div>
+<!-- Toast & Error State -->
+<div class="flex flex-col gap-space-md justify-between">
+<!-- Toast -->
+<div class="p-space-md rounded-[16px] bg-[#EAF4FD] border border-[#2F8FDD]/15 shadow-[0_12px_28px_-4px_rgba(47,143,221,0.12)] flex items-center justify-between gap-space-md border-l-4 border-l-[#1FB77A]">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-[#1FB77A]/15 text-[#1FB77A] flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-sm text-[#0B2545] font-semibold">Checkpoint saved successfully</span>
+<span class="font-body-md text-xs text-[#4F6A85]">Epoch 42 synchronization pushed to repository</span>
+</div>
+</div>
+<button class="text-tertiary hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Error Banner with Retry -->
+<div class="p-space-md rounded-[16px] bg-[#FFEAE8] border border-[#E63946]/30 flex items-center justify-between gap-space-md shadow-[0_4px_16px_rgba(230,57,70,0.08)]">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[#E63946] text-[24px]">cloud_off</span>
+<div class="flex flex-col">
+<span class="font-title-md text-sm text-[#0B2545] font-semibold">Failed to load telemetry stream</span>
+<span class="font-body-md text-xs text-[#4F6A85]">Cluster node ws://stream-04 responded with HTTP 504</span>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-[10px] bg-[#E63946] text-white font-label-sm text-xs font-semibold hover:bg-error transition-all shrink-0 shadow-sm" type="button">
+              Retry Connection
+            </button>
+</div>
+</div>
+<!-- Skeleton Loaders -->
+<div class="p-space-lg rounded-[28px] bg-[#EAF4FD] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col gap-space-md">
+<span class="font-label-sm text-xs text-tertiary">Skeleton Loading State</span>
+<div class="flex items-center gap-space-md animate-pulse">
+<div class="w-12 h-12 rounded-full bg-[#D2EAFD]"></div>
+<div class="flex-1 flex flex-col gap-2">
+<div class="h-4 bg-[#D2EAFD] rounded-full w-3/4"></div>
+<div class="h-3 bg-[#D2EAFD] rounded-full w-1/2"></div>
+</div>
+</div>
+<div class="space-y-2 animate-pulse pt-2">
+<div class="h-3 bg-[#D2EAFD] rounded-full w-full"></div>
+<div class="h-3 bg-[#D2EAFD] rounded-full w-5/6"></div>
+<div class="h-3 bg-[#D2EAFD] rounded-full w-4/6"></div>
+</div>
+</div>
+<!-- Empty State -->
+<div class="p-space-lg rounded-[28px] bg-[#EAF4FD] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col items-center justify-center text-center gap-space-sm">
+<div class="w-14 h-14 rounded-full bg-[#D4F1FE] flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[30px]">science</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm font-semibold text-[#0B2545]">No active submissions</h4>
+<p class="font-body-md text-body-md text-[#4F6A85] max-w-sm">No research experiments are executing on this compute branch. Launch a sandbox to initialize metrics.</p>
+<button class="mt-2 px-space-md py-2 rounded-[14px] bg-[#2F8FDD] text-white font-label-lg text-label-lg hover:bg-primary-container transition-all shadow-[0_4px_14px_rgba(47,143,221,0.25)]" type="button">Start new lab</button>
+</div>
+</div>
+</section>
+<!-- 10. TELEMETRY, PROGRESS RINGS & AVATAR IDENTITY -->
+<section class="flex flex-col gap-space-md">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">10. AMBIENT TELEMETRY</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Meters, Progress Rings &amp; Identity Artifacts</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<!-- Dual-Tone Progress Bar -->
+<div class="p-space-lg rounded-[28px] bg-[#EAF4FD] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex flex-col justify-between gap-space-md">
+<span class="font-label-sm text-xs font-bold text-primary uppercase">NEURAL PIPELINE SYNTHESIS</span>
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between font-label-lg text-sm">
+<span class="text-[#0B2545] font-semibold">Diffusion Model Checkpoint</span>
+<span class="text-primary font-mono font-bold">68% Complete</span>
+</div>
+<!-- Dual tone track -->
+<div class="w-full bg-[#D7EDFC] h-4 rounded-full overflow-hidden p-0.5 border border-[#2F8FDD]/20">
+<div class="h-full rounded-full bg-gradient-to-r from-[#2F8FDD] via-[#00C2DE] to-[#3dd8f5] w-[68%] transition-all"></div>
+</div>
+</div>
+<span class="font-body-md text-xs text-[#4F6A85]">Estimated remaining computation: 2m 14s</span>
+</div>
+<!-- Circular Progress Ring (82% DONE) -->
+<div class="p-space-lg rounded-[28px] bg-[#EAF4FD] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex items-center justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-xs font-bold text-primary uppercase">INFERENCE ACCURACY</span>
+<div class="font-headline-sm text-headline-sm font-semibold text-[#0B2545]">Model Audit</div>
+<span class="font-body-md text-xs text-[#4F6A85]">Validation benchmark passed</span>
+</div>
+<!-- SVG Ring -->
+<div class="relative w-24 h-24 shrink-0 flex items-center justify-center">
+<svg class="w-24 h-24 transform -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="40" stroke="#D7EDFC" stroke-width="8"></circle>
+<circle class="filter drop-shadow-[0_0_8px_rgba(0,194,222,0.4)]" cx="50" cy="50" fill="none" r="40" stroke="#00C2DE" stroke-dasharray="251.2" stroke-dashoffset="45.2" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute flex flex-col items-center justify-center">
+<span class="font-headline-sm text-base font-bold text-[#0B2545]">82%</span>
+<span class="font-label-sm text-[9px] font-bold text-primary">DONE</span>
+</div>
+</div>
+</div>
+<!-- Identity Avatar with XP Indicator Ring -->
+<div class="p-space-lg rounded-[28px] bg-[#EAF4FD] border border-[#2F8FDD]/15 shadow-[0_8px_20px_-4px_rgba(47,143,221,0.09)] flex items-center gap-space-md">
+<div class="relative shrink-0">
+<!-- XP Ring SVG -->
+<svg class="w-20 h-20 transform -rotate-90" viewbox="0 0 80 80">
+<circle cx="40" cy="40" fill="none" r="34" stroke="#D7EDFC" stroke-width="4"></circle>
+<circle class="filter drop-shadow-[0_0_6px_rgba(0,194,222,0.5)]" cx="40" cy="40" fill="none" r="34" stroke="#00C2DE" stroke-dasharray="213.6" stroke-dashoffset="30" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-2 rounded-full overflow-hidden flex items-center justify-center bg-primary">
+<img class="w-full h-full object-cover" data-alt="Close up photographic portrait of a modern artificial intelligence student researcher wearing a minimal tech jacket in bright daylight lighting with cool cyan and deep ocean reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8DmOwZuw2YaBCcDhPgialY7I2fwq7evBYt9j73vNJD4KP2sASc65lgPv9JxZUh4nvnXfuUDVjWfY871z-WbJ1NPwTvSGwNo8pPz_Tp5W3IevnSU8yPsLdeLSNCmxay0tmyIyop6I7eWCuHQ1bgQKiVZihiHEP9noLJfcwt68FgBDeQR-SaU1iMSZMGo7YzSSwbMYPNoLgjV8ERVAKekScjg1H71HWI_qHHgbh2VM7X9SmBDNb6eprug"/>
+</div>
+<!-- Level Pill Badge -->
+<div class="absolute -bottom-1 -right-1 px-1.5 py-0.5 rounded-full bg-primary text-white font-label-sm text-[10px] font-bold shadow-sm">
+              L14
+            </div>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md font-semibold text-[#0B2545]">Dr. Elena Vance</span>
+<span class="font-body-md text-sm text-[#4F6A85]">Cognitive Architecture Lead</span>
+<div class="mt-1 flex items-center gap-1 text-[#00C2DE] font-label-sm text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<span>Top 5% Telemetry Yield</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div></main></div></body></html>

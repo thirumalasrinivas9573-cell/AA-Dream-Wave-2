@@ -1,4 +1,5 @@
 const { robustAiCall } = require('../services/openaiService')
+const { getModel } = require('../utils/openaiClient')
 
 const FALLBACK = {
   tip:         'Small steps every day lead to big results.',
@@ -25,11 +26,11 @@ exports.getDailyAdvice = async (req, res) => {
       },
     ]
 
-    const result = await robustAiCall(messages, 'gpt-3.5-turbo', FALLBACK)
+    const result = await robustAiCall(messages, getModel())
 
     res.json({ success: true, ...result })
   } catch (error) {
     console.error('[dailyController]', error.message)
-    res.json({ success: true, ...FALLBACK })
+    res.status(502).json({ success: false, message: error.message || 'AI daily advice temporarily unavailable.' })
   }
 }

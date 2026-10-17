@@ -33,8 +33,8 @@
 .dw-mentor__mode-btn.is-active,
 .dw-mentor__mentor-mode-btn.is-active {
   box-shadow: 0 4px 20px rgba(140, 122, 230, 0.18);
-  border-color: #8C7AE6;
-  background: #FFFFFF;
+  border-color: var(--purple);
+  background: var(--bg-elevated);
 }
 
 .dw-mentor__layout {
@@ -52,10 +52,10 @@
 
 .dw-mentor__history,
 .dw-mentor__aside .dw-mentor-panel {
-  background: #FFFFFF;
-  border: 1px solid rgba(139, 132, 163, 0.2);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(140, 122, 230, 0.08);
+  box-shadow: var(--shadow-sm);
 }
 
 .dw-mentor__history-header,
@@ -65,8 +65,8 @@
   justify-content: space-between;
   gap: 10px;
   padding: 14px 16px;
-  background: #F3EEFA;
-  border-bottom: 1px solid rgba(139, 132, 163, 0.2);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
 }
 
 .dw-mentor__history-header h2,
@@ -126,8 +126,8 @@
   display: flex;
   flex-direction: column;
   min-height: 520px;
-  background: rgba(13, 13, 23, 0.88);
-  border: 1px solid rgba(148, 163, 184, 0.14);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
 }
@@ -137,7 +137,8 @@
   align-items: center;
   gap: 12px;
   padding: 14px 18px;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
 }
 
 .dw-mentor__chat-header-meta {
@@ -161,8 +162,8 @@
 
 .dw-mentor__chat-toolbar button,
 .dw-mentor__chat-toolbar select {
-  border: 1px solid rgba(148, 163, 184, 0.14);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
   color: inherit;
   border-radius: 8px;
   padding: 4px 8px;
@@ -207,8 +208,8 @@
 
 .dw-mentor__bubble.is-assistant {
   border-radius: 16px 16px 16px 4px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
 }
 
 .dw-mentor__avatar {
@@ -230,8 +231,8 @@
 
 .dw-mentor__composer {
   padding: 12px 14px;
-  border-top: 1px solid rgba(148, 163, 184, 0.1);
-  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid var(--border);
+  background: var(--bg-secondary);
 }
 
 .dw-mentor__composer form {
@@ -295,7 +296,7 @@
   display: block;
   padding: 8px 10px;
   border-radius: 8px;
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  border: 1px solid var(--border);
   text-decoration: none;
   color: inherit;
   font-size: 0.8rem;
@@ -306,7 +307,7 @@
   border-radius: 10px;
   border: 1px solid rgba(239, 68, 68, 0.35);
   background: rgba(239, 68, 68, 0.08);
-  color: #fecaca;
+  color: var(--danger);
 }
 
 @media (max-width: 1100px) {
@@ -324,4 +325,39 @@
   .dw-mentor__mentor-modes {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+/* ══ DARK MODE OVERRIDES — restore original dark immersive chat look ══════════ */
+.dark .dw-mentor__chat {
+  background: rgba(13, 13, 23, 0.88);
+  border-color: rgba(148, 163, 184, 0.14);
+}
+
+.dark .dw-mentor__chat-header {
+  background: transparent;
+  border-bottom-color: rgba(148, 163, 184, 0.1);
+}
+
+.dark .dw-mentor__chat-toolbar button,
+.dark .dw-mentor__chat-toolbar select {
+  border-color: rgba(148, 163, 184, 0.14);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.dark .dw-mentor__bubble.is-assistant {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(148, 163, 184, 0.12);
+}
+
+.dark .dw-mentor__composer {
+  border-top-color: rgba(148, 163, 184, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dark .dw-mentor__suggestions a {
+  border-color: rgba(148, 163, 184, 0.12);
+}
+
+.dark .dw-mentor__error {
+  color: #fecaca;
 }

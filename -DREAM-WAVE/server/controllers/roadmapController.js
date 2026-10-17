@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
-const { generateRoadmap, buildFallbackRoadmap } = require('../services/aiRoadmapService')
+const aiRoadmapService = require('../services/aiRoadmapService')
 const { validateRoadmapPayload } = require('../services/roadmapValidator')
-const { generateDailyTasks } = require('../services/aiTaskService')
+const aiTaskService = require('../services/aiTaskService')
 const Roadmap = require('../models/Roadmap')
 const Goal = require('../models/Goal')
 const Task = require('../models/Task')
@@ -13,6 +13,7 @@ const { syncGoalProgress } = require('../services/progressEngine')
 
 const fail = (res, status, message, code = 'ROADMAP_ERROR') => res.status(status).json({ success: false, code, message })
 const validId = (id) => mongoose.isValidObjectId(id)
+const activeGenerations = new Set()
 
 async function ownedGoal(goalId, userId) {
   if (!validId(goalId)) return null
@@ -264,16 +265,30 @@ exports.createRoadmap = async (req, res) => {
   const { goalId, age, education, skills, interests, resetProgress = false } = req.body
   if (!goalId || !validId(goalId)) return fail(res, 400, 'A valid goal ID is required.', 'INVALID_ID')
 
-  const goal = await ownedGoal(goalId, req.user._id)
-  if (!goal) return fail(res, 404, 'Goal not found.', 'NOT_FOUND')
+  const lockKey = `${req.user._id}:${goalId}`
+  if (activeGenerations.has(lockKey)) {
+    return fail(res, 409, 'Roadmap generation is already in progress for this goal.', 'CONCURRENT_GENERATION')
+  }
+  activeGenerations.add(lockKey)
 
+  let goal = null
   try {
+    goal = await ownedGoal(goalId, req.user._id)
+    if (!goal) return fail(res, 404, 'Goal not found.', 'NOT_FOUND')
+
     const existingRoadmap = await Roadmap.findOne({ goalId: goal._id, userId: req.user._id })
     const userContext = await loadUserContext(req.user._id, goal, { age, education, skills, interests })
-    const rawData = await generateRoadmap(goal.title, goal.category, userContext)
+
+    // 1. Generate Roadmap via AI
+    const rawData = await aiRoadmapService.generateRoadmap(goal, userContext)
     const validated = validateRoadmapPayload(rawData)
-    const fallbackData = attachTransparency(buildFallbackRoadmap(goal, userContext), userContext, true)
-    const mergedData = validated.valid ? attachTransparency({ ...rawData, ...validated.data }, userContext, false) : fallbackData
+    if (!validated.valid) {
+      const err = new Error(`Roadmap payload validation failed: ${validated.errors.join('; ')}`)
+      err.statusCode = 502
+      throw err
+    }
+
+    const mergedData = attachTransparency({ ...rawData, ...validated.data }, userContext, false)
     const roadmapData = preserveGeneratedProgress(existingRoadmap, mergedData)
     const learningStages = (roadmapData.learningStages || []).length
       ? roadmapData.learningStages
@@ -284,32 +299,44 @@ exports.createRoadmap = async (req, res) => {
           status: index === 0 ? 'available' : 'locked',
           progress: step.completed ? 100 : 0,
         }))
-    const roadmap = await Roadmap.findOneAndUpdate(
-      { goalId: goal._id, userId: req.user._id },
-      {
-        $set: {
-          data: roadmapData,
-          learningStages,
-          status: 'active',
-          'architecture.schemaVersion': 'learning-roadmap-v1',
-          'architecture.source': validated.valid ? 'ai' : 'fallback',
-          'architecture.generatedAt': new Date(),
-          'architecture.estimatedCompletion': goal.deadline,
-        },
-        $inc: { version: 1 },
-      },
-      { upsert: true, new: true, setDefaultsOnInsert: true },
-    )
 
-    try {
-      const generated = await generateDailyTasks(goal.title, goal.category, roadmapData)
-      const days = Array.isArray(generated?.days) ? generated.days : []
+    // 2. Generate Tasks via AI BEFORE database modification
+    // (If task generation fails, no roadmap and no tasks are written to the database)
+    const generatedTasks = await aiTaskService.generateDailyTasks(goal, roadmapData, userContext)
+    const days = Array.isArray(generatedTasks?.days) ? generatedTasks.days : []
+    if (!days.length) {
+      const err = new Error('Task generation returned no valid learning days.')
+      err.statusCode = 502
+      throw err
+    }
+
+    // 3. Persist Roadmap and Tasks to DB atomically
+    const executePersistence = async (sessionOpt = {}) => {
+      const roadmap = await Roadmap.findOneAndUpdate(
+        { goalId: goal._id, userId: req.user._id },
+        {
+          $set: {
+            data: roadmapData,
+            learningStages,
+            status: 'active',
+            'architecture.schemaVersion': 'learning-roadmap-v1',
+            'architecture.source': 'ai',
+            'architecture.generatedAt': new Date(),
+            'architecture.estimatedCompletion': goal.deadline,
+          },
+          $inc: { version: 1 },
+        },
+        { upsert: true, new: true, setDefaultsOnInsert: true, ...sessionOpt },
+      )
+
+      // Fetch existing tasks in THIS roadmap to preserve student progress
       const existingTasks = await Task.find({
         roadmapId: roadmap._id,
         userId: req.user._id,
-        $or: [{ source: { $in: ['ai', 'roadmap'] } }, { source: { $exists: false } }],
-      }).lean()
-      const tasksToCreate = preserveGeneratedTasks(existingTasks, days.flatMap((dayInfo) => (
+        source: { $in: ['ai', 'roadmap'] },
+      }, null, sessionOpt).lean()
+
+      const rawTasksToCreate = days.flatMap((dayInfo) => (
         Array.isArray(dayInfo.tasks) ? dayInfo.tasks.map((task) => ({
           userId: req.user._id,
           goalId: goal._id,
@@ -324,47 +351,99 @@ exports.createRoadmap = async (req, res) => {
           completed: false,
           status: 'todo',
         })) : []
-      )).filter((task) => task.title))
+      )).filter((task) => task.title)
 
+      // Preserve completion status and progress of previously generated tasks with matching titles
+      const tasksToCreate = preserveGeneratedTasks(existingTasks, rawTasksToCreate)
+
+      // Restrict deleteMany strictly to AI/roadmap tasks belonging to THIS roadmap
       await Task.deleteMany({
         roadmapId: roadmap._id,
         userId: req.user._id,
-        $or: [{ source: { $in: ['ai', 'roadmap'] } }, { source: { $exists: false } }],
-      })
-      if (tasksToCreate.length) await Task.insertMany(tasksToCreate)
-      if (resetProgress === true && !existingRoadmap) {
-        await Goal.updateOne({ _id: goal._id, userId: req.user._id }, { $set: { progress: 0, completed: false } })
+        source: { $in: ['ai', 'roadmap'] },
+      }, sessionOpt)
+
+      if (tasksToCreate.length) {
+        await Task.insertMany(tasksToCreate, sessionOpt)
       }
-    } catch (taskErr) {
-      console.error('[roadmapController] Task generation failed:', taskErr.message)
+
+      if (resetProgress === true && !existingRoadmap) {
+        await Goal.updateOne(
+          { _id: goal._id, userId: req.user._id },
+          { $set: { progress: 0, completed: false } },
+          sessionOpt,
+        )
+      }
+
+      return roadmap
     }
 
-    await syncGoalProgress(goal._id, req.user._id, 'Roadmap generated')
-    return res.json({ success: true, roadmap })
-  } catch (error) {
-    console.error('[roadmapController.createRoadmap]', error.message)
-    const isQuota = error?.status === 429 || error?.code === 'insufficient_quota'
-    if (isQuota) {
-      const userContext = await loadUserContext(req.user._id, goal, { age, education, skills, interests })
-      const fallbackRoadmap = attachTransparency(buildFallbackRoadmap(goal, userContext), userContext, true)
-      const roadmap = await Roadmap.findOneAndUpdate(
-        { goalId: goal._id, userId: req.user._id },
-        {
-          $set: {
-            data: fallbackRoadmap,
-            status: 'active',
-            'architecture.schemaVersion': 'learning-roadmap-v1',
-            'architecture.source': 'fallback',
-            'architecture.generatedAt': new Date(),
-            'architecture.estimatedCompletion': goal.deadline,
-          },
-          $inc: { version: 1 },
-        },
-        { upsert: true, new: true, setDefaultsOnInsert: true },
-      )
-      return res.json({ success: true, roadmap, fallback: true })
+    let savedRoadmap = null
+    let session = null
+    let usedTransaction = false
+
+    try {
+      session = await mongoose.startSession()
+      session.startTransaction()
+      usedTransaction = true
+      savedRoadmap = await executePersistence({ session })
+      await session.commitTransaction()
+    } catch (txErr) {
+      if (session && usedTransaction) {
+        try { await session.abortTransaction() } catch {}
+      }
+      // Check if error is due to MongoDB running as standalone server (no replica set transactions)
+      const isReplicaSetError = /Transaction numbers are only allowed on a replica set|transactions are not supported/i.test(txErr.message)
+      if (isReplicaSetError) {
+        // Standalone MongoDB detected: retry persistence sequentially without a transaction session
+        console.warn('[roadmapController] Standalone MongoDB detected (replica set transactions unavailable). Retrying persistence without session.')
+        try {
+          savedRoadmap = await executePersistence({})
+        } catch (standaloneErr) {
+          // If task insertion fails on standalone, clean up the newly created roadmap
+          if (!existingRoadmap && savedRoadmap?._id) {
+            try { await Roadmap.deleteOne({ _id: savedRoadmap._id, userId: req.user._id }) } catch {}
+          } else if (existingRoadmap) {
+            try {
+              await Roadmap.updateOne(
+                { _id: existingRoadmap._id },
+                {
+                  $set: {
+                    data: existingRoadmap.data,
+                    learningStages: existingRoadmap.learningStages,
+                    status: existingRoadmap.status,
+                  },
+                },
+              )
+            } catch {}
+          }
+          throw standaloneErr
+        }
+      } else {
+        throw txErr
+      }
+    } finally {
+      if (session) {
+        try { session.endSession() } catch {}
+      }
     }
-    return fail(res, 502, 'Failed to generate roadmap.', 'AI_SERVICE_ERROR')
+
+    // Outside the persistence try/catch (Item 3):
+    // Failure in syncGoalProgress must NOT abort, clean up, or delete the saved roadmap.
+    try {
+      await syncGoalProgress(goal._id, req.user._id, 'Roadmap generated')
+    } catch (syncErr) {
+      console.error('[roadmapController] syncGoalProgress failed:', syncErr.message)
+    }
+
+    return res.json({ success: true, roadmap: savedRoadmap })
+  } catch (error) {
+    const goalIdStr = goal?._id ? String(goal._id) : (req.body?.goalId || 'unknown')
+    const finishReason = error.finishReason || 'unknown'
+    console.error(`[roadmapController.createRoadmap] Failed for goalId: ${goalIdStr}, finishReason: ${finishReason}, error: ${error.message}`)
+    return fail(res, 502, 'Failed to generate roadmap. Please try again.', 'AI_SERVICE_ERROR')
+  } finally {
+    activeGenerations.delete(lockKey)
   }
 }
 

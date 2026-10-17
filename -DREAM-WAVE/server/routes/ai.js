@@ -6,7 +6,7 @@ const router = require('express').Router()
 const UserProfile = require('../models/UserProfile')
 const auth = require('../middleware/auth')
 const { sanitizeInput } = require('../middleware/sanitize')
-const { openai } = require('../utils/openaiClient')
+const { openai, getModel } = require('../utils/openaiClient')
 
 router.use(sanitizeInput)
 
@@ -43,9 +43,9 @@ router.get('/daily-suggestion', auth, async (req, res) => {
     const goalList = goals.map((goal) => `- ${goal.title} (${goal.progress || 0}% done)`).join('\n') || 'No active goals'
     const taskList = tasks.map((task) => `- ${task.title}`).join('\n') || 'No pending tasks'
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: getModel(),
       temperature: 0.7,
-      max_tokens: 300,
+      max_tokens: 1000,
       response_format: { type: 'json_object' },
       messages: [
         { role: 'system', content: 'You are a concise career mentor. Return valid JSON only.' },

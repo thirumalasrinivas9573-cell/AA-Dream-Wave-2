@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=Sora:wght@600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-tertiary-fixed-variant":"#3c475d","primary-fixed":"#d7e2ff","outline":"#8f9098","on-secondary-container":"#a5b9e2","inverse-on-surface":"#2c303a","surface-container":"#1c2028","outline-variant":"#44474d","on-primary-container":"#e1e9ff","surface-dim":"#0f131c","surface-bright":"#353943","on-secondary-fixed":"#031b3c","inverse-primary":"#4f5e7d","surface":"#0f131c","surface-container-lowest":"#0a0e16","primary-container":"#5a6988","secondary-container":"#35496d","tertiary-fixed-dim":"#bbc7e1","on-primary-fixed":"#0a1b36","surface-container-low":"#181c24","on-error":"#690005","surface-tint":"#b7c7ea","on-secondary":"#1b3052","on-tertiary":"#253045","secondary-fixed":"#d7e3ff","secondary":"#b3c7f1","inverse-surface":"#dfe2ee","on-primary-fixed-variant":"#384764","error-container":"#93000a","secondary-fixed-dim":"#b3c7f1","primary":"#b7c7ea","tertiary-fixed":"#d7e2fe","surface-container-highest":"#31353e","surface-variant":"#31353e","primary-fixed-dim":"#b7c7ea","background":"#0f131c","on-surface-variant":"#c5c6ce","tertiary-container":"#5e6980","on-tertiary-container":"#e1e9ff","surface-container-high":"#262a33","error":"#ffb4ab","tertiary":"#bbc7e1","on-tertiary-fixed":"#101c2f","on-error-container":"#ffdad6","on-primary":"#21304c","on-background":"#dfe2ee","on-surface":"#dfe2ee","on-secondary-fixed-variant":"#33476a"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-md":"1rem","gutter":"1.5rem","space-lg":"1.5rem","space-xl":"2.5rem","space-xs":"0.25rem","space-sm":"0.5rem","gutter-sm":"1rem","margin":"2.5rem","margin-mobile":"1.25rem"},"fontFamily":{"headline-sm":["Sora"],"label-caps":["IBM Plex Sans"],"body-md":["IBM Plex Sans"],"display-hero":["Sora"],"headline-lg-mobile":["Sora"],"body-sm":["IBM Plex Sans"],"label-md":["IBM Plex Sans"],"label-lg":["IBM Plex Sans"],"headline-md":["Sora"],"headline-lg":["Sora"],"display-hero-mobile":["Sora"],"body-lg":["IBM Plex Sans"]},"fontSize":{"headline-sm":["18px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"600"}],"label-caps":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0.01em","fontWeight":"400"}],"display-hero":["48px",{"lineHeight":"56px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0.015em","fontWeight":"400"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.03em","fontWeight":"500"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.015em","fontWeight":"600"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"400"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[72px] bg-surface-container-high z-50 flex flex-col items-center justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col items-center gap-space-lg w-full"><a class="group relative flex items-center justify-center w-12 h-12 rounded-xl bg-surface-container hover:bg-surface-container-highest transition-colors" data-path="overview" href="#"><span class="material-symbols-outlined text-primary text-[24px]">waves</span><div class="absolute left-[78px] px-space-sm py-1 bg-surface-bright text-on-surface text-label-caps font-label-caps rounded opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 shadow-[0_12px_32px_-4px_rgba(13,15,20,0.45)]">Dream Wave AI</div></a><nav class="flex flex-col items-center gap-space-xs w-full px-2" data-active-classes="bg-primary-container text-on-primary-container"><a aria-current="page" class="group relative flex items-center justify-center w-11 h-11 rounded-xl transition-all bg-primary-container text-on-primary-container" data-path="workspace" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><div class="absolute left-[68px] px-space-sm py-1 bg-surface-bright text-on-surface text-label-caps font-label-caps rounded opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 shadow-[0_12px_32px_-4px_rgba(13,15,20,0.45)]">Workspace</div></a><a class="group relative flex items-center justify-center w-11 h-11 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="models" href="#"><span class="material-symbols-outlined text-[20px]">neurology</span><div class="absolute left-[68px] px-space-sm py-1 bg-surface-bright text-on-surface text-label-caps font-label-caps rounded opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 shadow-[0_12px_32px_-4px_rgba(13,15,20,0.45)]">Model Checkpoints</div></a><a class="group relative flex items-center justify-center w-11 h-11 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="datasets" href="#"><span class="material-symbols-outlined text-[20px]">database</span><div class="absolute left-[68px] px-space-sm py-1 bg-surface-bright text-on-surface text-label-caps font-label-caps rounded opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 shadow-[0_12px_32px_-4px_rgba(13,15,20,0.45)]">Datasets &amp; Corpus</div></a><a class="group relative flex items-center justify-center w-11 h-11 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="experiments" href="#"><span class="material-symbols-outlined text-[20px]">science</span><div class="absolute left-[68px] px-space-sm py-1 bg-surface-bright text-on-surface text-label-caps font-label-caps rounded opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 shadow-[0_12px_32px_-4px_rgba(13,15,20,0.45)]">Experiment Runs</div></a><a class="group relative flex items-center justify-center w-11 h-11 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="collaborators" href="#"><span class="material-symbols-outlined text-[20px]">group</span><div class="absolute left-[68px] px-space-sm py-1 bg-surface-bright text-on-surface text-label-caps font-label-caps rounded opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 shadow-[0_12px_32px_-4px_rgba(13,15,20,0.45)]">Lab Supervisor &amp; Team</div></a></nav></div><div class="flex flex-col items-center gap-space-sm w-full"><button class="group relative flex items-center justify-center w-10 h-10 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" type="button"><span class="material-symbols-outlined text-[20px]">dark_mode</span><div class="absolute left-[68px] px-space-sm py-1 bg-surface-bright text-on-surface text-label-caps font-label-caps rounded opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 shadow-[0_12px_32px_-4px_rgba(13,15,20,0.45)]">Theme Toggle</div></button><a class="group relative flex items-center justify-center w-10 h-10 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-error transition-all" data-path="login" href="#"><span class="material-symbols-outlined text-[20px]">logout</span><div class="absolute left-[68px] px-space-sm py-1 bg-surface-bright text-on-surface text-label-caps font-label-caps rounded opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 shadow-[0_12px_32px_-4px_rgba(13,15,20,0.45)]">Sign Out</div></a><div class="pt-space-xs"><div class="group relative cursor-pointer"><div class="relative flex items-center justify-center w-10 h-10 rounded-full bg-surface-container p-[2px]"><svg class="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewbox="0 0 40 40"><circle cx="20" cy="20" fill="none" r="18" stroke="#1c2028" stroke-width="2.5"></circle><circle cx="20" cy="20" fill="none" r="18" stroke="#b7c7ea" stroke-dasharray="113" stroke-dashoffset="38" stroke-linecap="round" stroke-width="2.5"></circle></svg><div class="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-on-primary font-headline-sm text-label-caps font-semibold">CG</div></div><div class="absolute left-[68px] bottom-0 px-space-sm py-1 bg-surface-bright text-on-surface text-label-caps font-label-caps rounded opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 shadow-[0_12px_32px_-4px_rgba(13,15,20,0.45)]">Charan G. (Level 6 XP)</div></div></div></div></aside><div class="pl-[72px]"><header class="fixed top-0 left-[72px] right-0 h-16 bg-surface/80 backdrop-blur-xl z-40 shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full h-16 px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm text-label-caps font-label-caps text-on-surface-variant"><span class="text-primary font-semibold">LAB_NODE //</span><span>WORKSPACE</span></div><div class="flex-1 max-w-md"><div class="relative flex items-center w-full"><span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]">search</span><input class="w-full h-9 pl-9 pr-12 rounded-full bg-surface-container-high text-on-surface placeholder:text-on-surface-variant/60 font-body-sm text-body-sm focus:outline-none transition-all" placeholder="Search experiments, runs, checkpoints..." type="text"/><span class="absolute right-3 px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-mono font-medium">⌘K</span></div></div><div class="flex items-center gap-space-sm"><button class="relative flex items-center justify-center w-9 h-9 rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-secondary"></span></button><div class="flex items-center gap-space-xs pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="relative pt-16 w-full bg-background"><div class="w-full bg-secondary-container/20 px-space-lg py-space-sm shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="max-w-7xl mx-auto flex items-center justify-between text-body-sm font-body-sm text-on-surface"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-secondary text-[18px]">warning</span><span>Workflow needs approval — 1 pending model checkpoint review request from lab supervisor</span></div><a class="flex items-center gap-1 font-label-md text-label-md text-primary hover:text-on-primary-container transition-colors" data-path="models" href="#"><span>Review</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span></a></div></div><div class="max-w-7xl mx-auto px-space-lg py-space-lg"><div class="flex flex-col w-full text-on-surface">
+<div class="relative w-full max-w-7xl mx-auto space-y-space-xl">
+<!-- Ambient slate-blue atmospheric haze -->
+<div class="absolute -top-16 left-1/4 w-96 h-48 bg-secondary-container/20 blur-[110px] pointer-events-none -z-10 rounded-full"></div>
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-space-md pt-2">
+<div class="space-y-1.5">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-caps text-label-caps tracking-widest text-secondary uppercase">Student Workspace · Overview</span>
+</div>
+<h1 class="font-display-hero text-display-hero text-on-surface tracking-tight">Good evening, Charan</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+          Here is your calm overview, next best action, and focus priorities for today.
+        </p>
+</div>
+<!-- Quick Session Indicator -->
+<div class="flex items-center gap-3 bg-surface-container px-4 py-2.5 rounded-2xl shadow-sm self-start md:self-auto">
+<span class="material-symbols-outlined text-secondary text-[20px]">spa</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Active State</span>
+<span class="font-label-md text-label-md text-on-surface font-medium">Deep Focus Mode · 52m</span>
+</div>
+</div>
+</header>
+<!-- Full-Width Hero Card: "What should I do now?" -->
+<section class="relative overflow-hidden rounded-[28px] bg-gradient-to-r from-secondary-container via-primary-container to-surface-container-high p-8 lg:p-10 shadow-xl">
+<!-- Subtle geometric wave SVG in background -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-15" fill="none" preserveaspectratio="none" viewbox="0 0 1200 400">
+<path class="text-secondary-fixed" d="M0 240C200 180 400 320 600 240C800 160 1000 280 1200 220V400H0V240Z" fill="currentColor"></path>
+<path class="text-primary-fixed" d="M0 160C300 260 600 100 900 210C1050 265 1150 200 1200 180" stroke="currentColor" stroke-dasharray="4 8" stroke-width="1.5"></path>
+</svg>
+<!-- Pale top-right ambient flare -->
+<div class="absolute -top-24 -right-24 w-72 h-72 bg-primary/20 blur-3xl pointer-events-none rounded-full"></div>
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Hero Details (Cols 1-8) -->
+<div class="lg:col-span-8 space-y-6">
+<div class="inline-flex items-center gap-2 bg-on-surface text-surface-dim px-3.5 py-1 rounded-full shadow-sm">
+<span class="text-[12px] font-semibold tracking-wide">✦</span>
+<span class="font-label-md text-label-md font-semibold">What should I do now?</span>
+</div>
+<div class="space-y-3">
+<h2 class="font-headline-lg text-headline-lg text-white tracking-tight leading-snug">
+              Complete Attention Mechanisms &amp; FlashAttention-2 Lab
+            </h2>
+<p class="font-body-lg text-body-lg text-on-primary-container/90 max-w-2xl">
+              Your prompt architecture milestone is 82% complete and scheduled for evaluation tomorrow morning.
+            </p>
+</div>
+<!-- Glass Chips -->
+<div class="flex flex-wrap items-center gap-2 pt-1">
+<span class="px-3 py-1 rounded-full bg-surface-dim/40 backdrop-blur-md text-on-surface font-label-md text-label-md">
+              Task
+            </span>
+<span class="px-3 py-1 rounded-full bg-surface-dim/40 backdrop-blur-md text-on-surface font-label-md text-label-md">
+              Goal: Deep Learning Core
+            </span>
+<span class="px-3 py-1 rounded-full bg-surface-dim/40 backdrop-blur-md text-on-surface font-label-md text-label-md">
+              Roadmap: Phase 2
+            </span>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-wrap items-center gap-4 pt-2">
+<button class="inline-flex items-center gap-2 h-11 px-6 rounded-xl bg-on-surface text-surface-dim hover:bg-surface-tint hover:text-on-primary font-label-lg text-label-lg font-semibold transition-all shadow-md group" type="button">
+<span>Open task</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">north_east</span>
+</button>
+<button class="inline-flex items-center gap-2 h-11 px-5 rounded-xl bg-surface-dim/30 hover:bg-surface-dim/50 text-white font-label-lg text-label-lg font-medium transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Plan my day</span>
+</button>
+</div>
+</div>
+<!-- Progress Gauge (Cols 9-12) -->
+<div class="lg:col-span-4 flex flex-col items-center justify-center p-6 bg-surface-dim/35 backdrop-blur-md rounded-2xl shadow-inner">
+<div class="relative w-40 h-40 flex items-center justify-center">
+<!-- Inline SVG Gauge -->
+<svg class="w-full h-full -rotate-90" viewbox="0 0 120 120">
+<circle class="text-surface-container-high/60" cx="60" cy="60" fill="none" r="50" stroke="currentColor" stroke-width="9"></circle>
+<circle class="text-secondary" cx="60" cy="60" fill="none" r="50" stroke="currentColor" stroke-dasharray="314.159" stroke-dashoffset="56.5" stroke-linecap="round" stroke-width="9"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-headline-lg text-headline-lg font-bold text-white tracking-tight">82%</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase font-semibold">Done</span>
+</div>
+</div>
+<div class="text-center mt-3 space-y-1">
+<div class="font-headline-sm text-headline-sm text-white">Phase Completion</div>
+<div class="inline-flex items-center gap-1 font-label-caps text-label-caps text-secondary">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>+4% from yesterday</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Row of 3 Stat Cards -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1: Level and XP -->
+<div class="bg-surface-container rounded-[26px] p-7 shadow-lg flex flex-col justify-between space-y-5 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-secondary font-semibold">Current Proficiency</span>
+<span class="material-symbols-outlined text-secondary text-[22px]">military_tech</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Level 1 Explorer</h3>
+<div class="flex items-baseline justify-between mt-2 mb-2 font-body-sm text-body-sm">
+<span class="text-on-surface font-semibold">350 <span class="text-on-surface-variant font-normal">/ 500 XP</span></span>
+<span class="text-secondary font-medium">70%</span>
+</div>
+<div class="w-full h-2.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 70%;"></div>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1.5 pt-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">hourglass_top</span>
+<span>150 XP until Level 2 Prompt Architect</span>
+</p>
+</div>
+<!-- Card 2: Learning Streak -->
+<div class="bg-surface-container rounded-[26px] p-7 shadow-lg flex flex-col justify-between space-y-5 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-secondary font-semibold">Habit Rhythm</span>
+<span class="material-symbols-outlined text-secondary text-[22px]">local_fire_department</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">7 Days Active</h3>
+<!-- Streak Trackers M-T-W-T-F-S-S -->
+<div class="grid grid-cols-7 gap-2 mt-4">
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-label-caps text-label-caps text-on-surface-variant">M</span>
+<span class="w-7 h-7 rounded-xl bg-secondary flex items-center justify-center text-on-secondary font-semibold text-[11px]">✓</span>
+</div>
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-label-caps text-label-caps text-on-surface-variant">T</span>
+<span class="w-7 h-7 rounded-xl bg-secondary flex items-center justify-center text-on-secondary font-semibold text-[11px]">✓</span>
+</div>
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-label-caps text-label-caps text-on-surface-variant">W</span>
+<span class="w-7 h-7 rounded-xl bg-secondary flex items-center justify-center text-on-secondary font-semibold text-[11px]">✓</span>
+</div>
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-label-caps text-label-caps text-on-surface-variant">T</span>
+<span class="w-7 h-7 rounded-xl bg-secondary flex items-center justify-center text-on-secondary font-semibold text-[11px]">✓</span>
+</div>
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-label-caps text-label-caps text-on-surface-variant">F</span>
+<span class="w-7 h-7 rounded-xl bg-secondary flex items-center justify-center text-on-secondary font-semibold text-[11px]">✓</span>
+</div>
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-label-caps text-label-caps text-on-surface-variant">S</span>
+<span class="w-7 h-7 rounded-xl bg-secondary flex items-center justify-center text-on-secondary font-semibold text-[11px]">✓</span>
+</div>
+<div class="flex flex-col items-center gap-1.5">
+<span class="font-label-caps text-label-caps text-secondary font-bold">S</span>
+<span class="w-7 h-7 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-[11px] ring-2 ring-secondary/40">★</span>
+</div>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1.5 pt-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">bolt</span>
+<span>Consistent daily momentum recorded</span>
+</p>
+</div>
+<!-- Card 3: Goal Health -->
+<div class="bg-surface-container rounded-[26px] p-7 shadow-lg flex flex-col justify-between space-y-5 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-secondary font-semibold">Active Milestone</span>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container/40 text-secondary font-label-caps text-label-caps font-semibold">
+            ON TRACK
+          </span>
+</div>
+<div>
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Core AI Pathway</h3>
+</div>
+<!-- Sparkline representation -->
+<div class="h-10 w-full mt-3 flex items-end">
+<svg class="w-full h-8 overflow-visible" fill="none" viewbox="0 0 200 40">
+<path class="text-secondary" d="M0 32 Q 40 30, 70 22 T 130 14 T 200 4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
+<circle class="text-secondary" cx="200" cy="4" fill="currentColor" r="4"></circle>
+</svg>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1.5 pt-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">schedule</span>
+<span>Paced for completion in 18 days</span>
+</p>
+</div>
+</section>
+<!-- Two-Column Section: Priorities & Daily Brief -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Left Column: Today's Priorities (8 Cols) -->
+<div class="lg:col-span-8 bg-surface-container rounded-[26px] p-7 lg:p-8 shadow-lg flex flex-col justify-between space-y-6">
+<div>
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<h2 class="font-headline-md text-headline-md text-on-surface">Today's Priorities</h2>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-caps text-label-caps font-semibold">
+                4 pending
+              </span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+<span>Sorted by urgency</span>
+</div>
+</div>
+<!-- Priority Item Rows -->
+<div class="space-y-3">
+<!-- Item 01 -->
+<div class="group flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-colors gap-4">
+<div class="flex items-start sm:items-center gap-4">
+<span class="w-8 h-8 rounded-xl bg-surface-container-highest flex items-center justify-center font-headline-sm text-headline-sm text-secondary font-semibold">01</span>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold group-hover:text-primary transition-colors">Synthesize LoRA Fine-Tuning Benchmarks</h4>
+<span class="px-2 py-0.5 rounded-full bg-error-container/30 text-error font-label-caps text-label-caps font-medium">High</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Required before setting up tomorrow's distributed run</p>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary hover:text-on-surface shrink-0 self-end sm:self-auto font-medium transition-colors" href="#">
+<span>Open task</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Item 02 -->
+<div class="group flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-colors gap-4">
+<div class="flex items-start sm:items-center gap-4">
+<span class="w-8 h-8 rounded-xl bg-surface-container-highest flex items-center justify-center font-headline-sm text-headline-sm text-secondary font-semibold">02</span>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold group-hover:text-primary transition-colors">Review AI Mentor Feedback on Transformer Prompt</h4>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/40 text-secondary font-label-caps text-label-caps font-medium">Lab</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">3 specific optimizations suggested for latency reduction</p>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary hover:text-on-surface shrink-0 self-end sm:self-auto font-medium transition-colors" href="#">
+<span>Open task</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Item 03 -->
+<div class="group flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-colors gap-4">
+<div class="flex items-start sm:items-center gap-4">
+<span class="w-8 h-8 rounded-xl bg-surface-container-highest flex items-center justify-center font-headline-sm text-headline-sm text-secondary font-semibold">03</span>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold group-hover:text-primary transition-colors">Inspect Embeddings Vector Space Visualization</h4>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-caps text-label-caps font-medium">Routine</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Weekly verification checkpoint for token alignment</p>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary hover:text-on-surface shrink-0 self-end sm:self-auto font-medium transition-colors" href="#">
+<span>Open task</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Item 04 -->
+<div class="group flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-2xl bg-surface-container-low hover:bg-surface-container-high transition-colors gap-4">
+<div class="flex items-start sm:items-center gap-4">
+<span class="w-8 h-8 rounded-xl bg-surface-container-highest flex items-center justify-center font-headline-sm text-headline-sm text-secondary font-semibold">04</span>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold group-hover:text-primary transition-colors">Submit System Architecture Capstone Draft</h4>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/40 text-tertiary font-label-caps text-label-caps font-medium">48h left</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Final review deadline closes in 48 hours</p>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary hover:text-on-surface shrink-0 self-end sm:self-auto font-medium transition-colors" href="#">
+<span>Open task</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="flex items-center justify-between pt-4 font-body-sm text-body-sm text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Focus Mode enabled</span>
+</div>
+<a class="flex items-center gap-1 text-primary hover:text-on-surface font-label-md text-label-md transition-colors" href="#">
+<span>View all backlog (12)</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Right Column: Daily Brief (4 Cols) -->
+<div class="lg:col-span-4 bg-surface-container rounded-[26px] p-7 shadow-lg flex flex-col justify-between space-y-6">
+<div>
+<div class="flex items-center justify-between mb-5">
+<h3 class="font-headline-md text-headline-md text-on-surface">Daily Brief</h3>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/40 text-secondary font-label-caps text-label-caps font-semibold">Today</span>
+</div>
+<!-- Bullet Updates -->
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mt-2 shrink-0"></span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                Stanford CS231n cohort synchronous review starts today at 4:00 PM.
+              </p>
+</li>
+<li class="flex items-start gap-3">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mt-2 shrink-0"></span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                Your research notebook on Rotary Positional Embeddings was starred by 2 peers.
+              </p>
+</li>
+<li class="flex items-start gap-3">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mt-2 shrink-0"></span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                3 new internship listings in AI Alignment matched your candidate profile.
+              </p>
+</li>
+<li class="flex items-start gap-3">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mt-2 shrink-0"></span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                Platform weights synchronized with checkpoint v2.4 at 09:30 AM.
+              </p>
+</li>
+<li class="flex items-start gap-3">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mt-2 shrink-0"></span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                Weekly goal progress is currently 14% ahead of your cohort median.
+              </p>
+</li>
+</ul>
+</div>
+<!-- Footer -->
+<div class="flex items-center justify-between pt-4 font-body-sm text-body-sm text-on-surface-variant">
+<span>All 5 updates live</span>
+<button class="flex items-center gap-1 text-secondary hover:text-on-surface font-label-md text-label-md transition-colors" onclick="this.innerHTML='All read ✓'; this.classList.add('text-on-surface-variant')" type="button">
+<span>Mark all read</span>
+<span class="material-symbols-outlined text-[16px]">done_all</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Bottom Section: Intelligent Suggestions -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Intelligent Suggestions</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Recommended actions contextualized to your current study trajectories</p>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">4 Curated</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+<!-- Suggestion Card 1 -->
+<div class="bg-surface-container rounded-[26px] p-6 shadow-md hover:bg-surface-container-high transition-colors flex flex-col justify-between space-y-4 group">
+<div class="space-y-3">
+<div class="w-10 h-10 rounded-2xl bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+              Explore Multi-Agent Orchestration
+            </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              15 min read · Architectural patterns for LLM agent chains and consensus protocols.
+            </p>
+</div>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary group-hover:text-on-surface pt-2 transition-colors" href="#">
+<span>Read</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Suggestion Card 2 -->
+<div class="bg-surface-container rounded-[26px] p-6 shadow-md hover:bg-surface-container-high transition-colors flex flex-col justify-between space-y-4 group">
+<div class="space-y-3">
+<div class="w-10 h-10 rounded-2xl bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">support_agent</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+              Schedule 1:1 with Dr. Aris Thorne
+            </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              2 slots open · Capstone supervisor guidance on attention sink implementations.
+            </p>
+</div>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary group-hover:text-on-surface pt-2 transition-colors" href="#">
+<span>Book session</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Suggestion Card 3 -->
+<div class="bg-surface-container rounded-[26px] p-6 shadow-md hover:bg-surface-container-high transition-colors flex flex-col justify-between space-y-4 group">
+<div class="space-y-3">
+<div class="w-10 h-10 rounded-2xl bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">speed</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+              Optimize Inference Budget
+            </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Diagnostics · Quantization check to trim GPU inference latency by up to 34%.
+            </p>
+</div>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary group-hover:text-on-surface pt-2 transition-colors" href="#">
+<span>Run audit</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Suggestion Card 4 -->
+<div class="bg-surface-container rounded-[26px] p-6 shadow-md hover:bg-surface-container-high transition-colors flex flex-col justify-between space-y-4 group">
+<div class="space-y-3">
+<div class="w-10 h-10 rounded-2xl bg-surface-container-low flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-primary transition-colors">
+              Practice System Design Mock
+            </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              ~25 mins · Simulated interview covering distributed embeddings cache scale-out.
+            </p>
+</div>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary group-hover:text-on-surface pt-2 transition-colors" href="#">
+<span>Start mock</span>
+<span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+</div>
+</div></div></main></div></body></html>

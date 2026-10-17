@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;margin:0;padding:0;}body{overscroll-behavior:none;background:linear-gradient(180deg,#e6f3fd 0%,#f0f8fe 100%);}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'on-secondary-fixed': '#001f25', 'on-surface': '#001c3b', 'tertiary': '#246185', 'inverse-primary': '#9bcaff', 'surface-bright': '#f9f9ff', 'primary-fixed-dim': '#9bcaff', 'error-container': '#ffdad6', 'on-secondary-fixed-variant': '#004e5b', 'tertiary-fixed-dim': '#96cdf5', 'on-background': '#001c3b', 'outline': '#707882', 'primary': '#005f9c', 'on-primary-container': '#fdfcff', 'on-primary': '#ffffff', 'outline-variant': '#c0c7d3', 'surface-tint': '#0062a0', 'primary-container': '#0079c4', 'surface-variant': '#d5e3ff', 'primary-fixed': '#d0e4ff', 'tertiary-fixed': '#c8e6ff', 'on-secondary': '#ffffff', 'surface-dim': '#c7dbff', 'surface-container-low': '#f0f3ff', 'on-primary-fixed-variant': '#00497a', 'on-secondary-container': '#006170', 'background': '#f9f9ff', 'secondary-container': '#49e1fd', 'error': '#ba1a1a', 'surface-container-lowest': '#ffffff', 'secondary-fixed': '#a6eeff', 'inverse-surface': '#193151', 'surface-container-high': '#dee8ff', 'surface': '#f9f9ff', 'on-error': '#ffffff', 'tertiary-container': '#427a9f', 'on-tertiary': '#ffffff', 'on-surface-variant': '#404751', 'on-tertiary-fixed': '#001e2f', 'surface-container-highest': '#d5e3ff', 'surface-container': '#e7eeff', 'inverse-on-surface': '#ebf1ff', 'on-error-container': '#93000a', 'on-tertiary-fixed-variant': '#004c6e', 'on-primary-fixed': '#001d35', 'secondary-fixed-dim': '#3dd8f5', 'on-tertiary-container': '#fcfcff', 'secondary': '#006878' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'space-lg': '1.75rem', 'gutter-mobile': '1rem', 'space-xl': '2.5rem', 'margin-mobile': '1rem', 'space-sm': '0.75rem', 'space-xs': '0.375rem', 'margin': '2rem', 'gutter': '1.5rem', 'space-md': '1.25rem' }, fontFamily: { 'label-lg': ['Outfit'], 'headline-md': ['Outfit'], 'headline-sm': ['Outfit'], 'label-md': ['Outfit'], 'title-md': ['Outfit'], 'body-lg': ['Plus Jakarta Sans'], 'headline-lg': ['Outfit'], 'display-hero': ['Outfit'], 'body-sm': ['Plus Jakarta Sans'], 'body-md': ['Plus Jakarta Sans'], 'label-sm': ['Outfit'], 'headline-lg-mobile': ['Outfit'], 'display-hero-mobile': ['Outfit'] }, fontSize: { 'label-lg': ['14px', { lineHeight: '20px', fontWeight: '600' }], 'headline-md': ['24px', { lineHeight: '32px', fontWeight: '600' }], 'headline-sm': ['20px', { lineHeight: '28px', fontWeight: '600' }], 'label-md': ['12px', { lineHeight: '16px', fontWeight: '600' }], 'title-md': ['18px', { lineHeight: '24px', fontWeight: '600' }], 'body-lg': ['16px', { lineHeight: '26px', fontWeight: '400' }], 'headline-lg': ['32px', { lineHeight: '40px', fontWeight: '600' }], 'display-hero': ['48px', { lineHeight: '56px', fontWeight: '700' }], 'body-sm': ['12px', { lineHeight: '18px', fontWeight: '400' }], 'body-md': ['14px', { lineHeight: '22px', fontWeight: '400' }], 'label-sm': ['11px', { lineHeight: '14px', fontWeight: '500' }], 'headline-lg-mobile': ['26px', { lineHeight: '32px', fontWeight: '600' }], 'display-hero-mobile': ['32px', { lineHeight: '40px', fontWeight: '700' }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="min-h-full font-body-md text-on-surface flex flex-col relative antialiased"><header class="fixed top-0 w-full z-50 pt-safe bg-[#cfe6f9]/85 backdrop-blur-xl shadow-[0_4px_20px_rgba(47,143,221,0.08)]"><div class="h-16 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-space-xs"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shadow-[0_2px_8px_rgba(0,95,156,0.3)]"><span class="material-symbols-outlined text-on-primary text-[20px]">neurology</span></div><div class="flex flex-col"><span class="font-label-md text-primary tracking-wider uppercase leading-none">Dream Wave</span><span class="font-headline-sm text-on-surface truncate">Mobile Memory</span></div></div><div class="flex items-center gap-space-xs"><button class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface transition-colors active:scale-95"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-20"><div class="flex flex-col w-full px-margin-mobile pb-8 space-y-4">
+<!-- Screen Header -->
+<div class="pt-3 pb-1">
+<div class="flex items-center gap-1.5 mb-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-secondary uppercase tracking-widest">PERSONAL AI MEMORY 2.0</span>
+</div>
+<h1 class="font-headline-md text-on-surface tracking-tight">Mobile Memory</h1>
+<p class="font-body-md text-on-surface-variant">Useful, minimal, and under your control.</p>
+</div>
+<!-- Hero Card: Remember Something -->
+<section class="rounded-[24px] p-space-md shadow-md bg-gradient-to-br from-tertiary-fixed to-primary-fixed-dim/90 relative overflow-hidden">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-lowest/80 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">add_task</span>
+</div>
+<h2 class="font-headline-sm text-on-surface">What should AI remember?</h2>
+</div>
+<span class="font-label-sm px-2.5 py-1 rounded-full bg-surface-container-lowest/70 text-on-surface-variant backdrop-blur-sm">v2.4 Auto-sync</span>
+</div>
+<form class="space-y-3" id="new-memory-form" onsubmit="event.preventDefault(); window.addNewMemory();">
+<div class="relative">
+<textarea class="w-full bg-surface-container-lowest text-on-surface placeholder:text-on-surface-variant/70 rounded-xl p-3 text-[15px] leading-relaxed focus:outline-none focus:ring-2 focus:ring-primary shadow-sm resize-none" id="memory-input" placeholder="e.g. I prefer concise explanations and visual architecture diagrams" rows="2"></textarea>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex-1 relative">
+<select class="w-full h-11 bg-surface-container-lowest text-on-surface rounded-xl px-3 font-label-md appearance-none focus:outline-none shadow-sm flex items-center" id="memory-category">
+<option value="PREFERENCE">PREFERENCE</option>
+<option value="LEARNING">LEARNING</option>
+<option value="WORKFLOW">WORKFLOW</option>
+<option value="GOALS">GOALS</option>
+<option value="COMMUNICATION">COMMUNICATION</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-[18px]">expand_more</span>
+</div>
+<div class="flex items-center h-11 px-3 rounded-xl bg-surface-container-lowest/60 text-on-surface text-label-md gap-1">
+<span class="material-symbols-outlined text-secondary text-[16px]">verified</span>
+<span>Canonical</span>
+</div>
+</div>
+<button class="w-full h-11 rounded-full bg-primary hover:bg-primary-container active:scale-[0.99] text-on-primary font-label-lg shadow-md flex items-center justify-center gap-1.5 transition-all" type="submit">
+<span class="material-symbols-outlined text-[18px]">bookmark_add</span>
+<span>Remember Context</span>
+</button>
+</form>
+</section>
+<!-- Collapsible: Memory Settings -->
+<section class="rounded-[24px] bg-surface-container-lowest/80 backdrop-blur-md shadow-sm overflow-hidden">
+<button class="w-full px-space-md py-3.5 flex items-center justify-between text-left active:bg-surface-container-low transition-colors" id="toggle-settings-btn" onclick="window.toggleSettings()">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">tune</span>
+<span class="font-headline-sm text-on-surface">Memory Settings</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed" id="active-toggles-badge">4 Active</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px] transition-transform duration-200" id="settings-chevron">expand_less</span>
+</div>
+</button>
+<div class="px-space-md pb-4 pt-1 space-y-3" id="settings-body">
+<!-- Toggle 1 -->
+<label class="flex items-center justify-between min-h-[44px] cursor-pointer">
+<div class="flex flex-col pr-3">
+<span class="font-title-md text-[15px] text-on-surface">Personalization memory</span>
+<span class="font-body-sm text-on-surface-variant">Adapt responses based on tracked patterns</span>
+</div>
+<input checked="" class="peer sr-only" onchange="window.updateBadge()" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-high rounded-full peer peer-checked:bg-primary relative transition-colors">
+<div class="w-5 h-5 bg-surface-container-lowest rounded-full absolute top-0.5 left-0.5 peer-checked:translate-x-6 transition-transform shadow"></div>
+</div>
+</label>
+<!-- Toggle 2 -->
+<label class="flex items-center justify-between min-h-[44px] cursor-pointer">
+<div class="flex flex-col pr-3">
+<span class="font-title-md text-[15px] text-on-surface">Use memory in AI</span>
+<span class="font-body-sm text-on-surface-variant">Inject synthesized memory keys during prompts</span>
+</div>
+<input checked="" class="peer sr-only" onchange="window.updateBadge()" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-high rounded-full peer peer-checked:bg-primary relative transition-colors">
+<div class="w-5 h-5 bg-surface-container-lowest rounded-full absolute top-0.5 left-0.5 peer-checked:translate-x-6 transition-transform shadow"></div>
+</div>
+</label>
+<!-- Toggle 3 -->
+<label class="flex items-center justify-between min-h-[44px] cursor-pointer">
+<div class="flex flex-col pr-3">
+<span class="font-title-md text-[15px] text-on-surface">Proactive use</span>
+<span class="font-body-sm text-on-surface-variant">Allow suggestions without explicit trigger queries</span>
+</div>
+<input checked="" class="peer sr-only" onchange="window.updateBadge()" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-high rounded-full peer peer-checked:bg-primary relative transition-colors">
+<div class="w-5 h-5 bg-surface-container-lowest rounded-full absolute top-0.5 left-0.5 peer-checked:translate-x-6 transition-transform shadow"></div>
+</div>
+</label>
+<!-- Toggle 4 -->
+<label class="flex items-center justify-between min-h-[44px] cursor-pointer">
+<div class="flex flex-col pr-3">
+<span class="font-title-md text-[15px] text-on-surface">Allow AI proposals</span>
+<span class="font-body-sm text-on-surface-variant">Draft new memories for you to review and confirm</span>
+</div>
+<input checked="" class="peer sr-only" onchange="window.updateBadge()" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-high rounded-full peer peer-checked:bg-primary relative transition-colors">
+<div class="w-5 h-5 bg-surface-container-lowest rounded-full absolute top-0.5 left-0.5 peer-checked:translate-x-6 transition-transform shadow"></div>
+</div>
+</label>
+<div class="pt-2">
+<div class="rounded-xl p-3 bg-secondary-fixed/50 flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">info</span>
+<p class="font-body-sm text-on-secondary-fixed-variant leading-snug">
+            Memory is DATA — not truth. Canonical goals and projects always stem from live verified systems.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Search & Category Filters -->
+<section class="space-y-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full h-11 bg-surface-container-lowest text-on-surface placeholder:text-on-surface-variant/70 rounded-xl pl-10 pr-4 text-[15px] shadow-sm focus:outline-none focus:ring-2 focus:ring-primary" id="search-input" oninput="window.filterMemories()" placeholder="Search memories" type="text"/>
+</div>
+<!-- Horizontal Category Chips -->
+<div class="flex items-center gap-1.5 overflow-x-auto py-1 -mx-margin-mobile px-margin-mobile scroll-smooth" id="chips-container">
+<button class="cat-chip h-9 px-3.5 rounded-full font-label-md whitespace-nowrap bg-primary text-on-primary shadow-sm shrink-0 transition-transform active:scale-95" data-category="ALL" onclick="window.setCategory('ALL', this)">All (3)</button>
+<button class="cat-chip h-9 px-3.5 rounded-full font-label-md whitespace-nowrap bg-surface-container-lowest text-on-surface shadow-sm shrink-0 transition-transform active:scale-95" data-category="PREFERENCE" onclick="window.setCategory('PREFERENCE', this)">Preferences</button>
+<button class="cat-chip h-9 px-3.5 rounded-full font-label-md whitespace-nowrap bg-surface-container-lowest text-on-surface shadow-sm shrink-0 transition-transform active:scale-95" data-category="LEARNING" onclick="window.setCategory('LEARNING', this)">Learning</button>
+<button class="cat-chip h-9 px-3.5 rounded-full font-label-md whitespace-nowrap bg-surface-container-lowest text-on-surface shadow-sm shrink-0 transition-transform active:scale-95" data-category="WORKFLOW" onclick="window.setCategory('WORKFLOW', this)">Workflow</button>
+<button class="cat-chip h-9 px-3.5 rounded-full font-label-md whitespace-nowrap bg-surface-container-lowest text-on-surface shadow-sm shrink-0 transition-transform active:scale-95" data-category="CAREER" onclick="window.setCategory('CAREER', this)">Career</button>
+<button class="cat-chip h-9 px-3.5 rounded-full font-label-md whitespace-nowrap bg-surface-container-lowest text-on-surface shadow-sm shrink-0 transition-transform active:scale-95" data-category="PROJECTS" onclick="window.setCategory('PROJECTS', this)">Projects</button>
+<button class="cat-chip h-9 px-3.5 rounded-full font-label-md whitespace-nowrap bg-surface-container-lowest text-on-surface shadow-sm shrink-0 transition-transform active:scale-95" data-category="COMMUNICATION" onclick="window.setCategory('COMMUNICATION', this)">Communication</button>
+<button class="cat-chip h-9 px-3.5 rounded-full font-label-md whitespace-nowrap bg-surface-container-lowest text-on-surface shadow-sm shrink-0 transition-transform active:scale-95" data-category="GOALS" onclick="window.setCategory('GOALS', this)">Goals</button>
+<button class="cat-chip h-9 px-3.5 rounded-full font-label-md whitespace-nowrap bg-surface-container-lowest text-on-surface shadow-sm shrink-0 transition-transform active:scale-95" data-category="DECISIONS" onclick="window.setCategory('DECISIONS', this)">Decisions</button>
+</div>
+</section>
+<!-- Memories List -->
+<section class="space-y-3" id="memories-list">
+<!-- Card 1 -->
+<article class="memory-card rounded-[24px] p-space-md bg-surface-container-lowest/80 backdrop-blur-md shadow-sm relative transition-all" data-category="PREFERENCE" data-keywords="concise explanations bullet points takeaways">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm uppercase px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant">PREFERENCE</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-on-surface-variant">Active</span>
+</div>
+<div class="flex items-center gap-1 -mr-1">
+<button aria-label="Edit memory" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary active:scale-90 transition-transform" onclick="window.editMemory(this)">
+<span class="material-symbols-outlined text-[19px]">edit</span>
+</button>
+<button aria-label="Delete memory" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-error active:scale-90 transition-transform" onclick="window.deleteMemory(this)">
+<span class="material-symbols-outlined text-[19px]">delete</span>
+</button>
+</div>
+</div>
+<h3 class="card-title font-headline-sm text-on-surface mb-1">Concise Explanations</h3>
+<p class="card-body font-body-md text-on-surface-variant text-[15px] mb-3">Prefers responses structured in concise bullet points with direct technical takeaways.</p>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">schedule</span>
+<span>2d ago · Confirmed</span>
+</div>
+<span class="font-label-sm px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant">100% confidence</span>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="memory-card rounded-[24px] p-space-md bg-surface-container-lowest/80 backdrop-blur-md shadow-sm relative transition-all" data-category="LEARNING" data-keywords="distributed systems vector search latency profiling tutorials">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm uppercase px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant">LEARNING</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-on-surface-variant">Synthesized</span>
+</div>
+<div class="flex items-center gap-1 -mr-1">
+<button aria-label="Edit memory" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary active:scale-90 transition-transform" onclick="window.editMemory(this)">
+<span class="material-symbols-outlined text-[19px]">edit</span>
+</button>
+<button aria-label="Delete memory" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-error active:scale-90 transition-transform" onclick="window.deleteMemory(this)">
+<span class="material-symbols-outlined text-[19px]">delete</span>
+</button>
+</div>
+</div>
+<h3 class="card-title font-headline-sm text-on-surface mb-1">Focus on Distributed Systems</h3>
+<p class="card-body font-body-md text-on-surface-variant text-[15px] mb-3">Prioritize vector search pipelines and latency profiling in tutorials.</p>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+<span>4d ago · Approved</span>
+</div>
+<span class="font-label-sm px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant">High impact</span>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="memory-card rounded-[24px] p-space-md bg-surface-container-lowest/80 backdrop-blur-md shadow-sm relative transition-all" data-category="WORKFLOW" data-keywords="sandbox safety gating explicit human approval shell commands push">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-2">
+<span class="font-label-sm uppercase px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant">WORKFLOW</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-on-surface-variant">Policy</span>
+</div>
+<div class="flex items-center gap-1 -mr-1">
+<button aria-label="Edit memory" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary active:scale-90 transition-transform" onclick="window.editMemory(this)">
+<span class="material-symbols-outlined text-[19px]">edit</span>
+</button>
+<button aria-label="Delete memory" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-error active:scale-90 transition-transform" onclick="window.deleteMemory(this)">
+<span class="material-symbols-outlined text-[19px]">delete</span>
+</button>
+</div>
+</div>
+<h3 class="card-title font-headline-sm text-on-surface mb-1">Sandbox Safety Gating</h3>
+<p class="card-body font-body-md text-on-surface-variant text-[15px] mb-3">Require explicit human approval before shell commands or push actions.</p>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">verified_user</span>
+<span>1w ago · Policy</span>
+</div>
+<span class="font-label-sm px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant">Mandatory</span>
+</div>
+</article>
+</section>
+<!-- Empty State Banner -->
+<div class="hidden rounded-[24px] p-6 bg-surface-container-lowest/80 backdrop-blur-md shadow-sm text-center" id="empty-state">
+<div class="w-12 h-12 rounded-full bg-primary-fixed mx-auto mb-3 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[24px]">filter_drama</span>
+</div>
+<h3 class="font-headline-sm text-on-surface mb-1">No memories in this view</h3>
+<p class="font-body-md text-on-surface-variant text-[15px] max-w-xs mx-auto mb-4">
+      Save a preference or important context to personalize Dream Wave over time.
+    </p>
+<button class="h-11 px-5 rounded-full bg-primary text-on-primary font-label-md active:scale-95 shadow-sm inline-flex items-center gap-1" onclick="window.resetFilters()">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+<span>Reset filters</span>
+</button>
+</div>
+<!-- Notification Toast -->
+<div class="fixed top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-opacity duration-300" id="toast">
+<div class="bg-surface-container-lowest px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" id="toast-icon">check</span>
+<span class="font-label-sm text-on-surface" id="toast-text">Memory updated</span>
+</div>
+</div>
+</div>
+<script>
+(function() {
+  let activeCat = 'ALL';
+  const searchInput = document.getElementById('search-input');
+  const memoriesList = document.getElementById('memories-list');
+  const emptyState = document.getElementById('empty-state');
+  const toast = document.getElementById('toast');
+  const toastText = document.getElementById('toast-text');
+
+  function showToast(msg, icon = 'check') {
+    if (!toast) return;
+    toastText.textContent = msg;
+    const iconEl = document.getElementById('toast-icon');
+    if (iconEl) iconEl.textContent = icon;
+    toast.classList.remove('opacity-0');
+    setTimeout(() => {
+      toast.classList.add('opacity-0');
+    }, 2200);
+  }
+
+  window.toggleSettings = function() {
+    const body = document.getElementById('settings-body');
+    const chevron = document.getElementById('settings-chevron');
+    if (!body || !chevron) return;
+    const isHidden = body.classList.contains('hidden');
+    if (isHidden) {
+      body.classList.remove('hidden');
+      chevron.textContent = 'expand_less';
+    } else {
+      body.classList.add('hidden');
+      chevron.textContent = 'expand_more';
+    }
+  };
+
+  window.updateBadge = function() {
+    const checked = document.querySelectorAll('#settings-body input[type="checkbox"]:checked').length;
+    const badge = document.getElementById('active-toggles-badge');
+    if (badge) {
+      badge.textContent = checked + ' Active';
+    }
+  };
+
+  window.setCategory = function(cat, btn) {
+    activeCat = cat;
+    document.querySelectorAll('.cat-chip').forEach(el => {
+      el.className = 'cat-chip h-9 px-3.5 rounded-full font-label-md whitespace-nowrap bg-surface-container-lowest text-on-surface shadow-sm shrink-0 transition-transform active:scale-95';
+    });
+    btn.className = 'cat-chip h-9 px-3.5 rounded-full font-label-md whitespace-nowrap bg-primary text-on-primary shadow-sm shrink-0 transition-transform active:scale-95';
+    window.filterMemories();
+  };
+
+  window.filterMemories = function() {
+    const q = (searchInput?.value || '').toLowerCase().trim();
+    const cards = document.querySelectorAll('.memory-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const cardCat = card.dataset.category || '';
+      const keywords = (card.dataset.keywords || '') + ' ' + (card.innerText || '');
+      const matchCat = (activeCat === 'ALL' || cardCat.toUpperCase() === activeCat.toUpperCase());
+      const matchQuery = !q || keywords.toLowerCase().includes(q);
+
+      if (matchCat && matchQuery) {
+        card.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    if (visibleCount === 0) {
+      emptyState.classList.remove('hidden');
+    } else {
+      emptyState.classList.add('hidden');
+    }
+  };
+
+  window.resetFilters = function() {
+    if (searchInput) searchInput.value = '';
+    const allBtn = document.querySelector('.cat-chip[data-category="ALL"]');
+    if (allBtn) window.setCategory('ALL', allBtn);
+  };
+
+  window.deleteMemory = function(btn) {
+    const card = btn.closest('.memory-card');
+    if (card) {
+      card.style.transform = 'scale(0.95)';
+      card.style.opacity = '0';
+      setTimeout(() => {
+        card.remove();
+        window.filterMemories();
+        showToast('Memory purged', 'delete');
+      }, 180);
+    }
+  };
+
+  window.editMemory = function(btn) {
+    const card = btn.closest('.memory-card');
+    const bodyText = card?.querySelector('.card-body')?.innerText || '';
+    const input = document.getElementById('memory-input');
+    if (input) {
+      input.value = bodyText;
+      input.focus();
+      showToast('Loaded into composer', 'edit');
+      window.scrollTo({ top: 120, behavior: 'smooth' });
+    }
+  };
+
+  window.addNewMemory = function() {
+    const input = document.getElementById('memory-input');
+    const catSelect = document.getElementById('memory-category');
+    if (!input || !input.value.trim()) return;
+
+    const val = input.value.trim();
+    const cat = catSelect?.value || 'PREFERENCE';
+    const title = val.slice(0, 28) + (val.length > 28 ? '...' : '');
+
+    const badgeTint = cat === 'PREFERENCE' ? 'bg-primary-fixed text-on-primary-fixed-variant' :
+                      cat === 'LEARNING' ? 'bg-secondary-fixed text-on-secondary-fixed-variant' : 'bg-tertiary-fixed text-on-tertiary-fixed-variant';
+
+    const card = document.createElement('article');
+    card.className = 'memory-card rounded-[24px] p-space-md bg-surface-container-lowest/80 backdrop-blur-md shadow-sm relative transition-all';
+    card.dataset.category = cat;
+    card.dataset.keywords = val.toLowerCase();
+
+    card.innerHTML = `
+      <div class="flex items-start justify-between mb-2">
+        <div class="flex items-center gap-2">
+          <span class="font-label-sm uppercase px-2.5 py-0.5 rounded-full ${badgeTint}">${cat}</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          <span class="font-label-sm text-on-surface-variant">Just added</span>
+        </div>
+        <div class="flex items-center gap-1 -mr-1">
+          <button class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary active:scale-90 transition-transform" onclick="window.editMemory(this)" aria-label="Edit memory">
+            <span class="material-symbols-outlined text-[19px]">edit</span>
+          </button>
+          <button class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-error active:scale-90 transition-transform" onclick="window.deleteMemory(this)" aria-label="Delete memory">
+            <span class="material-symbols-outlined text-[19px]">delete</span>
+          </button>
+        </div>
+      </div>
+      <h3 class="card-title font-headline-sm text-on-surface mb-1">${title}</h3>
+      <p class="card-body font-body-md text-on-surface-variant text-[15px] mb-3">${val}</p>
+      <div class="flex items-center justify-between pt-2">
+        <div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm">
+          <span class="material-symbols-outlined text-[16px] text-primary">schedule</span>
+          <span>Just now · Confirmed</span>
+        </div>
+        <span class="font-label-sm px-2 py-0.5 rounded-md bg-surface-container text-on-surface-variant">User defined</span>
+      </div>
+    `;
+
+    memoriesList.prepend(card);
+    input.value = '';
+    showToast('Context memorized', 'auto_awesome');
+    window.filterMemories();
+  };
+})();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-[#cfe6f9]/90 backdrop-blur-xl shadow-[0_-4px_24px_rgba(47,143,221,0.12)]" data-active-classes="text-primary font-bold"><div class="flex justify-around items-center h-20 px-space-xs"><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-transform active:scale-95" data-path="delulu-roadmap" href="#"><span class="material-symbols-outlined text-[24px]">auto_awesome</span><span class="font-label-sm mt-1">Roadmap</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-transform active:scale-95" data-path="study-canvas" href="#"><span class="material-symbols-outlined text-[24px]">edit_note</span><span class="font-label-sm mt-1">Canvas</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-transform active:scale-95" data-path="ai-companion" href="#"><div class="w-11 h-11 -mt-5 rounded-full bg-primary flex items-center justify-center shadow-[0_4px_14px_rgba(47,143,221,0.35)]"><span class="material-symbols-outlined text-on-primary text-[24px]">psychology</span></div><span class="font-label-sm mt-1">Companion</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 transition-transform active:scale-95 text-primary font-bold" data-path="mobile-memory" href="#"><span class="material-symbols-outlined text-[24px]">cognition</span><span class="font-label-sm mt-1">Memory</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-transform active:scale-95" data-path="academic-vibe" href="#"><span class="material-symbols-outlined text-[24px]">insights</span><span class="font-label-sm mt-1">Vibe</span></a></div></nav></body></html>
