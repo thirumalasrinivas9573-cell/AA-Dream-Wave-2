@@ -32,23 +32,28 @@ import {
 import '../styles/dashboard.css'
 
 const QUICK_ACTIONS = [
-  { to: '/student/mentor', icon: '✦', label: 'Ask AI' },
-  { to: '/student/tasks', icon: '✓', label: 'Add Task' },
-  { to: '/student/focus', icon: '◎', label: 'Start Focus' },
-  { to: '/student/goals', icon: '🎯', label: 'Open Goal' },
-  { to: '/student/roadmap', icon: '🗺️', label: 'Continue Roadmap' },
-  { to: '/student/books', icon: '📖', label: 'Open Library' },
-  { to: '/student/career', icon: '🚀', label: 'Explore Career' },
-  { to: '/student/community', icon: '💬', label: 'Create Post' },
+  { to: '/student/mentor', icon: 'psychology', label: 'Ask AI' },
+  { to: '/student/tasks', icon: 'checklist', label: 'Add Task' },
+  { to: '/student/focus', icon: 'center_focus_strong', label: 'Start Focus' },
+  { to: '/student/goals', icon: 'flag', label: 'Open Goal' },
+  { to: '/student/roadmap', icon: 'route', label: 'Continue Roadmap' },
+  { to: '/student/books', icon: 'menu_book', label: 'Open Library' },
+  { to: '/student/career', icon: 'work', label: 'Explore Career' },
+  { to: '/student/community', icon: 'groups', label: 'Create Post' },
 ]
 
 const DAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 const isValidDate = (value) => value && !Number.isNaN(new Date(value).getTime())
-const dateKey = (value) => isValidDate(value) ? new Date(value).toISOString().slice(0, 10) : ''
-const average = (values) => values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : 0
+const dateKey = (value) => (isValidDate(value) ? new Date(value).toISOString().slice(0, 10) : '')
+const average = (values) => (values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : 0)
 
 function initials(name) {
-  return String(name || 'Student').split(/\s+/).slice(0, 2).map((part) => part[0]).join('').toUpperCase()
+  return String(name || 'Student')
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join('')
+    .toUpperCase()
 }
 
 function getGreeting() {
@@ -98,59 +103,65 @@ export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState(() => new Date().toISOString().slice(0, 10))
   const search = useUnifiedSearch({ scope: 'all', enabled: searchOpen, debounceMs: 200 })
 
-  const loadDashboard = useCallback(async (force = false) => {
-    setLoading(true)
-    setError('')
-    try {
-      const response = await dashboardService.student({ force })
-      const payload = response.data || {}
-      const discovery = payload.discovery || {}
-      hydrateNotifications(payload.notifications)
-      setCommandCenter(payload.commandCenter || null)
-      setServerActivity(payload.activity || [])
-      setGroupedNotifications(payload.notifications?.grouped || [])
-      setData({
-        goals: payload.goals || [],
-        tasks: payload.tasks || [],
-        roadmaps: payload.roadmaps || [],
-        profile: payload.identity?.user || null,
-        identityProfile: payload.identity?.profile || null,
-        profileSummary: payload.stats || null,
-        books: payload.books || [],
-        reading: payload.reading || {},
-        applications: payload.applications || [],
-        events: discovery.events || [],
-        courses: discovery.courses || [],
-        featuredBooks: discovery.featuredBooks || [],
-        jobs: discovery.jobs || [],
-        internships: discovery.internships || [],
-        stats: payload.stats || {},
-      })
-    } catch (requestError) {
-      setError(requestError.userMessage || 'The dashboard could not connect to Dream Wave services.')
-    } finally {
-      setLoading(false)
-    }
-  }, [hydrateNotifications])
+  const loadDashboard = useCallback(
+    async (force = false) => {
+      setLoading(true)
+      setError('')
+      try {
+        const response = await dashboardService.student({ force })
+        const payload = response.data || {}
+        const discovery = payload.discovery || {}
+        hydrateNotifications(payload.notifications)
+        setCommandCenter(payload.commandCenter || null)
+        setServerActivity(payload.activity || [])
+        setGroupedNotifications(payload.notifications?.grouped || [])
+        setData({
+          goals: payload.goals || [],
+          tasks: payload.tasks || [],
+          roadmaps: payload.roadmaps || [],
+          profile: payload.identity?.user || null,
+          identityProfile: payload.identity?.profile || null,
+          profileSummary: payload.stats || null,
+          books: payload.books || [],
+          reading: payload.reading || {},
+          applications: payload.applications || [],
+          events: discovery.events || [],
+          courses: discovery.courses || [],
+          featuredBooks: discovery.featuredBooks || [],
+          jobs: discovery.jobs || [],
+          internships: discovery.internships || [],
+          stats: payload.stats || {},
+        })
+      } catch (requestError) {
+        setError(requestError.userMessage || 'The dashboard could not connect to Dream Wave services.')
+      } finally {
+        setLoading(false)
+      }
+    },
+    [hydrateNotifications]
+  )
 
   useEffect(() => {
     loadDashboard()
   }, [loadDashboard])
 
   useEffect(() => {
-    intelligenceService.insights()
+    intelligenceService
+      .insights()
       .then((response) => setAiInsights(response.data?.items || []))
       .catch(() => {})
   }, [])
 
   useEffect(() => {
-    mentorService.conversations()
+    mentorService
+      .conversations()
       .then((response) => setMentorResume((response.conversations || [])[0] || null))
       .catch(() => {})
   }, [])
 
   useEffect(() => {
-    goalIntelligenceService.weeklyReview()
+    goalIntelligenceService
+      .weeklyReview()
       .then((response) => setGoalIntel((current) => ({ ...current, weekly: response.data })))
       .catch(() => {})
   }, [])
@@ -161,7 +172,8 @@ export default function Dashboard() {
       setGoalIntel((current) => ({ ...current, nextAction: null, primaryGoal: null }))
       return
     }
-    goalIntelligenceService.nextAction(primary._id)
+    goalIntelligenceService
+      .nextAction(primary._id)
       .then((response) => setGoalIntel((current) => ({ ...current, nextAction: response.data, primaryGoal: primary })))
       .catch(() => setGoalIntel((current) => ({ ...current, nextAction: null, primaryGoal: primary })))
   }, [data.goals])
@@ -180,30 +192,42 @@ export default function Dashboard() {
   const profile = data.profile || user || {}
   const identityProfile = data.identityProfile || {}
   const academic = identityProfile.academic || {}
-  const certificates = useMemo(() => identityProfile.credentials || user?.certificates || [], [identityProfile.credentials, user?.certificates])
-  const completedGoals = useMemo(() => data.goals.filter((goal) => goal.completed), [data.goals])
+  const certificates = useMemo(
+    () => identityProfile.credentials || user?.certificates || [],
+    [identityProfile.credentials, user?.certificates]
+  )
   const activeGoals = useMemo(() => data.goals.filter((goal) => !goal.completed), [data.goals])
+  const completedGoals = useMemo(
+    () => data.goals.filter((goal) => goal.completed || goal.status === 'completed'),
+    [data.goals]
+  )
   const activeTasks = useMemo(() => data.tasks.filter((task) => task.status !== 'archived'), [data.tasks])
-  const completedTasks = useMemo(() => activeTasks.filter((task) => task.completed || task.status === 'completed'), [activeTasks])
-  const pendingTasks = useMemo(() => activeTasks.filter((task) => !task.completed && !['completed', 'paused'].includes(task.status)), [activeTasks])
+  const completedTasks = useMemo(
+    () => activeTasks.filter((task) => task.completed || task.status === 'completed'),
+    [activeTasks]
+  )
+  const pendingTasks = useMemo(
+    () => activeTasks.filter((task) => !task.completed && !['completed', 'paused'].includes(task.status)),
+    [activeTasks]
+  )
   const roadmaps = data.roadmaps
   const jobApplications = useMemo(
     () => data.applications.filter((item) => String(item.targetType || item.type).toLowerCase() === 'job'),
-    [data.applications],
+    [data.applications]
   )
   const internshipApplications = useMemo(
     () => data.applications.filter((item) => String(item.targetType || item.type).toLowerCase() === 'internship'),
-    [data.applications],
+    [data.applications]
   )
 
   const stats = [
-    { label: 'Goals', value: data.goals.length, icon: '🎯', to: '/student/goals', tone: 'purple' },
-    { label: 'Tasks', value: activeTasks.length, icon: '✓', to: '/student/tasks', tone: 'green' },
-    { label: 'Books', value: data.stats.books ?? data.books.length, icon: '📚', to: '/student/books', tone: 'blue' },
-    { label: 'Roadmaps', value: roadmaps.length, icon: '🗺️', to: '/student/roadmap', tone: 'purple' },
-    { label: 'Certificates', value: data.stats.certificates ?? certificates.length, icon: '🏅', to: '/student/certificates', tone: 'amber' },
-    { label: 'Internships', value: data.stats.internshipsAvailable ?? internshipApplications.length, icon: '💼', to: '/student/career/internships', tone: 'green' },
-    { label: 'Jobs', value: data.stats.jobsAvailable ?? jobApplications.length, icon: '🚀', to: '/student/career/jobs', tone: 'blue' },
+    { label: 'Goals', value: data.goals.length, icon: 'flag', to: '/student/goals', tone: 'purple' },
+    { label: 'Tasks', value: activeTasks.length, icon: 'checklist', to: '/student/tasks', tone: 'green' },
+    { label: 'Books', value: data.stats.books ?? data.books.length, icon: 'menu_book', to: '/student/books', tone: 'blue' },
+    { label: 'Roadmaps', value: roadmaps.length, icon: 'route', to: '/student/roadmap', tone: 'purple' },
+    { label: 'Certificates', value: data.stats.certificates ?? certificates.length, icon: 'verified', to: '/student/certificates', tone: 'amber' },
+    { label: 'Internships', value: data.stats.internshipsAvailable ?? internshipApplications.length, icon: 'badge', to: '/student/career/internships', tone: 'green' },
+    { label: 'Jobs', value: data.stats.jobsAvailable ?? jobApplications.length, icon: 'work', to: '/student/career/jobs', tone: 'blue' },
   ]
 
   const plannerToday = commandCenter?.planner || null
@@ -229,7 +253,10 @@ export default function Dashboard() {
     setPlanLoading(true)
     setPlanError('')
     try {
-      await plannerService.applyPlan(planPreview.items.filter((item) => item.selected !== false), 'selected')
+      await plannerService.applyPlan(
+        planPreview.items.filter((item) => item.selected !== false),
+        'selected'
+      )
       setPlanOpen(false)
       setPlanPreview(null)
       await loadDashboard(true)
@@ -244,11 +271,17 @@ export default function Dashboard() {
     if (!fingerprint) return
     try {
       await intelligenceService.dismissRecommendation(fingerprint)
-      setCommandCenter((current) => current ? {
-        ...current,
-        nextBestAction: current.nextBestAction?.fingerprint === fingerprint ? null : current.nextBestAction,
-        intelligenceRecommendations: (current.intelligenceRecommendations || []).filter((item) => item.fingerprint !== fingerprint),
-      } : current)
+      setCommandCenter((current) =>
+        current
+          ? {
+              ...current,
+              nextBestAction: current.nextBestAction?.fingerprint === fingerprint ? null : current.nextBestAction,
+              intelligenceRecommendations: (current.intelligenceRecommendations || []).filter(
+                (item) => item.fingerprint !== fingerprint
+              ),
+            }
+          : current
+      )
     } catch {
       // Non-blocking
     }
@@ -265,425 +298,311 @@ export default function Dashboard() {
     return [...taskItems, ...eventItems].slice(0, 5)
   }, [data.events, pendingTasks, todayKey])
 
-  const deadlines = useMemo(() => data.goals
-    .filter((goal) => !goal.completed && isValidDate(goal.deadline) && new Date(goal.deadline) >= new Date())
-    .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
-    .slice(0, 5), [data.goals])
+  const deadlines = useMemo(
+    () =>
+      data.goals
+        .filter((goal) => !goal.completed && isValidDate(goal.deadline) && new Date(goal.deadline) >= new Date())
+        .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
+        .slice(0, 5),
+    [data.goals]
+  )
 
-  const calendarItems = useMemo(() => [
-    ...data.goals.filter((goal) => isValidDate(goal.deadline)).map((goal) => ({
-      id: `goal-${goal._id}`,
-      title: goal.title,
-      dateKey: dateKey(goal.deadline),
-      kind: 'deadline',
-      tone: 'amber',
-    })),
-    ...data.tasks.filter((task) => isValidDate(task.dueDate)).map((task) => ({
-      id: `task-${task._id}`,
-      title: task.title,
-      dateKey: dateKey(task.dueDate),
-      kind: 'task',
-      tone: 'green',
-    })),
-    ...data.events.filter((event) => isValidDate(event.startDate)).map((event) => ({
-      id: `event-${event._id}`,
-      title: event.title,
-      dateKey: dateKey(event.startDate),
-      kind: event.type || 'event',
-      tone: 'blue',
-    })),
-  ], [data.events, data.goals, data.tasks])
+  const calendarItems = useMemo(
+    () => [
+      ...data.goals
+        .filter((goal) => isValidDate(goal.deadline))
+        .map((goal) => ({
+          id: `goal-${goal._id}`,
+          title: goal.title,
+          dateKey: dateKey(goal.deadline),
+          kind: 'deadline',
+          tone: 'amber',
+        })),
+      ...data.tasks
+        .filter((task) => isValidDate(task.dueDate))
+        .map((task) => ({
+          id: `task-${task._id}`,
+          title: task.title,
+          dateKey: dateKey(task.dueDate),
+          kind: 'task',
+          tone: 'green',
+        })),
+      ...data.events
+        .filter((event) => isValidDate(event.startDate))
+        .map((event) => ({
+          id: `event-${event._id}`,
+          title: event.title,
+          dateKey: dateKey(event.startDate),
+          kind: event.type || 'event',
+          tone: 'blue',
+        })),
+    ],
+    [data.events, data.goals, data.tasks]
+  )
 
   const recentActivity = useMemo(() => {
     if (serverActivity.length) {
       return serverActivity.map((item) => ({
         id: item.id,
         title: item.title,
-        meta: item.meta,
-        icon: item.icon,
-        tone: item.tone,
-        to: item.url,
+        type: item.type,
+        kind: item.kind || item.type,
+        timestamp: item.timestamp,
+        meta: item.detail || item.meta,
       }))
     }
-    const rows = [
-      ...data.books.map((item) => {
-        const book = getBook(item)
-        return {
-          id: `book-${item._id}`,
-          title: book?.title || 'Book',
-          meta: `Recently read · ${Math.round(item.percent || 0)}% complete`,
-          timestamp: item.lastReadAt || item.updatedAt,
-          icon: '📖',
-          tone: 'blue',
-          to: book?._id ? `/library/books/${book._id}` : '/student/books',
-        }
-      }),
-      ...completedGoals.map((goal) => ({
-        id: `goal-${goal._id}`,
-        title: goal.title,
-        meta: 'Goal completed',
-        timestamp: goal.updatedAt,
-        icon: '🎯',
-        tone: 'green',
-        to: '/student/goals',
-      })),
-      ...certificates.map((certificate, index) => ({
-        id: `certificate-${certificate._id || index}`,
-        title: certificate.title,
-        meta: 'Certificate earned',
-        timestamp: certificate.issuedAt,
-        icon: '🏅',
-        tone: 'amber',
-        to: '/student/certificates',
-      })),
-      ...completedTasks.map((task) => ({
-        id: `task-${task._id}`,
-        title: task.title,
-        meta: 'Task completed',
-        timestamp: task.completedAt || task.updatedAt,
-        icon: '✓',
-        tone: 'green',
-        to: '/student/tasks',
-      })),
-      ...roadmaps.map((roadmap) => ({
-        id: `roadmap-${roadmap._id}`,
-        title: roadmap.goalId?.title || 'Learning Roadmap',
-        meta: 'Roadmap updated',
-        timestamp: roadmap.updatedAt,
-        icon: '🗺️',
-        tone: 'purple',
-        to: '/student/roadmap',
-      })),
-      ...data.applications.map((application) => ({
-        id: `application-${application._id}`,
-        title: application.opportunity?.title || `${application.targetType || 'Opportunity'} application`,
-        meta: application.status || 'Submitted',
-        timestamp: application.updatedAt || application.createdAt,
-        icon: '💼',
-        tone: 'blue',
-        to: '/student/career/applications',
-      })),
-    ]
-    return rows
-      .sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0))
-      .slice(0, 8)
-  }, [certificates, completedGoals, completedTasks, data.applications, data.books, roadmaps, serverActivity])
-
-  const fallbackInsightItems = useMemo(() => [
-    {
-      key: 'recommended-skill',
-      icon: '⚡',
-      label: 'Recommended Skill',
-      value: identityProfile.skills?.[0]?.name || '',
-      detail: identityProfile.skills?.length ? 'Based on your current skills profile.' : '',
-      to: '/student/learn',
-    },
-    {
-      key: 'recommended-course',
-      icon: '🎓',
-      label: 'Recommended Course',
-      value: data.courses[0]?.title || data.courses[0]?.name,
-      detail: data.courses[0]?.category,
-      to: '/student/career',
-      tone: 'blue',
-    },
-    {
-      key: 'recommended-book',
-      icon: '📚',
-      label: 'Recommended Book',
-      value: data.featuredBooks[0]?.title,
-      detail: data.featuredBooks[0]?.author,
-      to: '/library',
-      tone: 'green',
-    },
-    {
-      key: 'career-suggestion',
-      icon: '🧭',
-      label: 'Career Suggestion',
-      to: '/student/career/internships',
-    },
-    {
-      key: 'internship-suggestion',
-      icon: '💼',
-      label: 'Internship Suggestion',
-      value: data.internships[0]?.title,
-      detail: data.internships[0]?.companyId?.name,
-      to: '/student/career/jobs',
-      tone: 'green',
-    },
-    {
-      key: 'opportunity-alert',
-      icon: '🔔',
-      label: 'Opportunity Alert',
-      value: data.jobs[0]?.title,
-      detail: data.jobs[0]?.companyId?.name,
-      to: '/discover',
-      tone: 'amber',
-    },
-  ], [data.courses, data.featuredBooks, data.internships, data.jobs, identityProfile.skills])
-
-  const insightItems = aiInsights.length ? aiInsights : fallbackInsightItems
+    const goalEvents = data.goals.map((goal) => ({
+      id: `goal-${goal._id}`,
+      title: goal.title,
+      type: 'goal',
+      kind: 'goal',
+      timestamp: goal.updatedAt || goal.createdAt,
+      meta: goal.completed ? 'Goal completed' : `${goal.progress || 0}% completed`,
+    }))
+    const taskEvents = completedTasks.map((task) => ({
+      id: `task-${task._id}`,
+      title: task.title,
+      type: 'task',
+      kind: 'task',
+      timestamp: task.updatedAt || task.createdAt,
+      meta: 'Task completed',
+    }))
+    return [...goalEvents, ...taskEvents]
+      .filter((item) => isValidDate(item.timestamp))
+      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+      .slice(0, 6)
+  }, [completedTasks, data.goals, serverActivity])
 
   const weekActivity = useMemo(() => {
-    const today = new Date()
-    return Array.from({ length: 7 }, (_, offset) => {
-      const date = new Date(today)
-      date.setDate(today.getDate() - (6 - offset))
-      const key = date.toISOString().slice(0, 10)
-      const count = completedTasks.filter((task) => dateKey(task.completedAt) === key).length
-      return { label: DAY_LABELS[date.getDay()], count }
+    const counts = [0, 0, 0, 0, 0, 0, 0]
+    const now = new Date()
+    const startOfWeek = new Date(now)
+    startOfWeek.setDate(now.getDate() - now.getDay())
+    startOfWeek.setHours(0, 0, 0, 0)
+    completedTasks.forEach((task) => {
+      const taskDate = new Date(task.updatedAt || task.createdAt)
+      if (taskDate >= startOfWeek) {
+        counts[taskDate.getDay()] += 1
+      }
     })
+    return DAY_LABELS.map((label, index) => ({ label, count: counts[index] }))
   }, [completedTasks])
-  const maxWeekCount = Math.max(...weekActivity.map((item) => item.count), 1)
-  const goalProgress = data.stats.goalProgress ?? average(activeGoals.map((goal) => Number(goal.progress) || 0))
-  const taskProgress = data.stats.taskProgress ?? (activeTasks.length ? completedTasks.length / activeTasks.length * 100 : 0)
-  const readingProgress = data.stats.readingProgress ?? average(data.books.map((item) => Number(item.percent) || 0))
-  const learningProgress = data.stats.learningProgress ?? average([goalProgress, taskProgress, readingProgress].filter((value) => value > 0))
+
+  const maxWeekCount = useMemo(() => Math.max(...weekActivity.map((item) => item.count), 1), [weekActivity])
+
+  const learningProgress = useMemo(() => {
+    const taskRatio = data.tasks.length ? completedTasks.length / data.tasks.length : 0
+    const goalRatio = data.goals.length ? completedGoals.length / data.goals.length : 0
+    const readingRatio = data.books.length ? Math.min(1, (data.reading.readCount || 0) / data.books.length) : 0
+    return Math.round(average([taskRatio, goalRatio, readingRatio]) * 100)
+  }, [completedGoals.length, completedTasks.length, data.books.length, data.goals.length, data.reading.readCount, data.tasks.length])
+
+  const goalProgress = useMemo(() => {
+    if (!data.goals.length) return 0
+    return Math.round(average(data.goals.map((goal) => (goal.completed ? 100 : goal.progress || 0))))
+  }, [data.goals])
+
+  const taskProgress = useMemo(() => {
+    if (!activeTasks.length) return 0
+    return Math.round((completedTasks.length / activeTasks.length) * 100)
+  }, [activeTasks.length, completedTasks.length])
+
+  const readingProgress = useMemo(() => {
+    if (!data.books.length) return 0
+    return Math.round(average(data.books.map((book) => Math.min(100, Math.max(0, book.percent || 0)))))
+  }, [data.books])
+
+  const insightItems = useMemo(() => {
+    if (aiInsights.length) {
+      return aiInsights.map((insight) => ({
+        id: insight._id || insight.id,
+        title: insight.title,
+        message: insight.message || insight.summary,
+        kind: insight.type || 'insight',
+        tone: insight.tone || 'purple',
+        actionText: insight.actionText || 'Explore',
+        url: insight.url || '/student/mentor',
+      }))
+    }
+    return [
+      {
+        id: 'ins-1',
+        title: 'Learning Velocity',
+        message: `${completedTasks.length} tasks completed this week. High study momentum!`,
+        kind: 'insight',
+        tone: 'purple',
+        actionText: 'View Tasks',
+        url: '/student/tasks',
+      },
+    ]
+  }, [aiInsights, completedTasks.length])
 
   return (
     <StudentLayout>
-      <div className="student-dashboard">
-        <header className="dw-dashboard-topbar">
-          <div className="dw-dashboard-topbar__heading">
-            <h1>My Workspace</h1>
-            <p>Your learning journey, opportunities and progress in one place.</p>
-          </div>
-          <button type="button" className="dw-dashboard-search" onClick={() => setSearchOpen(true)} aria-label="Open global dashboard search">
-            <span aria-hidden="true">⌕</span>
-            <span>Search your workspace</span>
-            <kbd>⌘ K</kbd>
-          </button>
-        </header>
+      <div className="flex flex-col gap-6 w-full">
+        {error && <ErrorState message={error} onRetry={() => loadDashboard(true)} />}
 
-        {error && <ErrorState title="Some information may be delayed" message={error} onRetry={loadDashboard} />}
-
-        <AlertBanner alerts={commandCenter?.alerts || []} />
-
-        {commandCenter?.isNewUser && commandCenter.onboarding?.length > 0 && (
-          <DashboardPanel title="Get started" icon="✨">
-            <nav className="dw-onboarding-actions" aria-label="Onboarding actions">
-              {commandCenter.onboarding.map((action) => (
-                <Link key={action.label} to={action.url}><span aria-hidden="true">{action.icon}</span>{action.label}</Link>
-              ))}
-            </nav>
-          </DashboardPanel>
-        )}
-
-        <section className="dw-command-center" aria-label="Daily command center">
-          <div className="dw-command-grid">
-            <DashboardPanel title="Daily Brief" icon="✦">
-              <DailyBriefCard brief={commandCenter?.dailyBrief} loading={loading} onPlanDay={handlePlanDay} />
-            </DashboardPanel>
-            <DashboardPanel title="Today's Priorities" icon="⚡" action={<Link to="/student/tasks">All tasks</Link>}>
-              <PriorityList items={commandCenter?.priorities || []} loading={loading} />
-            </DashboardPanel>
-            {commandCenter?.nextBestAction && (
-              <DashboardPanel title="Next Best Action" icon="🎯" className="dw-panel--accent">
-                <NextBestActionCard
-                  action={commandCenter.nextBestAction}
-                  loading={loading}
-                  onDismiss={handleDismissRecommendation}
-                />
-              </DashboardPanel>
-            )}
-          </div>
-          {(commandCenter?.intelligenceRecommendations?.length > 0) && (
-            <DashboardPanel title="Intelligent Suggestions" icon="💡" action={<Link to="/student/intelligence">Intelligence home</Link>}>
-              <IntelligenceRecommendations
-                items={commandCenter.intelligenceRecommendations}
-                loading={loading}
-                onDismiss={handleDismissRecommendation}
-              />
-            </DashboardPanel>
-          )}
-          <WidgetSummary
-            goal={commandCenter?.activeGoal}
-            roadmap={commandCenter?.roadmap}
-            reading={commandCenter?.continueReading}
-            career={commandCenter?.career}
-            focus={commandCenter?.focus}
-            academics={commandCenter?.academics}
-          />
-        </section>
-
-        <section className="dw-welcome" aria-labelledby="dashboard-welcome-title">
-          <div className="dw-welcome__main">
-            <div className="dw-welcome__identity">
-              <div className="dw-avatar">
-                {identityProfile.profilePhoto || profile.profileImage ? <img src={identityProfile.profilePhoto || profile.profileImage} alt={`${identityProfile.displayName || profile.name || 'Student'} profile`} /> : initials(identityProfile.displayName || profile.name)}
+        {/* Hero Welcome Banner */}
+        <section className="relative overflow-hidden rounded-stitch bg-gradient-to-r from-brand-primary/15 via-brand-primary/5 to-surface border border-divider shadow-md p-6 md:p-8">
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-full bg-brand-primary text-white font-bold text-xl flex items-center justify-center shadow-md shrink-0">
+                {identityProfile.profilePhoto || profile.profileImage ? (
+                  <img
+                    src={identityProfile.profilePhoto || profile.profileImage}
+                    alt="Student profile"
+                    className="w-full h-full rounded-full object-cover"
+                  />
+                ) : (
+                  initials(identityProfile.displayName || profile.name)
+                )}
               </div>
               <div>
-                <p>{getGreeting()}</p>
-                <h2 id="dashboard-welcome-title">{identityProfile.displayName || profile.name || 'Student'}</h2>
-                <p>{profile.streak || 0} day learning streak · Keep your momentum going</p>
+                <span className="text-xs font-semibold text-brand-primary uppercase tracking-wider">
+                  {getGreeting()}
+                </span>
+                <h1 className="text-2xl md:text-3xl font-heading font-bold text-content-heading tracking-tight">
+                  {identityProfile.displayName || profile.name || 'Student'}
+                </h1>
+                <p className="text-xs text-content-muted mt-0.5">
+                  {profile.streak || 0} day learning streak · Keep your momentum going
+                </p>
               </div>
             </div>
-            <div className="dw-welcome__level" aria-label={`Level ${profile.level || 1}, ${profile.credits || 0} experience points`}>
-              <div><span>Level {profile.level || 1}</span><strong>{profile.credits || 0} XP</strong></div>
-              <div className="dw-xp-track"><span style={{ width: `${(profile.credits || 0) % 100}%` }} /></div>
-              <small>{100 - ((profile.credits || 0) % 100)} XP to next level</small>
+
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={handlePlanDay}
+                className="h-10 px-5 rounded-xl bg-brand-primary text-white text-xs font-semibold hover:bg-brand-hover transition-all shadow-md shadow-brand-primary/25 flex items-center gap-2"
+              >
+                <span className="material-symbols-outlined text-[18px]">wb_sunny</span>
+                <span>Plan My Day</span>
+              </button>
             </div>
           </div>
-          <div className="dw-profile-facts">
-            <span>Semester <strong>{academic.semester || 'Not set'}</strong></span>
-            <span>Department <strong>{academic.department || 'Not set'}</strong></span>
-            <span>Institution <strong>{academic.institution || 'Not set'}</strong></span>
-            <Link to="/student/profile">Update profile</Link>
-          </div>
         </section>
 
-        <section className="dw-stat-grid" aria-label="Learning journey statistics">
-          {stats.map((stat) => <DashboardStat {...stat} loading={loading} key={stat.label} />)}
+        {/* Dashboard Stat Grid */}
+        <section className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+          {stats.map((stat) => (
+            <Link
+              key={stat.label}
+              to={stat.to}
+              className="p-4 rounded-stitch bg-surface border border-divider shadow-xs hover:border-brand-primary transition-all flex flex-col justify-between group"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-medium text-content-muted">{stat.label}</span>
+                <span className="material-symbols-outlined text-[18px] text-brand-primary group-hover:scale-110 transition-transform">
+                  {stat.icon}
+                </span>
+              </div>
+              <div className="text-2xl font-heading font-bold text-content-heading mt-2">{stat.value}</div>
+            </Link>
+          ))}
         </section>
 
-        <div className="dw-dashboard-grid">
-          <main className="dw-main-workspace">
-            <section className="dw-overview-grid" aria-label="Today's overview">
-              <DashboardPanel title="Today's Plan" icon="☀️" action={<Link to="/student/planner">Open planner</Link>}>
-                {loading ? <LoadingState label="Loading schedule…" rows={3} /> : (plannerToday?.items?.length || todaySchedule.length) ? (
-                  <ul className="dw-schedule-list">
-                    {(plannerToday?.items?.length ? plannerToday.items.slice(0, 4).map((item) => ({
-                      id: item._id,
-                      title: item.title,
-                      meta: item.startTime ? `${item.startTime} · ${item.durationMinutes || 30} min` : `${item.durationMinutes || 30} min`,
-                      icon: '▣',
-                    })) : todaySchedule).map((item) => (
-                      <li key={item.id}><span className="dw-list-icon">{item.icon}</span><span><strong>{item.title}</strong><small>{item.meta}</small></span><span>Today</span></li>
+        {/* Main Dashboard Bento Workspace */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Left Column (2/3) */}
+          <div className="lg:col-span-2 space-y-6">
+            <section className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <DashboardPanel title="Today's Plan" icon="wb_sunny" action={<Link to="/student/planner">Planner</Link>}>
+                {loading ? (
+                  <LoadingState label="Loading schedule…" rows={3} />
+                ) : plannerToday?.items?.length || todaySchedule.length ? (
+                  <ul className="space-y-2 text-xs">
+                    {(plannerToday?.items?.length
+                      ? plannerToday.items.slice(0, 4).map((item) => ({
+                          id: item._id,
+                          title: item.title,
+                          meta: item.startTime ? `${item.startTime} · ${item.durationMinutes || 30} min` : `${item.durationMinutes || 30} min`,
+                          icon: 'checklist',
+                        }))
+                      : todaySchedule
+                    ).map((item) => (
+                      <li key={item.id} className="p-3 rounded-xl bg-canvas border border-divider flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="material-symbols-outlined text-[16px] text-brand-primary">{item.icon}</span>
+                          <div>
+                            <div className="font-semibold text-content-heading">{item.title}</div>
+                            <div className="text-[10px] text-content-muted">{item.meta}</div>
+                          </div>
+                        </div>
+                        <span className="text-[10px] font-bold text-brand-primary">Today</span>
+                      </li>
                     ))}
                   </ul>
-                ) : <EmptyState title="Nothing planned today" message="Generate a study plan or schedule tasks in the planner." action={<Link to="/student/planner" className="btn btn-sm">Open planner</Link>} />}
-                {plannerToday?.metrics && (
-                  <p className="dw-study-summary">
-                    {plannerToday.metrics.completed}/{plannerToday.metrics.planned} done · {plannerToday.metrics.focusMinutes || 0}m focus today
-                  </p>
+                ) : (
+                  <EmptyState title="Nothing planned today" message="Generate a study plan or schedule tasks in the planner." />
                 )}
               </DashboardPanel>
 
-              <DashboardPanel title="Upcoming Deadlines" icon="⏳" action={<Link to="/student/goals">View goals</Link>}>
-                {loading ? <LoadingState label="Loading deadlines…" rows={3} /> : deadlines.length ? (
-                  <ul className="dw-deadline-list">
+              <DashboardPanel title="Upcoming Deadlines" icon="flag" action={<Link to="/student/goals">View Goals</Link>}>
+                {loading ? (
+                  <LoadingState label="Loading deadlines…" rows={3} />
+                ) : deadlines.length ? (
+                  <ul className="space-y-2 text-xs">
                     {deadlines.map((goal) => (
-                      <li key={goal._id}><span className="dw-list-icon">🎯</span><span><strong>{goal.title}</strong><small>{goal.progress || 0}% complete</small></span><small>{formatDashboardDate(goal.deadline)}</small></li>
+                      <li key={goal._id} className="p-3 rounded-xl bg-canvas border border-divider flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="material-symbols-outlined text-[16px] text-amber-500">flag</span>
+                          <div>
+                            <div className="font-semibold text-content-heading line-clamp-1">{goal.title}</div>
+                            <div className="text-[10px] text-content-muted">{goal.progress || 0}% complete</div>
+                          </div>
+                        </div>
+                        <span className="text-[10px] font-bold text-content-muted">{formatDashboardDate(goal.deadline)}</span>
+                      </li>
                     ))}
                   </ul>
-                ) : <EmptyState title="No upcoming deadlines" message="Goal deadlines will appear here." />}
-              </DashboardPanel>
-
-              <DashboardPanel title="Continue Learning" icon="📖" action={<Link to="/student/books">View library</Link>}>
-                {loading ? <LoadingState label="Loading reading progress…" rows={3} /> : data.books.length ? (
-                  <ul className="dw-schedule-list">
-                    {data.books.slice(0, 4).map((item) => {
-                      const book = getBook(item)
-                      return (
-                        <li key={item._id}>
-                          <span className="dw-list-icon">📚</span>
-                          <span><strong>{book?.title || 'Untitled book'}</strong><small>{Math.round(item.percent || 0)}% read</small></span>
-                          <Link to={book?._id ? `/library/books/${book._id}` : '/student/books'}>Open</Link>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                ) : <EmptyState title="No active reading" message="Books you start will appear here." />}
-              </DashboardPanel>
-
-              <DashboardPanel title="Upcoming Events" icon="📅" action={<Link to="/discover">Discover</Link>}>
-                {loading ? <LoadingState label="Loading events…" rows={3} /> : data.events.length ? (
-                  <ul className="dw-event-list">
-                    {data.events.slice(0, 4).map((event) => (
-                      <li key={event._id}><span className="dw-list-icon">📅</span><span><strong>{event.title}</strong><small>{event.venue || event.type || 'Dream Wave event'}</small></span><small>{formatDashboardDate(event.startDate)}</small></li>
-                    ))}
-                  </ul>
-                ) : <EmptyState title="No upcoming events" message="Published academic and career events will appear here." />}
+                ) : (
+                  <EmptyState title="No upcoming deadlines" message="Goal deadlines will appear here." />
+                )}
               </DashboardPanel>
             </section>
 
-            <DashboardPanel title="Recent Activity" icon="↻">
-              <ActivityList items={recentActivity} loading={loading} emptyMessage="Your completed goals, tasks, books, roadmaps, certificates and applications will appear here." />
+            <DashboardPanel title="Recent Activity" icon="history">
+              <ActivityList items={recentActivity} loading={loading} />
             </DashboardPanel>
 
-            <section className="dw-productivity-grid" aria-label="Productivity overview">
-              <DashboardPanel title="Weekly Study Activity" icon="▥">
-                <div className="dw-week-chart" aria-label={`${completedTasks.length} completed study sessions`}>
-                  {weekActivity.map((item) => (
-                    <div key={item.label}>
-                      <span style={{ height: `${Math.max(5, item.count / maxWeekCount * 100)}%` }} title={`${item.count} completed`} />
-                      <small>{item.label}</small>
-                    </div>
-                  ))}
-                </div>
-                <p className="dw-study-summary">{weekActivity.reduce((sum, item) => sum + item.count, 0)} completed tasks · {data.reading.minutesWeek || 0} reading minutes · {data.reading.pagesReadWeek || 0} pages this week</p>
-              </DashboardPanel>
-              <DashboardPanel title="Learning Progress" icon="📈">
-                <ProgressMeter label="Overall learning" value={learningProgress} detail="Combined active goal, task and reading progress" />
-                <ProgressMeter label="Goal progress" value={goalProgress} tone="purple" />
-                <ProgressMeter label="Reading progress" value={readingProgress} tone="blue" />
-                <ProgressMeter label="Task completion" value={taskProgress} tone="green" />
-              </DashboardPanel>
-            </section>
-
-            <DashboardPanel title="Quick Actions" icon="⚡">
-              <nav className="dw-quick-actions" aria-label="Dashboard quick actions">
-                {QUICK_ACTIONS.map((action) => <Link to={action.to} key={action.label}><span aria-hidden="true">{action.icon}</span>{action.label}</Link>)}
-              </nav>
+            <DashboardPanel title="Quick Actions" icon="bolt">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {QUICK_ACTIONS.map((action) => (
+                  <Link
+                    key={action.label}
+                    to={action.to}
+                    className="p-3 rounded-xl bg-canvas border border-divider hover:border-brand-primary transition-all flex items-center gap-2.5 text-xs font-semibold text-content-heading shadow-xs group"
+                  >
+                    <span className="material-symbols-outlined text-[18px] text-brand-primary group-hover:scale-110 transition-transform">
+                      {action.icon}
+                    </span>
+                    <span className="truncate">{action.label}</span>
+                  </Link>
+                ))}
+              </div>
             </DashboardPanel>
-          </main>
+          </div>
 
-          <aside className="dw-insight-column" aria-label="Student insights">
-            <DashboardPanel title="AI Insights" icon="✦" ariaLabel="AI insight integration widgets">
+          {/* Right Column (1/3 Sidebar) */}
+          <div className="space-y-6">
+            <DashboardPanel title="AI Insights" icon="auto_awesome">
               <InsightGrid items={insightItems} />
             </DashboardPanel>
 
-            {goalIntel.primaryGoal && (
-              <DashboardPanel title="Next Best Action" icon="🎯" action={<Link to={`/student/goals?goalId=${goalIntel.primaryGoal._id}`}>Open goal</Link>}>
-                {goalIntel.nextAction ? (
-                  <div className="dw-next-action">
-                    <strong>{goalIntel.nextAction.title}</strong>
-                    <p>{goalIntel.nextAction.reason}</p>
-                    {goalIntel.nextAction.url && <Link to={goalIntel.nextAction.url}>Take action</Link>}
-                  </div>
-                ) : <EmptyState title="No action queued" message="Create milestones or tasks to get a recommended next step." />}
-              </DashboardPanel>
-            )}
-
-            {goalIntel.weekly && (
-              <DashboardPanel title="Weekly Goal Review" icon="📊" action={<Link to="/student/goals">View goals</Link>}>
-                <ul className="dw-schedule-list">
-                  <li><span className="dw-list-icon">✓</span><span><strong>{goalIntel.weekly.tasksCompleted || 0} tasks completed</strong><small>This week</small></span></li>
-                  <li><span className="dw-list-icon">◎</span><span><strong>{goalIntel.weekly.milestonesCompleted || 0} milestones completed</strong><small>This week</small></span></li>
-                  <li><span className="dw-list-icon">🎯</span><span><strong>{goalIntel.weekly.goalsActive || 0} active goals</strong><small>Currently in progress</small></span></li>
-                </ul>
-              </DashboardPanel>
-            )}
-
-            {mentorResume && (
-              <DashboardPanel title="AI Mentor" icon="🤖" action={<Link to="/student/mentor">Open</Link>}>
-                <p style={{ marginTop: 0, color: 'var(--text-muted)' }}>Continue your latest mentor conversation.</p>
-                <Link to="/student/mentor">{mentorResume.title || 'Continue conversation'} →</Link>
-              </DashboardPanel>
-            )}
-
-            <DashboardPanel title="Calendar" icon="📅">
+            <DashboardPanel title="Calendar" icon="calendar_month">
               <DashboardCalendar items={calendarItems} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
             </DashboardPanel>
 
-            <DashboardPanel title="Notification Center" icon="🔔" action={<Link to="/notifications">View all</Link>}>
-              {groupedNotifications.length ? (
-                <GroupedNotifications
-                  groups={groupedNotifications}
-                  loading={loading}
-                  onMarkRead={(id) => markRead(id).catch(() => setError('The notification update failed. Please retry.'))}
-                />
-              ) : (
-                <NotificationCenter
-                  items={notifications}
-                  unread={unread}
-                  loading={loading}
-                  onMarkRead={(id) => markRead(id).catch(() => setError('The notification update failed. Please retry.'))}
-                  onPin={(id, pinned) => pinNotification(id, pinned).catch(() => setError('The notification update failed. Please retry.'))}
-                />
-              )}
-            </DashboardPanel>
-          </aside>
+            {mentorResume && (
+              <DashboardPanel title="AI Mentor" icon="psychology" action={<Link to="/student/mentor">Open</Link>}>
+                <p className="text-xs text-content-muted mb-2">Continue your latest mentor conversation.</p>
+                <Link to="/student/mentor" className="text-xs font-bold text-brand-primary hover:underline">
+                  {mentorResume.title || 'Continue conversation'} →
+                </Link>
+              </DashboardPanel>
+            )}
+          </div>
         </div>
       </div>
 
@@ -692,7 +611,11 @@ export default function Dashboard() {
         preview={planPreview}
         loading={planLoading}
         error={planError}
-        onClose={() => { setPlanOpen(false); setPlanPreview(null); setPlanError('') }}
+        onClose={() => {
+          setPlanOpen(false)
+          setPlanPreview(null)
+          setPlanError('')
+        }}
         onConfirm={handleConfirmPlan}
       />
 

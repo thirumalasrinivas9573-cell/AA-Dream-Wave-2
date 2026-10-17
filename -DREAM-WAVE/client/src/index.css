@@ -1,4 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-body);
+  font-family: var(--font-body);
+  min-height: 100vh;
+}
 
 .sr-only {
   position: absolute;
@@ -12,46 +23,143 @@
   border: 0;
 }
 
-/* ══ V10 DESIGN SYSTEM — DREAM WAVE AI (DREAMWAVE LIGHT THEME) ══════════════ */
+/* ══ STITCH UI 4-THEME MATRIX ARCHITECTURE ═════════════════════════════════ */
+:root,
+[data-theme="delulu-daylight"] {
+  --bg-canvas:           #f9f9ff;
+  --bg-surface:          #ffffff;
+  --bg-surface-elevated: #e7eeff;
+  --primary:             #005f9c;
+  --primary-hover:       #0079c4;
+  --secondary:           #006878;
+  --text-heading:        #001c3b;
+  --text-body:           #5a7089;
+  --text-muted:          #707882;
+  --border-subtle:       rgba(60, 150, 220, 0.12);
+  --border-focus:        rgba(0, 95, 156, 0.4);
+  --font-heading:        'Outfit', sans-serif;
+  --font-body:           'Plus Jakarta Sans', sans-serif;
+  --radius-card:         1.75rem;
+
+  /* Legacy fallback mapping */
+  --bg-primary:          var(--bg-canvas);
+  --bg-secondary:        var(--bg-surface);
+  --bg-card:             var(--bg-surface);
+  --bg-elevated:         var(--bg-surface-elevated);
+  --text-primary:        var(--text-heading);
+  --text-secondary:      var(--text-body);
+  --border:              var(--border-subtle);
+  --purple:              var(--primary);
+  --accent:              var(--primary);
+  --accent-hover:        var(--primary-hover);
+}
+
+[data-theme="barely-working"] {
+  --bg-canvas:           #0f131c;
+  --bg-surface:          #1c2028;
+  --bg-surface-elevated: #262a33;
+  --primary:             #b7c7ea;
+  --primary-hover:       #5a6988;
+  --secondary:           #b3c7f1;
+  --text-heading:        #dfe2ee;
+  --text-body:           #a09fa5;
+  --text-muted:          #c5c6ce;
+  --border-subtle:       rgba(188, 191, 198, 0.12);
+  --border-focus:        rgba(183, 199, 234, 0.4);
+  --font-heading:        'Sora', sans-serif;
+  --font-body:           'IBM Plex Sans', sans-serif;
+  --radius-card:         1.625rem;
+
+  --bg-primary:          var(--bg-canvas);
+  --bg-secondary:        var(--bg-surface);
+  --bg-card:             var(--bg-surface);
+  --bg-elevated:         var(--bg-surface-elevated);
+  --text-primary:        var(--text-heading);
+  --text-secondary:      var(--text-body);
+  --border:              var(--border-subtle);
+  --purple:              var(--primary);
+  --accent:              var(--primary);
+  --accent-hover:        var(--primary-hover);
+}
+
+[data-theme="green-flag-energy"] {
+  --bg-canvas:           #e4fff9;
+  --bg-surface:          #ffffff;
+  --bg-surface-elevated: #d2f5ef;
+  --primary:             #00685e;
+  --primary-hover:       #1c8277;
+  --secondary:           #2d685f;
+  --text-heading:        #00201d;
+  --text-body:           #4f6f69;
+  --text-muted:          #6e7977;
+  --border-subtle:       rgba(110, 168, 158, 0.18);
+  --border-focus:        rgba(0, 104, 94, 0.4);
+  --font-heading:        'Lexend', sans-serif;
+  --font-body:           'Be Vietnam Pro', sans-serif;
+  --radius-card:         1.75rem;
+
+  --bg-primary:          var(--bg-canvas);
+  --bg-secondary:        var(--bg-surface);
+  --bg-card:             var(--bg-surface);
+  --bg-elevated:         var(--bg-surface-elevated);
+  --text-primary:        var(--text-heading);
+  --text-secondary:      var(--text-body);
+  --border:              var(--border-subtle);
+  --purple:              var(--primary);
+  --accent:              var(--primary);
+  --accent-hover:        var(--primary-hover);
+}
+
+[data-theme="midnight-intelligence"] {
+  --bg-canvas:           #0a1325;
+  --bg-surface:          #171f32;
+  --bg-surface-elevated: #212a3d;
+  --primary:             #aac7ff;
+  --primary-hover:       #0466c8;
+  --secondary:           #5de6ff;
+  --text-heading:        #dae2fc;
+  --text-body:           #9fb3d1;
+  --text-muted:          #8b919e;
+  --border-subtle:       rgba(0, 229, 255, 0.12);
+  --border-focus:        rgba(34, 211, 238, 0.4);
+  --font-heading:        'Space Grotesk', sans-serif;
+  --font-body:           'Manrope', sans-serif;
+  --radius-card:         1.5rem;
+
+  --bg-primary:          var(--bg-canvas);
+  --bg-secondary:        var(--bg-surface);
+  --bg-card:             var(--bg-surface);
+  --bg-elevated:         var(--bg-surface-elevated);
+  --text-primary:        var(--text-heading);
+  --text-secondary:      var(--text-body);
+  --border:              var(--border-subtle);
+  --purple:              var(--primary);
+  --accent:              var(--primary);
+  --accent-hover:        var(--primary-hover);
+}
+
+/* ══ V10 DESIGN SYSTEM UTILITIES ═══════════════════════════════════════════ */
+
 :root {
-  /* Base - Pearl Mist & Soft Lavender */
-  --bg-primary:    #FBF9FC;
-  --bg-secondary:  #F3EEFA;
-  --bg-card:       rgba(243, 238, 250, 0.85);
-  --bg-elevated:   #FFFFFF;
   --bg-glass:      rgba(201, 182, 228, 0.15);
   --bg-hover:      rgba(140, 122, 230, 0.08);
 
-  /* Periwinkle & Lavender accent system */
-  --purple:        #8C7AE6;  /* Dream accent - Periwinkle Pop */
-  --purple-mid:    #7C69DC;  /* Deep periwinkle */
-  --purple-light:  #6E5BC9;  /* Accessible text periwinkle */
+  --purple-mid:    #7C69DC;
+  --purple-light:  #6E5BC9;
   --purple-glow:   rgba(140, 122, 230, 0.25);
   --purple-subtle: rgba(140, 122, 230, 0.08);
-
-  /* Accent (Sky-foam blue & Periwinkle) */
-  --accent:        #8C7AE6;  /* Periwinkle CTA */
-  --accent-hover:  #7C69DC;
   --accent-glow:   rgba(140, 122, 230, 0.25);
 
-  /* Text */
-  --text-primary:   #3A3153;  /* Deep dusk plum */
-  --text-secondary: #5D5477;  /* Medium dusk plum */
-  --text-muted:     #8B84A3;  /* Soft slate lavender */
   --text-disabled:  #B5B0C8;
 
-  /* Borders */
-  --border:         rgba(139, 132, 163, 0.2);
   --border-purple:  rgba(140, 122, 230, 0.35);
   --border-hover:   rgba(140, 122, 230, 0.5);
 
-  /* Status */
   --success: #059669;
   --warning: #D97706;
   --danger:  #DC2626;
   --info:    #0284C7;
 
-  /* Radius */
   --r-xs: 6px;
   --r-sm: 10px;
   --r:    14px;
@@ -59,14 +167,12 @@
   --r-xl: 26px;
   --r-2xl:34px;
 
-  /* Shadows - Faint colored lavender tint */
   --shadow-sm:     0 2px 10px rgba(139, 132, 163, 0.08);
   --shadow:        0 8px 30px rgba(140, 122, 230, 0.12);
   --shadow-lg:     0 16px 45px rgba(140, 122, 230, 0.16);
   --shadow-purple: 0 8px 32px rgba(140, 122, 230, 0.2);
   --shadow-glow:   0 0 40px rgba(140, 122, 230, 0.18);
 
-  /* Transition */
   --t:   all 0.2s cubic-bezier(0.4,0,0.2,1);
   --t-slow: all 0.4s cubic-bezier(0.4,0,0.2,1);
 }

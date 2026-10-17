@@ -192,20 +192,20 @@ export default function MemoryManagement() {
 
   return (
     <StudentLayout title="My Memory">
-      <div className="dw-memory">
-        <header className="dw-memory__hero">
+      <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
+        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface p-6 rounded-stitch border border-divider shadow-sm">
           <div>
-            <p className="dw-memory__eyebrow">Personal AI Memory 2.0</p>
-            <h1>My Memory</h1>
-            <p>
+            <span className="text-xs font-semibold uppercase tracking-wider text-brand-primary">Personal AI Memory 2.0</span>
+            <h1 className="text-2xl sm:text-3xl font-bold text-content-heading tracking-tight mt-1">My Memory</h1>
+            <p className="text-sm text-content-muted mt-1 max-w-2xl">
               Useful, minimal, and under your control. Dream Wave keeps confirmed context —
               not every conversation. Current instructions always win over old memory.
             </p>
           </div>
-          <div className="dw-memory__hero-actions">
-            <Link className="btn btn-secondary" to="/student/mentor">AI Mentor</Link>
-            <Link className="btn btn-secondary" to="/student/personal-ai">Personal AI</Link>
-            <button type="button" className="btn btn-primary" onClick={load} disabled={loading}>Refresh</button>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link className="px-4 py-2 text-sm font-medium bg-surface-elevated hover:bg-surface text-content-heading rounded-stitch border border-divider transition-colors" to="/student/mentor">AI Mentor</Link>
+            <Link className="px-4 py-2 text-sm font-medium bg-surface-elevated hover:bg-surface text-content-heading rounded-stitch border border-divider transition-colors" to="/student/personal-ai">Personal AI</Link>
+            <button type="button" className="px-4 py-2 text-sm font-medium bg-brand-primary hover:bg-brand-primary-hover text-white rounded-stitch transition-colors" onClick={load} disabled={loading}>Refresh</button>
           </div>
         </header>
 
@@ -214,39 +214,43 @@ export default function MemoryManagement() {
 
         {!loading && !error && (
           <>
-            <section className="dw-memory__panel" aria-labelledby="memory-settings">
-              <h2 id="memory-settings">Memory settings</h2>
-              <div className="dw-memory__toggles">
-                <label>
+            <section className="bg-surface p-6 rounded-stitch border border-divider shadow-sm space-y-4" aria-labelledby="memory-settings">
+              <h2 id="memory-settings" className="text-lg font-semibold text-content-heading">Memory settings</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <label className="flex items-center gap-3 p-3 bg-surface-elevated rounded-stitch border border-divider text-sm text-content-body cursor-pointer">
                   <input
                     type="checkbox"
+                    className="rounded border-divider text-brand-primary focus:ring-brand-primary"
                     checked={settings?.memoryEnabled !== false}
                     onChange={() => toggleSetting('memoryEnabled')}
                     disabled={busy}
                   />
                   Personalization memory
                 </label>
-                <label>
+                <label className="flex items-center gap-3 p-3 bg-surface-elevated rounded-stitch border border-divider text-sm text-content-body cursor-pointer">
                   <input
                     type="checkbox"
+                    className="rounded border-divider text-brand-primary focus:ring-brand-primary"
                     checked={settings?.personalizationEnabled !== false}
                     onChange={() => toggleSetting('personalizationEnabled')}
                     disabled={busy}
                   />
                   Use memory in AI
                 </label>
-                <label>
+                <label className="flex items-center gap-3 p-3 bg-surface-elevated rounded-stitch border border-divider text-sm text-content-body cursor-pointer">
                   <input
                     type="checkbox"
+                    className="rounded border-divider text-brand-primary focus:ring-brand-primary"
                     checked={settings?.proactiveMemoryUse !== false}
                     onChange={() => toggleSetting('proactiveMemoryUse')}
                     disabled={busy}
                   />
                   Proactive use
                 </label>
-                <label>
+                <label className="flex items-center gap-3 p-3 bg-surface-elevated rounded-stitch border border-divider text-sm text-content-body cursor-pointer">
                   <input
                     type="checkbox"
+                    className="rounded border-divider text-brand-primary focus:ring-brand-primary"
                     checked={settings?.allowAiDerivedProposals !== false}
                     onChange={() => toggleSetting('allowAiDerivedProposals')}
                     disabled={busy}
@@ -256,28 +260,28 @@ export default function MemoryManagement() {
               </div>
             </section>
 
-            <section className="dw-memory__panel" aria-labelledby="memory-review">
-              <h2 id="memory-review">What Dream Wave remembers</h2>
-              <p>{review?.summary || "I don't have that saved."}</p>
-              <small>Memory is DATA — not truth. Canonical goals and projects come from live system data.</small>
+            <section className="bg-surface p-6 rounded-stitch border border-divider shadow-sm space-y-2" aria-labelledby="memory-review">
+              <h2 id="memory-review" className="text-lg font-semibold text-content-heading">What Dream Wave remembers</h2>
+              <p className="text-sm text-content-body">{review?.summary || "I don't have that saved."}</p>
+              <small className="text-xs text-content-muted block pt-1">Memory is DATA — not truth. Canonical goals and projects come from live system data.</small>
             </section>
 
             {pending.length > 0 && (
-              <section className="dw-memory__panel" aria-labelledby="memory-pending">
-                <h2 id="memory-pending">Confirm before saving</h2>
-                <ul className="dw-memory__list">
+              <section className="bg-surface p-6 rounded-stitch border border-divider shadow-sm space-y-4" aria-labelledby="memory-pending">
+                <h2 id="memory-pending" className="text-lg font-semibold text-content-heading">Confirm before saving</h2>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {pending.map((m) => (
-                    <li key={m.id} className="dw-memory__card">
-                      <div className="dw-memory__card-head">
-                        <strong>{String(m.type).replace(/_/g, ' ')}</strong>
-                        <span>Pending</span>
+                    <li key={m.id} className="p-4 bg-surface-elevated rounded-stitch border border-divider space-y-3">
+                      <div className="flex items-center justify-between">
+                        <strong className="text-sm font-semibold text-content-heading">{String(m.type).replace(/_/g, ' ')}</strong>
+                        <span className="px-2 py-0.5 text-xs font-medium bg-amber-500/10 text-amber-600 rounded-full">Pending</span>
                       </div>
-                      <p>{m.content}</p>
-                      <div className="dw-memory__actions">
-                        <button type="button" className="btn btn-primary" disabled={busy} onClick={() => confirmPending(m.id, true)}>
+                      <p className="text-sm text-content-body">{m.content}</p>
+                      <div className="flex items-center gap-2 pt-2">
+                        <button type="button" className="px-3 py-1.5 text-xs font-medium bg-brand-primary hover:bg-brand-primary-hover text-white rounded-lg transition-colors" disabled={busy} onClick={() => confirmPending(m.id, true)}>
                           Remember
                         </button>
-                        <button type="button" className="btn btn-secondary" disabled={busy} onClick={() => confirmPending(m.id, false)}>
+                        <button type="button" className="px-3 py-1.5 text-xs font-medium bg-surface hover:bg-surface-elevated text-content-muted rounded-lg border border-divider transition-colors" disabled={busy} onClick={() => confirmPending(m.id, false)}>
                           Dismiss
                         </button>
                       </div>
@@ -287,48 +291,56 @@ export default function MemoryManagement() {
               </section>
             )}
 
-            <section className="dw-memory__panel" aria-labelledby="memory-add">
-              <h2 id="memory-add">Remember something</h2>
-              <label htmlFor="memory-draft">What should AI remember?</label>
-              <textarea
-                id="memory-draft"
-                rows={3}
-                value={draft}
-                onChange={(e) => setDraft(e.target.value)}
-                placeholder="e.g. I prefer concise explanations"
-              />
-              <div className="dw-memory__row">
-                <label htmlFor="memory-type">
-                  Category
-                  <select id="memory-type" value={draftType} onChange={(e) => setDraftType(e.target.value)}>
-                    {(meta?.types || CATEGORIES.filter((c) => c.key !== 'ALL').map((c) => c.key)).map((t) => (
-                      <option key={t} value={t}>{String(t).replace(/_/g, ' ')}</option>
-                    ))}
-                  </select>
-                </label>
-                <button type="button" className="btn btn-primary" disabled={busy || !draft.trim()} onClick={createMemory}>
-                  Remember
-                </button>
+            <section className="bg-surface p-6 rounded-stitch border border-divider shadow-sm space-y-4" aria-labelledby="memory-add">
+              <h2 id="memory-add" className="text-lg font-semibold text-content-heading">Remember something</h2>
+              <div className="space-y-3">
+                <label htmlFor="memory-draft" className="text-xs font-medium text-content-muted uppercase tracking-wider block">What should AI remember?</label>
+                <textarea
+                  id="memory-draft"
+                  rows={3}
+                  value={draft}
+                  onChange={(e) => setDraft(e.target.value)}
+                  placeholder="e.g. I prefer concise explanations"
+                  className="w-full bg-surface-elevated text-content-body border border-divider rounded-stitch p-3 text-sm focus:outline-none focus:border-brand-primary"
+                />
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex items-center gap-2">
+                    <label htmlFor="memory-type" className="text-sm text-content-muted">Category:</label>
+                    <select id="memory-type" value={draftType} onChange={(e) => setDraftType(e.target.value)} className="bg-surface-elevated text-content-body border border-divider rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-brand-primary">
+                      {(meta?.types || CATEGORIES.filter((c) => c.key !== 'ALL').map((c) => c.key)).map((t) => (
+                        <option key={t} value={t}>{String(t).replace(/_/g, ' ')}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <button type="button" className="px-4 py-2 text-sm font-medium bg-brand-primary hover:bg-brand-primary-hover text-white rounded-stitch transition-colors disabled:opacity-50" disabled={busy || !draft.trim()} onClick={createMemory}>
+                    Remember
+                  </button>
+                </div>
               </div>
-              {message && <p className="dw-memory__note" role="status">{message}</p>}
+              {message && <p className="p-3 bg-brand-primary/10 text-brand-primary rounded-stitch text-xs font-medium" role="status">{message}</p>}
             </section>
 
-            <section className="dw-memory__toolbar" aria-label="Search and filter">
+            <section className="space-y-4" aria-label="Search and filter">
               <input
                 type="search"
-                placeholder="Search memories"
+                placeholder="Search memories…"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                className="w-full bg-surface text-content-body border border-divider rounded-stitch p-3 text-sm focus:outline-none focus:border-brand-primary shadow-sm"
                 aria-label="Search memories"
               />
-              <div className="dw-memory__cats" role="tablist" aria-label="Memory categories">
+              <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" role="tablist" aria-label="Memory categories">
                 {CATEGORIES.map((c) => (
                   <button
                     key={c.key}
                     type="button"
                     role="tab"
                     aria-selected={category === c.key}
-                    className={category === c.key ? 'is-active' : ''}
+                    className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all whitespace-nowrap ${
+                      category === c.key
+                        ? 'bg-brand-primary text-white shadow-sm'
+                        : 'bg-surface hover:bg-surface-elevated text-content-muted hover:text-content-heading border border-divider'
+                    }`}
                     onClick={() => setCategory(c.key)}
                   >
                     {c.label}
@@ -343,44 +355,46 @@ export default function MemoryManagement() {
                 message="Save a preference or important context to personalize Dream Wave over time."
               />
             ) : (
-              <ul className="dw-memory__list">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {filtered.map((m) => (
-                  <li key={m.id} className="dw-memory__card">
-                    <div className="dw-memory__card-head">
-                      <strong>{String(m.type).replace(/_/g, ' ')}</strong>
-                      <span>{m.importance || 'USEFUL'} · {m.confidence}</span>
-                    </div>
-                    {editingId === m.id ? (
-                      <div className="dw-memory__edit">
-                        <textarea rows={3} value={editContent} onChange={(e) => setEditContent(e.target.value)} />
-                        <div className="dw-memory__actions">
-                          <button type="button" className="btn btn-primary" disabled={busy} onClick={() => saveEdit(m.id)}>Save</button>
-                          <button type="button" className="btn btn-secondary" onClick={() => setEditingId(null)}>Cancel</button>
-                        </div>
+                  <li key={m.id} className="bg-surface p-5 rounded-stitch border border-divider shadow-sm space-y-3 flex flex-col justify-between">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <strong className="text-sm font-semibold text-content-heading">{String(m.type).replace(/_/g, ' ')}</strong>
+                        <span className="text-xs font-medium text-content-muted">{m.importance || 'USEFUL'} · {m.confidence}</span>
                       </div>
-                    ) : (
-                      <p>{m.content}</p>
-                    )}
-                    <div className="dw-memory__meta">
-                      <small>Source: {sourceLabel(m.source)}</small>
-                      <small>Updated: {m.updatedAt ? new Date(m.updatedAt).toLocaleString() : '—'}</small>
-                      {m.previousContent && <small>Previous: {m.previousContent.slice(0, 60)}{m.previousContent.length > 60 ? '…' : ''}</small>}
-                      {m.metadata?.whyRemembered && <small>Why: {m.metadata.whyRemembered}</small>}
-                      {m.expiresAt && <small>Expires: {new Date(m.expiresAt).toLocaleDateString()}</small>}
+                      {editingId === m.id ? (
+                        <div className="space-y-2">
+                          <textarea rows={3} value={editContent} onChange={(e) => setEditContent(e.target.value)} className="w-full bg-surface-elevated text-content-body border border-divider rounded-stitch p-2 text-sm focus:outline-none focus:border-brand-primary" />
+                          <div className="flex items-center gap-2">
+                            <button type="button" className="px-3 py-1 text-xs font-medium bg-brand-primary text-white rounded-lg" disabled={busy} onClick={() => saveEdit(m.id)}>Save</button>
+                            <button type="button" className="px-3 py-1 text-xs font-medium bg-surface-elevated text-content-muted rounded-lg border border-divider" onClick={() => setEditingId(null)}>Cancel</button>
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="text-sm text-content-body">{m.content}</p>
+                      )}
+                      <div className="space-y-0.5 text-xs text-content-muted pt-2 border-t border-divider/50">
+                        <div>Source: {sourceLabel(m.source)}</div>
+                        <div>Updated: {m.updatedAt ? new Date(m.updatedAt).toLocaleString() : '—'}</div>
+                        {m.previousContent && <div>Previous: {m.previousContent.slice(0, 60)}{m.previousContent.length > 60 ? '…' : ''}</div>}
+                        {m.metadata?.whyRemembered && <div>Why: {m.metadata.whyRemembered}</div>}
+                        {m.expiresAt && <div>Expires: {new Date(m.expiresAt).toLocaleDateString()}</div>}
+                      </div>
                     </div>
                     {editingId !== m.id && (
-                      <div className="dw-memory__actions">
+                      <div className="flex items-center gap-2 pt-3 border-t border-divider">
                         <button
                           type="button"
-                          className="btn btn-secondary"
+                          className="px-3 py-1 text-xs font-medium bg-surface-elevated hover:bg-surface text-content-body rounded-lg border border-divider transition-colors"
                           onClick={() => { setEditingId(m.id); setEditContent(m.content) }}
                         >
                           Edit
                         </button>
-                        <button type="button" className="btn btn-secondary" disabled={busy} onClick={() => archive(m.id)}>
+                        <button type="button" className="px-3 py-1 text-xs font-medium bg-surface-elevated hover:bg-surface text-content-body rounded-lg border border-divider transition-colors" disabled={busy} onClick={() => archive(m.id)}>
                           Archive
                         </button>
-                        <button type="button" className="btn btn-danger" disabled={busy} onClick={() => remove(m.id, m.content)}>
+                        <button type="button" className="px-3 py-1 text-xs font-medium bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg transition-colors ml-auto" disabled={busy} onClick={() => remove(m.id, m.content)}>
                           Forget
                         </button>
                       </div>
@@ -390,9 +404,9 @@ export default function MemoryManagement() {
               </ul>
             )}
 
-            <section className="dw-memory__panel dw-memory__footnote">
-              <h2>Privacy</h2>
-              <p>
+            <section className="bg-surface p-6 rounded-stitch border border-divider shadow-sm space-y-2">
+              <h2 className="text-base font-semibold text-content-heading">Privacy</h2>
+              <p className="text-xs text-content-muted leading-relaxed">
                 Memories are private to your student account. Institution and company portals cannot
                 read them. Secrets and sensitive attributes are blocked. Saying “give me a detailed
                 explanation” always overrides a concise-preference memory.

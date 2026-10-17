@@ -70,19 +70,23 @@ export default function Community() {
 
   return (
     <StudentLayout>
-      <div className="community-shell">
-        <section className="community-hero">
+      <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
+        <section className="bg-surface p-6 rounded-stitch border border-divider shadow-sm space-y-4">
           <div>
-            <span>Student community</span>
-            <h1>Knowledge feed & collaboration network</h1>
-            <p>Share learning updates, showcase projects, ask questions, and discover collaborators across Dream Wave.</p>
+            <span className="text-xs font-semibold uppercase tracking-wider text-brand-primary">Student community</span>
+            <h1 className="text-2xl sm:text-3xl font-bold text-content-heading tracking-tight mt-1">Knowledge feed & collaboration network</h1>
+            <p className="text-sm text-content-muted mt-1">Share learning updates, showcase projects, ask questions, and discover collaborators across Dream Wave.</p>
           </div>
-          <nav className="community-tabs" aria-label="Feed sections">
+          <nav className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-divider" aria-label="Feed sections">
             {TABS.map((item) => (
               <button
                 key={item.id}
                 type="button"
-                className={tab === item.id ? 'is-active' : ''}
+                className={`px-4 py-2 text-sm font-medium rounded-full transition-all whitespace-nowrap ${
+                  tab === item.id
+                    ? 'bg-brand-primary text-white shadow-sm'
+                    : 'text-content-muted hover:text-content-heading hover:bg-surface-elevated'
+                }`}
                 onClick={() => setTab(item.id)}
               >
                 {item.label}
@@ -91,10 +95,14 @@ export default function Community() {
           </nav>
         </section>
 
-        {message && <p className="community-error" role="status">{message}</p>}
+        {message && (
+          <p className="p-4 bg-brand-primary/10 text-brand-primary border border-brand-primary/20 rounded-stitch text-sm font-medium" role="status">
+            {message}
+          </p>
+        )}
 
-        <div className="community-layout">
-          <div className="community-main">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 space-y-6">
             <CreatePostPanel userName={user?.name} onSubmit={createPost} />
 
             {tab === 'projects' ? (
@@ -103,13 +111,13 @@ export default function Community() {
               <CollaborationPanel requests={collaborations} onRefresh={refreshMeta} />
             ) : (
               <>
-                {error && <p className="community-error">{error}</p>}
+                {error && <p className="p-4 bg-red-500/10 text-red-500 rounded-stitch text-sm">{error}</p>}
                 {loading ? (
-                  [...Array(3)].map((_, index) => <div key={index} className="skeleton" style={{ height: 150 }} />)
+                  [...Array(3)].map((_, index) => <div key={index} className="h-36 bg-surface animate-pulse rounded-stitch border border-divider" />)
                 ) : posts.length === 0 ? (
-                  <div className="community-empty">
-                    <strong>No posts in this section yet</strong>
-                    <p>{tab === 'following' ? 'Follow students to see their learning updates here.' : 'Be the first to share something useful.'}</p>
+                  <div className="bg-surface p-12 rounded-stitch border border-divider text-center space-y-2">
+                    <strong className="text-base font-semibold text-content-heading block">No posts in this section yet</strong>
+                    <p className="text-sm text-content-muted">{tab === 'following' ? 'Follow students to see their learning updates here.' : 'Be the first to share something useful.'}</p>
                   </div>
                 ) : (
                   posts.map((post) => (
@@ -127,7 +135,12 @@ export default function Community() {
                   ))
                 )}
                 {nextCursor && (
-                  <button type="button" className="btn btn-ghost community-load-more" onClick={loadMore} disabled={loadingMore}>
+                  <button
+                    type="button"
+                    className="w-full py-3 bg-surface hover:bg-surface-elevated text-content-body font-medium rounded-stitch border border-divider transition-colors text-sm"
+                    onClick={loadMore}
+                    disabled={loadingMore}
+                  >
                     {loadingMore ? 'Loading…' : 'Load more'}
                   </button>
                 )}
@@ -135,16 +148,28 @@ export default function Community() {
             )}
           </div>
 
-          <aside className="community-sidebar">
+          <aside className="hidden lg:block space-y-6">
             <CreatorPanel stats={creatorStats} />
 
-            <section className="community-panel">
-              <header><div><span>Trending</span><h2>Topics this week</h2></div></header>
-              <div className="community-trending">
+            <section className="bg-surface p-5 rounded-stitch border border-divider shadow-sm space-y-4">
+              <header className="flex items-center justify-between">
+                <div>
+                  <span className="text-xs font-semibold text-brand-primary uppercase tracking-wider">Trending</span>
+                  <h2 className="text-base font-semibold text-content-heading">Topics this week</h2>
+                </div>
+              </header>
+              <div className="flex flex-wrap gap-2">
                 {trending.length === 0 ? (
-                  <span className="community-empty-inline">Trending topics appear as students share learning content.</span>
+                  <span className="text-xs text-content-muted">Trending topics appear as students share learning content.</span>
                 ) : trending.map((item) => (
-                  <button key={item.topic} type="button" onClick={() => setTab('knowledge')}>{item.topic}</button>
+                  <button
+                    key={item.topic}
+                    type="button"
+                    className="px-3 py-1.5 text-xs font-medium bg-surface-elevated hover:bg-brand-primary/10 text-content-body hover:text-brand-primary border border-divider rounded-full transition-colors"
+                    onClick={() => setTab('knowledge')}
+                  >
+                    {item.topic}
+                  </button>
                 ))}
               </div>
             </section>
@@ -157,23 +182,33 @@ export default function Community() {
         {activePost && <CommentsPanel post={activePost} onClose={() => setActivePost(null)} />}
 
         {selectedProject && (
-          <div className="community-modal" role="dialog" aria-modal="true" aria-label="Project details">
-            <div className="community-modal-backdrop" onClick={() => setSelectedProject(null)} />
-            <section className="community-modal-panel">
-              <header>
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label="Project details">
+            <div className="fixed inset-0" onClick={() => setSelectedProject(null)} />
+            <section className="relative z-10 w-full max-w-lg bg-surface p-6 rounded-stitch border border-divider shadow-xl space-y-4">
+              <header className="flex items-center justify-between">
                 <div>
-                  <strong>{selectedProject.title}</strong>
-                  <p>{selectedProject.ownerName}</p>
+                  <strong className="text-lg font-semibold text-content-heading block">{selectedProject.title}</strong>
+                  <p className="text-xs text-content-muted">{selectedProject.ownerName}</p>
                 </div>
-                <button type="button" className="btn btn-ghost btn-sm" onClick={() => setSelectedProject(null)}>Close</button>
+                <button type="button" className="text-xs font-medium text-content-muted hover:text-content-heading" onClick={() => setSelectedProject(null)}>Close</button>
               </header>
-              <p>{selectedProject.description}</p>
-              <div className="community-tags">
-                {(selectedProject.technologies || []).map((tech) => <span key={tech}>{tech}</span>)}
+              <p className="text-sm text-content-body">{selectedProject.description}</p>
+              <div className="flex flex-wrap gap-2">
+                {(selectedProject.technologies || []).map((tech) => (
+                  <span key={tech} className="px-2.5 py-1 text-xs font-medium bg-surface-elevated text-content-muted rounded-full border border-divider">{tech}</span>
+                ))}
               </div>
-              <footer className="community-create-actions">
-                {selectedProject.demoUrl && <a href={selectedProject.demoUrl} target="_blank" rel="noreferrer">Open demo</a>}
-                {selectedProject.githubUrl && <a href={selectedProject.githubUrl} target="_blank" rel="noreferrer">Open repository</a>}
+              <footer className="flex items-center gap-3 pt-2 border-t border-divider">
+                {selectedProject.demoUrl && (
+                  <a href={selectedProject.demoUrl} target="_blank" rel="noreferrer" className="text-xs font-medium text-brand-primary hover:underline">
+                    Open demo
+                  </a>
+                )}
+                {selectedProject.githubUrl && (
+                  <a href={selectedProject.githubUrl} target="_blank" rel="noreferrer" className="text-xs font-medium text-brand-primary hover:underline">
+                    Open repository
+                  </a>
+                )}
               </footer>
             </section>
           </div>

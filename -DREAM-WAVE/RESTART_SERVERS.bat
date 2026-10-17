@@ -21,7 +21,7 @@ timeout /t 2 /nobreak >nul
 
 echo.
 echo Starting backend server...
-start "Backend Server" cmd /c "cd /d d:\-DREAM-WAVE\server && node server.js"
+start "Backend Server" cmd /c "set "PATH=%~dp0.tools\node-v20.18.0-win-x64;%%PATH%%" && cd /d "%~dp0server" && node server.js"
 
 echo.
 echo Waiting 3 seconds for backend to start...
@@ -29,7 +29,7 @@ timeout /t 3 /nobreak >nul
 
 echo.
 echo Starting frontend server...
-start "Frontend Server" cmd /c "cd /d d:\-DREAM-WAVE\client && npm run dev"
+start "Frontend Server" cmd /c "set "PATH=%~dp0.tools\node-v20.18.0-win-x64;%%PATH%%" && cd /d "%~dp0client" && "%~dp0.tools\node-v20.18.0-win-x64\npm.cmd" run dev"
 
 echo.
 echo ✅ Servers starting!

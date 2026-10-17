@@ -6,6 +6,7 @@ import { renderToBuffer } from '@react-pdf/renderer'
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs'
 
 import { ReportPdf } from '../../src/modules/student/pages/ReportPdf.jsx'
+import { RoadmapPdf } from '../../src/modules/student/pages/RoadmapPdf.jsx'
 import { registerPdfFonts } from '../../src/shared/pdf/fonts.js'
 import { installFontkitGuard, getGuardStats } from '../../src/shared/pdf/fontkitGuard.js'
 
@@ -187,6 +188,62 @@ async function main() {
     caseHits: hitsAfterFix - hitsBeforeFix,
   })
 
+  // Render Roadmap Case
+  const hitsBeforeRoadmap = getGuardStats().hits
+  let roadmapStatus = 'PASS'
+  let roadmapBuffer = null
+  const roadmapFilename = 'roadmap-fixture.pdf'
+  const roadmapOutPath = path.resolve(OUT_DIR, roadmapFilename)
+  const clientRoadmapOutPath = path.resolve(CLIENT_DIR, 'out', roadmapFilename)
+
+  const teluguRaVattu = '\u0C2A\u0C4D\u0C30\u0C3E\u0C1C\u0C46\u0C15\u0C4D\u0C1F\u0C4D'
+  const roadmapCaseDoc = (
+    <RoadmapPdf
+      goal={{
+        title: `వెబ్ డెవలప్‌మెంట్ ${teluguRaVattu} రోడ్‌మ్యాప్`,
+        category: 'Technical Skill',
+        isPrimary: true,
+        progress: 45,
+        description: 'లర్నింగ్ జర్నీ మరియు కెరీర్ గ్రోత్ కోసం ఆర్కిటెక్చర్.',
+      }}
+      roadmap={{
+        title: `వెబ్ ఆర్కిటెక్చర్ ${teluguRaVattu}`,
+        isPrimary: true,
+        progress: { percent: 45 },
+        learningStages: [
+          { order: 1, title: `ఫ్రంట్‌ఎండ్ బేసిక్స్ మరియు ${teluguRaVattu} ప్రణాళిక`, description: 'ఈ దశలో HTML, CSS మరియు ప్రాథమిక భావనలు నేర్చుకుంటారు.', status: 'completed', progress: 100, skills: ['HTML5', 'CSS3'] },
+          { order: 2, title: `రియాక్ట్ అడ్వాన్స్‌డ్ ${teluguRaVattu} నిర్మాణం`, description: 'यह एक व्यापक रोडमैप विवरण है जिसमें सभी चरण और योजनाएं शामिल हैं।', status: 'in-progress', progress: 60, skills: ['React'] },
+          { order: 3, title: `సిస్టమ్ టెస్టింగ్ మరియు డిప్లాయ్‌మెంట్ ${teluguRaVattu}`, description: '', status: 'available', progress: 0, skills: ['Docker'] },
+        ],
+        weeklyPlans: [],
+        practiceProjects: [
+          { title: `డ్రీమ్‌వేవ్ పోర్ట్‌ఫోలియో ${teluguRaVattu}`, description: 'పూర్తి స్థాయి అప్లికేషన్ నిర్మాణం.', skills: ['React', 'Node.js'], status: 'in-progress' },
+          { title: 'Project Without Skills', description: 'Testing edge case where skills array is empty or undefined.', skills: [], status: 'planned' },
+        ],
+      }}
+      options={{}}
+    />
+  )
+
+  try {
+    roadmapBuffer = await renderToBuffer(roadmapCaseDoc)
+    fs.writeFileSync(roadmapOutPath, roadmapBuffer)
+    if (fs.existsSync(path.resolve(CLIENT_DIR, 'out'))) {
+      fs.writeFileSync(clientRoadmapOutPath, roadmapBuffer)
+    }
+  } catch (e) {
+    roadmapStatus = `CRASH (${e.message})`
+  }
+
+  const hitsAfterRoadmap = getGuardStats().hits
+  results.push({
+    caseName: 'roadmap-fixture',
+    filename: roadmapFilename,
+    status: roadmapStatus,
+    bytes: roadmapBuffer ? roadmapBuffer.length : 0,
+    caseHits: hitsAfterRoadmap - hitsBeforeRoadmap,
+  })
+
   // Verify each saved PDF with pdfjs-dist
   console.log('\n--- VERIFYING SHIPPED PDFs WITH pdfjs-dist ---')
   const harnessTable = []
@@ -240,6 +297,7 @@ async function main() {
       bytes: r.bytes,
       pages: pageCount,
       guardHits: r.caseHits,
+      textLength: textContentStr.length,
       teluguCharsInU0C00_U0C7F: teluguCharCount,
     })
   }

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { ErrorState, EmptyState, LoadingState } from '@shared/components/ui'
 import StudentLayout from '../layouts/StudentLayout'
 import academicsService from '@shared/services/academicsService'
-import '../styles/academics.css'
 
 export default function AcademicsHome() {
   const [overview, setOverview] = useState(null)
@@ -30,7 +29,9 @@ export default function AcademicsHome() {
     }
   }, [])
 
-  useEffect(() => { load() }, [load])
+  useEffect(() => {
+    load()
+  }, [load])
 
   async function saveProfile(e) {
     e.preventDefault()
@@ -79,7 +80,7 @@ export default function AcademicsHome() {
   if (loading) {
     return (
       <StudentLayout>
-        <div className="academics-shell"><LoadingState label="Loading academic workspace…" rows={8} /></div>
+        <LoadingState label="Loading academic workspace…" rows={8} />
       </StudentLayout>
     )
   }
@@ -96,79 +97,180 @@ export default function AcademicsHome() {
 
   return (
     <StudentLayout>
-      <div className="academics-shell">
-        <header className="academics-hero">
-          <div>
-            <span>Academic Intelligence 3.0</span>
-            <h1>Your semester, subjects, and study plan — connected.</h1>
-            <p>Track syllabus progress, assignments, exams, notes, and revision in one private workspace grounded in your data.</p>
+      <div className="flex flex-col gap-6 w-full">
+        {/* Page Hero */}
+        <header className="p-6 md:p-8 rounded-stitch bg-surface border border-divider shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-1 max-w-xl">
+            <span className="text-xs font-bold tracking-widest text-brand-primary uppercase">
+              ACADEMIC INTELLIGENCE 3.0
+            </span>
+            <h1 className="text-2xl md:text-3xl font-heading font-bold text-content-heading tracking-tight">
+              Syllabus, Subjects & Exams — Connected
+            </h1>
+            <p className="text-xs text-content-muted leading-relaxed">
+              Track syllabus progress, assignments, exams, notes, and revision in one workspace grounded in your profile data.
+            </p>
           </div>
-          <div className="academics-hero__stats">
-            <div><strong>{data.stats?.subjectCount || 0}</strong><span>Subjects</span></div>
-            <div><strong>{data.stats?.noteCount || 0}</strong><span>Notes</span></div>
-            <div><strong>{data.stats?.examCount || 0}</strong><span>Exams</span></div>
+
+          <div className="flex items-center gap-3 bg-surface-elevated p-4 rounded-2xl border border-divider shrink-0">
+            <div className="text-center px-3">
+              <span className="text-2xl font-heading font-bold text-content-heading block">
+                {data.stats?.subjectCount || 0}
+              </span>
+              <span className="text-[10px] font-semibold text-content-muted uppercase">Subjects</span>
+            </div>
+            <div className="w-px h-8 bg-divider" />
+            <div className="text-center px-3">
+              <span className="text-2xl font-heading font-bold text-content-heading block">
+                {data.stats?.noteCount || 0}
+              </span>
+              <span className="text-[10px] font-semibold text-content-muted uppercase">Notes</span>
+            </div>
+            <div className="w-px h-8 bg-divider" />
+            <div className="text-center px-3">
+              <span className="text-2xl font-heading font-bold text-brand-primary block">
+                {data.stats?.examCount || 0}
+              </span>
+              <span className="text-[10px] font-semibold text-content-muted uppercase">Exams</span>
+            </div>
           </div>
         </header>
 
         {data.setupRequired && (
-          <section className="academics-setup">
-            <h2>Set up your academic period</h2>
-            <form onSubmit={addPeriod} className="academics-inline-form">
-              <input value={form.periodLabel} onChange={(e) => setForm({ ...form, periodLabel: e.target.value })} placeholder="e.g. Semester 3 — 2026" aria-label="Academic period label" />
-              <button type="submit" className="btn btn-primary" disabled={busy}>Add period</button>
+          <section className="p-5 rounded-stitch bg-brand-primary/10 border border-brand-primary/20 space-y-3">
+            <h2 className="font-heading font-bold text-sm text-content-heading">Set Up Academic Period</h2>
+            <form onSubmit={addPeriod} className="flex items-center gap-3">
+              <input
+                value={form.periodLabel}
+                onChange={(e) => setForm({ ...form, periodLabel: e.target.value })}
+                placeholder="e.g. Semester 3 — 2026"
+                aria-label="Academic period label"
+                className="flex-1 h-10 px-4 rounded-xl bg-surface border border-divider text-xs font-medium text-content-heading focus:outline-none focus:border-brand-primary"
+              />
+              <button
+                type="submit"
+                disabled={busy}
+                className="h-10 px-5 rounded-xl bg-brand-primary text-white text-xs font-semibold hover:bg-brand-hover transition-all"
+              >
+                Add Period
+              </button>
             </form>
           </section>
         )}
 
-        <section className="academics-grid">
-          <article className="academics-panel">
-            <header><h2>Academic profile</h2></header>
-            <form onSubmit={saveProfile} className="academics-form">
-              <label>Program<input value={form.program} onChange={(e) => setForm({ ...form, program: e.target.value })} placeholder="B.Tech, B.Sc, MBA…" /></label>
-              <label>Branch / specialization<input value={form.branch} onChange={(e) => setForm({ ...form, branch: e.target.value })} placeholder="CSE, Physics…" /></label>
-              <button type="submit" className="btn btn-secondary" disabled={busy}>Save profile</button>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Academic Profile Panel */}
+          <article className="p-6 rounded-stitch bg-surface border border-divider shadow-xs space-y-4">
+            <h2 className="font-heading font-bold text-base text-content-heading">Academic Profile</h2>
+            <form onSubmit={saveProfile} className="space-y-3">
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-content-muted block">Program</label>
+                <input
+                  value={form.program}
+                  onChange={(e) => setForm({ ...form, program: e.target.value })}
+                  placeholder="B.Tech, B.Sc, MBA…"
+                  className="w-full h-10 px-3 rounded-xl bg-canvas border border-divider text-xs font-medium text-content-heading focus:outline-none focus:border-brand-primary"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-semibold text-content-muted block">Branch / Specialization</label>
+                <input
+                  value={form.branch}
+                  onChange={(e) => setForm({ ...form, branch: e.target.value })}
+                  placeholder="Computer Science, Physics…"
+                  className="w-full h-10 px-3 rounded-xl bg-canvas border border-divider text-xs font-medium text-content-heading focus:outline-none focus:border-brand-primary"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={busy}
+                className="h-10 px-4 rounded-xl bg-surface-elevated border border-divider text-content-heading text-xs font-semibold hover:bg-surface transition-all"
+              >
+                Save Profile
+              </button>
             </form>
           </article>
 
-          <article className="academics-panel">
-            <header><h2>Priority today</h2></header>
+          {/* Priority Today Panel */}
+          <article className="p-6 rounded-stitch bg-surface border border-divider shadow-xs space-y-4">
+            <h2 className="font-heading font-bold text-base text-content-heading">Priority Today</h2>
             {data.upcomingExam ? (
-              <div className="academics-priority">
-                <strong>Exam: {data.upcomingExam.name}</strong>
-                <p>{data.upcomingExam.daysRemaining} day(s) remaining</p>
-                <Link to={`/student/academics/subjects/${data.upcomingExam.subjectId}`} className="btn btn-sm">Prepare</Link>
+              <div className="p-4 rounded-xl bg-brand-primary/10 border border-brand-primary/20 space-y-2">
+                <div className="font-bold text-sm text-content-heading">Exam: {data.upcomingExam.name}</div>
+                <div className="text-xs text-brand-primary font-semibold">{data.upcomingExam.daysRemaining} day(s) remaining</div>
+                <Link
+                  to={`/student/academics/subjects/${data.upcomingExam.subjectId}`}
+                  className="inline-flex items-center gap-1 h-8 px-3 rounded-lg bg-brand-primary text-white text-xs font-semibold"
+                >
+                  Prepare Now
+                </Link>
               </div>
             ) : data.dueAssignment ? (
-              <div className="academics-priority">
-                <strong>{data.dueAssignment.title}</strong>
-                <p>Assignment due {data.dueAssignment.dueDate ? new Date(data.dueAssignment.dueDate).toLocaleDateString() : 'soon'}</p>
-                <Link to={`/student/academics/subjects/${data.dueAssignment.subjectId}`} className="btn btn-sm">Open</Link>
+              <div className="p-4 rounded-xl bg-surface-elevated border border-divider space-y-2">
+                <div className="font-bold text-sm text-content-heading">{data.dueAssignment.title}</div>
+                <div className="text-xs text-content-muted">
+                  Due {data.dueAssignment.dueDate ? new Date(data.dueAssignment.dueDate).toLocaleDateString() : 'soon'}
+                </div>
+                <Link
+                  to={`/student/academics/subjects/${data.dueAssignment.subjectId}`}
+                  className="inline-flex items-center gap-1 h-8 px-3 rounded-lg bg-brand-primary text-white text-xs font-semibold"
+                >
+                  Open
+                </Link>
               </div>
             ) : (
-              <EmptyState title="No urgent academic items" message="Add subjects, exams, or assignments to get prioritized guidance." />
+              <EmptyState title="No urgent items" message="Add subjects, exams, or assignments to get prioritized guidance." />
             )}
           </article>
-        </section>
+        </div>
 
-        <section className="academics-panel">
-          <header>
-            <div><h2>Subjects</h2><p>Each subject has syllabus, notes, assignments, exams, and revision.</p></div>
-            <form onSubmit={addSubject} className="academics-inline-form">
-              <input value={form.subjectName} onChange={(e) => setForm({ ...form, subjectName: e.target.value })} placeholder="Add subject name" aria-label="Subject name" />
-              <button type="submit" className="btn btn-primary" disabled={busy}>Add</button>
+        {/* Subjects List Panel */}
+        <section className="p-6 rounded-stitch bg-surface border border-divider shadow-xs space-y-4">
+          <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h2 className="font-heading font-bold text-base text-content-heading">Subjects</h2>
+              <p className="text-xs text-content-muted">Each subject includes syllabus, notes, assignments, exams, and revision logs.</p>
+            </div>
+            <form onSubmit={addSubject} className="flex items-center gap-2">
+              <input
+                value={form.subjectName}
+                onChange={(e) => setForm({ ...form, subjectName: e.target.value })}
+                placeholder="Add subject name..."
+                aria-label="Subject name"
+                className="h-10 px-3 rounded-xl bg-canvas border border-divider text-xs font-medium text-content-heading focus:outline-none focus:border-brand-primary"
+              />
+              <button
+                type="submit"
+                disabled={busy}
+                className="h-10 px-4 rounded-xl bg-brand-primary text-white text-xs font-semibold hover:bg-brand-hover transition-all"
+              >
+                Add Subject
+              </button>
             </form>
           </header>
+
           {data.subjects?.length ? (
-            <ul className="academics-subject-list">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
               {data.subjects.map((subject) => (
-                <li key={subject.id}>
-                  <Link to={`/student/academics/subjects/${subject.id}`}>
-                    <strong>{subject.name}</strong>
-                    <span>{subject.unitCount} units · {subject.topicCount} topics</span>
-                  </Link>
-                </li>
+                <Link
+                  key={subject.id}
+                  to={`/student/academics/subjects/${subject.id}`}
+                  className="p-4 rounded-stitch bg-canvas border border-divider hover:border-brand-primary transition-all flex flex-col justify-between group"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="material-symbols-outlined text-[24px] text-brand-primary">school</span>
+                    <div>
+                      <div className="font-heading font-bold text-sm text-content-heading group-hover:text-brand-primary transition-colors">
+                        {subject.name}
+                      </div>
+                      <div className="text-xs text-content-muted">
+                        {subject.unitCount} units · {subject.topicCount} topics
+                      </div>
+                    </div>
+                  </div>
+                </Link>
               ))}
-            </ul>
+            </div>
           ) : (
             <EmptyState title="No subjects yet" message="Add your first subject to begin syllabus and exam tracking." />
           )}

@@ -119,27 +119,66 @@ export default function ResumeBuilder() {
   if (loading) return <StudentLayout><div className="career-shell"><LoadingState label="Loading Resume Builder…" rows={9} /></div></StudentLayout>
   return (
     <StudentLayout>
-      <div className="career-shell resume-workspace">
-        <header className="career-page-header resume-page-header">
-          <div><span>ATS-friendly professional identity</span><h1>Resume Builder</h1><p>Create, edit, preview, autosave and export multiple professional resumes.</p></div>
-          <nav><Button variant="secondary" onClick={() => setCreateOpen(true)}>+ New resume</Button>{resume && <Button onClick={download}>Download PDF</Button>}</nav>
-        </header>
-        {error && <ErrorState title="Resume action failed" message={error} onRetry={() => setError('')} />}
-        {!resume ? <EmptyState title="Create your first professional resume" message="Start from your verified Dream Wave profile or build from a blank template." action={<Button onClick={() => setCreateOpen(true)}>Create resume</Button>} /> : <>
-          <section className="resume-command-bar">
-            <label><span>Resume</span><select value={resume._id} onChange={(event) => selectResume(event.target.value)}>{resumes.map((item) => <option value={item._id} key={item._id}>{item.title}{item.isDefault ? ' · Default' : ''}</option>)}</select></label>
-            <label><span>Title</span><input value={resume.title} onChange={(event) => setResume((current) => ({ ...current, title: event.target.value }))} /></label>
-            <div className="resume-view-toggle"><button type="button" className={view === 'editor' ? 'is-active' : ''} onClick={() => setView('editor')}>Editor</button><button type="button" className={view === 'preview' ? 'is-active' : ''} onClick={() => setView('preview')}>Preview</button><button type="button" className={view === 'analysis' ? 'is-active' : ''} onClick={() => setView('analysis')}>ATS Score</button></div>
-            <span className={`resume-save-state ${saveState.includes('failed') ? 'is-error' : ''}`} role="status">{saveState || 'Autosave ready'}</span>
-            <Button variant="ghost" onClick={remove}>Delete</Button>
-          </section>
-          <TemplatePicker value={resume.template} onChange={(template) => setResume((current) => ({ ...current, template }))} />
-          <div className={`resume-main resume-main--${view}`}>
-            <div className={view === 'editor' ? '' : 'resume-mobile-hidden'}><ResumeEditor resume={resume} onChange={setResume} /></div>
-            <div className={view === 'preview' ? '' : 'resume-mobile-hidden'}><ResumePreview resume={resume} /></div>
-            <div className={view === 'analysis' ? '' : 'resume-mobile-hidden'}><FormField label="Target job keywords" hint="Comma separated; used only by the deterministic matching architecture"><input className="input" value={keywords} onChange={(event) => setKeywords(event.target.value)} placeholder="React, TypeScript, REST APIs" /></FormField><ATSPanel analysis={resume.atsSnapshot} onAnalyze={analyze} loading={analyzing} /></div>
+      <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
+        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface p-6 rounded-stitch border border-divider shadow-sm">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-wider text-brand-primary">ATS-friendly professional identity</span>
+            <h1 className="text-2xl sm:text-3xl font-bold text-content-heading tracking-tight mt-1">Resume Builder</h1>
+            <p className="text-sm text-content-muted mt-1">Create, edit, preview, autosave and export multiple professional resumes.</p>
           </div>
-        </>}
+          <div className="flex flex-wrap items-center gap-3">
+            <Button variant="secondary" onClick={() => setCreateOpen(true)}>+ New resume</Button>
+            {resume && <Button onClick={download}>Download PDF</Button>}
+          </div>
+        </header>
+
+        {error && <ErrorState title="Resume action failed" message={error} onRetry={() => setError('')} />}
+
+        {!resume ? (
+          <EmptyState title="Create your first professional resume" message="Start from your verified Dream Wave profile or build from a blank template." action={<Button onClick={() => setCreateOpen(true)}>Create resume</Button>} />
+        ) : (
+          <>
+            <section className="bg-surface p-4 rounded-stitch border border-divider shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center gap-4">
+                <label className="flex items-center gap-2 text-xs font-semibold text-content-heading">
+                  <span>Resume:</span>
+                  <select className="bg-surface-elevated text-content-body border border-divider rounded-lg px-2.5 py-1.5 text-xs focus:outline-none focus:border-brand-primary" value={resume._id} onChange={(event) => selectResume(event.target.value)}>
+                    {resumes.map((item) => <option value={item._id} key={item._id}>{item.title}{item.isDefault ? ' · Default' : ''}</option>)}
+                  </select>
+                </label>
+                <label className="flex items-center gap-2 text-xs font-semibold text-content-heading">
+                  <span>Title:</span>
+                  <input className="bg-surface-elevated text-content-body border border-divider rounded-lg px-2.5 py-1.5 text-xs focus:outline-none focus:border-brand-primary" value={resume.title} onChange={(event) => setResume((current) => ({ ...current, title: event.target.value }))} />
+                </label>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 bg-surface-elevated border border-divider rounded-xl p-1 text-xs">
+                  <button type="button" className={`px-3 py-1 font-semibold rounded-lg transition-colors ${view === 'editor' ? 'bg-brand-primary text-white' : 'text-content-muted hover:text-content-heading'}`} onClick={() => setView('editor')}>Editor</button>
+                  <button type="button" className={`px-3 py-1 font-semibold rounded-lg transition-colors ${view === 'preview' ? 'bg-brand-primary text-white' : 'text-content-muted hover:text-content-heading'}`} onClick={() => setView('preview')}>Preview</button>
+                  <button type="button" className={`px-3 py-1 font-semibold rounded-lg transition-colors ${view === 'analysis' ? 'bg-brand-primary text-white' : 'text-content-muted hover:text-content-heading'}`} onClick={() => setView('analysis')}>ATS Score</button>
+                </div>
+                <span className={`text-xs font-medium px-2 py-1 rounded ${saveState.includes('failed') ? 'text-red-500 bg-red-500/10' : 'text-content-muted'}`} role="status">{saveState || 'Autosave ready'}</span>
+                <Button variant="ghost" onClick={remove}>Delete</Button>
+              </div>
+            </section>
+
+            <TemplatePicker value={resume.template} onChange={(template) => setResume((current) => ({ ...current, template }))} />
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className={view === 'editor' ? 'block' : 'hidden lg:block'}><ResumeEditor resume={resume} onChange={setResume} /></div>
+              <div className={view === 'preview' ? 'block' : 'hidden lg:block'}><ResumePreview resume={resume} /></div>
+              {view === 'analysis' && (
+                <div className="lg:col-span-2 space-y-4">
+                  <FormField label="Target job keywords" hint="Comma separated; used only by the deterministic matching architecture">
+                    <input className="input" value={keywords} onChange={(event) => setKeywords(event.target.value)} placeholder="React, TypeScript, REST APIs" />
+                  </FormField>
+                  <ATSPanel analysis={resume.atsSnapshot} onAnalyze={analyze} loading={analyzing} />
+                </div>
+              )}
+            </div>
+          </>
+        )}
       </div>
       <Dialog open={createOpen} title="Create resume" description="Choose a template and optionally seed sections from your Student Profile." onClose={() => setCreateOpen(false)}>
         <form className="resume-create-form" onSubmit={create}><FormField label="Resume title" required><input className="input" value={createForm.title} onChange={(event) => setCreateForm((current) => ({ ...current, title: event.target.value }))} /></FormField><TemplatePicker value={createForm.template} onChange={(template) => setCreateForm((current) => ({ ...current, template }))} /><label><input type="checkbox" checked={createForm.fromProfile} onChange={(event) => setCreateForm((current) => ({ ...current, fromProfile: event.target.checked }))} /> Import education, skills, projects, certificates and achievements from my profile</label><footer><Button variant="ghost" onClick={() => setCreateOpen(false)}>Cancel</Button><Button type="submit">Create resume</Button></footer></form>

@@ -476,19 +476,19 @@ export default function Learn() {
 
   return (
     <StudentLayout>
-      {/* Page header */}
-      <div className="page-header">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12 }}>
+      <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
+        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface p-6 rounded-stitch border border-divider shadow-sm">
           <div>
-            <h1>🎓 <span className="gradient-text">AI Learning Studio</span></h1>
-            <p>Cinematic AI-powered lessons — scenes, narration, visuals, quizzes, mind maps</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-content-heading tracking-tight">🎓 <span className="gradient-text">AI Learning Studio</span></h1>
+            <p className="text-sm text-content-muted mt-1">Cinematic AI-powered lessons — scenes, narration, visuals, quizzes, mind maps</p>
           </div>
-          {lesson && <div style={{ display: 'flex', gap: 8 }}>
-            <span className="badge badge-purple">{lesson.totalDuration}</span>
-            <span className="badge" style={{ background: `${diffColor}20`, color: diffColor, border: `1px solid ${diffColor}30` }}>{lesson.difficulty}</span>
-          </div>}
-        </div>
-      </div>
+          {lesson && (
+            <div className="flex items-center gap-2">
+              <span className="px-3 py-1 text-xs font-semibold bg-brand-primary/10 text-brand-primary rounded-full border border-brand-primary/20">{lesson.totalDuration}</span>
+              <span className="px-3 py-1 text-xs font-semibold rounded-full" style={{ background: `${diffColor}20`, color: diffColor, border: `1px solid ${diffColor}30` }}>{lesson.difficulty}</span>
+            </div>
+          )}
+        </header>
 
       {/* Topic input */}
       <div className="card card-purple" style={{ marginBottom: 20 }}>
@@ -717,7 +717,7 @@ export default function Learn() {
 
           {/* Studio layout — shown in text mode */}
           {!videoMode && (
-          <div className="learning-studio-grid">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Scene list sidebar */}
             <div>
               <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>
@@ -993,6 +993,7 @@ export default function Learn() {
           </div>
         </motion.div>
       )}
+      </div>
     </StudentLayout>
   )
 }

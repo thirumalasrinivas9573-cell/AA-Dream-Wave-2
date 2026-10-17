@@ -3,10 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import StudentLayout from '../layouts/StudentLayout'
 import { libraryApi } from '@shared/services/api'
 
-/**
- * Student Books — wired to Digital Library (licensed/active PDFs only).
- * Preserves student layout UX: search, categories, continue reading, AI recommend.
- */
 export default function Books() {
   const navigate = useNavigate()
   const [books, setBooks] = useState([])
@@ -34,10 +30,13 @@ export default function Books() {
     setLoading(true)
     Promise.all([
       loadCatalog(),
-      libraryApi.categories().then((r) => {
-        const cats = r.data.categories || []
-        setCategories(['All', ...cats])
-      }).catch(() => {}),
+      libraryApi
+        .categories()
+        .then((r) => {
+          const cats = r.data.categories || []
+          setCategories(['All', ...cats])
+        })
+        .catch(() => {}),
       libraryApi.continueReading().then((r) => setContinueItems(r.data.items || [])).catch(() => setContinueItems([])),
       libraryApi.recommendations().then((r) => setRecommendations(r.data.items || [])).catch(() => setRecommendations([])),
     ]).finally(() => setLoading(false))
@@ -84,151 +83,242 @@ export default function Books() {
     e.stopPropagation()
     try {
       await libraryApi.favorite(bookId)
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }
 
   return (
     <StudentLayout>
-      <div className="page-header">
-        <h1>📚 <span className="gradient-text">Books</span></h1>
-        <p>Licensed digital library — search, continue reading, notes, and AI summaries</p>
-      </div>
-
-      <div className="card card-purple" style={{ marginBottom: 20 }}>
-        <h3 style={{ marginBottom: 10, fontSize: '0.9375rem' }}>✦ Knowledge discovery</h3>
-        <p style={{ fontSize: '0.8rem', marginBottom: 10 }}>Find legal resources by skill or topic. AI recommendations are architecture-ready and will be grounded in approved content.</p>
-        <form onSubmit={recommend} style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-          <input
-            className="input"
-            value={topic}
-            onChange={(e) => setTopic(e.target.value)}
-            placeholder="e.g. machine learning, entrepreneurship…"
-            style={{ flex: 1, minWidth: 200 }}
-            aria-label="Topic for book recommendations"
-          />
-          <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? <><div className="spinner" style={{ borderTopColor: 'white' }} /> Finding…</> : '🔍 Discover'}
-          </button>
-        </form>
-      </div>
-
-      <form onSubmit={search} style={{ display: 'flex', gap: 10, marginBottom: 16, flexWrap: 'wrap' }}>
-        <input
-          className="input"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search library titles, authors…"
-          style={{ flex: 1, minWidth: 200 }}
-          aria-label="Search books"
-        />
-        <button type="submit" className="btn btn-secondary" disabled={loading}>Search</button>
-      </form>
-
-      {error && <div className="alert alert-error" style={{ marginBottom: 14 }} role="alert">{error}</div>}
-
-      {continueItems.length > 0 && (
-        <section style={{ marginBottom: 22 }} aria-label="Continue reading">
-          <h3 style={{ marginBottom: 10, fontSize: '0.95rem' }}>Continue Reading</h3>
-          <div className="grid-4 student-books-grid">
-            {continueItems.map((p) => {
-              const b = p.bookId
-              if (!b?._id) return null
-              return (
-                <button
-                  key={p._id}
-                  type="button"
-                  className="card card-lift"
-                  onClick={() => openBook(b._id)}
-                  style={{ textAlign: 'left', cursor: 'pointer', border: '1px solid var(--border)', background: 'var(--bg-card)', color: 'inherit', fontFamily: 'inherit' }}
-                >
-                  <div style={{ fontWeight: 700, fontSize: '0.9rem', marginBottom: 4 }}>{b.title}</div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{Math.round(p.percent || 0)}% complete</div>
-                  <div className="progress-bar" style={{ marginTop: 8, height: 6, borderRadius: 99, background: 'var(--border)', overflow: 'hidden' }}>
-                    <div style={{ width: `${Math.round(p.percent || 0)}%`, height: '100%', background: 'linear-gradient(90deg,#8B5CF6,#3B82F6)' }} />
-                  </div>
-                </button>
-              )
-            })}
+      <div className="flex flex-col gap-6 w-full">
+        {/* Header Section */}
+        <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <span className="text-xs font-bold tracking-widest text-brand-primary uppercase">
+              DIGITAL LIBRARY & PAPERS
+            </span>
+            <h1 className="text-3xl font-heading font-bold text-content-heading tracking-tight mt-1">
+              Books & Knowledge Base
+            </h1>
+            <p className="text-sm text-content-muted">
+              Licensed digital library — search, continue reading, notes, and AI summaries
+            </p>
           </div>
-        </section>
-      )}
+          <Link
+            to="/library"
+            className="h-10 px-4 rounded-xl inline-flex items-center gap-2 text-xs font-semibold text-content-heading bg-surface border border-divider hover:border-brand-primary transition-all self-start md:self-auto"
+          >
+            <span className="material-symbols-outlined text-[18px] text-brand-primary">local_library</span>
+            <span>Open Library Hub</span>
+          </Link>
+        </header>
 
-      {recommendations.length > 0 && filter === 'All' && !query && (
-        <section style={{ marginBottom: 22 }} aria-label="Recommended">
-          <h3 style={{ marginBottom: 10, fontSize: '0.95rem' }}>Recommended for you</h3>
-          <div className="grid-4 student-books-grid">
-            {recommendations.slice(0, 4).map((b) => (
+        {/* Knowledge Discovery Card */}
+        <div className="p-5 rounded-stitch bg-surface border border-divider shadow-xs space-y-3">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-[20px] text-brand-primary">auto_awesome</span>
+            <h3 className="font-heading font-bold text-sm text-content-heading">AI Knowledge Discovery</h3>
+          </div>
+          <p className="text-xs text-content-muted">
+            Find legal resources by skill or topic. AI recommendations are grounded in verified library content.
+          </p>
+          <form onSubmit={recommend} className="flex flex-wrap md:flex-nowrap items-center gap-3 pt-1">
+            <div className="relative flex-1 min-w-[240px]">
+              <span className="material-symbols-outlined absolute left-3.5 top-2.5 text-[18px] text-content-muted">
+                search
+              </span>
+              <input
+                value={topic}
+                onChange={(e) => setTopic(e.target.value)}
+                placeholder="e.g. distributed systems, machine learning, quantum computing..."
+                className="w-full h-10 pl-10 pr-4 rounded-xl bg-canvas border border-divider text-xs font-medium text-content-heading placeholder:text-content-muted focus:outline-none focus:border-brand-primary transition-all"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="h-10 px-5 rounded-xl bg-brand-primary text-white text-xs font-semibold hover:bg-brand-hover transition-all flex items-center gap-2 shrink-0 shadow-xs"
+            >
+              <span className="material-symbols-outlined text-[18px]">explore</span>
+              <span>Discover</span>
+            </button>
+          </form>
+        </div>
+
+        {/* Main Search & Category Filters */}
+        <div className="flex flex-col gap-3">
+          <form onSubmit={search} className="flex items-center gap-3">
+            <div className="relative flex-1">
+              <span className="material-symbols-outlined absolute left-3.5 top-2.5 text-[18px] text-content-muted">
+                menu_book
+              </span>
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search library titles, authors, or ISBN..."
+                className="w-full h-10 pl-10 pr-4 rounded-xl bg-surface border border-divider text-xs font-medium text-content-heading placeholder:text-content-muted focus:outline-none focus:border-brand-primary transition-all"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="h-10 px-4 rounded-xl bg-surface-elevated border border-divider text-content-heading text-xs font-semibold hover:bg-surface transition-all shrink-0"
+            >
+              Search
+            </button>
+          </form>
+
+          {/* Category Tabs */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+            {categories.map((c) => (
               <button
-                key={b._id}
+                key={c}
                 type="button"
-                className="card card-lift"
-                onClick={() => openBook(b._id)}
-                style={{ textAlign: 'center', cursor: 'pointer', border: '1px solid var(--border)', background: 'var(--bg-card)', color: 'inherit', fontFamily: 'inherit' }}
+                onClick={() => onFilter(c)}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                  filter === c
+                    ? 'bg-brand-primary text-white shadow-xs'
+                    : 'bg-surface border border-divider text-content-muted hover:text-content-heading hover:bg-surface-elevated'
+                }`}
               >
-                <div style={{ fontSize: '2rem', marginBottom: 8 }}>📖</div>
-                <h3 style={{ fontSize: '0.9rem', marginBottom: 4 }}>{b.title}</h3>
-                <p style={{ fontSize: '0.78rem', color: 'var(--purple-light)' }}>{b.author}</p>
+                {c}
               </button>
             ))}
           </div>
-        </section>
-      )}
-
-      <div style={{ overflowX: 'auto', marginBottom: 18 }} role="tablist" aria-label="Book categories">
-        <div className="tab-nav" style={{ width: 'max-content' }}>
-          {categories.map((c) => (
-            <button
-              key={c}
-              type="button"
-              role="tab"
-              aria-selected={filter === c}
-              className={`tab-item ${filter === c ? 'active' : ''}`}
-              onClick={() => onFilter(c)}
-            >
-              {c}
-            </button>
-          ))}
         </div>
-      </div>
 
-      {loading ? (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: 40 }}><div className="spinner spinner-lg" /></div>
-      ) : books.length === 0 ? (
-        <div className="card" style={{ textAlign: 'center', padding: 36 }}>
-          <p style={{ marginBottom: 8 }}>No licensed books match this search yet.</p>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: 14 }}>
-            Only institution-licensed or legally available PDFs appear here.
-          </p>
-          <Link to="/library" className="btn btn-secondary btn-sm" style={{ textDecoration: 'none' }}>Open Digital Library</Link>
-        </div>
-      ) : (
-        <div className="grid-4 student-books-grid">
-          {books.map((b) => (
-            <div key={b._id} className="card card-lift" style={{ textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ fontSize: '2.8rem', marginBottom: 10 }} aria-hidden>📖</div>
-              <h3 style={{ fontSize: '0.9rem', marginBottom: 4, lineHeight: 1.35 }}>{b.title}</h3>
-              <p style={{ fontSize: '0.78rem', color: 'var(--purple-light)', marginBottom: 8 }}>{b.author}</p>
-              {b.description && (
-                <p style={{ fontSize: '0.77rem', marginBottom: 10, lineHeight: 1.55, flex: 1 }}>
-                  {b.description.slice(0, 120)}{b.description.length > 120 ? '…' : ''}
-                </p>
-              )}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 6, marginBottom: 10 }}>
-                <span className="badge badge-purple" style={{ fontSize: '0.68rem' }}>{b.category || 'General'}</span>
-                <button type="button" className="btn btn-ghost btn-sm" onClick={(e) => toggleFavorite(b._id, e)} aria-label={`Favorite ${b.title}`}>★</button>
-              </div>
-              <div style={{ display: 'flex', gap: 6 }}>
-                <button type="button" className="btn btn-primary btn-sm" style={{ flex: 1 }} onClick={() => openBook(b._id)}>
-                  Read PDF
-                </button>
-                <button type="button" className="btn btn-secondary btn-sm" disabled title="Grounded knowledge tools coming soon" aria-label={`Knowledge tools for ${b.title} coming soon`}>
-                  ✦
-                </button>
-              </div>
+        {error && (
+          <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-600 text-xs font-semibold">
+            {error}
+          </div>
+        )}
+
+        {/* Continue Reading Section */}
+        {continueItems.length > 0 && (
+          <section className="space-y-3">
+            <h3 className="font-heading font-bold text-base text-content-heading">Continue Reading</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {continueItems.map((p) => {
+                const b = p.bookId
+                if (!b?._id) return null
+                return (
+                  <button
+                    key={p._id}
+                    type="button"
+                    onClick={() => openBook(b._id)}
+                    className="p-4 rounded-stitch bg-surface border border-divider hover:border-brand-primary text-left transition-all flex flex-col justify-between shadow-xs group cursor-pointer"
+                  >
+                    <div>
+                      <div className="font-heading font-bold text-sm text-content-heading group-hover:text-brand-primary transition-colors line-clamp-1">
+                        {b.title}
+                      </div>
+                      <div className="text-xs text-content-muted mt-1">{Math.round(p.percent || 0)}% completed</div>
+                    </div>
+                    <div className="w-full bg-canvas h-1.5 rounded-full mt-3 overflow-hidden">
+                      <div
+                        className="bg-brand-primary h-full rounded-full transition-all"
+                        style={{ width: `${Math.round(p.percent || 0)}%` }}
+                      />
+                    </div>
+                  </button>
+                )
+              })}
             </div>
-          ))}
-        </div>
-      )}
+          </section>
+        )}
+
+        {/* Recommended Books Section */}
+        {recommendations.length > 0 && filter === 'All' && !query && (
+          <section className="space-y-3">
+            <h3 className="font-heading font-bold text-base text-content-heading">Recommended for You</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {recommendations.slice(0, 4).map((b) => (
+                <button
+                  key={b._id}
+                  type="button"
+                  onClick={() => openBook(b._id)}
+                  className="p-5 rounded-stitch bg-surface border border-divider hover:border-brand-primary text-left transition-all shadow-xs flex flex-col items-center text-center cursor-pointer group"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-brand-primary/10 text-brand-primary flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                    <span className="material-symbols-outlined text-[24px]">book_5</span>
+                  </div>
+                  <h4 className="font-heading font-bold text-sm text-content-heading line-clamp-1 group-hover:text-brand-primary transition-colors">
+                    {b.title}
+                  </h4>
+                  <p className="text-xs text-content-muted mt-0.5 line-clamp-1">{b.author}</p>
+                </button>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Book Catalog Grid */}
+        {loading ? (
+          <div className="flex items-center justify-center min-h-[300px]">
+            <div className="spinner spinner-lg" />
+          </div>
+        ) : books.length === 0 ? (
+          <div className="p-8 rounded-stitch bg-surface border border-divider text-center space-y-3">
+            <span className="material-symbols-outlined text-[40px] text-content-muted">folder_open</span>
+            <p className="text-sm font-semibold text-content-heading">No licensed books match this search yet.</p>
+            <p className="text-xs text-content-muted">Only institution-licensed or legally available PDFs appear here.</p>
+            <Link
+              to="/library"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-elevated border border-divider text-xs font-semibold text-content-heading hover:bg-surface transition-all"
+            >
+              Open Digital Library
+            </Link>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {books.map((b) => (
+              <div
+                key={b._id}
+                className="p-5 rounded-stitch bg-surface border border-divider hover:border-brand-primary transition-all flex flex-col justify-between shadow-xs group"
+              >
+                <div>
+                  <div className="w-12 h-12 rounded-2xl bg-brand-primary/10 text-brand-primary flex items-center justify-center mb-3">
+                    <span className="material-symbols-outlined text-[24px]">menu_book</span>
+                  </div>
+                  <h3 className="font-heading font-bold text-sm text-content-heading line-clamp-1 group-hover:text-brand-primary transition-colors">
+                    {b.title}
+                  </h3>
+                  <p className="text-xs font-semibold text-brand-primary mt-0.5">{b.author}</p>
+                  {b.description && (
+                    <p className="text-xs text-content-muted mt-2 line-clamp-2 leading-relaxed">
+                      {b.description}
+                    </p>
+                  )}
+                </div>
+
+                <div className="pt-4 space-y-3 border-t border-divider mt-4">
+                  <div className="flex items-center justify-between">
+                    <span className="px-2.5 py-0.5 rounded-full bg-brand-primary/10 text-brand-primary text-[10px] font-bold">
+                      {b.category || 'General'}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={(e) => toggleFavorite(b._id, e)}
+                      className="p-1 rounded-lg text-content-muted hover:text-amber-500 transition-colors"
+                      title="Bookmark"
+                    >
+                      <span className="material-symbols-outlined text-[18px]">star</span>
+                    </button>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => openBook(b._id)}
+                    className="w-full h-9 rounded-xl bg-brand-primary text-white text-xs font-semibold hover:bg-brand-hover transition-all flex items-center justify-center gap-1.5 shadow-xs"
+                  >
+                    <span className="material-symbols-outlined text-[16px]">visibility</span>
+                    <span>Read PDF</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </StudentLayout>
   )
 }

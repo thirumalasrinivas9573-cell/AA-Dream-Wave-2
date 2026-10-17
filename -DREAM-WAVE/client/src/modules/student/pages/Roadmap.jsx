@@ -4,6 +4,8 @@ import { goalApi, roadmapApi } from '@shared/services/api'
 import goalIntelligenceService from '@shared/services/goalIntelligenceService'
 import { Button, Dialog, EmptyState, ErrorState, LoadingState } from '@shared/components/ui'
 import StudentLayout from '../layouts/StudentLayout'
+import { usePdfExport } from '@shared/hooks/usePdfExport'
+import { DownloadPdfButton } from '@shared/components/DownloadPdfButton'
 import {
   CollectionEditor,
   PlanEditor,
@@ -55,6 +57,7 @@ export default function Roadmap() {
   const [adaptPreview, setAdaptPreview] = useState(null)
   const [adaptLoading, setAdaptLoading] = useState(false)
   const requestId = useRef(0)
+  const { exporting, error: pdfError, setError: setPdfError, notice: pdfNotice, setNotice: setPdfNotice, exportPdf } = usePdfExport()
 
   const selectedGoal = useMemo(() => goals.find((goal) => goal._id === selectedGoalId) || null, [goals, selectedGoalId])
   const data = draft?.data || {}
@@ -251,35 +254,75 @@ export default function Roadmap() {
     ...(data.courses || []).map((item) => ({ type: 'course', title: item.name || item.title || String(item), url: item.url || '' })),
   ], [data.books, data.courses])
 
+  const hasStages = Boolean(roadmap && (draft?.learningStages?.length || roadmap?.learningStages?.length))
+
+  const handleExportPdf = () => {
+    if (!roadmap) return
+    const titleForSlug = selectedGoal?.title || roadmap.title || draft?.data?.overview || 'roadmap'
+    const slug = titleForSlug
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '') || 'roadmap'
+    const dateStr = new Date().toISOString().slice(0, 10)
+    const fileName = `dreamwave-roadmap-${slug}-${dateStr}.pdf`
+
+    const docBuilder = async (options = {}) => {
+      const { RoadmapPdf } = await import('./RoadmapPdf')
+      return <RoadmapPdf roadmap={draft || roadmap} goal={selectedGoal} options={options} />
+    }
+    exportPdf(docBuilder, fileName)
+  }
+
   return (
     <StudentLayout>
-      <div className="student-roadmap">
-        <header className="roadmap-header">
+      <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
+        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface p-6 rounded-stitch border border-divider shadow-sm">
           <div>
-            <h1><span className="gradient-text">Learning Roadmap</span></h1>
-            <p>Structure skill progression, plans, resources, practice and assessments.</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-content-heading tracking-tight">
+              <span className="gradient-text">Learning Roadmap</span>
+            </h1>
+            <p className="text-sm text-content-muted mt-1">Structure skill progression, plans, resources, practice and assessments.</p>
           </div>
-          <div className="goals-header__actions">
+          <div className="flex flex-wrap items-center gap-3">
             {dirty && <Button onClick={saveArchitecture} disabled={saving || generating}>{saving ? 'Saving…' : 'Save changes'}</Button>}
             {roadmap && <Button variant="secondary" onClick={() => setConfirmGenerate(true)} disabled={generating}>{generating ? 'Generating roadmap…' : 'AI generation'}</Button>}
             {roadmap && <Button variant="secondary" onClick={loadAdaptPreview} disabled={adaptLoading || generating}>Suggest adjustments</Button>}
+            <DownloadPdfButton
+              onExport={handleExportPdf}
+              loading={exporting}
+              disabled={!hasStages}
+              disabledReason={!roadmap ? 'No roadmap to export.' : 'This roadmap has no stages to export.'}
+            />
           </div>
         </header>
 
         {generating && (
-          <div className="roadmap-generating-banner" style={{ margin: '1rem 0' }}>
+          <div className="p-4 bg-surface rounded-stitch border border-divider shadow-sm">
             <LoadingState label="Generating personalized roadmap and 30-day curriculum with AI… Please wait." rows={3} />
           </div>
         )}
 
-        <section className="roadmap-selector" aria-label="Select roadmap goal">
-          <label htmlFor="roadmap-goal">Goal</label>
-          <select id="roadmap-goal" className="select" value={selectedGoalId} onChange={(event) => chooseGoal(event.target.value)} disabled={loadingGoals}>
+        <section className="bg-surface p-6 rounded-stitch border border-divider shadow-sm flex flex-col sm:flex-row sm:items-center gap-4" aria-label="Select roadmap goal">
+          <label htmlFor="roadmap-goal" className="text-sm font-semibold text-content-heading shrink-0">Goal</label>
+          <select id="roadmap-goal" className="flex-1 bg-surface-elevated text-content-body border border-divider rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-primary" value={selectedGoalId} onChange={(event) => chooseGoal(event.target.value)} disabled={loadingGoals}>
             <option value="">{goals.length ? '— Select a goal —' : 'No goals available'}</option>
             {goals.map((goal) => <option value={goal._id} key={goal._id}>{goal.title} · {goal.category}</option>)}
           </select>
-          <Link className="btn btn-secondary" to="/student/goals">Manage goals</Link>
+          <Link className="px-4 py-2 text-sm font-medium bg-surface-elevated hover:bg-surface text-content-heading rounded-stitch border border-divider transition-colors shrink-0" to="/student/goals">Manage goals</Link>
         </section>
+
+        {pdfError && (
+          <div className="alert alert-error" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span>⚠️ {pdfError}</span>
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => setPdfError('')} style={{ padding: '2px 8px' }}>✕</button>
+          </div>
+        )}
+        {pdfNotice && (
+          <div className="alert alert-warning" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span>ℹ️ {pdfNotice}</span>
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => setPdfNotice('')} style={{ padding: '2px 8px' }}>✕</button>
+          </div>
+        )}
 
         {error && (
           <ErrorState
@@ -297,54 +340,54 @@ export default function Roadmap() {
             }}
           />
         )}
-        {fallback && <div className="alert alert-warning">The existing AI service used its fallback roadmap because the generation provider was unavailable.</div>}
+        {fallback && <div className="p-4 bg-amber-500/10 text-amber-600 border border-amber-500/20 rounded-stitch text-sm">The existing AI service used its fallback roadmap because the generation provider was unavailable.</div>}
         {transparency && (
-          <div className="alert alert-info">
-            <strong>{transparency.label === 'SYSTEM-GENERATED FALLBACK' ? 'SYSTEM-GENERATED FALLBACK' : 'Roadmap transparency'}</strong>
-            <div style={{ marginTop: 8, display: 'grid', gap: 6 }}>
-              {transparency.confirmedUserData?.length > 0 && <span>Confirmed user data: {transparency.confirmedUserData.join(', ')}</span>}
-              {transparency.databaseSignals?.length > 0 && <span>Database signals: {transparency.databaseSignals.join(', ')}</span>}
-              {transparency.aiInferences?.length > 0 && <span>AI/system inference: {transparency.aiInferences.join(', ')}</span>}
-              {transparency.needsUserConfirmation?.length > 0 && <span>Needs confirmation: {transparency.needsUserConfirmation.join(', ')}</span>}
+          <div className="p-4 bg-brand-primary/10 text-content-body border border-brand-primary/20 rounded-stitch text-sm space-y-2">
+            <strong className="text-brand-primary font-semibold block">{transparency.label === 'SYSTEM-GENERATED FALLBACK' ? 'SYSTEM-GENERATED FALLBACK' : 'Roadmap transparency'}</strong>
+            <div className="grid grid-cols-1 gap-1 text-xs text-content-muted">
+              {transparency.confirmedUserData?.length > 0 && <div>Confirmed user data: {transparency.confirmedUserData.join(', ')}</div>}
+              {transparency.databaseSignals?.length > 0 && <div>Database signals: {transparency.databaseSignals.join(', ')}</div>}
+              {transparency.aiInferences?.length > 0 && <div>AI/system inference: {transparency.aiInferences.join(', ')}</div>}
+              {transparency.needsUserConfirmation?.length > 0 && <div>Needs confirmation: {transparency.needsUserConfirmation.join(', ')}</div>}
             </div>
           </div>
         )}
 
         {!loadingGoals && !goals.length && (
-          <section className="roadmap-empty">
-            <span aria-hidden="true">🗺️</span>
-            <h2>Create a goal first</h2>
-            <p>Every roadmap belongs to a measurable learning goal.</p>
-            <Link className="btn btn-primary" to="/student/goals">Create a goal</Link>
+          <section className="bg-surface p-12 rounded-stitch border border-divider text-center flex flex-col items-center space-y-3 shadow-sm">
+            <span aria-hidden="true" className="text-4xl">🗺️</span>
+            <h2 className="text-lg font-semibold text-content-heading">Create a goal first</h2>
+            <p className="text-sm text-content-muted max-w-md">Every roadmap belongs to a measurable learning goal.</p>
+            <Link className="px-4 py-2 text-sm font-medium bg-brand-primary text-white rounded-stitch" to="/student/goals">Create a goal</Link>
           </section>
         )}
 
         {!loadingGoals && goals.length > 0 && !selectedGoalId && (
-          <section className="roadmap-empty">
-            <span aria-hidden="true">🎯</span>
-            <h2>Select a learning goal</h2>
-            <p>Choose a goal from the dropdown above to view or generate its customized roadmap.</p>
+          <section className="bg-surface p-12 rounded-stitch border border-divider text-center flex flex-col items-center space-y-3 shadow-sm">
+            <span aria-hidden="true" className="text-4xl">🎯</span>
+            <h2 className="text-lg font-semibold text-content-heading">Select a learning goal</h2>
+            <p className="text-sm text-content-muted max-w-md">Choose a goal from the dropdown above to view or generate its customized roadmap.</p>
           </section>
         )}
 
         {loadingRoadmap && <LoadingState label="Loading roadmap workspace…" rows={6} />}
 
         {!loadingRoadmap && selectedGoal && notFound && (
-          <section className="roadmap-empty">
-            <span aria-hidden="true">🧭</span>
-            <h2>Start this learning roadmap</h2>
-            <p>Create a manual roadmap workspace for stages, weekly plans, resources, projects, revision sessions and assessments. AI is optional.</p>
+          <section className="bg-surface p-12 rounded-stitch border border-divider text-center flex flex-col items-center space-y-3 shadow-sm">
+            <span aria-hidden="true" className="text-4xl">🧭</span>
+            <h2 className="text-lg font-semibold text-content-heading">Start this learning roadmap</h2>
+            <p className="text-sm text-content-muted max-w-md">Create a manual roadmap workspace for stages, weekly plans, resources, projects, revision sessions and assessments. AI is optional.</p>
             <Button onClick={initialize} disabled={saving}>{saving ? 'Starting…' : 'Initialize roadmap'}</Button>
           </section>
         )}
 
         {!loadingRoadmap && draft && (
           <>
-            <section className="roadmap-summary" aria-label="Roadmap summary">
-              <article><strong>{progress}%</strong><small>Completion</small></article>
-              <article><strong>{draft.learningStages.length}</strong><small>Learning stages</small></article>
-              <article><strong>{draft.weeklyPlans.length}</strong><small>Weekly plans</small></article>
-              <article><strong>{draft.architecture?.estimatedCompletion ? new Date(draft.architecture.estimatedCompletion).toLocaleDateString() : selectedGoal.deadline ? new Date(selectedGoal.deadline).toLocaleDateString() : 'Flexible'}</strong><small>Estimated completion</small></article>
+            <section className="grid grid-cols-2 sm:grid-cols-4 gap-4" aria-label="Roadmap summary">
+              <article className="bg-surface p-4 rounded-stitch border border-divider shadow-sm space-y-1"><strong className="text-xl font-bold text-brand-primary block">{progress}%</strong><small className="text-xs text-content-muted font-medium uppercase tracking-wider block">Completion</small></article>
+              <article className="bg-surface p-4 rounded-stitch border border-divider shadow-sm space-y-1"><strong className="text-xl font-bold text-content-heading block">{draft.learningStages.length}</strong><small className="text-xs text-content-muted font-medium uppercase tracking-wider block">Learning stages</small></article>
+              <article className="bg-surface p-4 rounded-stitch border border-divider shadow-sm space-y-1"><strong className="text-xl font-bold text-content-heading block">{draft.weeklyPlans.length}</strong><small className="text-xs text-content-muted font-medium uppercase tracking-wider block">Weekly plans</small></article>
+              <article className="bg-surface p-4 rounded-stitch border border-divider shadow-sm space-y-1"><strong className="text-xl font-bold text-content-heading block">{draft.architecture?.estimatedCompletion ? new Date(draft.architecture.estimatedCompletion).toLocaleDateString() : selectedGoal.deadline ? new Date(selectedGoal.deadline).toLocaleDateString() : 'Flexible'}</strong><small className="text-xs text-content-muted font-medium uppercase tracking-wider block">Estimated completion</small></article>
             </section>
 
             <div className="roadmap-shell">

@@ -1,24 +1,12 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTheme } from '../context/ThemeContext'
+import { useTheme, STITCH_THEMES } from '../context/ThemeContext'
 
-const OPTIONS = [
-  { id: 'light', label: 'Light', icon: '☀️', tip: 'Always Light theme' },
-  { id: 'dark', label: 'Dark', icon: '🌙', tip: 'Always Dark theme' },
-  { id: 'system', label: 'System', icon: '⚙️', tip: 'Match operating system' },
-]
-
-
-export default function ThemeToggle({
-  variant = 'segmented', // 'segmented' | 'compact' | 'icon'
-  className = '',
-  style = {},
-}) {
-  const { themePreference, resolvedTheme, setThemePreference } = useTheme()
+export function ThemeSelector({ variant = 'segmented', className = '', style = {} }) {
+  const { stitchTheme, setStitchTheme, themes = STITCH_THEMES } = useTheme()
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const dropdownRef = useRef(null)
 
-  // Close dropdown on outside click or Escape
   useEffect(() => {
     if (!dropdownOpen) return
     const handleClick = (e) => {
@@ -37,75 +25,41 @@ export default function ThemeToggle({
     }
   }, [dropdownOpen])
 
-  // ── Segmented Control Variant (ideal for sidebars, settings, profiles) ──
+  const activeThemeObj = themes.find((t) => t.id === stitchTheme) || themes[0]
+
   if (variant === 'segmented') {
     return (
       <div
         role="group"
-        aria-label="Theme mode selection"
-        className={`theme-segmented-control ${className}`}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          background: 'var(--bg-elevated)',
-          border: '1px solid var(--border)',
-          borderRadius: '12px',
-          padding: '3px',
-          gap: '2px',
-          position: 'relative',
-          userSelect: 'none',
-          boxShadow: 'var(--shadow-sm)',
-          ...style,
-        }}
+        aria-label="Select Stitch UI Theme"
+        className={`flex items-center bg-surface border border-divider rounded-xl p-1 gap-1 relative select-none shadow-sm overflow-x-auto ${className}`}
+        style={style}
       >
-        {OPTIONS.map(({ id, label, icon, tip }) => {
-          const isActive = themePreference === id
+        {themes.map(({ id, name, icon, mode }) => {
+          const isActive = stitchTheme === id
           return (
             <button
               key={id}
               type="button"
               role="radio"
               aria-checked={isActive}
-              aria-label={`${label} theme: ${tip}`}
-              title={`${label} Mode (${tip})`}
-              onClick={() => setThemePreference(id)}
-              style={{
-                flex: 1,
-                position: 'relative',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '6px',
-                padding: '7px 10px',
-                borderRadius: '9px',
-                border: 'none',
-                background: 'transparent',
-                color: isActive ? 'var(--text-primary)' : 'var(--text-muted)',
-                fontWeight: isActive ? 650 : 500,
-                fontSize: '0.8125rem',
-                cursor: 'pointer',
-                transition: 'color 0.15s ease',
-                fontFamily: 'inherit',
-                zIndex: 1,
-              }}
+              title={`${name} (${mode})`}
+              onClick={() => setStitchTheme(id)}
+              className={`flex-1 min-w-[110px] relative flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-lg border-0 text-xs font-semibold cursor-pointer transition-all duration-150 ${
+                isActive
+                  ? 'text-brand-primary bg-surface-elevated shadow-xs border border-focus'
+                  : 'text-content-muted hover:text-content-heading hover:bg-surface-elevated/50'
+              }`}
             >
               {isActive && (
                 <motion.div
-                  layoutId="activeThemePill"
+                  layoutId="activeStitchTheme"
                   transition={{ type: 'spring', stiffness: 450, damping: 35 }}
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    borderRadius: '9px',
-                    background: resolvedTheme === 'dark' ? 'rgba(157, 141, 241, 0.18)' : 'rgba(140, 122, 230, 0.14)',
-                    border: '1px solid var(--border-purple)',
-                    boxShadow: '0 2px 8px rgba(140, 122, 230, 0.15)',
-                    zIndex: -1,
-                  }}
+                  className="absolute inset-0 rounded-lg bg-brand-primary/10 border border-brand-primary/30 z-0"
                 />
               )}
-              <span style={{ fontSize: '0.9rem', lineHeight: 1 }}>{icon}</span>
-              <span>{label}</span>
+              <span className="material-symbols-outlined text-[15px] z-10">{icon}</span>
+              <span className="truncate z-10">{name}</span>
             </button>
           )
         })}
@@ -113,58 +67,19 @@ export default function ThemeToggle({
     )
   }
 
-  // ── Compact / Icon Toggle Variant with Popover (ideal for headers / topbars) ──
-  const activeOption = OPTIONS.find((o) => o.id === themePreference) || OPTIONS[0]
-  const currentIcon = activeOption.id === 'system'
-    ? (resolvedTheme === 'dark' ? '⚙️' : '⚙️')
-    : activeOption.icon
-
   return (
-    <div
-      ref={dropdownRef}
-      className={`theme-toggle-compact ${className}`}
-      style={{ position: 'relative', display: 'inline-flex', ...style }}
-    >
+    <div ref={dropdownRef} className={`relative inline-flex ${className}`} style={style}>
       <button
         type="button"
-        aria-label={`Current theme: ${activeOption.label}. Click to switch.`}
         aria-haspopup="true"
         aria-expanded={dropdownOpen}
-        title={`Theme: ${activeOption.label} (Click to change)`}
+        title={`Theme: ${activeThemeObj.name}`}
         onClick={() => setDropdownOpen((prev) => !prev)}
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '6px',
-          padding: '6px 10px',
-          borderRadius: '10px',
-          border: '1px solid var(--border)',
-          background: 'var(--bg-elevated)',
-          color: 'var(--text-primary)',
-          fontSize: '0.85rem',
-          fontWeight: 600,
-          cursor: 'pointer',
-          boxShadow: 'var(--shadow-sm)',
-          transition: 'all 0.18s ease',
-          fontFamily: 'inherit',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = 'var(--border-purple)'
-          e.currentTarget.style.boxShadow = 'var(--shadow)'
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = 'var(--border)'
-          e.currentTarget.style.boxShadow = 'var(--shadow-sm)'
-        }}
+        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-divider bg-surface text-content-heading text-xs font-semibold shadow-xs hover:border-brand-primary transition-all cursor-pointer"
       >
-        <span style={{ fontSize: '1rem', lineHeight: 1 }}>{currentIcon}</span>
-        {variant === 'compact' && (
-          <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-            {activeOption.label}
-          </span>
-        )}
-        <span style={{ fontSize: '0.65rem', opacity: 0.6 }}>▾</span>
+        <span className="material-symbols-outlined text-[18px] text-brand-primary">{activeThemeObj.icon}</span>
+        <span className="truncate">{activeThemeObj.name}</span>
+        <span className="text-[10px] opacity-60">▾</span>
       </button>
 
       <AnimatePresence>
@@ -174,81 +89,35 @@ export default function ThemeToggle({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.95 }}
             transition={{ duration: 0.14, ease: 'easeOut' }}
-            style={{
-              position: 'absolute',
-              top: 'calc(100% + 6px)',
-              right: 0,
-              zIndex: 100,
-              minWidth: '150px',
-              padding: '6px',
-              background: 'var(--bg-elevated)',
-              border: '1px solid var(--border)',
-              borderRadius: '12px',
-              boxShadow: 'var(--shadow-lg)',
-              backdropFilter: 'blur(16px)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '2px',
-            }}
+            className="absolute top-[calc(100%+6px)] right-0 z-50 min-w-[200px] p-2 bg-surface border border-divider rounded-2xl shadow-xl backdrop-blur-xl flex flex-col gap-1"
           >
-            <div
-              style={{
-                fontSize: '0.65rem',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                color: 'var(--text-muted)',
-                padding: '4px 8px 2px',
-              }}
-            >
-              Select Theme
+            <div className="text-[10px] font-bold tracking-wider uppercase text-content-muted px-2 py-1">
+              Select Stitch Theme (4)
             </div>
-            {OPTIONS.map(({ id, label, icon }) => {
-
-              const isSelected = themePreference === id
+            {themes.map(({ id, name, icon, desc, mode }) => {
+              const isSelected = stitchTheme === id
               return (
                 <button
                   key={id}
                   type="button"
                   onClick={() => {
-                    setThemePreference(id)
+                    setStitchTheme(id)
                     setDropdownOpen(false)
                   }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    gap: '8px',
-                    padding: '8px 10px',
-                    borderRadius: '8px',
-                    border: 'none',
-                    background: isSelected
-                      ? 'var(--bg-hover)'
-                      : 'transparent',
-                    color: isSelected
-                      ? 'var(--purple-light)'
-                      : 'var(--text-primary)',
-                    fontWeight: isSelected ? 650 : 500,
-                    fontSize: '0.825rem',
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    fontFamily: 'inherit',
-                    transition: 'background 0.12s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!isSelected) e.currentTarget.style.background = 'var(--bg-hover)'
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isSelected) e.currentTarget.style.background = 'transparent'
-                  }}
+                  className={`flex items-center justify-between gap-2 px-2.5 py-2 rounded-xl text-left text-xs font-medium cursor-pointer transition-colors ${
+                    isSelected
+                      ? 'bg-brand-primary/15 text-brand-primary font-bold'
+                      : 'text-content-body hover:bg-surface-elevated hover:text-content-heading'
+                  }`}
                 >
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '0.95rem' }}>{icon}</span>
-                    <span>{label}</span>
-                  </span>
-                  {isSelected && (
-                    <span style={{ color: 'var(--purple)', fontSize: '0.85rem' }}>✓</span>
-                  )}
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="material-symbols-outlined text-[18px]">{icon}</span>
+                    <div className="flex flex-col min-w-0">
+                      <span className="truncate">{name}</span>
+                      <span className="text-[10px] text-content-muted capitalize">{desc || mode}</span>
+                    </div>
+                  </div>
+                  {isSelected && <span className="material-symbols-outlined text-[16px] text-brand-primary">check</span>}
                 </button>
               )
             })}
@@ -257,4 +126,8 @@ export default function ThemeToggle({
       </AnimatePresence>
     </div>
   )
+}
+
+export default function ThemeToggle(props) {
+  return <ThemeSelector {...props} />
 }

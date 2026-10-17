@@ -3,7 +3,7 @@ var __esm = (fn, res) => function __init() {
   return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
 };
 
-// client/src/shared/pdf/sanitizeText.js
+// ../../src/shared/pdf/sanitizeText.js
 function sanitizeText(raw, options = {}) {
   if (raw === null || raw === void 0) return "";
   let str = String(raw);
@@ -25,7 +25,7 @@ function sanitizeText(raw, options = {}) {
 }
 var KNOWN_HTML_TAGS, EMOJI_REGEX, SYMBOL_REPLACEMENTS;
 var init_sanitizeText = __esm({
-  "client/src/shared/pdf/sanitizeText.js"() {
+  "../../src/shared/pdf/sanitizeText.js"() {
     "use strict";
     KNOWN_HTML_TAGS = /<\/?(script|style|iframe|div|span|p|br|img|a|b|i|em|strong|table|tr|td|th|ul|ol|li|h[1-6])\b[^>]*>/gi;
     EMOJI_REGEX = /(?:\p{Emoji_Presentation}|\uFE0F|[\uD83C\uDFFB-\uD83C\uDFFF])+(?:\u200D(?:\p{Emoji_Presentation}|\uFE0F|[\uD83C\uDFFB-\uD83C\uDFFF])+)*/gu;
@@ -44,7 +44,7 @@ var init_sanitizeText = __esm({
   }
 });
 
-// client/src/shared/pdf/fonts.js
+// ../../src/shared/pdf/fonts.js
 import { Font } from "@react-pdf/renderer";
 function registerPdfFonts() {
   if (fontsRegistered) return Promise.resolve(REGISTERED_FONTS);
@@ -261,7 +261,7 @@ function sanitizeEmojiAndText(raw, options = {}) {
 }
 var PDF_FONT_FAMILY, REGISTERED_FONTS, INDIC_FONTS, fontsRegistered, fontRegistrationPromise, warnedTelugu, warnedDevanagari, LAST_EMITTED_RUNS;
 var init_fonts = __esm({
-  "client/src/shared/pdf/fonts.js"() {
+  "../../src/shared/pdf/fonts.js"() {
     "use strict";
     init_sanitizeText();
     PDF_FONT_FAMILY = "Helvetica";
@@ -286,9 +286,7 @@ var init_fonts = __esm({
   }
 });
 
-// client/src/shared/pdf/fontkitGuard.js
-import path from "path";
-import fs from "fs";
+// ../../src/shared/pdf/fontkitGuard.js
 function warnOnce(msg) {
   if (warnCount === 0) {
     warnCount++;
@@ -318,16 +316,7 @@ async function installFontkitGuard({ fontData } = {}) {
             const ab = await resp.arrayBuffer();
             fontBuffer2 = new Uint8Array(ab);
           }
-        } catch (fetchErr) {
-        }
-      }
-      if (!fontBuffer2 && typeof process !== "undefined" && process.cwd) {
-        try {
-          const possibleFontPath = path.resolve(process.cwd(), "public/fonts/NotoSansTelugu-Regular.ttf");
-          if (fs.existsSync(possibleFontPath)) {
-            fontBuffer2 = fs.readFileSync(possibleFontPath);
-          }
-        } catch (fsErr) {
+        } catch {
         }
       }
     }
@@ -339,7 +328,7 @@ async function installFontkitGuard({ fontData } = {}) {
     try {
       sampleFont = fontkit.create(fontBuffer2);
       sampleFont.layout("\u0C17\u0C48\u0C21\u0C46\u0C28\u0C4D\u0C38\u0C4D");
-    } catch (e) {
+    } catch {
     }
     const engine = sampleFont && sampleFont._layoutEngine && sampleFont._layoutEngine.engine;
     const gposProcessor = engine && engine.GPOSProcessor;
@@ -375,7 +364,7 @@ async function installFontkitGuard({ fontData } = {}) {
 }
 var GUARD_MARKER, GUARD_SYMBOL, isInstalled, hitCount, variantType, warnCount;
 var init_fontkitGuard = __esm({
-  "client/src/shared/pdf/fontkitGuard.js"() {
+  "../../src/shared/pdf/fontkitGuard.js"() {
     "use strict";
     GUARD_MARKER = "__dwFontkitGuard";
     GUARD_SYMBOL = Symbol.for(GUARD_MARKER);
@@ -386,21 +375,21 @@ var init_fontkitGuard = __esm({
   }
 });
 
-// client/scripts/pdf-verify/shipped-runner.jsx
+// shipped-runner.jsx
 import React from "react";
-import path2 from "path";
-import fs2 from "fs";
+import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 import { renderToBuffer } from "@react-pdf/renderer";
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
 
-// client/src/modules/student/pages/ReportPdf.jsx
+// ../../src/modules/student/pages/ReportPdf.jsx
 import { Text as Text4, View as View4, StyleSheet as StyleSheet3 } from "@react-pdf/renderer";
 
-// client/src/shared/pdf/PdfDocument.jsx
+// ../../src/shared/pdf/PdfDocument.jsx
 import { Document, Page, Text, View } from "@react-pdf/renderer";
 
-// client/src/shared/pdf/pdfStyles.js
+// ../../src/shared/pdf/pdfStyles.js
 init_fonts();
 import { StyleSheet } from "@react-pdf/renderer";
 var colors = {
@@ -596,7 +585,7 @@ function getPdfStyles() {
   return cachedStyles;
 }
 
-// client/src/shared/pdf/PdfDocument.jsx
+// ../../src/shared/pdf/PdfDocument.jsx
 init_fonts();
 import { jsx, jsxs } from "react/jsx-runtime";
 function PdfDocument({ title = "Dream Wave Report", author = "Dream Wave AI", children }) {
@@ -622,10 +611,10 @@ function PdfDocument({ title = "Dream Wave Report", author = "Dream Wave AI", ch
   ] }) });
 }
 
-// client/src/shared/pdf/markdownToPdf.jsx
+// ../../src/shared/pdf/markdownToPdf.jsx
 import { Text as Text3, View as View3, StyleSheet as StyleSheet2 } from "@react-pdf/renderer";
 
-// client/src/shared/pdf/pdfComponents.jsx
+// ../../src/shared/pdf/pdfComponents.jsx
 import { Text as Text2, View as View2 } from "@react-pdf/renderer";
 init_fonts();
 import { jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
@@ -648,6 +637,13 @@ function Section({ title, sectionKey, children, style = {}, wrap = true, options
     children
   ] });
 }
+function KeyValueRow({ label, value, options = {} }) {
+  const styles = getPdfStyles();
+  return /* @__PURE__ */ jsxs2(View2, { style: styles.keyValueRow, children: [
+    /* @__PURE__ */ jsx2(Text2, { style: styles.keyLabel, children: renderTextSegments(label, options, "kvlbl") }),
+    /* @__PURE__ */ jsx2(Text2, { style: styles.keyValue, children: renderTextSegments(value, options, "kvval") })
+  ] });
+}
 function BulletList({ items = [], options = {} }) {
   const styles = getPdfStyles();
   if (!items?.length) return null;
@@ -664,12 +660,17 @@ function Table({ headers = [], rows = [], options = {} }) {
     rows.map((row, rIdx) => /* @__PURE__ */ jsx2(View2, { style: styles.tableRow, wrap: false, children: row.map((cell, cIdx) => /* @__PURE__ */ jsx2(Text2, { style: styles.tableCell, children: renderTextSegments(cell, options, `td-${rIdx}-${cIdx}`) }, `td-${rIdx}-${cIdx}`)) }, `tr-${rIdx}`))
   ] });
 }
+function ProgressBar({ percent = 0, color = colors.primaryLight }) {
+  const styles = getPdfStyles();
+  const clamped = Math.min(100, Math.max(0, Number(percent) || 0));
+  return /* @__PURE__ */ jsx2(View2, { style: styles.progressBarTrack, children: /* @__PURE__ */ jsx2(View2, { style: [styles.progressBarFill, { width: `${clamped}%`, backgroundColor: color }] }) });
+}
 function Badge({ children, style = {}, options = {} }) {
   const styles = getPdfStyles();
   return /* @__PURE__ */ jsx2(Text2, { style: [styles.badge, style], children: renderTextSegments(children, options, "bdg") });
 }
 
-// client/src/shared/pdf/markdownToPdf.jsx
+// ../../src/shared/pdf/markdownToPdf.jsx
 init_fonts();
 import { jsx as jsx3, jsxs as jsxs3 } from "react/jsx-runtime";
 function getMarkdownStyles() {
@@ -949,16 +950,16 @@ function markdownToPdf(markdownText, options = {}) {
   return elements;
 }
 
-// client/src/shared/pdf/index.js
+// ../../src/shared/pdf/index.js
 init_fonts();
 
-// client/src/shared/hooks/usePdfExport.js
+// ../../src/shared/hooks/usePdfExport.js
 import { useCallback, useState } from "react";
 
-// client/src/shared/components/DownloadPdfButton.jsx
+// ../../src/shared/components/DownloadPdfButton.jsx
 import { jsx as jsx4 } from "react/jsx-runtime";
 
-// client/src/modules/student/pages/ReportPdf.jsx
+// ../../src/modules/student/pages/ReportPdf.jsx
 import { jsx as jsx5, jsxs as jsxs4 } from "react/jsx-runtime";
 function getCustomStyles() {
   return StyleSheet3.create({
@@ -1076,51 +1077,321 @@ function ReportPdf({ workspace = {}, report = {}, options = {} }) {
   ] });
 }
 
-// client/scripts/pdf-verify/shipped-runner.jsx
+// ../../src/modules/student/pages/RoadmapPdf.jsx
+import { Text as Text5, View as View5, StyleSheet as StyleSheet4 } from "@react-pdf/renderer";
+import { Fragment, jsx as jsx6, jsxs as jsxs5 } from "react/jsx-runtime";
+function formatDate(raw) {
+  if (!raw) return null;
+  const parsed = new Date(raw);
+  if (isNaN(parsed.getTime())) return null;
+  return parsed.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
+function getCustomStyles2() {
+  return StyleSheet4.create({
+    headerContainer: {
+      marginBottom: 14,
+      borderBottomWidth: 1.5,
+      borderBottomColor: colors.primaryLight,
+      borderBottomStyle: "solid",
+      paddingBottom: 10
+    },
+    titleRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      flexWrap: "wrap",
+      gap: 8,
+      marginBottom: 4
+    },
+    roadmapTitle: {
+      fontSize: 18,
+      fontWeight: "bold",
+      color: colors.primary
+    },
+    goalSubtitle: {
+      fontSize: 9.5,
+      color: colors.textMuted,
+      marginBottom: 4
+    },
+    badgeRow: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 6,
+      marginTop: 4
+    },
+    overviewCard: {
+      backgroundColor: colors.primaryBg,
+      borderLeftWidth: 3,
+      borderLeftColor: colors.primaryLight,
+      borderLeftStyle: "solid",
+      padding: 8,
+      borderRadius: 4,
+      marginBottom: 10
+    },
+    overviewHeading: {
+      fontSize: 10,
+      fontWeight: "bold",
+      color: colors.primary,
+      marginBottom: 3
+    },
+    overviewText: {
+      fontSize: 9,
+      lineHeight: 1.4,
+      color: colors.textDark
+    },
+    stageCard: {
+      marginBottom: 10,
+      paddingBottom: 8,
+      borderBottomWidth: 0.5,
+      borderBottomColor: colors.borderLight
+    },
+    stageHeader: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 4
+    },
+    stageTitle: {
+      fontSize: 10.5,
+      fontWeight: "bold",
+      color: colors.textDark,
+      flex: 1,
+      marginRight: 8
+    },
+    stageMeta: {
+      fontSize: 8.5,
+      color: colors.textMuted
+    },
+    stageDesc: {
+      fontSize: 8.5,
+      lineHeight: 1.4,
+      color: colors.textDark,
+      marginTop: 3,
+      marginBottom: 4
+    },
+    stageSkills: {
+      fontSize: 8,
+      color: colors.primaryLight,
+      marginTop: 2
+    },
+    stageDate: {
+      fontSize: 8,
+      color: colors.textLight,
+      marginTop: 1
+    },
+    weeklyGroup: {
+      marginBottom: 8,
+      paddingBottom: 6,
+      borderBottomWidth: 0.5,
+      borderBottomColor: colors.borderLight
+    },
+    weeklyGroupHeader: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 3
+    },
+    weeklyGroupTitle: {
+      fontSize: 9.5,
+      fontWeight: "bold",
+      color: colors.primary
+    },
+    weeklyGroupMeta: {
+      fontSize: 8,
+      color: colors.textMuted
+    },
+    weeklyOutcomesLabel: {
+      fontSize: 8,
+      fontWeight: "bold",
+      color: colors.textLight,
+      marginTop: 2,
+      marginBottom: 2,
+      textTransform: "uppercase"
+    },
+    projectCard: {
+      marginBottom: 8,
+      padding: 8,
+      backgroundColor: "#FAFAFA",
+      borderRadius: 4,
+      borderWidth: 0.5,
+      borderColor: colors.border
+    },
+    projectTitle: {
+      fontSize: 9.5,
+      fontWeight: "bold",
+      color: colors.primary,
+      marginBottom: 2
+    },
+    projectDesc: {
+      fontSize: 8.5,
+      lineHeight: 1.4,
+      color: colors.textDark,
+      marginBottom: 3
+    },
+    projectSkills: {
+      fontSize: 8,
+      color: colors.textMuted
+    },
+    projectStatus: {
+      fontSize: 8,
+      color: colors.textLight,
+      marginTop: 2
+    },
+    emptyNotice: {
+      fontSize: 8.5,
+      fontStyle: "italic",
+      color: colors.textMuted,
+      marginVertical: 4
+    }
+  });
+}
+function RoadmapPdf({ roadmap = {}, goal = {}, options = {} }) {
+  getPdfStyles();
+  const customStyles = getCustomStyles2();
+  const rawTitle = roadmap.title || (goal?.title ? `${goal.title} Roadmap` : "") || roadmap.data?.title || "Learning Roadmap";
+  const isPrimary = Boolean(roadmap.isPrimary || goal?.isPrimary || roadmap.data?.isPrimary);
+  const goalCategory = goal?.category || "";
+  const goalDescription = goal?.description || roadmap.data?.overview || "";
+  const formattedDate = formatDate(roadmap.updatedAt || roadmap.createdAt || roadmap.architecture?.generatedAt || /* @__PURE__ */ new Date());
+  const estimatedDate = formatDate(roadmap.architecture?.estimatedCompletion || goal?.deadline);
+  const percentProgress = roadmap.progress?.percent ?? goal?.progress ?? 0;
+  const learningStages = Array.isArray(roadmap.learningStages) ? [...roadmap.learningStages] : [];
+  learningStages.sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0));
+  const rawWeeklyPlans = Array.isArray(roadmap.weeklyPlans) ? [...roadmap.weeklyPlans] : [];
+  rawWeeklyPlans.sort((a, b) => (Number(a.week) || 0) - (Number(b.week) || 0));
+  const weeklyPlansByWeek = /* @__PURE__ */ new Map();
+  for (const plan of rawWeeklyPlans) {
+    const w = Number(plan.week) || 1;
+    if (!weeklyPlansByWeek.has(w)) {
+      weeklyPlansByWeek.set(w, []);
+    }
+    weeklyPlansByWeek.get(w).push(plan);
+  }
+  const weeklyWeekEntries = [...weeklyPlansByWeek.entries()].sort((a, b) => a[0] - b[0]);
+  const weeklyTableHeaders = ["Week", "Focus", "Study Hours", "Status"];
+  const weeklyTableRows = rawWeeklyPlans.map((plan, idx) => [
+    `Week ${plan.week || idx + 1}`,
+    plan.focus || "General study",
+    `${plan.studyHours || 0} hrs`,
+    plan.completed ? "Completed" : "Pending"
+  ]);
+  const practiceProjects = Array.isArray(roadmap.practiceProjects) ? roadmap.practiceProjects : [];
+  return /* @__PURE__ */ jsxs5(PdfDocument, { title: sanitizeEmojiAndText(rawTitle, options), author: "Dream Wave AI", children: [
+    /* @__PURE__ */ jsxs5(View5, { style: customStyles.headerContainer, wrap: false, children: [
+      /* @__PURE__ */ jsxs5(View5, { style: customStyles.titleRow, children: [
+        /* @__PURE__ */ jsx6(Text5, { style: customStyles.roadmapTitle, children: renderTextSegments(rawTitle, options, "rm-title") }),
+        isPrimary ? /* @__PURE__ */ jsx6(Badge, { style: { backgroundColor: colors.primaryBg, color: colors.primary }, options, children: "Primary" }) : null
+      ] }),
+      goal?.title && goal.title !== rawTitle ? /* @__PURE__ */ jsx6(Text5, { style: customStyles.goalSubtitle, children: renderTextSegments(`Goal: ${goal.title}`, options, "rm-goal") }) : null,
+      /* @__PURE__ */ jsxs5(View5, { style: customStyles.badgeRow, children: [
+        formattedDate ? /* @__PURE__ */ jsx6(Badge, { options, children: `Date: ${formattedDate}` }) : null,
+        goalCategory ? /* @__PURE__ */ jsx6(Badge, { options, children: goalCategory }) : null,
+        estimatedDate ? /* @__PURE__ */ jsx6(Badge, { options, children: `Target: ${estimatedDate}` }) : null,
+        /* @__PURE__ */ jsx6(Badge, { options, children: `Progress: ${percentProgress}%` })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxs5(Section, { title: "Roadmap Overview", options, wrap: false, children: [
+      goalDescription ? /* @__PURE__ */ jsxs5(View5, { style: customStyles.overviewCard, children: [
+        /* @__PURE__ */ jsx6(Text5, { style: customStyles.overviewHeading, children: renderTextSegments("Overview", options, "rm-ov-h") }),
+        /* @__PURE__ */ jsx6(Text5, { style: customStyles.overviewText, children: renderTextSegments(goalDescription, options, "rm-desc") })
+      ] }) : null,
+      /* @__PURE__ */ jsx6(KeyValueRow, { label: "Overall Completion", value: `${percentProgress}%`, options }),
+      /* @__PURE__ */ jsx6(KeyValueRow, { label: "Learning Stages", value: String(learningStages.length), options }),
+      /* @__PURE__ */ jsx6(KeyValueRow, { label: "Weekly Plans", value: String(rawWeeklyPlans.length), options }),
+      /* @__PURE__ */ jsx6(KeyValueRow, { label: "Practice Projects", value: String(practiceProjects.length), options })
+    ] }),
+    /* @__PURE__ */ jsx6(Section, { title: "Learning Stages", options, wrap: true, children: learningStages.length > 0 ? learningStages.map((stage, idx) => {
+      const stageOrder = stage.order || idx + 1;
+      const stageTitle = stage.title || `Stage ${stageOrder}`;
+      const stageStatus = stage.status || "available";
+      const stageProgress = Number(stage.progress) || 0;
+      const stageTargetDate = formatDate(stage.targetDate);
+      const stageSkills = Array.isArray(stage.skills) ? stage.skills.filter(Boolean) : [];
+      return /* @__PURE__ */ jsxs5(View5, { style: customStyles.stageCard, wrap: false, children: [
+        /* @__PURE__ */ jsxs5(View5, { style: customStyles.stageHeader, children: [
+          /* @__PURE__ */ jsx6(Text5, { style: customStyles.stageTitle, children: renderTextSegments(`${stageOrder}. ${stageTitle}`, options, `stg-ttl-${idx}`) }),
+          /* @__PURE__ */ jsx6(Text5, { style: customStyles.stageMeta, children: renderTextSegments(`${stageStatus} \xB7 ${stageProgress}%`, options, `stg-meta-${idx}`) })
+        ] }),
+        /* @__PURE__ */ jsx6(ProgressBar, { percent: stageProgress }),
+        stage.description ? /* @__PURE__ */ jsx6(Text5, { style: customStyles.stageDesc, children: renderTextSegments(stage.description, options, `stg-desc-${idx}`) }) : null,
+        stageSkills.length > 0 ? /* @__PURE__ */ jsx6(Text5, { style: customStyles.stageSkills, children: renderTextSegments(`Skills: ${stageSkills.join(", ")}`, options, `stg-skl-${idx}`) }) : null,
+        stageTargetDate ? /* @__PURE__ */ jsx6(Text5, { style: customStyles.stageDate, children: renderTextSegments(`Target: ${stageTargetDate}`, options, `stg-dt-${idx}`) }) : null
+      ] }, stage._id || `stage-${idx}`);
+    }) : /* @__PURE__ */ jsx6(Text5, { style: customStyles.emptyNotice, children: renderTextSegments("No learning stages defined for this roadmap.", options, "empty-stages") }) }),
+    /* @__PURE__ */ jsx6(Section, { title: "Weekly Plans", options, wrap: true, children: rawWeeklyPlans.length > 0 ? /* @__PURE__ */ jsxs5(Fragment, { children: [
+      /* @__PURE__ */ jsx6(Table, { headers: weeklyTableHeaders, rows: weeklyTableRows, options }),
+      weeklyWeekEntries.map(([weekNum, plans]) => {
+        const allOutcomes = plans.flatMap((p) => Array.isArray(p.outcomes) ? p.outcomes.filter(Boolean) : []);
+        return /* @__PURE__ */ jsxs5(View5, { style: customStyles.weeklyGroup, wrap: false, children: [
+          /* @__PURE__ */ jsxs5(View5, { style: customStyles.weeklyGroupHeader, children: [
+            /* @__PURE__ */ jsx6(Text5, { style: customStyles.weeklyGroupTitle, children: renderTextSegments(`Week ${weekNum}: ${plans.map((p) => p.focus).filter(Boolean).join(" / ") || "Scheduled Plan"}`, options, `wk-ttl-${weekNum}`) }),
+            /* @__PURE__ */ jsx6(Text5, { style: customStyles.weeklyGroupMeta, children: renderTextSegments(`${plans.reduce((sum, p) => sum + (Number(p.studyHours) || 0), 0)} study hours`, options, `wk-hrs-${weekNum}`) })
+          ] }),
+          allOutcomes.length > 0 ? /* @__PURE__ */ jsxs5(Fragment, { children: [
+            /* @__PURE__ */ jsx6(Text5, { style: customStyles.weeklyOutcomesLabel, children: renderTextSegments("Target Outcomes:", options, `wk-out-lbl-${weekNum}`) }),
+            /* @__PURE__ */ jsx6(BulletList, { items: allOutcomes, options })
+          ] }) : null
+        ] }, `wk-group-${weekNum}`);
+      })
+    ] }) : /* @__PURE__ */ jsx6(Text5, { style: customStyles.emptyNotice, children: renderTextSegments("No weekly plans defined for this roadmap.", options, "empty-weekly") }) }),
+    /* @__PURE__ */ jsx6(Section, { title: "Practice Projects", options, wrap: true, children: practiceProjects.length > 0 ? practiceProjects.map((proj, idx) => {
+      const projTitle = proj.title || `Project ${idx + 1}`;
+      const projSkills = Array.isArray(proj.skills) ? proj.skills.filter(Boolean) : [];
+      const projStatus = proj.status || "planned";
+      return /* @__PURE__ */ jsxs5(View5, { style: customStyles.projectCard, wrap: false, children: [
+        /* @__PURE__ */ jsx6(Text5, { style: customStyles.projectTitle, children: renderTextSegments(projTitle, options, `prj-ttl-${idx}`) }),
+        proj.description ? /* @__PURE__ */ jsx6(Text5, { style: customStyles.projectDesc, children: renderTextSegments(proj.description, options, `prj-dsc-${idx}`) }) : null,
+        projSkills.length > 0 ? /* @__PURE__ */ jsx6(Text5, { style: customStyles.projectSkills, children: renderTextSegments(`Skills: ${projSkills.join(", ")}`, options, `prj-skl-${idx}`) }) : null,
+        /* @__PURE__ */ jsx6(Text5, { style: customStyles.projectStatus, children: renderTextSegments(`Status: ${projStatus}`, options, `prj-st-${idx}`) })
+      ] }, proj._id || `proj-${idx}`);
+    }) : /* @__PURE__ */ jsx6(Text5, { style: customStyles.emptyNotice, children: renderTextSegments("No practice projects defined for this roadmap.", options, "empty-projects") }) })
+  ] });
+}
+
+// shipped-runner.jsx
 init_fonts();
 init_fontkitGuard();
-import { jsx as jsx6 } from "react/jsx-runtime";
-var __dirname = path2.dirname(fileURLToPath(import.meta.url));
-var CLIENT_DIR = path2.resolve(__dirname, "../..");
-var ROOT_DIR = path2.resolve(CLIENT_DIR, "..");
-var FONTS_DIR = path2.resolve(CLIENT_DIR, "public/fonts");
-var OUT_DIR = path2.resolve(__dirname, "out");
-if (!fs2.existsSync(OUT_DIR)) fs2.mkdirSync(OUT_DIR, { recursive: true });
-var originalFsOpen = fs2.promises.open;
-fs2.promises.open = function(filePath, flags, mode) {
+import { jsx as jsx7 } from "react/jsx-runtime";
+var __dirname = path.dirname(fileURLToPath(import.meta.url));
+var CLIENT_DIR = path.resolve(__dirname, "../..");
+var ROOT_DIR = path.resolve(CLIENT_DIR, "..");
+var FONTS_DIR = path.resolve(CLIENT_DIR, "public/fonts");
+var OUT_DIR = path.resolve(__dirname, "out");
+if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
+var originalFsOpen = fs.promises.open;
+fs.promises.open = function(filePath, flags, mode) {
   const pStr = String(filePath);
   if (pStr.includes("fonts") || pStr.includes("NotoSans")) {
-    const filename = path2.basename(pStr);
-    const realPath = path2.resolve(FONTS_DIR, filename);
-    if (fs2.existsSync(realPath)) {
-      return originalFsOpen.call(fs2.promises, realPath, flags, mode);
+    const filename = path.basename(pStr);
+    const realPath = path.resolve(FONTS_DIR, filename);
+    if (fs.existsSync(realPath)) {
+      return originalFsOpen.call(fs.promises, realPath, flags, mode);
     }
   }
-  return originalFsOpen.call(fs2.promises, filePath, flags, mode);
+  return originalFsOpen.call(fs.promises, filePath, flags, mode);
 };
-var origReadFile = fs2.promises.readFile;
-fs2.promises.readFile = function(filePath, options) {
+var origReadFile = fs.promises.readFile;
+fs.promises.readFile = function(filePath, options) {
   const pStr = String(filePath);
   if (pStr.includes("fonts") || pStr.includes("NotoSans")) {
-    const filename = path2.basename(pStr);
-    const realPath = path2.resolve(FONTS_DIR, filename);
-    if (fs2.existsSync(realPath)) {
-      return origReadFile.call(fs2.promises, realPath, options);
+    const filename = path.basename(pStr);
+    const realPath = path.resolve(FONTS_DIR, filename);
+    if (fs.existsSync(realPath)) {
+      return origReadFile.call(fs.promises, realPath, options);
     }
   }
-  return origReadFile.call(fs2.promises, filePath, options);
+  return origReadFile.call(fs.promises, filePath, options);
 };
-var origFileSync = fs2.readFileSync;
-fs2.readFileSync = function(filePath, options) {
+var origFileSync = fs.readFileSync;
+fs.readFileSync = function(filePath, options) {
   const pStr = String(filePath);
   if (pStr.includes("fonts") || pStr.includes("NotoSans")) {
-    const filename = path2.basename(pStr);
-    const realPath = path2.resolve(FONTS_DIR, filename);
-    if (fs2.existsSync(realPath)) {
-      return origFileSync.call(fs2, realPath, options);
+    const filename = path.basename(pStr);
+    const realPath = path.resolve(FONTS_DIR, filename);
+    if (fs.existsSync(realPath)) {
+      return origFileSync.call(fs, realPath, options);
     }
   }
-  return origFileSync.call(fs2, filePath, options);
+  return origFileSync.call(fs, filePath, options);
 };
 if (!globalThis.__originalFetch) {
   globalThis.__originalFetch = globalThis.fetch;
@@ -1128,10 +1399,10 @@ if (!globalThis.__originalFetch) {
 globalThis.fetch = async (input, options) => {
   const urlStr = typeof input === "string" ? input : input && input.url ? input.url : String(input);
   if (urlStr.toLowerCase().includes("fonts")) {
-    const filename = path2.basename(urlStr);
-    const fontPath2 = path2.resolve(FONTS_DIR, filename);
-    if (fs2.existsSync(fontPath2)) {
-      const fontBuffer2 = fs2.readFileSync(fontPath2);
+    const filename = path.basename(urlStr);
+    const fontPath2 = path.resolve(FONTS_DIR, filename);
+    if (fs.existsSync(fontPath2)) {
+      const fontBuffer2 = fs.readFileSync(fontPath2);
       const ab = fontBuffer2.buffer.slice(fontBuffer2.byteOffset, fontBuffer2.byteOffset + fontBuffer2.byteLength);
       return {
         ok: true,
@@ -1146,8 +1417,8 @@ globalThis.fetch = async (input, options) => {
   throw new Error(`Unhandled fetch: ${urlStr}`);
 };
 await registerPdfFonts();
-var fontPath = path2.resolve(FONTS_DIR, "NotoSansTelugu-Regular.ttf");
-var fontBuffer = fs2.readFileSync(fontPath);
+var fontPath = path.resolve(FONTS_DIR, "NotoSansTelugu-Regular.ttf");
+var fontBuffer = fs.readFileSync(fontPath);
 await installFontkitGuard({ fontData: fontBuffer });
 console.log("Shipped Fontkit Guard Installation Status:", getGuardStats());
 var cases = [
@@ -1163,8 +1434,8 @@ var cases = [
   { name: "case-10-telugu-period", title: "Telugu Word Period", content: "\u0C21\u0C4D\u0C30\u0C40\u0C2E\u0C4D." },
   { name: "case-11-telugu-words", title: "Telugu Words Escape", content: "\u0C21\u0C4D\u0C30\u0C40\u0C2E\u0C4D \u0C35\u0C47\u0C35\u0C4D\n\u0C2A\u0C4D\u0C30\u0C3E\u0C1C\u0C46\u0C15\u0C4D\u0C1F\u0C4D \u0C15\u0C4D\u0C30\u0C2E\u0C02 \u0C36\u0C4D\u0C30\u0C40" }
 ];
-var fixturePath = path2.resolve(ROOT_DIR, "sample-report-test.md");
-var fixtureContent = fs2.readFileSync(fixturePath, "utf8");
+var fixturePath = path.resolve(ROOT_DIR, "sample-report-test.md");
+var fixtureContent = fs.readFileSync(fixturePath, "utf8");
 async function main() {
   console.log("================================================================================");
   console.log("RUNNING SHIPPED FONTKIT GUARD HARNESS VERIFICATION (CASES 1-11 + FIXTURE)");
@@ -1175,8 +1446,8 @@ async function main() {
     let status = "PASS";
     let buffer = null;
     const outFilename = `shipped-${c.name}.pdf`;
-    const outPath = path2.resolve(OUT_DIR, outFilename);
-    const doc = /* @__PURE__ */ jsx6(
+    const outPath = path.resolve(OUT_DIR, outFilename);
+    const doc = /* @__PURE__ */ jsx7(
       ReportPdf,
       {
         workspace: { title: c.title },
@@ -1189,7 +1460,7 @@ async function main() {
     );
     try {
       buffer = await renderToBuffer(doc);
-      fs2.writeFileSync(outPath, buffer);
+      fs.writeFileSync(outPath, buffer);
     } catch (e) {
       status = `CRASH (${e.message})`;
     }
@@ -1207,8 +1478,8 @@ async function main() {
   let fixStatus = "PASS";
   let fixBuffer = null;
   const fixFilename = "shipped-full-fixture.pdf";
-  const fixOutPath = path2.resolve(OUT_DIR, fixFilename);
-  const fixDoc = /* @__PURE__ */ jsx6(
+  const fixOutPath = path.resolve(OUT_DIR, fixFilename);
+  const fixDoc = /* @__PURE__ */ jsx7(
     ReportPdf,
     {
       workspace: { title: "FULL FIXTURE" },
@@ -1221,7 +1492,7 @@ async function main() {
   );
   try {
     fixBuffer = await renderToBuffer(fixDoc);
-    fs2.writeFileSync(fixOutPath, fixBuffer);
+    fs.writeFileSync(fixOutPath, fixBuffer);
   } catch (e) {
     fixStatus = `CRASH (${e.message})`;
   }
@@ -1233,11 +1504,63 @@ async function main() {
     bytes: fixBuffer ? fixBuffer.length : 0,
     caseHits: hitsAfterFix - hitsBeforeFix
   });
+  const hitsBeforeRoadmap = getGuardStats().hits;
+  let roadmapStatus = "PASS";
+  let roadmapBuffer = null;
+  const roadmapFilename = "roadmap-fixture.pdf";
+  const roadmapOutPath = path.resolve(OUT_DIR, roadmapFilename);
+  const clientRoadmapOutPath = path.resolve(CLIENT_DIR, "out", roadmapFilename);
+  const teluguRaVattu = "\u0C2A\u0C4D\u0C30\u0C3E\u0C1C\u0C46\u0C15\u0C4D\u0C1F\u0C4D";
+  const roadmapCaseDoc = /* @__PURE__ */ jsx7(
+    RoadmapPdf,
+    {
+      goal: {
+        title: `\u0C35\u0C46\u0C2C\u0C4D \u0C21\u0C46\u0C35\u0C32\u0C2A\u0C4D\u200C\u0C2E\u0C46\u0C02\u0C1F\u0C4D ${teluguRaVattu} \u0C30\u0C4B\u0C21\u0C4D\u200C\u0C2E\u0C4D\u0C2F\u0C3E\u0C2A\u0C4D`,
+        category: "Technical Skill",
+        isPrimary: true,
+        progress: 45,
+        description: "\u0C32\u0C30\u0C4D\u0C28\u0C3F\u0C02\u0C17\u0C4D \u0C1C\u0C30\u0C4D\u0C28\u0C40 \u0C2E\u0C30\u0C3F\u0C2F\u0C41 \u0C15\u0C46\u0C30\u0C40\u0C30\u0C4D \u0C17\u0C4D\u0C30\u0C4B\u0C24\u0C4D \u0C15\u0C4B\u0C38\u0C02 \u0C06\u0C30\u0C4D\u0C15\u0C3F\u0C1F\u0C46\u0C15\u0C4D\u0C1A\u0C30\u0C4D."
+      },
+      roadmap: {
+        title: `\u0C35\u0C46\u0C2C\u0C4D \u0C06\u0C30\u0C4D\u0C15\u0C3F\u0C1F\u0C46\u0C15\u0C4D\u0C1A\u0C30\u0C4D ${teluguRaVattu}`,
+        isPrimary: true,
+        progress: { percent: 45 },
+        learningStages: [
+          { order: 1, title: `\u0C2B\u0C4D\u0C30\u0C02\u0C1F\u0C4D\u200C\u0C0E\u0C02\u0C21\u0C4D \u0C2C\u0C47\u0C38\u0C3F\u0C15\u0C4D\u0C38\u0C4D \u0C2E\u0C30\u0C3F\u0C2F\u0C41 ${teluguRaVattu} \u0C2A\u0C4D\u0C30\u0C23\u0C3E\u0C33\u0C3F\u0C15`, description: "\u0C08 \u0C26\u0C36\u0C32\u0C4B HTML, CSS \u0C2E\u0C30\u0C3F\u0C2F\u0C41 \u0C2A\u0C4D\u0C30\u0C3E\u0C25\u0C2E\u0C3F\u0C15 \u0C2D\u0C3E\u0C35\u0C28\u0C32\u0C41 \u0C28\u0C47\u0C30\u0C4D\u0C1A\u0C41\u0C15\u0C41\u0C02\u0C1F\u0C3E\u0C30\u0C41.", status: "completed", progress: 100, skills: ["HTML5", "CSS3"] },
+          { order: 2, title: `\u0C30\u0C3F\u0C2F\u0C3E\u0C15\u0C4D\u0C1F\u0C4D \u0C05\u0C21\u0C4D\u0C35\u0C3E\u0C28\u0C4D\u0C38\u0C4D\u200C\u0C21\u0C4D ${teluguRaVattu} \u0C28\u0C3F\u0C30\u0C4D\u0C2E\u0C3E\u0C23\u0C02`, description: "\u092F\u0939 \u090F\u0915 \u0935\u094D\u092F\u093E\u092A\u0915 \u0930\u094B\u0921\u092E\u0948\u092A \u0935\u093F\u0935\u0930\u0923 \u0939\u0948 \u091C\u093F\u0938\u092E\u0947\u0902 \u0938\u092D\u0940 \u091A\u0930\u0923 \u0914\u0930 \u092F\u094B\u091C\u0928\u093E\u090F\u0902 \u0936\u093E\u092E\u093F\u0932 \u0939\u0948\u0902\u0964", status: "in-progress", progress: 60, skills: ["React"] },
+          { order: 3, title: `\u0C38\u0C3F\u0C38\u0C4D\u0C1F\u0C2E\u0C4D \u0C1F\u0C46\u0C38\u0C4D\u0C1F\u0C3F\u0C02\u0C17\u0C4D \u0C2E\u0C30\u0C3F\u0C2F\u0C41 \u0C21\u0C3F\u0C2A\u0C4D\u0C32\u0C3E\u0C2F\u0C4D\u200C\u0C2E\u0C46\u0C02\u0C1F\u0C4D ${teluguRaVattu}`, description: "", status: "available", progress: 0, skills: ["Docker"] }
+        ],
+        weeklyPlans: [],
+        practiceProjects: [
+          { title: `\u0C21\u0C4D\u0C30\u0C40\u0C2E\u0C4D\u200C\u0C35\u0C47\u0C35\u0C4D \u0C2A\u0C4B\u0C30\u0C4D\u0C1F\u0C4D\u200C\u0C2B\u0C4B\u0C32\u0C3F\u0C2F\u0C4B ${teluguRaVattu}`, description: "\u0C2A\u0C42\u0C30\u0C4D\u0C24\u0C3F \u0C38\u0C4D\u0C25\u0C3E\u0C2F\u0C3F \u0C05\u0C2A\u0C4D\u0C32\u0C3F\u0C15\u0C47\u0C37\u0C28\u0C4D \u0C28\u0C3F\u0C30\u0C4D\u0C2E\u0C3E\u0C23\u0C02.", skills: ["React", "Node.js"], status: "in-progress" },
+          { title: "Project Without Skills", description: "Testing edge case where skills array is empty or undefined.", skills: [], status: "planned" }
+        ]
+      },
+      options: {}
+    }
+  );
+  try {
+    roadmapBuffer = await renderToBuffer(roadmapCaseDoc);
+    fs.writeFileSync(roadmapOutPath, roadmapBuffer);
+    if (fs.existsSync(path.resolve(CLIENT_DIR, "out"))) {
+      fs.writeFileSync(clientRoadmapOutPath, roadmapBuffer);
+    }
+  } catch (e) {
+    roadmapStatus = `CRASH (${e.message})`;
+  }
+  const hitsAfterRoadmap = getGuardStats().hits;
+  results.push({
+    caseName: "roadmap-fixture",
+    filename: roadmapFilename,
+    status: roadmapStatus,
+    bytes: roadmapBuffer ? roadmapBuffer.length : 0,
+    caseHits: hitsAfterRoadmap - hitsBeforeRoadmap
+  });
   console.log("\n--- VERIFYING SHIPPED PDFs WITH pdfjs-dist ---");
   const harnessTable = [];
   for (const r of results) {
-    const filePath = path2.resolve(OUT_DIR, r.filename);
-    if (!fs2.existsSync(filePath)) {
+    const filePath = path.resolve(OUT_DIR, r.filename);
+    if (!fs.existsSync(filePath)) {
       harnessTable.push({
         case: r.caseName,
         result: r.status,
@@ -1248,7 +1571,7 @@ async function main() {
       });
       continue;
     }
-    const pdfBuffer = fs2.readFileSync(filePath);
+    const pdfBuffer = fs.readFileSync(filePath);
     const data = new Uint8Array(pdfBuffer);
     let pageCount = 0;
     let textContentStr = "";
@@ -1278,6 +1601,7 @@ async function main() {
       bytes: r.bytes,
       pages: pageCount,
       guardHits: r.caseHits,
+      textLength: textContentStr.length,
       teluguCharsInU0C00_U0C7F: teluguCharCount
     });
   }
